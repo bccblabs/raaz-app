@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <scenes>
+        <!--Video-->
+        <scene sceneID="imE-1Y-gJg">
+            <objects>
+                <viewController id="e0f-eL-rGL" customClass="VideoPlayerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CnH-7j-PjC"/>
+                        <viewControllerLayoutGuide type="bottom" id="yVn-Fc-ya1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CQl-Xw-wEf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zQ1-5w-8NJ">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OMR-Ys-a0b" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="1020"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gorillas" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Voo-dm-XBj">
+                                                <rect key="frame" x="16" y="8" width="568" height="24"/>
+                                                <edgeInsets key="layoutMargins" top="16" left="16" bottom="8" right="16"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The great apes from Central Africa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ctC-fQ-0er">
+                                                <rect key="frame" x="16" y="40" width="568" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5c-EY-j0S">
+                                                <rect key="frame" x="16" y="65" width="568" height="91"/>
+                                                <string key="text">Gorillas are ground-dwelling, predominantly herbivorous apes that inhabit the forests of central Africa.
+
+The 360 video below shows gorillas in the Congo rainforest.</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="16" y="89" width="368" height="127"/>
+                                                </variation>
+                                            </label>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g44-Ff-A5N" customClass="GVRVideoView">
+                                                <rect key="frame" x="16" y="164" width="568" height="250"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="250" id="Ec1-yC-QN6"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ctX-9z-bcu">
+                                                <rect key="frame" x="16" y="422" width="568" height="311"/>
+                                                <string key="text">The eponymous genus Gorilla is divided into species: the eastern gorillas and the western gorillas, and either four or five subspecies. They are the largest living primates by physical size.
+
+The DNA of gorillas is highly similar to that of humans, from 95–99% depending on what is counted, and they are the next closest living relatives to humans after the chimpanzees and bonobos.
+
+Gorillas' natural habitats cover tropical or subtropical forests in Africa. Although their range covers a small percentage of Africa, gorillas cover a wide range of elevations. The mountain gorilla inhabits the Albertine Rift montane cloud forests of the Virunga Volcanoes, ranging in altitude from 2,200–4,300 metres (7,200–14,100 ft). Lowland gorillas live in dense forests and lowland swamps and marshes as low as sea level, with western lowland gorillas living in Central West African countries and eastern lowland gorillas living in the Democratic Republic of the Congo near its border with Rwanda.
+</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="16" y="89" width="368" height="127"/>
+                                                </variation>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" text="Source: Wikipedia" translatesAutoresizingMaskIntoConstraints="NO" id="GY1-gR-BYW">
+                                                <rect key="frame" x="16" y="741" width="568" height="36"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="g44-Ff-A5N" secondAttribute="trailing" constant="16" id="03s-8j-7TG"/>
+                                            <constraint firstItem="ctC-fQ-0er" firstAttribute="top" secondItem="Voo-dm-XBj" secondAttribute="bottom" constant="8" id="43s-MK-ABD"/>
+                                            <constraint firstAttribute="trailing" secondItem="ctC-fQ-0er" secondAttribute="trailing" constant="16" id="4vY-ZS-XC3"/>
+                                            <constraint firstAttribute="trailing" secondItem="s5c-EY-j0S" secondAttribute="trailing" constant="16" id="5cV-qZ-2A7"/>
+                                            <constraint firstItem="ctX-9z-bcu" firstAttribute="top" secondItem="g44-Ff-A5N" secondAttribute="bottom" constant="8" id="9fK-0J-Iim"/>
+                                            <constraint firstAttribute="trailing" secondItem="Voo-dm-XBj" secondAttribute="trailing" constant="16" id="Gh1-aw-YCU"/>
+                                            <constraint firstItem="s5c-EY-j0S" firstAttribute="leading" secondItem="OMR-Ys-a0b" secondAttribute="leading" constant="16" id="Los-WC-jZn"/>
+                                            <constraint firstItem="Voo-dm-XBj" firstAttribute="leading" secondItem="OMR-Ys-a0b" secondAttribute="leading" constant="16" id="TzT-N2-K4e"/>
+                                            <constraint firstItem="GY1-gR-BYW" firstAttribute="leading" secondItem="OMR-Ys-a0b" secondAttribute="leading" constant="16" id="VM0-J0-Tpn"/>
+                                            <constraint firstItem="s5c-EY-j0S" firstAttribute="top" secondItem="ctC-fQ-0er" secondAttribute="bottom" constant="8" id="cOe-06-Ajw"/>
+                                            <constraint firstItem="g44-Ff-A5N" firstAttribute="leading" secondItem="OMR-Ys-a0b" secondAttribute="leading" constant="16" id="hOC-rd-XFr"/>
+                                            <constraint firstItem="Voo-dm-XBj" firstAttribute="top" secondItem="OMR-Ys-a0b" secondAttribute="top" constant="8" id="hzJ-1V-Kwz"/>
+                                            <constraint firstItem="ctC-fQ-0er" firstAttribute="leading" secondItem="OMR-Ys-a0b" secondAttribute="leading" constant="16" id="kas-DW-PH4"/>
+                                            <constraint firstAttribute="trailing" secondItem="GY1-gR-BYW" secondAttribute="trailing" constant="16" id="l0W-3L-vxc"/>
+                                            <constraint firstItem="g44-Ff-A5N" firstAttribute="top" secondItem="s5c-EY-j0S" secondAttribute="bottom" constant="8" id="nvA-mm-0jf"/>
+                                            <constraint firstAttribute="trailing" secondItem="ctX-9z-bcu" secondAttribute="trailing" constant="16" id="oTb-ww-PZy"/>
+                                            <constraint firstItem="ctX-9z-bcu" firstAttribute="leading" secondItem="OMR-Ys-a0b" secondAttribute="leading" constant="16" id="qEZ-rd-hpu"/>
+                                            <constraint firstItem="GY1-gR-BYW" firstAttribute="top" secondItem="ctX-9z-bcu" secondAttribute="bottom" constant="8" id="qcR-jr-02n"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="OMR-Ys-a0b" firstAttribute="top" secondItem="zQ1-5w-8NJ" secondAttribute="top" id="M5Y-dB-VUb"/>
+                                    <constraint firstAttribute="bottom" secondItem="OMR-Ys-a0b" secondAttribute="bottom" id="aAN-K8-sji"/>
+                                    <constraint firstAttribute="trailing" secondItem="OMR-Ys-a0b" secondAttribute="trailing" id="mUn-6J-Q70"/>
+                                    <constraint firstItem="OMR-Ys-a0b" firstAttribute="leading" secondItem="zQ1-5w-8NJ" secondAttribute="leading" id="p4b-eA-Bvp"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zQ1-5w-8NJ" firstAttribute="width" secondItem="CQl-Xw-wEf" secondAttribute="width" id="MdU-4f-qy4"/>
+                            <constraint firstItem="zQ1-5w-8NJ" firstAttribute="centerY" secondItem="CQl-Xw-wEf" secondAttribute="centerY" id="W0D-9f-9ea"/>
+                            <constraint firstItem="OMR-Ys-a0b" firstAttribute="width" secondItem="CQl-Xw-wEf" secondAttribute="width" id="pAV-5e-QDd"/>
+                            <constraint firstItem="zQ1-5w-8NJ" firstAttribute="centerX" secondItem="CQl-Xw-wEf" secondAttribute="centerX" id="sHM-q6-yZX"/>
+                            <constraint firstItem="zQ1-5w-8NJ" firstAttribute="height" secondItem="CQl-Xw-wEf" secondAttribute="height" id="yWo-xS-vCP"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Video" id="JaH-W9-Pf5"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="600"/>
+                    <connections>
+                        <outlet property="attributionTextView" destination="GY1-gR-BYW" id="xvk-qh-tD1"/>
+                        <outlet property="videoView" destination="g44-Ff-A5N" id="ur6-ow-BnT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="an1-cB-rUh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1412" y="330"/>
+        </scene>
+    </scenes>
+</document>
