@@ -59,7 +59,6 @@ class SubmodelsList extends Component {
   componentWillReceiveProps (nextProps) {
     let {submodels, selectedMake, selectedModel, selectedSubmodel} = nextProps,
         isFetching = submodels.length?false:true
-    console.log ('submodelsList models=',submodels, 'isFetching=', isFetching)
     this.setState ({submodels, selectedModel, selectedMake, isFetching, selectedSubmodel})
   }
 

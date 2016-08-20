@@ -61,14 +61,11 @@ class MakesList extends Component {
   componentWillReceiveProps (nextProps) {
     let {makes, selectedMake} = nextProps,
         isFetching = makes.length?false:true
-    console.log ('MakesList makes=',makes, 'isFetching=', isFetching)
     this.setState ({makes, selectedMake, isFetching})
   }
 
   render () {
     let {makes, selectedMake, isFetching} = this.state
-    console.log ('render MakesList makes=',makes, 'isFetching=', isFetching)
-
     const leftItem = {
             title: 'Cancel',
             onPress: ()=>Actions.pop()

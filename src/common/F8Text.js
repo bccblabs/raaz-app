@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     fontSize: normalize(24),
     lineHeight: normalize(27),
     // color: F8Colors.darkText,
-    color: F8Colors.black,
+    color: 'white',
     fontWeight: 'bold',
     letterSpacing: 0,
   },

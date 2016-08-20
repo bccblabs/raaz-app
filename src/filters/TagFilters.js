@@ -21,7 +21,7 @@ import isArray from 'lodash/isArray'
 import {SliderStyles, FilterStyles, Styles} from '../styles'
 import PureListView from '../common/PureListView'
 
-class StockCarFilter extends Component {
+class TagFilters extends Component {
   _innerRef: ?PureListView;
   constructor (props) {
     super (props)
@@ -29,7 +29,8 @@ class StockCarFilter extends Component {
 
   render() {
     let {data, onPress, selectedTags} = this.props
-    console.log (onPress)
+    if (!data) return (<View><Text style={{color: 'black'}}>{"Email Us For More..."}</Text></View>)
+    else {
     return (
       <View style={{flex:1, marginBottom: 100}}>
         <View>
@@ -63,6 +64,7 @@ class StockCarFilter extends Component {
       </View>
     )
   }
+  }
 }
 var styles = StyleSheet.create({
   container: {
@@ -85,4 +87,4 @@ var styles = StyleSheet.create({
   },
 });
 
-export default connect () (StockCarFilter)
+export default connect () (TagFilters)

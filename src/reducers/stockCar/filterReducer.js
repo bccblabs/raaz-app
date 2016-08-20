@@ -4,6 +4,7 @@ const {
   SET_SELECTED_SUBMODEL,
   SET_SELECTED_MAKE,
   SET_SELECTED_MODEL,
+  SET_SELECTED_SPECID,
   TOGGLE_CAR_TAG,
 } = require ('../../constants').default
 
@@ -29,6 +30,9 @@ export default function stockCarReducer (state=initialState, action) {
     case SET_SELECTED_SUBMODEL: {
       nextState = state
       return nextState.setIn (['selectedSubmodel'], action.payload, val=>action.payload)
+    }
+    case SET_SELECTED_SPECID: {
+      return state.setIn (['selectedSpecId'], action.payload, val=>action.payload)
     }
     case TOGGLE_CAR_TAG: {
       let value = action.payload,

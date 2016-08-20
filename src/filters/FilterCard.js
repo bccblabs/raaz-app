@@ -46,7 +46,6 @@ class FilterCard extends Component {
     render () {
       let {name, media, touchEnabled} = this.props,
           imageStyle=this.props.imageStyle?this.props.imageStyle:{height: 150, width:150}
-      console.log (this.state)
       return (
         <View style={FilterCardStyles.containerStyle}>
           <Image

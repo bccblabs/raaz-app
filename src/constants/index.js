@@ -104,7 +104,7 @@ export default keyMirror ({
   SET_SELECTED_MAKE: null,
   SET_SELECTED_MODEL: null,
   SET_SELECTED_SUBMODEL: null,
-
+  SET_SELECTED_SPECID: null,
 
   /* History */
   SAVE_PRODUCT: null,

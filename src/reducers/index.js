@@ -64,6 +64,7 @@ let initState = {
   listings: {},
   events: {},
   posts: {},
+  specsDetails: {},
 
   postTags: {},
   tuningTags: {},
@@ -123,6 +124,15 @@ const pagination = combineReducers ({
       CAT_REQUEST,
       CAT_SUCCESS,
       CAT_ERROR,
+    ]
+  }),
+
+  specDetailsPagination: paginate ({
+    mapActionToKey: action=>action.specId,
+    types: [
+      SPECS_DETAILS_REQUEST,
+      SPECS_DETAILS_SUCCESS,
+      SPECS_DETAILS_ERROR,
     ]
   })
 })

@@ -11,14 +11,12 @@ import React, {
 import {Actions} from 'react-native-router-flux'
 import {connect} from 'react-redux'
 import {createSelector} from 'reselect'
-import Carmera from '../components/Carmera'
-import StockCars from '../filters/StockCars'
+import TagFilters from '../filters/TagFilters'
 import {fetchDealsFromApi, toggleCarTag, fetchCategoriesFromApi} from '../reducers/stockCar/filterActions'
 import {loadSavedSpecsFromApi} from '../reducers/history/historyActions'
 import Deals from '../tuning/Deals'
 import F8Header from '../common/F8Header'
 import F8Button from '../common/F8Button'
-import TagsHeader from '../common/TagsHeader'
 import {Heading3, Paragraph} from '../common/F8Text'
 import {SliderStyles, Styles} from '../styles'
 
@@ -95,12 +93,12 @@ class Tuning extends Component {
 
   render () {
     const leftItem = {title: 'Saved', onPress: ()=>{Actions.SavedItems()}},
-          rightItem = {title: 'Recognize!', onPress: ()=>{Actons.Orders()}},
+          rightItem = {title: 'Recognize', onPress: ()=>{Actons.Orders()}},
           selectedTags = this.state.selectedTags
     let buttonContent = selectedTags.size ? (
       <F8Button
       type="secondary"
-      caption="Fetch Cars!"
+      caption="Find Me Cars!"
       style={Styles.contactDealerButton}/>): (<View/>)
     return (
       <View style={{flex: 1}}>
@@ -113,15 +111,12 @@ class Tuning extends Component {
             style={styles.clear}
             onPress={Actions.Makes}>
             <View style={{alignSelf: 'center', flexDirection: 'row'}}>
-            <Image source={require('../common/img/filter.png')} />
-            <Heading3 style={styles.text}>{"Search By Car Specs"}</Heading3>
+            <Heading3 style={styles.text}>{"Select Car By Make and Model"}</Heading3>
             </View>
           </TouchableOpacity>
         </View>
-        <Paragraph style={{alignSelf: 'flex-end', paddingRight: 8, fontFamily: 'FontAwesome'}}>Deals</Paragraph>
-        <Deals />
-        <Paragraph style={{fontWeight: 'bold', alignSelf: 'flex-end', paddingRight: 8, fontFamily: 'FontAwesome'}}>Categories</Paragraph>
-        <StockCars data={this.state.categories} onPress={toggleCarTag} selectedTags={this.state.selectedTags}/>
+        <Heading3 style={[styles.text, {color: 'black', paddingTop: 8}]}>{"Browse Cars By Categories"}</Heading3>
+        <TagFilters data={this.state.categories} onPress={toggleCarTag} selectedTags={this.state.selectedTags}/>
         </ScrollView>
         {buttonContent}
       </View>
@@ -139,11 +134,11 @@ const styles = StyleSheet.create ({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 8,
-    backgroundColor: 'black',
+    backgroundColor: 'orange',
   },
   text: {
     flex: 1,
-    fontSize: 12,
+    fontSize: 10,
     color: 'white',
     paddingHorizontal: 8
   },

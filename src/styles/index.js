@@ -20,7 +20,7 @@ export const Styles = StyleSheet.create ({
   contactDealerButton: {
     borderTopWidth: 1,
     borderTopColor: '#eee',
-    backgroundColor: 'white',
+    backgroundColor: 'orange',
     position: 'absolute',
     bottom: 50,
     width: window.width,
@@ -197,13 +197,10 @@ export const RecallColorsArray = [
   {backgroundColor: 'lightcoral'},
 ]
 export const GraphColorsArray = [
-  {backgroundColor: '#F55443'},
-  {backgroundColor: '#FCBD24'},
-  {backgroundColor: '#59838B'},
   {backgroundColor: '#4D98E4'},
+  // {backgroundColor: '#59838B'},
   {backgroundColor: '#418E50'},
-  {backgroundColor: '#7B7FEC'},
-  {backgroundColor: '#3ABAA4'}
+  // {backgroundColor: '#7B7FEC'},
 ]
 export const ParallaxScrollStyles = {
   STICKY_HEADER_HEIGHT: 60,
@@ -432,22 +429,34 @@ export const EmptyViewStyles = StyleSheet.create ({
 export const ScrollColorsNum = ScrollColorsArray.length
 export const RecallColorsNum = RecallColorsArray.length
 export const PostStyles = StyleSheet.create({
+  linearGradient: {
+    flex: 1,
+    paddingLeft: 15,
+    paddingRight: 15,
+    borderRadius: 5
+  },
   container: {
     flex: 1,
     padding: 16,
     backgroundColor: 'white',
   },
   header: {
-    flex: 1,
+    opacity: 0.6,
+    backgroundColor: 'black',
     flexDirection: 'row',
-    paddingVertical: 8
+    paddingVertical: 8,
+
   },
   tags: {
     flex: 1,
     flexWrap: 'wrap',
     flexDirection: 'row',
     alignItems: 'flex-start',
+    position: 'absolute',
+    bottom: 0,
+    opacity: 0.9,
     paddingVertical: 8,
+    backgroundColor: 'transparent'
   },
   bottom: {
     flex: 1,
@@ -465,24 +474,32 @@ export const PostStyles = StyleSheet.create({
     paddingHorizontal: 4
   },
   tag: {
-    fontWeight: '500',
-    color: 'black',
-    paddingHorizontal: 2
+    fontWeight: '800',
+    color: 'white',
+    fontSize: 12,
+    paddingHorizontal: 4
   },
   created: {
+    fontSize: 11,
     paddingVertical: 8,
-    color: 'mediumvioletred',
+    color: 'white',
   },
   authorName: {
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: '500',
-    color: 'black',
+    color: 'white',
   },
   singlePostImage: {
-    width: window.width - 32,
-    height: window.width - 32,
+    width: window.width,
+    height: 250,
     resizeMode: 'cover',
     alignSelf: 'center'
+  },
+  userPhotoStyle: {
+    height: 50,
+    width: 50,
+    paddingHorizontal: 8,
+    resizeMode: 'contain'
   }
 })
 export const CarmeraStyles = StyleSheet.create ({
@@ -514,8 +531,17 @@ export const CarmeraStyles = StyleSheet.create ({
 
 export const TuningBySpecStyles = StyleSheet.create ({
   VRImageHolder : {
-    flex: 1,
     width: window.width,
-    height: 300
-  }
+    height: 300,
+    alignSelf: 'center'
+  },
+  subtitle: {
+      flex: 1,
+      fontSize: 10,
+      color: 'black',
+      padding: 8,
+      paddingTop: 2,
+      paddingBottom: 0,
+  },
+
 })

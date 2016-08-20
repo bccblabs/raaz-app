@@ -20,9 +20,10 @@ const {
     TAGS_SUCCESS,
     TAGS_ERROR,
 
-    CAR_REQUEST,
-    CAR_SUCCESS,
-    CAR_ERROR,
+    SPECS_DETAILS_REQUEST,
+    SPECS_DETAILS_SUCCESS,
+    SPECS_DETAILS_ERROR,
+
 
 } = require ('../../constants').default
 
@@ -101,9 +102,9 @@ export function fetchCarDetails (specId) {
   return {
     specId,
     [CALL_API]: {
-      types: [CAR_REQUEST, CAR_SUCCESS, CAR_ERROR],
+      types: [SPECS_DETAILS_REQUEST, SPECS_DETAILS_SUCCESS, SPECS_DETAILS_ERROR],
       endpoint: endpoint,
-      schema: Schemas.SPEC_ARRAY,
+      schema: Schemas.SPEC_DETAILS_ARRAY,
     }
   }
 }

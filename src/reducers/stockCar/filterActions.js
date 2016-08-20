@@ -25,6 +25,7 @@ const {
     SET_SELECTED_MAKE,
     SET_SELECTED_MODEL,
     SET_SELECTED_SUBMODEL,
+    SET_SELECTED_SPECID,
 
     CAT_REQUEST,
     CAT_SUCCESS,
@@ -51,6 +52,13 @@ export function setModel (value) {
 export function setSubmodel (value) {
   return {
     type: SET_SELECTED_SUBMODEL,
+    payload: value
+  }
+}
+
+export function setSpecId (value) {
+  return {
+    type: SET_SELECTED_SPECID,
     payload: value
   }
 }

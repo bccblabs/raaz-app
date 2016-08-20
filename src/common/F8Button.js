@@ -138,7 +138,8 @@ var styles = StyleSheet.create({
     color: 'white',
   },
   secondaryCaption: {
-    color: F8Colors.lightText,
+    color: 'white',
+    fontSize: 12,
   },
   tuningCaption: {
     color: 'white',

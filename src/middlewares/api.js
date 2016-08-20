@@ -22,7 +22,9 @@ const submodelSchema = new Schema ('submodels', {
 const specSchema = new Schema ('specs', {
   idAttribute: 'specId',
 })
-
+const specsDetailsSchema = new Schema ('specDetails', {
+  idAttribute: 'specId',
+})
 
 const stockCarSchema = new Schema ('stockCar', {
   idAttribute: 'key'
@@ -68,12 +70,16 @@ dealSchema.define ({
   deals: arrayOf (dealSchema)
 })
 
+specsDetailsSchema.define ({
+  specsDetails: arrayOf (specsDetailsSchema)
+})
+
 export const Schemas = {
   MAKE_ARRAY: arrayOf (makeSchema),
   MODEL_ARRAY: arrayOf (modelSchema),
   SUBMODEL_ARRAY: arrayOf (submodelSchema),
   SPEC_ARRAY: arrayOf (specSchema),
-
+  SPEC_DETAILS_ARRAY: arrayOf (specsDetailsSchema),
   STOCKCAR_ARRAY: arrayOf (stockCarSchema),
   BUILDS_ARRAY: arrayOf (buildSchema),
   PARTS_ARRAY: arrayOf (partSchema),

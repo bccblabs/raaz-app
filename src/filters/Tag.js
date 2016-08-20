@@ -52,26 +52,26 @@ const styles = StyleSheet.create({
   deselectedStyle: {
     padding: 5,
     margin: 4,
-    borderRadius: 5,
-    borderWidth: 1.3,
-    borderColor: 'white',
+    // borderRadius: 5,
+    // borderWidth: 1.3,
+    // borderColor: 'white',
     backgroundColor: 'transparent'
   },
   selectedStyle: {
     padding: 5,
     margin: 4,
-    borderRadius: 5,
-    borderWidth: 1.3,
-    borderColor: 'red',
+    // borderRadius: 5,
+    // borderWidth: 1.3,
+    // borderColor: 'red',
     backgroundColor: 'transparent'
   },
   deselectedLabel: {
     color: 'white',
-    fontSize: 8,
+    fontSize: 10,
   },
   selectedLabel: {
-    color: 'red',
-    fontSize: 8,
+    color: 'black',
+    fontSize: 10,
   }
 })
 export default connect () (Tag)

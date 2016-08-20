@@ -17,8 +17,8 @@ const maxWidth = 350
 const scalars = {
   'city': 5,
   'displacement': 1/20,
-  'horsepower': 1/3,
-  'torque': 1/3,
+  'horsepower': 1/1.5,
+  'torque': 1/1.5,
   'highway': 5,
   'max_hp_rpm': 1/20,
   'max_tq_rpm': 1/20,
@@ -47,7 +47,8 @@ const scalars = {
 }
 
 var Icon = require('react-native-vector-icons/EvilIcons');
-
+import {Heading3} from '../common/F8Text'
+import {TuningBySpecStyles} from '../styles'
 export default class MetricsGraph extends Component {
   constructor (...args) {
     super (...args)
@@ -169,8 +170,7 @@ export default class MetricsGraph extends Component {
           canPrev = currentIndex > 0 ? 1 : 0
 
     return (
-      <View style={styles.container}>
-          <View style={{height: 80, marginTop: 4}}>
+          <View style={{flex: 1, marginTop: 4}}>
           {
             dataOnDisplay && entriesOnDisplay && [val0, val1].map ((itemValue, idx)=>{
               let dataEntry = dataOnDisplay.entries[idx],
@@ -178,17 +178,16 @@ export default class MetricsGraph extends Component {
                   labelValue = dataEntry?numeral(dataEntry['value']).format ('0,0'):''
               return (
                 itemValue && <View style={styles.item} key={idx}>
-                <Text style={styles.dataNumber}>{labelName}</Text>
+                <Heading3 style={TuningBySpecStyles.subtitle}>{labelName}</Heading3>
                 <View style={styles.data}>
-                      <Animated.View style={[styles.bar, GraphColorsArray[currentIndex%GraphColorsArray.length], {width: itemValue}]}/>
-                      <Text style={styles.dataNumber}>{labelValue}</Text>
+                      <Animated.View style={[styles.bar, GraphColorsArray[idx%GraphColorsArray.length], {width: itemValue}]}/>
+                      <Heading3 style={TuningBySpecStyles.subtitle}>{labelValue}</Heading3>
                 </View>
                   </View>
               )
             })
           }
           </View>
-      </View>
     )
   }
 
@@ -205,7 +204,6 @@ const styles = StyleSheet.create({
   item: {
     flexDirection: 'column',
     marginBottom: 5,
-    paddingHorizontal: 10,
   },
   label: {
     color: '#CBCBCB',
@@ -230,8 +228,10 @@ const styles = StyleSheet.create({
   bar: {
     alignSelf: 'center',
     borderRadius: 5,
-    height: 20,
-    marginRight: 5
+    height: 10,
+    marginRight: 5,
+    marginLeft: 10,
+
   },
     // controller
   controller: {

@@ -20,8 +20,8 @@ import { FilterStyles } from '../styles'
 
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
-import {saveTrimHistory} from '../reducers/history/historyActions'
-import {syncSpec} from '../reducers/history/historyActions'
+import { syncSpec } from '../reducers/history/historyActions'
+import { setSpecId } from '../reducers/stockCar/filterActions'
 
 const mapStateToProps = (state) => {
   let specIds = keys(state.entities.specs).sort(),
@@ -38,6 +38,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     saveSpecId: (userId, specId) => {
       dispatch (syncSpec (userId, specId))
+    },
+    setSelectedSpecId: (specId) => {
+      dispatch (setSpecId (specId))
     }
   }
 }
@@ -69,7 +72,7 @@ class SpecsList extends Component {
 
   render () {
     let {specs, selectedSubmodel, isFetching} = this.state,
-        {saveSpecId, userId} = this.props
+        {saveSpecId, userId, setSelectedSpecId} = this.props
     const leftItem = {
             title: 'Back',
             onPress: ()=>Actions.pop(),
@@ -86,8 +89,9 @@ class SpecsList extends Component {
                          } = option
                         return (
                           <TouchableOpacity onPress={()=>{
-                            Actions.TuningBySpec ({specId: specId})
+                            setSelectedSpecId (specId)
                             saveSpecId (userId, specId)
+                            Actions.TuningBySpec ({specId: specId})
                           }}>
                           <Text style={FilterStyles.multipleChoiceText}>
                             { `${horsepower} HP ` + size.toFixed(1) + ` L ${configuration}-${cylinders} ${compressor}`}

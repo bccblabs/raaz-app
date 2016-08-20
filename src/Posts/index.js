@@ -65,7 +65,7 @@ class Raaz extends Component {
     return (
       <View style={{flex: 1}}>
       <F8Header title="Raaz" foreground='dark' leftItem={leftItem} rightItem={rightItem}/>
-      <TagsHeader color="black" tagAction={togglePostTag} tags={['#following', '#popular','#jdm', '#nsx', 'm5','#gt350', 'miata', '#lp710', '#offroad','#gtr', '#amg', '#evo', '#rc', '#wrx', '#nostalgia', ]}/>
+      <TagsHeader color="orange" tagAction={togglePostTag} tags={['#following', '#popular','#jdm', '#nsx', 'm5','#gt350', 'miata', '#lp710', '#offroad','#gtr', '#amg', '#evo', '#rc', '#wrx', '#nostalgia', ]}/>
       <PostListView/>
       </View>
     )

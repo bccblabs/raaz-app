@@ -35,9 +35,9 @@ const mapDispatchToProps = (dispatch) => {
 class Spec extends Component {
   render () {
     let {spec, userId, saveSpecId} = this.props,
-        {tags, media, years,
-         cylinders, compressor, configuration,
-         transmissionSpeed, transmission, drivenWheels,size,
+        {tags, media,
+         cylinders, compressor, configuration, years,
+         transmissionSpeed, transmission, drivenWheels, size,
          specId,
         } = spec,
         graphKeys = ['horsepower', 'torque']

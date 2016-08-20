@@ -58,14 +58,12 @@ class ModelsList extends Component {
   componentWillReceiveProps (nextProps) {
     let {models, selectedModel, selectedMake} = nextProps,
         isFetching = models.length?false:true
-    console.log ('ModelsList models=',models, 'isFetching=', isFetching)
     this.setState ({models, selectedModel, selectedMake, isFetching})
   }
 
   render () {
     let {models, selectedMake, selectedModel, isFetching} = this.state,
         {fetchSubmodels} = this.props
-    console.log ('render ModelsList models=',models, 'isFetching=', isFetching)
     const leftItem = {
             title: 'Makes',
             onPress: ()=>Actions.pop()

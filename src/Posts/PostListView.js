@@ -12,7 +12,8 @@ import PureListView from '../common/PureListView'
 import {fetchPosts} from '../reducers/posts/postActions'
 import {EmptyViewStyles} from '../styles'
 import FullScreenLoadingView from '../components/FullScreenLoadingView'
-// text string fields
+
+
 const filterHashSelector = (state) => (state.posts.postsFilterHash)
 const postsSelector = (state) => (state.entities.posts)
 const postsPaginationSelector = (state) => (state.pagination.postsPagination)
