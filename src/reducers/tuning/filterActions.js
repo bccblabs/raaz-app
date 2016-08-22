@@ -51,22 +51,21 @@ export function fetchBuildsFromApi (specId, pageUrl, tagsJson) {
   }
 }
 
-export function fetchBuilds (specId, paging) {
-  const pageUrl = '/tuning/' + specId + '/builds?' + paging + sortBy
-
-  return (dispatch, getState) => {
-    let tagsJson = getState().tuning.filterTags.toJS()
-    dispatch (fetchBuildsFromApi(specId, pageUrl, tagsJson))
-  }
-}
-
-
 export function fetchParts (specId, paging, sortBy) {
   const pageUrl = '/tuning/' + specId + '/parts?' + paging + sortBy
 
   return (dispatch, getState) => {
     let tagsJson = getState().tuning.filterTags.toJS()
     dispatch (fetchPartsFromApi (specId, pageUrl, tagsJson))
+  }
+}
+
+export function fetchBuilds (specId, paging) {
+  const pageUrl = '/tuning/' + specId + '/builds?' + paging + sortBy
+
+  return (dispatch, getState) => {
+    let tagsJson = getState().tuning.filterTags.toJS()
+    dispatch (fetchBuildsFromApi(specId, pageUrl, tagsJson))
   }
 }
 

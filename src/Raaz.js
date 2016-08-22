@@ -30,12 +30,12 @@ import SubmodelsList from './components/SubmodelsList'
 import SpecsList from './components/SpecsList'
 import Notifications from './Notifications'
 import TuningBySpec from './TuningBySpec'
+import TuningPager from './tuning/TuningPager'
 import Order from './Order'
-
 
 // import VRTestScreen from './RNVRPlayer/test'
 import {computeFilterHash, fetchMakeModelYears, fetchStockCars, rootUrl} from './reducers/stockCar/filterActions'
-// 
+//
 // <Route name="Events"
 //   component={Events}
 //   key="events"
@@ -118,6 +118,7 @@ export default class Viicles extends Component {
             <Route name="Order" component={Order} schema="default" hideNavBar={true}/>
             <Route name="TuningBySpec" component={TuningBySpec} schema="default" hideNavBar={true}/>
             <Route name="NewPost" component={NewPost} schema="default" hideNavBar={true}/>
+            <Route name="TuningPager" component={TuningPager} schema="default" hideNavBar={true}/>
           </Router>
       )
   }

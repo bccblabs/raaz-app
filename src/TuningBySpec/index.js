@@ -29,8 +29,7 @@ import TagFilters from '../filters/TagFilters'
 import PostsList from '../Posts/PostListView'
 import {VRImage} from '../cardboard'
 
-import {TuningBySpecStyles} from '../styles'
-
+import {Styles ,TuningBySpecStyles} from '../styles'
 const specIdSelector = (state) => (state.stockCar.selectedSpecId)
 const specDetailsSelector = (state) => (state.entities.specDetails)
 const specDetailsPagination = (state) => (state.pagination.specDetailsPagination)
@@ -119,6 +118,13 @@ class TuningBySpec extends Component {
 
       const dataArray = graphKeys.map ((key)=>{return {name: key, value: spec[key]}})
 
+      let tuningcomponent = (specsInfo && specsInfo.tuning.data.length )?(
+        <View>
+          <Heading3 style={TuningBySpecStyles.subtitle}>{"Search Tuning By Categories"}</Heading3>
+          <TagFilters data={specsInfo && specsInfo.tuning.data || []} onPress={toggleTuningTags} selectedTags={this.state.selectedTags}/>
+          <F8Button onPress={()=>{Actions.TuningPager()}} type="secondary" caption="Search Tuning!" style={[Styles.contactDealerButton, {marginTop: 8}]}/>
+        </View>
+      ): (<View/>)
         return (
           <ParallaxScrollView
             backgroundColor="black"
@@ -143,8 +149,7 @@ class TuningBySpec extends Component {
             <Heading3 style={TuningBySpecStyles.subtitle}>{`${drivenWheels}`}</Heading3>
             <MetricsGraph data={[{entries:dataArray}]}/>
             </View>
-            <Heading3 style={TuningBySpecStyles.subtitle}>{"Search Tuning By Categories"}</Heading3>
-            <TagFilters data={specsInfo && specsInfo.tuning.data || []} onPress={toggleTuningTags} selectedTags={this.state.selectedTags}/>
+            {tuningcomponent}
             </View>
             <Heading3 style={TuningBySpecStyles.subtitle}>{"Posts"}</Heading3>
             <PostsList/>

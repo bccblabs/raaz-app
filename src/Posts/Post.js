@@ -10,7 +10,6 @@ import React, {
 
 import {Actions} from 'react-native-router-flux'
 
-import LinearGradient from 'react-native-linear-gradient';
 import Metro from 'react-native-metro-grid'
 import moment from 'moment'
 
