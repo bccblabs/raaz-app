@@ -72,6 +72,7 @@ class PostListView extends Component {
   componentWillReceiveProps (nextProps) {
     let {postsList, postsPagination} = nextProps
     this.setState ({dataSource: this.state.dataSource.cloneWithRows (postsList), postsPagination})
+    console.log (this.state.dataSource.getRowCount())
   }
 
   render () {
@@ -79,9 +80,11 @@ class PostListView extends Component {
       , listContent = (
         <ListView
           style={{flex: 1}}
+          pageSize={10}
           dataSource={dataSource}
           renderRow={this.renderRow}
           renderEmptyList={this._renderEmptyList}
+          enableEmptySections={true}
           onEndReached={()=>{
             console.log ('end of listview reached')
             if (postsPagination.nextPageUrl) {
@@ -111,7 +114,7 @@ class PostListView extends Component {
 
   renderRow (postData, rowId) {
     return (
-      <Post key={rowId} data={postData}/>
+      <Post data={postData}/>
     )
   }
 }

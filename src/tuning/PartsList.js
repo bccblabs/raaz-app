@@ -1,111 +1,90 @@
 'use strict'
 
-import React, {Component, ListView} from 'react-native'
-import deepEqual from 'deep-equal'
-
+import React, {Component, ListView, Text, View} from 'react-native'
+import FullScreenLoadingView from '../components/FullScreenLoadingView'
 import {connect} from 'react-redux'
-import {createSelector} from 'reselect'
 import {Actions} from 'react-native-router-flux'
-
+import RequestUtils from '../requests'
 import {fetchParts, partsUrl} from '../reducers/tuning/filterActions'
-import BuildItem from './BuildItem'
-import PureListView from '../common/PureListView'
-
-
-const filterHashSelector = (state) => (state.tuning.partsFilterHash)
-const partsSelector = (state) => (state.entities.tuningItems)
-const partsPaginationSelector = (state) => (state.pagination.partsPagination)
-
-const getPartsEntities = createSelector (
-  [filterHashSelector, partsSelector, partsPaginationSelector],
-  (filterHash, partsList, partsPagination) => {
-    let ids = partsPagination[filterHash]?partsPagination[filterHash].ids:[]
-    return ids.map (id=>partsList[id])
-  }
-)
-
-const getPartsPagination = createSelector (
-  [filterHashSelector, partsPaginationSelector],
-  (filterHash, partsPagination) => {
-    return partsPagination[filterHash] || {}
-  }
-)
-
-const mapStateToProps = (state) => {
-  return {
-    partsList: getPartsEntities (state),
-    partsPagination: getPartsPagination (state)
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchNextPage: (pageUrl) => {
-      dispatch (fetchParts (pageUrl))
-    }
-  }
-}
+import Part from './Part'
 
 class PartsList extends Component {
-  _innerRef: ?PureListView;
-
   constructor (props) {
     super (props)
+    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     this.state = {
-      partsList: props.partsList,
-      partsPagination: props.partsPagination
+      specId: this.props.specId,
+      tagName: this.props.tag,
+      dataSource: ds.cloneWithRows ([]),
+      isFetching: true,
+      hasError: false,
+      nextPageUrl: null,
     }
-    this._innerRef = null;
-    this.renderRow = this.renderRow.bind(this);
-    this.storeInnerRef = this.storeInnerRef.bind(this);
-
+    this.fetchPartsFromUrl = this.fetchPartsFromUrl.bind (this)
   }
 
-
-  componentWillReceiveProps (nextProps) {
-    let {partsList, partsPagination} = this.props,
-        nextPartsList = nextProps.partsList,
-        nextPagination = nextProps.partsPagination,
-        trimEqual = deepEqual (partsList, nextPartsList),
-        paginationEqual = deepEqual (partsPagination, nextPagination)
-
-    if (!paginationEqual)
-      this.setState ({partsPagination: nextPagination})
-    if (!trimEqual)
-      this.setState ({partsList: nextPartsList})
+  async fetchPartsFromUrl (specId, tagName, pageUrl) {
+    try {
+      let data = await RequestUtils.fetchParts (specId, tagName, null)
+      console.log (data)
+      this.setState ({
+        dataSource: this.state.dataSource.cloneWithRows (data.data[0].parts),
+        hasError: false,
+        isFetching: false,
+      })
+    } catch (err) {
+      console.error (err)
+      this.setState ({
+        hasError: true,
+        isFetching: false
+      })
+    }
   }
 
+  componentWillMount () {
+    this.fetchPartsFromUrl (this.state.specId, this.state.tagName)
+  }
 
   render () {
-
+    let {dataSource, isFetching, hasError} = this.state
+      , content
+    if (isFetching) content = (<FullScreenLoadingView/>)
+    if (hasError) content = (<Text>{"Error Occurred..."}</Text>)
+    else {
+      content =  (
+        <ListView
+          style={{flex: 1, backgroundColor: '#F5F5F5'}}
+          dataSource={dataSource}
+          enableEmptySections={true}
+          renderRow={(data, rowId)=>{return (<Part data={data}/>)}}
+        />
+      )
+    }
     return (
-      <PureListView
-        ref={this.storeInnerRef}
-        data={this.state.partsList}
-        renderRow={this.renderRow}
-        {...this.props}
-      />
+      <View style={{flex: 1}}>
+      {content}
+      </View>
     )
   }
-  renderRow (partData, rowId) {
-    return (
-      <BuildItem data={partData || {}} onPress={()=>Actions.Order ({...partData})}/>
-    )
-  }
+  // renderRow (partData, rowId) {
+    // return (
+    //   <BuildItem data={partData || {}} onPress={()=>Actions.Order ({...partData})}/>
+    // )
+  // }
 
-  storeInnerRef(ref: ?PureListView) {
-    this._innerRef = ref;
-  }
-
-
-  scrollTo(...args: Array<any>) {
-    this._innerRef && this._innerRef.scrollTo(...args);
-  }
-
-  getScrollResponder(): any {
-    return this._innerRef && this._innerRef.getScrollResponder();
-  }
-
+  // storeInnerRef(ref: ?PureListView) {
+  //   this._innerRef = ref;
+  // }
+  //
+  //
+  // scrollTo(...args: Array<any>) {
+  //   this._innerRef && this._innerRef.scrollTo(...args);
+  // }
+  //
+  // getScrollResponder(): any {
+  //   return this._innerRef && this._innerRef.getScrollResponder();
+  // }
+  //
 }
 
-export default connect (mapStateToProps, mapDispatchToProps) (PartsList)
+export default connect () (PartsList)

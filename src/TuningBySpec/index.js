@@ -15,8 +15,7 @@ import {createSelector} from 'reselect'
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
 // Inside of a component's render() method:
-
-import {fetchCarDetails, toggleTuningTags} from '../reducers/tuning/filterActions'
+import {fetchCarDetails, toggleTuningTags, clearTuningTags} from '../reducers/tuning/filterActions'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 
 import F8Header from '../common/F8Header'
@@ -63,6 +62,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchSpecsDetails: (specId)=>{
       dispatch (fetchCarDetails (specId))
+    },
+    clearTuningTags: () => {
+      dispatch (clearTuningTags())
     }
   }
 }
@@ -79,35 +81,31 @@ class TuningBySpec extends Component {
   }
 
   componentWillMount () {
-    let {tuningTags, specsDetails, specId, fetchSpecsDetails, specsPagination} = this.props
+    let {specId, fetchSpecsDetails} = this.props
     fetchSpecsDetails(specId)
-    this.setState ({
-      selectedTags: tuningTags,
-      specsDetails: specsDetails,
-      specsPagination: specsPagination,
-    })
+    clearTuningTags()
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log ('tuningbyspec',nextProps)
     let {tuningTags, specsPagination, specsDetails} = nextProps
-
+      , specsInfo = this.state.specsDetails[0]
+    console.log (tuningTags)
     this.setState ({
       selectedTags: tuningTags,
-      specsDetails: specsDetails,
-      specsPagination: specsPagination
+      specsDetails,
+      specsPagination,
     })
   }
 
 
   render () {
-    let {selectedTags, specsDetails, specsPagination} = this.state
-    if (specsPagination.isFetching || specsDetails.length < 1) return (<FullScreenLoadingView/>)
+    let {selectedTags, specsDetails, specsPagination, availableTags} = this.state
+      , specsInfo = this.state.specsDetails[0]
+    if (specsPagination.isFetching || !specsInfo) return (<FullScreenLoadingView/>)
     else {
       const leftItem = {title: 'Back', onPress: ()=> {Actions.pop ()}}
-          , headerComponent = (<F8Header foreground="light" leftItem={leftItem}/>)
-          , specsInfo = this.state.specsDetails[0]
           , spec = specsInfo.specs
+          , headerComponent = (<F8Header foreground="light" leftItem={leftItem}/>)
           , {make, model, submodel} = specsInfo
 
       let {
@@ -122,7 +120,9 @@ class TuningBySpec extends Component {
         <View>
           <Heading3 style={TuningBySpecStyles.subtitle}>{"Search Tuning By Categories"}</Heading3>
           <TagFilters data={specsInfo && specsInfo.tuning.data || []} onPress={toggleTuningTags} selectedTags={this.state.selectedTags}/>
-          <F8Button onPress={()=>{Actions.TuningPager()}} type="secondary" caption="Search Tuning!" style={[Styles.contactDealerButton, {marginTop: 8}]}/>
+          {selectedTags.size?(<F8Button onPress={()=>{Actions.TuningPager({tuningTags: selectedTags})}} type="secondary" caption="Search Tuning!" style={Styles.contactDealerButton}/>):
+                                (<F8Button onPress={()=>{}} type="secondary" caption="Please Select From Above" style={[Styles.contactDealerButton, {backgroundColor: 'gray'}]}/>)
+          }
         </View>
       ): (<View/>)
         return (

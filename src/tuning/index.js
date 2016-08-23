@@ -70,19 +70,14 @@ const mapDispatchToProps = (dispatch) => {
 class Tuning extends Component {
   constructor (props) {
     super (props)
-    this.setState ({
+    this.state = {
       selectedTags: props.selectedTags,
       categories: props.categories,
       categoriesPagination: props.categoriesPagination,
-    })
+    }
   }
 
   componentWillMount () {
-    this.setState ({
-      selectedTags: this.props.selectedTags,
-      categories: this.props.categories,
-      categoriesPagination: this.props.categoriesPagination,
-    })
     this.props.fetchCategories()
   }
 
@@ -93,17 +88,24 @@ class Tuning extends Component {
 
   render () {
     const leftItem = {title: 'Saved', onPress: ()=>{Actions.SavedItems()}},
-          rightItem = {title: 'Recognize', onPress: ()=>{Actons.Orders()}},
+          rightItem = {title: 'Orders', onPress: ()=>{Actons.Orders()}},
           selectedTags = this.state.selectedTags
     let buttonContent = selectedTags.size ? (
       <F8Button
-      type="secondary"
-      caption="Find Me Cars!"
-      style={Styles.contactDealerButton}/>): (<View/>)
+        type="secondary"
+        caption="Find Me Cars!"
+        style={[Styles.contactDealerButton]}/>
+      ):(
+      <F8Button
+        type="secondary"
+        caption="Please Select From Above"
+        style={[Styles.contactDealerButton,{backgroundColor: 'gray'}]}/>
+      )
     return (
       <View style={{flex: 1}}>
       <F8Header title="Cars" foreground='dark' leftItem={leftItem} rightItem={rightItem}/>
       <ScrollView>
+        <View style={{flex: 1, marginBottom: 100}}>
         <View style={styles.container}>
           <TouchableOpacity
             accessibilityLabel="Clear filter"
@@ -117,8 +119,9 @@ class Tuning extends Component {
         </View>
         <Heading3 style={[styles.text, {color: 'black', paddingTop: 8}]}>{"Browse Cars By Categories"}</Heading3>
         <TagFilters data={this.state.categories} onPress={toggleCarTag} selectedTags={this.state.selectedTags}/>
-        </ScrollView>
         {buttonContent}
+        </View>
+        </ScrollView>
       </View>
     )
   }

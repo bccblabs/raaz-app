@@ -7,28 +7,26 @@ import React, {
   View,
 } from 'react-native'
 
-import F8Header from '../common/F8Header'
 
 import {Actions} from 'react-native-router-flux'
 import {connect} from 'react-redux'
 import {createSelector} from 'reselect'
 
 const specIdSelector = (state) => (state.stockCar.selectedSpecId)
-const tuningTagsSelector = (state) => (state.tuning.filterTags)
-const tuningItemsSelector = (state) => (state.entities.tuningItems)
-const tuningPaginationSelector = (state) => (state.pagination.partsPagination)
 
-const getTuningPartsSelector = createSelector (
-  [specIdSelector, tuningItemsSelector, partsPaginationSelector],
-  (specId, tuningEntities, tuningPagination) => {
+import F8Header from '../common/F8Header'
+import PartsList from '../tuning/PartsList'
+import ScrollableTabView from 'react-native-scrollable-tab-view'
 
-  }
-)
 const mapStateToProps = (state) => {
   return {
     specId: specIdSelector (state),
-    tuningTags: tuningTagsSelector (state),
-    tuningPagination: tuningPaginationSelector (state),
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch
   }
 }
 
@@ -36,21 +34,29 @@ class TuningPager extends Component {
   constructor (props) {
     super (props)
     this.state = {
-      isFetching: this.props.partsPagination
+      tuningTags: this.props.tuningTags,
+      specId: this.props.specId
     }
   }
-
-  componentWillMount () {
-
-  }
-
-  componentWillReceiveProps () {
-
-  }
-
   render () {
+    const leftItem = {
+      title: 'Back',
+      onPress: Actions.pop
+    }
+
     return (
       <View style={{flex: 1}}>
+      <F8Header leftItem={leftItem} foreground="dark"/>
+      <ScrollableTabView
+        locked={true}
+        tabBarUnderlineColor="orange"
+        tabBarActiveTextColor="orange"
+        tabBarInactiveTextColor="black"
+        tabBarTextStyle={{fontSize: 10}}>
+      {
+        this.state.tuningTags.map ((tagName, idx) => (<PartsList key={`$tp-{idx}`} tabLabel={`#${tagName}`} tag={tagName} specId={this.state.specId}/>))
+      }
+      </ScrollableTabView>
       </View>
     )
   }

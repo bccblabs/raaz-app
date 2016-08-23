@@ -21,10 +21,9 @@ export const Styles = StyleSheet.create ({
     borderTopWidth: 1,
     borderTopColor: '#eee',
     backgroundColor: 'orange',
-    position: 'absolute',
-    bottom: 50,
-    width: window.width,
-    flex: 1
+    alignSelf: 'center',
+    flex: 0,
+    margin: 16,
   },
 
   photoButton: {
@@ -474,9 +473,9 @@ export const PostStyles = StyleSheet.create({
     paddingHorizontal: 4
   },
   tag: {
-    fontWeight: '800',
+    fontWeight: '500',
     color: 'white',
-    fontSize: 12,
+    fontSize: 13,
     paddingHorizontal: 4
   },
   created: {

@@ -28,15 +28,15 @@ class TagFilters extends Component {
   }
 
   render() {
-    let {data, onPress, selectedTags} = this.props
+    let {data, onPress, selectedTags, isTuning} = this.props
     if (!data) return (<View><Text style={{color: 'black'}}>{"Email Us For More..."}</Text></View>)
     else {
     return (
-      <View style={{flex:1, marginBottom: 100}}>
+      <View style={isTuning?[styles.container, {marginBottom: 16}]:styles.container}>
         <View>
         {data.map ((optionRow, idx)=>{
           return (
-            <View style={{backgroundColor: 'white'}}>
+            <View style={{backgroundColor: 'white'}} key={`tf-${idx}`}>
             <Paragraph style={SliderStyles.sliderTitle}>
             {optionRow.name}
             </Paragraph>
@@ -70,9 +70,6 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    padding: 30,
-    paddingTop: 75,
-    alignItems: 'center',
   },
   title: {
     textAlign: 'center',

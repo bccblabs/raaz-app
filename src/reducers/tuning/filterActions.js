@@ -52,7 +52,9 @@ export function fetchBuildsFromApi (specId, pageUrl, tagsJson) {
 }
 
 export function fetchParts (specId, paging, sortBy) {
-  const pageUrl = '/tuning/' + specId + '/parts?' + paging + sortBy
+  let pageUrl = '/parts?'
+  if (paging) pageUrl += paging
+  if (sortBy) pageUrl += sortBy
 
   return (dispatch, getState) => {
     let tagsJson = getState().tuning.filterTags.toJS()
@@ -60,12 +62,12 @@ export function fetchParts (specId, paging, sortBy) {
   }
 }
 
-export function fetchBuilds (specId, paging) {
-  const pageUrl = '/tuning/' + specId + '/builds?' + paging + sortBy
+export function fetchBuilds (specId, partId, paging) {
+  let pageUrl = '/tuning/' + specId + '/builds/' + partId
+  if (paging) pageUrl += paging
 
   return (dispatch, getState) => {
-    let tagsJson = getState().tuning.filterTags.toJS()
-    dispatch (fetchBuildsFromApi(specId, pageUrl, tagsJson))
+    dispatch (fetchBuildsFromApi(pageUrl))
   }
 }
 

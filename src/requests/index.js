@@ -34,7 +34,7 @@ const requestTimeout = (ms) => {
 };
 
 const API_LISTINGS_TEST = 'http://localhost:9200/car/trim/_search'
-const API_URL = 'http://localhost:8080'
+const API_URL = 'http://localhost:3001'
 
 
 const fetchWithTimeout = (time_out, ...args) => {
@@ -42,6 +42,21 @@ const fetchWithTimeout = (time_out, ...args) => {
 };
 
 const RequestUtils = {
+
+  fetchParts (specId, tagName, pageUrl) {
+    let url = pageUrl?(API_URL + '/tuning/' + specId + '/' + tagName + pageUrl):(API_URL + '/tuning/' + specId + '/' + tagName)
+    return fetchWithTimeout (REQ_TIMEOUT, url, {
+            method: 'GET',
+            headers: {
+            'Accept': 'application/json',
+          }
+        }).then ((response) => {
+          return response.json()
+        }).catch ((error) => {
+          throw error
+        })
+  },
+
   fetchListingCategories (pageNum) {
     return fetchWithTimeout (REQ_TIMEOUT, API_URL + '/listings?pageNum=' + pageNum + '&pageSize=10&subPageNum=0&subPageSize=10', {
       method: 'GET',
