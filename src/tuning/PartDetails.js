@@ -8,9 +8,9 @@ import {createSelector} from 'reselect'
 
 import ViewPager from 'react-native-viewpager'
 
-import {Heading1, Heading2} from '../common/F8Text'
+import {Heading1, Heading2, Heading3} from '../common/F8Text'
 import {syncProduct} from '../reducers/history/historyActions'
-import {Styles, ButtonStyles, FilterStyles} from '../styles'
+import {Styles, TuningBySpecStyles, FilterStyles} from '../styles'
 import F8Button from '../common/F8Button'
 import F8Header from '../common/F8Header'
 import FullScreenLoadingView from '../components/FullScreenLoadingView'
@@ -40,7 +40,7 @@ class PartDetails extends Component {
   async fetchPartDetails (partId) {
     try {
       let data = await RequestUtils.fetchPartDetails (partId)
-      console.log (data)
+      console.log ('partsData', data)
       this.setState ({hasError: false, isLoading: false, ...data})
     } catch (err) {
       this.setState ({hasError: true, isLoading: false})
@@ -48,7 +48,7 @@ class PartDetails extends Component {
   }
 
   componentWillMount () {
-    this.fetchPartDetails (this.state.specId)
+    this.fetchPartDetails (this.props.data.partId)
   }
 
   render() {
@@ -75,28 +75,22 @@ class PartDetails extends Component {
       title: 'Save',
       onPress: ()=> {this.props.dispatch (syncProduct(partId))}
     }
-
     let content = isLoading?(<FullScreenLoadingView/>):(
       <View style={{flex: 1}}>
       <F8Header
         foreground="dark"
-        title={name}
         leftItem={leftItem}
         rightItem={rightItem}
         style={FilterStyles.headerStyle}/>
-        <ViewPager
-          renderPage={(media)=>{return (<Image source={{uri:media}} style={Styles.largeImageStyle}/>)}}
-          dataSource={this.state.mediaDataSource}/>
-        <ScrollView
-          style={Styles.ItemsListStyle}>
+        <ScrollView>
+          <Heading1 style={{padding: 16, color: 'black'}}>{name}</Heading1>
+          <ViewPager
+            renderPage={(media)=>{return (<Image source={{uri:media}} style={Styles.largeImageStyle}/>)}}
+            dataSource={this.state.mediaDataSource}
+          />
           <View style={{paddingBottom: 49}}>
-          {
-            description && description.map ((item, idx)=> (
-              <View style={Styles.ItemStyle} key={idx}>
-                <Text key={`partdesc-${idx}`}>{item}</Text>
-              </View>
-            ))
-          }
+          {description && description.map ((item, idx)=> (<Heading3 style={TuningBySpecStyles.subtitle} key={`partdesc-${idx}`}>{item}</Heading3>))}
+          {manufacturer && manufacturer.logo && <Image source={{uri: manufacturer.logo}} resizeMode="contain" style={{height: 50, margin: 32}}/>}
           </View>
         </ScrollView>
         <F8Button

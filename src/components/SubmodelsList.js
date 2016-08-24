@@ -74,7 +74,7 @@ class SubmodelsList extends Component {
             <ScrollView style={FilterStyles.optionsContainer}>
               <MultipleChoice
                 maxSelectedOptions={1}
-                renderText={(option)=> {return (<Text style={FilterStyles.multipleChoiceText}>{option}</Text>)}}
+                renderText={(option)=> {return (<Text style={FilterStyles.multipleChoiceText}>{option.toUpperCase()}</Text>)}}
                 options={this.state.submodels}
                 selectedOptions={[this.state.selectedSubmodel]}
                 renderSeparator={(option)=>{return (<View/>)}}

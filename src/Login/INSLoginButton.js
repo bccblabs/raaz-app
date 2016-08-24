@@ -1,10 +1,10 @@
 'use strict';
 
 import React, {Component, Image, StyleSheet, TouchableOpacity} from 'react-native'
-const MainButton = require('../common/MainButton');
+import F8Button from '../common/F8Button'
 const { loginWithInstagram } = require('../reducers/user/userActions');
 const {connect} = require('react-redux');
-
+import {Styles} from '../styles'
 class INSLoginButton extends Component {
   props: {
     style: any;
@@ -32,21 +32,13 @@ class INSLoginButton extends Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <MainButton
-          type='secondary'
-          style={[styles.button, this.props.style]}
-          caption="Please wait..."
-        />
-      );
+        <F8Button type="secondary" style={Styles.loginButton} caption="Loading..." />
+      )
     }
 
     return (
-      <TouchableOpacity onPress={() => this.logIn()}>
-      <Image
-        style={[styles.button, this.props.style]}
-        source={require('../images/ins-logo.png')}/>
-      </TouchableOpacity>
-    );
+      <F8Button type="secondary" style={Styles.loginButton} onPress={() => this.logIn()} caption="Instagram"/>
+    )
   }
 
   async logIn() {

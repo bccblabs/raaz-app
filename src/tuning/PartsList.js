@@ -28,7 +28,7 @@ class PartsList extends Component {
       let data = await RequestUtils.fetchParts (specId, tagName, null)
       console.log (data)
       this.setState ({
-        dataSource: this.state.dataSource.cloneWithRows (data.data[0].parts),
+        dataSource: this.state.dataSource.cloneWithRows (data && data.data[0] && data.data[0].parts),
         hasError: false,
         isFetching: false,
       })

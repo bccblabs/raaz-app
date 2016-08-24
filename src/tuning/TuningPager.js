@@ -51,8 +51,7 @@ class TuningPager extends Component {
         locked={true}
         tabBarUnderlineColor="orange"
         tabBarActiveTextColor="orange"
-        tabBarInactiveTextColor="black"
-        tabBarTextStyle={{fontSize: 10}}>
+        tabBarInactiveTextColor="black">
       {
         this.state.tuningTags.map ((tagName, idx) => (<PartsList key={`$tp-{idx}`} tabLabel={`#${tagName}`} tag={tagName} specId={this.state.specId}/>))
       }

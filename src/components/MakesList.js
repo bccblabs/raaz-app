@@ -74,7 +74,7 @@ class MakesList extends Component {
             <ScrollView style={FilterStyles.optionsContainer}>
               <MultipleChoice
                 maxSelectedOptions={1}
-                renderText={(option)=> {return (<Text style={FilterStyles.multipleChoiceText}>{option}</Text>)}}
+                renderText={(option)=> {return (<Text style={FilterStyles.multipleChoiceText}>{option.toUpperCase()}</Text>)}}
                 options={this.state.makes}
                 selectedOptions={[this.state.selectedMake]}
                 renderSeparator={(option)=>{return (<View/>)}}

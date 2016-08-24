@@ -103,7 +103,7 @@ class Tuning extends Component {
       )
     return (
       <View style={{flex: 1}}>
-      <F8Header title="Cars" foreground='dark' leftItem={leftItem} rightItem={rightItem}/>
+      <F8Header title="Raaz" foreground='dark' leftItem={leftItem} rightItem={rightItem}/>
       <ScrollView>
         <View style={{flex: 1, marginBottom: 100}}>
         <View style={styles.container}>
@@ -113,7 +113,7 @@ class Tuning extends Component {
             style={styles.clear}
             onPress={Actions.Makes}>
             <View style={{alignSelf: 'center', flexDirection: 'row'}}>
-            <Heading3 style={styles.text}>{"Select Car By Make and Model"}</Heading3>
+            <Heading3 style={styles.text}>{("Select Car By Make and Model").toUpperCase()}</Heading3>
             </View>
           </TouchableOpacity>
         </View>
@@ -143,7 +143,9 @@ const styles = StyleSheet.create ({
     flex: 1,
     fontSize: 10,
     color: 'white',
-    paddingHorizontal: 8
+    paddingHorizontal: 8,
+    letterSpacing: 1,
+
   },
   clear: {
     paddingRight: 16,

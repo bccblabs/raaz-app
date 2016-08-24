@@ -1,5 +1,6 @@
 'use strict'
 import React, {Dimensions, StyleSheet, Platform} from 'react-native'
+import F8Colors from '../common/F8Colors'
 const window = Dimensions.get ('window')
 export const Styles = StyleSheet.create ({
   button: {
@@ -23,7 +24,20 @@ export const Styles = StyleSheet.create ({
     backgroundColor: 'orange',
     alignSelf: 'center',
     flex: 0,
+    height: 50,
+    width: window.width,
     margin: 16,
+  },
+
+  loginButton: {
+    borderTopWidth: 1,
+    borderRadius: 10,
+    borderTopColor: 'lightblue',
+    backgroundColor: 'lightblue',
+    alignSelf: 'center',
+    height: 40,
+    width: window.width/2,
+    margin: 12,
   },
 
   photoButton: {
@@ -127,8 +141,9 @@ export const Styles = StyleSheet.create ({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width: 300,
-    resizeMode: 'cover',
+    height: 320,
+    width: 240,
+    resizeMode: 'contain',
   }
 })
 
@@ -253,11 +268,12 @@ export const FilterStyles = StyleSheet.create({
     marginRight: 16,
   },
   multipleChoiceText: {
-    padding: 10,
+    padding: 14,
     fontWeight:'bold',
     color: 'gray',
     alignSelf: 'flex-start',
-    fontSize: 12,
+    fontSize: 14,
+    letterSpacing: 0.7,
     fontFamily: 'FontAwesome'
   }
 })
@@ -291,6 +307,7 @@ export const SliderStyles = StyleSheet.create({
     color: 'black',
     alignSelf: 'flex-start',
     fontSize: 12,
+    letterSpacing: 1,
     fontFamily: 'FontAwesome'
   },
   avgText: {
@@ -397,7 +414,8 @@ export const PostScreenStyles = StyleSheet.create ({
     color: 'white',
     fontWeight: 'bold',
     alignSelf: 'center',
-    fontSize: 16
+    fontSize: 16,
+    letterSpacing: 1,
   },
   profileInfoView: {
     width: 100,
@@ -473,20 +491,25 @@ export const PostStyles = StyleSheet.create({
     paddingHorizontal: 4
   },
   tag: {
-    fontWeight: '500',
     color: 'white',
     fontSize: 13,
-    paddingHorizontal: 4
+    paddingHorizontal: 4,
+    letterSpacing: 0.7,
+    fontFamily: 'FontAwesome'
   },
   created: {
     fontSize: 11,
     paddingVertical: 8,
     color: 'white',
+    letterSpacing: 0.7,
+    fontFamily: 'FontAwesome'
   },
   authorName: {
     fontSize: 12,
     fontWeight: '500',
     color: 'white',
+    letterSpacing: 0.7,
+    fontFamily: 'FontAwesome'
   },
   singlePostImage: {
     width: window.width,
@@ -541,6 +564,7 @@ export const TuningBySpecStyles = StyleSheet.create ({
       padding: 8,
       paddingTop: 2,
       paddingBottom: 0,
+      letterSpacing: 0.7,
   },
 
 })

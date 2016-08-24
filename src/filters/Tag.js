@@ -41,7 +41,7 @@ class Tag extends Component {
         labelStyle = (touchEnabled && selected)?selectedLabel:deselectedLabel
     return (<View style={tagStyle}>
               <TouchableWithoutFeedback onPress={this._onPressTag}>
-                <Text style={labelStyle}>{title}</Text>
+                <Text style={labelStyle}>{title.toUpperCase()}</Text>
               </TouchableWithoutFeedback>
             </View>)
 
@@ -67,11 +67,15 @@ const styles = StyleSheet.create({
   },
   deselectedLabel: {
     color: 'white',
-    fontSize: 10,
+    fontSize: 12,
+    letterSpacing: 1,
+    fontFamily: 'FontAwesome'
   },
   selectedLabel: {
     color: 'black',
-    fontSize: 10,
+    fontSize: 12,
+    letterSpacing: 1,
+    fontFamily: 'FontAwesome'
   }
 })
 export default connect () (Tag)

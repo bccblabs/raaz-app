@@ -72,7 +72,7 @@ class ModelsList extends Component {
             <ScrollView style={FilterStyles.optionsContainer}>
               <MultipleChoice
                 maxSelectedOptions={1}
-                renderText={(option)=> {return (<Text style={FilterStyles.multipleChoiceText}>{option}</Text>)}}
+                renderText={(option)=> {return (<Text style={FilterStyles.multipleChoiceText}>{option.toUpperCase()}</Text>)}}
                 options={this.state.models}
                 selectedOptions={[this.state.selectedModel]}
                 renderSeparator={(option)=>{return (<View/>)}}

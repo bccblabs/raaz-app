@@ -38,7 +38,7 @@ class TagFilters extends Component {
           return (
             <View style={{backgroundColor: 'white'}} key={`tf-${idx}`}>
             <Paragraph style={SliderStyles.sliderTitle}>
-            {optionRow.name}
+            {optionRow.name.toUpperCase()}
             </Paragraph>
             <ScrollView
               showsHorizontalScrollIndicator={false}
