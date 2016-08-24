@@ -14,7 +14,7 @@ var numeral = require ('numeral')
 import {Actions} from 'react-native-router-flux'
 import {Heading2, Text} from '../common/F8Text'
 import ProfilePicture from '../common/ProfilePicture'
-
+import PartDetails from './PartDetails'
 export default class Part extends Component {
   constructor (...args) {
     super (...args)
@@ -25,10 +25,12 @@ export default class Part extends Component {
     const {description, media, name} = data
 
     return (
+      <TouchableOpacity onPress={()=>{Actions.PartDetails({data})}}>
         <View style={{backgroundColor: 'white', margin: 8, flexDirection: 'column'}}>
           <Text numberOfLines={2} style={styles.title}>{name}</Text>
           <Image source={{uri: data.media[0]}} resizeMode="contain" style={{height:150, width: 150, margin: 8}}/>
         </View>
+      </TouchableOpacity>
     )
   }
 }

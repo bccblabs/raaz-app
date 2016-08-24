@@ -11,7 +11,6 @@ exports.AUTH0_CLIENT_SECRET = module.exports.AUTH0_CLIENT_SECRET ='RyE7bMsLckFWN
 exports.AUTH0_DOMAIN = module.exports.AUTH0_DOMAIN ='https://raaz.auth0.com'
 
 exports.AUTH0_CALLBACK_URL = '//raaz://callback'
-
 exports.API_ENDPOINT = module.exports.API_ENDPOINT = "http://localhost:3001"
 
 export default keyMirror ({
