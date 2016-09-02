@@ -33,7 +33,7 @@ export default class LoginScreen extends Component {
         source={require('../images/2jz.jpg')}>
         <Animated.View style={[styles.section, this.fadeIn(700, -20)]}>
           <Text style={styles.h1}>RAAZ</Text>
-          <View style={{flexDirection: 'column', paddingTop: 56}}>
+          <View style={{flexDirection: 'row', paddingTop: 56}}>
           <FBLoginButton style={{marginHorizontal: 16}}/>
           <INSLoginButton style={{marginHorizontal: 16}}/>
           </View>
@@ -91,9 +91,9 @@ var styles = StyleSheet.create({
   h1: {
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: Math.round(56 * scale),
+    fontSize: Math.round(72 * scale),
     color: 'white',
-    paddingVertical: 96,
+    paddingVertical: 50,
     backgroundColor: 'transparent',
   },
   h2: {

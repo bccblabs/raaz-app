@@ -79,14 +79,12 @@ class PostListView extends Component {
     let {dataSource, postsPagination} = this.state
       , listContent = (
         <ListView
-          style={{flex: 1}}
-          pageSize={10}
+          style={{flex: 1, marginBottom: 50, backgroundColor: '#FFF0F5'}}
           dataSource={dataSource}
           renderRow={this.renderRow}
           renderEmptyList={this._renderEmptyList}
           enableEmptySections={true}
           onEndReached={()=>{
-            console.log ('end of listview reached')
             if (postsPagination.nextPageUrl) {
               this.props.fetchPosts (postsPagination.nextPageUrl)
             }

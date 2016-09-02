@@ -1,9 +1,9 @@
 'use strict'
 import React, {
   Component,
+  Image,
   PropTypes,
   Text,
-  Image,
   TouchableOpacity,
   View,
 } from 'react-native'
@@ -15,7 +15,7 @@ import moment from 'moment'
 
 import ProfilePicture from '../common/ProfilePicture'
 import F8Button from '../common/F8Button'
-
+import ResponsiveImage from 'react-native-responsive-image'
 import {PostStyles} from '../styles'
 
 export default class Post extends Component {
@@ -33,20 +33,24 @@ export default class Post extends Component {
     const {post, tags, user} = this.props.data,
           {media, created, title} = post,
           daysAgo = moment(created).fromNow()
+          , imageSize = media[0].split ('-')[1].split ('x')
+          , initWidth = imageSize[0]
+          , initHeight = imageSize[1]
     let imageContent
     imageContent = (
-      <Image style={PostStyles.singlePostImage} source={{uri: media[0]}}>
-        <View style={PostStyles.header}>
-          <Image source={{uri:user.picture}} style={PostStyles.userPhotoStyle}/>
-            <View style={{flexDirection: 'column', flex: 1}}>
-              <Text style={PostStyles.authorName}>{`${user.name}`}</Text>
-              <Text style={PostStyles.created}>{`Posted ${daysAgo}`}</Text>
-            </View>
-        </View>
-        <View style={PostStyles.tags}>
-        {tags && tags.map ((tag, idx)=> {return ( <Text key={idx} style={PostStyles.tag}>{`#${tag}`}</Text> )})}
-        </View>
-      </Image>
+      <View style={{flex: 1}}>
+      <View style={PostStyles.header}>
+        <Image source={{uri:user.picture}} style={PostStyles.userPhotoStyle}/>
+          <View style={{flexDirection: 'column', flex: 1, justifyContent: 'center', paddingHorizontal: 8}}>
+            <Text style={PostStyles.authorName}>{`${user.name}`}</Text>
+            <Text style={PostStyles.created}>{`${daysAgo}`}</Text>
+          </View>
+      </View>
+      <ResponsiveImage style={PostStyles.singlePostImage} source={{uri: media[0]}} initWidth={initWidth} initHeight={initHeight}/>
+      <View style={PostStyles.tags}>
+      {tags && tags.map ((tag, idx)=> {return ( <Text key={idx} style={PostStyles.tag}>{`#${tag}`}</Text> )})}
+      </View>
+      </View>
     )
     return (
         <View style={PostStyles.container}>

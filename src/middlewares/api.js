@@ -1,6 +1,6 @@
 import { Schema, arrayOf, normalize } from 'normalizr'
 import { camelizeKeys } from 'humps'
-const API_ROOT = 'http://192.168.0.32:3001'
+const API_ROOT = 'http://192.168.0.102:3001'
 
 // * ponyfilling....
 require('es6-symbol/implement')

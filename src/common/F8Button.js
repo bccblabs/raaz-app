@@ -117,6 +117,7 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 40,
+
   },
   border: {
     borderWidth: 1,
@@ -144,7 +145,7 @@ var styles = StyleSheet.create({
   },
   tuningCaption: {
     color: 'white',
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: 'bold',
   },
   subTuningCaption: {

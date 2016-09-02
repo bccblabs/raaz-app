@@ -20,7 +20,6 @@ import NewPost from './Posts/NewPost'
 import Login from './Login'
 import Profile from './Profile'
 import Settings from './Profile/Settings'
-import Events from './Events'
 import Tuning from './tuning'
 import PartDetails from './tuning/PartDetails'
 import MakesList from './components/MakesList'
@@ -31,7 +30,7 @@ import Notifications from './Notifications'
 import TuningBySpec from './TuningBySpec'
 import TuningPager from './tuning/TuningPager'
 import Order from './Order'
-
+import PostFilters from './Posts/PostFilters'
 import {computeFilterHash, fetchMakeModelYears, fetchStockCars, rootUrl} from './reducers/stockCar/filterActions'
 
 const mapStateToProps = (state) => {
@@ -54,7 +53,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default class Viicles extends Component {
+class Viicles extends Component {
 
   render () {
       const Router = connect() (RNRF.Router)
@@ -78,7 +77,7 @@ export default class Viicles extends Component {
                 <Route name="Tuning"
                   key="tuning"
                   component={Tuning}
-                  title="Cars"
+                  title="Tuning"
                   schema="tab"
                   hideNavBar={true}
                   iconName={"Cars"}/>
@@ -103,6 +102,7 @@ export default class Viicles extends Component {
             <Route name="TuningBySpec" component={TuningBySpec} schema="default" hideNavBar={true}/>
             <Route name="NewPost" component={NewPost} schema="default" hideNavBar={true}/>
             <Route name="TuningPager" component={TuningPager} schema="default" hideNavBar={true}/>
+            <Route name="PostFilters" component={PostFilters} schema="default" hideNavBar={true}/>
           </Router>
       )
   }

@@ -56,7 +56,7 @@ export function fetchPostsFromApi (pageUrl, filterHash, filterTags) {
 export function fetchPosts (pageUrl) {
   return (dispatch, getState) => {
     dispatch (computePostsFilterHash())
-    let filterTags = getState().posts.postsFilter.toJS()
+    let filterTags = getState().posts.tags.toJS()
       , filterHash = getState().posts.getIn(['postsFilterHash'])
 
     if (filterTags.length > 0) {

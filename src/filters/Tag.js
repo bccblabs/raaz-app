@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     fontFamily: 'FontAwesome'
   },
   selectedLabel: {
-    color: 'black',
+    color: 'red',
     fontSize: 12,
     letterSpacing: 1,
     fontFamily: 'FontAwesome'

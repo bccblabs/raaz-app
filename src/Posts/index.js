@@ -7,24 +7,26 @@ import React, {
 
 import {Actions} from 'react-native-router-flux'
 import {connect} from 'react-redux'
+import {createSelector} from 'reselect'
 
 import {setUserData} from '../reducers/user/userActions'
 import {setAccessToken} from '../reducers/history/historyActions'
-import {togglePostTag} from '../reducers/posts/postActions'
+import {fetchCategoriesFromApi} from '../reducers/stockCar/filterActions'
 
 import PostListView from './PostListView'
-
 import F8Header from '../common/F8Header'
-import TagsHeader from '../common/TagsHeader'
 
 const mapStateToProps = (state) => {
   return {
-    profileData: state.user.profileData
+    profileData: state.user.profileData,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    fetchCategories: ()=> {
+      dispatch (fetchCategoriesFromApi ('home'))
+    },
     setUserData: (profileData)=> {
       dispatch (setUserData (profileData))
     },
@@ -41,6 +43,7 @@ class Raaz extends Component {
     this.state = {}
   }
   componentWillMount () {
+    this.props.fetchCategories()
     let {profileData, setUserData, saveAccessToken, access_token, user} = this.props
     if (access_token && user) {
       setUserData (user)
@@ -52,7 +55,6 @@ class Raaz extends Component {
   }
 
   render () {
-    console.log ('userprofile state',this.state)
     const {picture, name} = this.state
           ,leftItem = {
                       title: "New Post",
@@ -64,8 +66,7 @@ class Raaz extends Component {
                     }
     return (
       <View style={{flex: 1}}>
-      <F8Header title="Raaz" foreground='dark' leftItem={leftItem} rightItem={rightItem}/>
-      <TagsHeader color="orange" tagAction={togglePostTag} tags={['#following', '#popular','#jdm', '#nsx', 'm5','#gt350', 'miata', '#lp710', '#offroad','#gtr', '#amg', '#evo', '#rc', '#wrx', '#nostalgia', ]}/>
+      <F8Header title="Posts" foreground='dark' leftItem={leftItem} rightItem={rightItem}/>
       <PostListView/>
       </View>
     )

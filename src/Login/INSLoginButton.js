@@ -32,12 +32,12 @@ class INSLoginButton extends Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <F8Button type="secondary" style={Styles.loginButton} caption="Loading..." />
+        <F8Button type="tuning" style={Styles.loginButton} caption="Loading..." />
       )
     }
 
     return (
-      <F8Button type="secondary" style={Styles.loginButton} onPress={() => this.logIn()} caption="Instagram"/>
+      <F8Button type="tuning" style={Styles.loginButton} onPress={() => this.logIn()} caption="Instagram"/>
     )
   }
 

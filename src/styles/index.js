@@ -31,12 +31,12 @@ export const Styles = StyleSheet.create ({
 
   loginButton: {
     borderTopWidth: 1,
-    borderRadius: 10,
-    borderTopColor: 'lightblue',
-    backgroundColor: 'lightblue',
+    borderRadius: 20,
+    borderTopColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.5)',
     alignSelf: 'center',
     height: 40,
-    width: window.width/2,
+    width: window.width/4,
     margin: 12,
   },
 
@@ -454,15 +454,16 @@ export const PostStyles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    padding: 16,
     backgroundColor: 'white',
+    marginVertical: 16,
+    padding: 8
   },
   header: {
-    opacity: 0.6,
-    backgroundColor: 'black',
+    backgroundColor: 'transparent',
     flexDirection: 'row',
-    paddingVertical: 8,
-
+    alignItems: 'flex-start',
+    paddingVertical: 16,
+    flex: 1,
   },
   tags: {
     flex: 1,
@@ -471,9 +472,7 @@ export const PostStyles = StyleSheet.create({
     alignItems: 'flex-start',
     position: 'absolute',
     bottom: 0,
-    opacity: 0.9,
     paddingVertical: 8,
-    backgroundColor: 'transparent'
   },
   bottom: {
     flex: 1,
@@ -491,24 +490,23 @@ export const PostStyles = StyleSheet.create({
     paddingHorizontal: 4
   },
   tag: {
-    color: 'white',
+    color: 'black',
     fontSize: 13,
     paddingHorizontal: 4,
     letterSpacing: 0.7,
     fontFamily: 'FontAwesome'
   },
   created: {
-    fontSize: 11,
+    fontSize: 10,
     paddingVertical: 8,
-    color: 'white',
-    letterSpacing: 0.7,
+    color: 'black',
+    letterSpacing: 0.3,
     fontFamily: 'FontAwesome'
   },
   authorName: {
-    fontSize: 12,
-    fontWeight: '500',
-    color: 'white',
-    letterSpacing: 0.7,
+    fontSize: 15,
+    color: F8Colors.lightText,
+    letterSpacing: 0.3,
     fontFamily: 'FontAwesome'
   },
   singlePostImage: {
@@ -518,9 +516,10 @@ export const PostStyles = StyleSheet.create({
     alignSelf: 'center'
   },
   userPhotoStyle: {
-    height: 50,
-    width: 50,
-    paddingHorizontal: 8,
+    height: 40,
+    width: 40,
+    backgroundColor: 'black',
+    marginHorizontal: 8,
     resizeMode: 'contain'
   }
 })

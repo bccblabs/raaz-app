@@ -17,7 +17,7 @@ import Tag from '../filters/Tag'
 
 const mapStateToProps = (state) => {
   return {
-    postTagFilter: state.posts.postsFilter,
+    selectedTags: state.posts.tags,
   }
 }
 
@@ -32,35 +32,30 @@ const mapDispatchToProps = (dispatch) => {
 class TagsHeader extends Component {
   constructor (props) {
     super (props)
-    this.state = {selectedTags: props.postTagFilter}
+    this.state = {selectedTags: props.selectedTags}
   }
 
   componentWillReceiveProps (nextProps) {
-    this.setState ({selectedTags: nextProps.postTagFilter})
+    this.setState ({selectedTags: nextProps.selectedTags})
   }
   render () {
     let {tags, tagAction, color} = this.props
     return (
       <View style={[styles.container, {backgroundColor: color}]}>
-      <TouchableOpacity
-        accessibilityLabel="Clear filter"
-        accessibilityTraits="button"
-        style={styles.clear}
-        onPress={this.props.resetFilters}>
-        <Image source={require('../common/img/filter.png')} />
-      </TouchableOpacity>
-        <ScrollView
-          showsHorizontalScrollIndicator={false}
-          horizontal={true}
-          style={SliderStyles.horizontalScrollContainer}
-          contentContainerStyle={[Styles.scrollContainer, {justifyContent: 'center'}]}>
-          {
-            tags && tags.map ((tag, idx)=> {
-              let isFilterSelected = (this.state.selectedTags.indexOf (tag) > -1)
-              return ( <Tag touchEnabled={true} title={tag} key={idx} selected={isFilterSelected} action={tagAction(tag)}/>)
-            })
-          }
-        </ScrollView>
+        <TouchableOpacity
+          accessibilityLabel="Clear filter"
+          accessibilityTraits="button"
+          style={styles.clear}
+          onPress={Actions.Makes}>
+          <Text style={styles.text}>{("Tuning By Car").toUpperCase()}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          accessibilityLabel="Clear filter"
+          accessibilityTraits="button"
+          style={styles.clear}
+          onPress={Actions.PostFilters}>
+          <Text style={styles.text}>{("Filter Builds").toUpperCase()}</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -73,17 +68,19 @@ var styles = StyleSheet.create({
     height: 44,
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 8,
-    paddingLeft: 16,
-    paddingRight: 4,
+    paddingHorizontal: 16,
+    opacity: 0.6,
+    justifyContent: 'center'
   },
   text: {
-    flex: 1,
-    fontSize: 12,
+    fontSize: 10,
     color: 'white',
+    letterSpacing: 1,
+    alignSelf: 'center',
+    textDecorationLine: 'underline'
   },
   clear: {
-    paddingRight: 16,
+    flex: 1,
     alignSelf: 'stretch',
     justifyContent: 'center',
   },

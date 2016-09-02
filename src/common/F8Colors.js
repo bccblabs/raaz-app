@@ -57,8 +57,8 @@ function colorForTopic(count: number, index: number): string {
 module.exports = {
   actionText: '#3FB4CF',
   inactiveText: '#9B9B9B',
-  darkText: '#032250',
-  lightText: '#7F91A7',
+  darkText: 'black',
+  lightText: '#032250',
   cellBorder: '#EEEEEE',
   darkBackground: '#183E63',
   colorForLocation,

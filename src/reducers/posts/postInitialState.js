@@ -2,7 +2,7 @@
 
 const {List, Record} = require ('immutable')
 const postInitialState = Record ({
-  postsFilter: new (List),
+  tags: new (List),
   postsFilterHash: '',
 })
 

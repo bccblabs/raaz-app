@@ -4,7 +4,6 @@ import React, {
   Image,
   ScrollView,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View
 } from 'react-native'
@@ -12,20 +11,14 @@ import React, {
 import {Actions} from 'react-native-router-flux'
 import {connect} from 'react-redux'
 import {createSelector} from 'reselect'
-import PostListView from '../Posts/PostListView'
 
-import TagFilters from '../filters/TagFilters'
-import TagsHeader from '../common/TagsHeader'
-import {toggleCarTag, fetchCategoriesFromApi} from '../reducers/stockCar/filterActions'
-import {togglePostTag} from '../reducers/posts/postActions'
-
-import {loadSavedSpecsFromApi} from '../reducers/history/historyActions'
 import F8Header from '../common/F8Header'
 import F8Button from '../common/F8Button'
+import TagFilters from '../filters/TagFilters'
+import {togglePostTag, fetchCategoriesFromApi} from '../reducers/posts/postActions'
+
 import {Heading3, Paragraph} from '../common/F8Text'
 import {SliderStyles, Styles} from '../styles'
-
-
 
 const categoriesEntitiesSelector = (state) => (state.entities.categories)
 const categoriesPaginationSelector = (state) => (state.pagination.categoriesPagination)
@@ -43,29 +36,22 @@ const getCategoriesSelector = createSelector (
 
 const mapStateToProps = (state) => {
     return {
-      selectedMake: state.stockCar.selectedMake,
-      selectedModel: state.stockCar.selectedModel,
-      selectedTrim: state.stockCar.selectedTrim,
-      selectedYears: state.stockCar.selectedYears,
-
-      savedSpecs: state.entities.savedSpecs,
-
       categories: getCategoriesSelector (state),
       categoriesPagination: state.pagination.categoriesPagination,
-      selectedTags: state.stockCar.tags
+      selectedTags: state.posts.tags
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadSavedSpecs: () => {
-      dispatch (loadSavedSpecsFromApi())
-    }
+    fetchCategories: ()=> {
+      dispatch (fetchCategoriesFromApi ('home'))
+    },
+
   }
 }
 
-
-class Tuning extends Component {
+class PostFilters extends Component {
   constructor (props) {
     super (props)
     this.state = {
@@ -81,49 +67,60 @@ class Tuning extends Component {
   }
 
   render () {
-    const leftItem = {title: 'Saved', onPress: ()=>{Actions.SavedItems()}},
-          rightItem = {title: 'Orders', onPress: ()=>{Actons.Orders()}},
-          selectedTags = this.state.selectedTags
+    const leftItem = {title: 'Back', onPress: ()=>{Actions.pop()}}
+    let {selectedTags} = this.state
+    let buttonContent = selectedTags.size ? (
+      <F8Button
+        type="secondary"
+        caption="Find Me Cars!"
+        onPress={Actions.pop}
+        style={[Styles.contactDealerButton]}/>
+      ):(
+      <F8Button
+        type="secondary"
+        caption="Please Select From Above"
+        onPress={Actions.pop}
+        style={[Styles.contactDealerButton,{backgroundColor: 'gray'}]}/>
+      )
 
-    let {categories} = this.state
-      , tags = []
-
-    if (categories && categories.length) {
-      let topLvl = categories.find ((val)=>{return val.name === 'popular' || val.name === 'origin'})
-      if (topLvl) {
-        tags = topLvl.options.map ((elem)=>elem.name)
-      }
+      return (
+        <View style={{flex: 1}}>
+        <F8Header title="Builds" foreground='dark' leftItem={leftItem} />
+        <ScrollView>
+          <View style={{flex: 1, marginBottom: 50}}>
+          <TagFilters data={this.state.categories} onPress={togglePostTag} selectedTags={selectedTags}/>
+          {buttonContent}
+          </View>
+          </ScrollView>
+        </View>
+      )
     }
-
-    return (
-      <View style={{flex: 1}}>
-      <F8Header title="Tuning" foreground='dark' leftItem={leftItem} rightItem={rightItem}/>
-      <TagsHeader onPress={Actions.PostFilters} color="black" tagAction={togglePostTag} tags={tags}/>
-      <PostListView/>
-      </View>
-    )
-  }
 }
 
-export default connect (mapStateToProps, mapDispatchToProps) (Tuning)
+export default connect (mapStateToProps, mapDispatchToProps) (PostFilters)
 
 const styles = StyleSheet.create ({
-  header: {
+  container: {
+    flex: 1,
     height: 44,
     flexDirection: 'row',
-    backgroundColor: 'black',
-    opacity: 0.6,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 8,
+    backgroundColor: 'orange',
   },
   text: {
+    flex: 1,
     fontSize: 10,
     color: 'white',
+    paddingHorizontal: 8,
     letterSpacing: 1,
-    alignSelf: 'center',
+
   },
   clear: {
     paddingRight: 16,
+    alignSelf: 'stretch',
     justifyContent: 'center',
-    flex: 1,
   },
 
 })
