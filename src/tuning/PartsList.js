@@ -5,7 +5,6 @@ import FullScreenLoadingView from '../components/FullScreenLoadingView'
 import {connect} from 'react-redux'
 import {Actions} from 'react-native-router-flux'
 import RequestUtils from '../requests'
-import {fetchParts, partsUrl} from '../reducers/tuning/filterActions'
 import Part from './Part'
 
 class PartsList extends Component {
@@ -66,25 +65,7 @@ class PartsList extends Component {
       </View>
     )
   }
-  // renderRow (partData, rowId) {
-    // return (
-    //   <BuildItem data={partData || {}} onPress={()=>Actions.Order ({...partData})}/>
-    // )
-  // }
 
-  // storeInnerRef(ref: ?PureListView) {
-  //   this._innerRef = ref;
-  // }
-  //
-  //
-  // scrollTo(...args: Array<any>) {
-  //   this._innerRef && this._innerRef.scrollTo(...args);
-  // }
-  //
-  // getScrollResponder(): any {
-  //   return this._innerRef && this._innerRef.getScrollResponder();
-  // }
-  //
 }
 
 export default connect () (PartsList)

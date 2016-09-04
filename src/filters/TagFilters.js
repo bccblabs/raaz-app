@@ -19,10 +19,8 @@ import {
 
 import isArray from 'lodash/isArray'
 import {SliderStyles, FilterStyles, Styles} from '../styles'
-import PureListView from '../common/PureListView'
 
 class TagFilters extends Component {
-  _innerRef: ?PureListView;
   constructor (props) {
     super (props)
   }

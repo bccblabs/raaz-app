@@ -31,7 +31,7 @@ const stockCarSchema = new Schema ('stockCar', {
 })
 
 const buildSchema = new Schema ('builds', {
-  idAttribute: 'key'
+  idAttribute: 'buildId'
 })
 
 const partSchema = new Schema ('tuningItems', {

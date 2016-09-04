@@ -73,7 +73,7 @@ class Profile extends Component {
     return (
       <ListContainer
         refs={this.storeInnerRef}
-        backgroundImage={require ('../images/tuning.png')}
+        backgroundImage={require ('../images/2jz.png')}
         parallaxContent={parallaxContent}
         leftItem={leftItem}
         rightItem={rightItem}>

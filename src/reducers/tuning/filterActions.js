@@ -27,47 +27,28 @@ const {
 
 } = require ('../../constants').default
 
-export function fetchPartsFromApi (specId, pageUrl, tagsJson) {
+
+export function fetchBuildsFromApi (pageUrl, tags, specId) {
   return {
     specId,
-    [CALL_API]: {
-      types: [PARTS_REQUEST, PARTS_SUCCESS, PARTS_ERROR],
-      endpoint: pageUrl,
-      schema: Schemas.PARTS_ARRAY,
-      filters: tagsJson
-    }
-  }
-}
-
-export function fetchBuildsFromApi (specId, pageUrl, tagsJson) {
-  return {
-    filterHash,
     [CALL_API]: {
       types: [BUILDS_REQUEST, BUILDS_SUCCESS, BUILDS_ERROR],
       endpoint: pageUrl,
       schema: Schemas.BUILDS_ARRAY,
-      filters: filterJson
+      filters: tags
     }
   }
 }
 
-export function fetchParts (specId, paging, sortBy) {
-  let pageUrl = '/parts?'
+export function fetchBuilds (paging) {
+
   if (paging) pageUrl += paging
-  if (sortBy) pageUrl += sortBy
-
   return (dispatch, getState) => {
-    let tagsJson = getState().tuning.filterTags.toJS()
-    dispatch (fetchPartsFromApi (specId, pageUrl, tagsJson))
-  }
-}
+    let tagsJson = getState().posts.tags.toJS()
+      , specId = getState().stockCar.selectedSpecId
+      , pageUrl = (specId!=='home')?('/build/' + specId):'/build'
 
-export function fetchBuilds (specId, partId, paging) {
-  let pageUrl = '/tuning/' + specId + '/builds/' + partId
-  if (paging) pageUrl += paging
-
-  return (dispatch, getState) => {
-    dispatch (fetchBuildsFromApi(pageUrl))
+    dispatch (fetchBuildsFromApi(pageUrl, tagsJson, specId))
   }
 }
 

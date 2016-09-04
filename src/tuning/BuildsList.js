@@ -7,49 +7,49 @@ import {createSelector} from 'reselect'
 import {Actions} from 'react-native-router-flux'
 import {EmptyHeading} from '../common/F8Text'
 import F8Button from '../common/F8Button'
-import Post from './Post'
-import {fetchPosts} from '../reducers/posts/postActions'
+import Build from './Build'
 import {EmptyViewStyles} from '../styles'
 import FullScreenLoadingView from '../components/FullScreenLoadingView'
+import {fetchBuilds} from '../reducers/tuning/filterActions'
 import {union} from 'lodash'
 
-const filterHashSelector = (state) => (state.posts.postsFilterHash)
-const postsSelector = (state) => (state.entities.posts)
-const postsPaginationSelector = (state) => (state.pagination.postsPagination)
+const specIdSelector = (state) => (state.stockCar.selectedSpecId)
+const buildsSelector = (state) => (state.entities.builds)
+const buildsPaginationSelector = (state) => (state.pagination.buildsPagination)
 
 
-const getPostsEntities = createSelector (
-  [filterHashSelector, postsSelector, postsPaginationSelector],
-  (filterHash, postsList, postsPagination) => {
-    let ids = postsPagination[filterHash]?postsPagination[filterHash].ids:[]
-    return ids.map (id=>postsList[id])
+const getBuildsEntities = createSelector (
+  [specIdSelector, buildsSelector, buildsPaginationSelector],
+  (specId, buildsList, buildsPagination) => {
+    let ids = buildsPagination[specId]?buildsPagination[specId].ids:[]
+    return ids.map (id=>buildsList[id])
   }
 )
 
-const getPostsPagination = createSelector (
-  [filterHashSelector, postsPaginationSelector],
-  (filterHash, postsPagination) => {
-    return postsPagination[filterHash] || {}
+const getBuildsPagination = createSelector (
+  [specIdSelector, buildsPaginationSelector],
+  (specId, buildsPagination) => {
+    return buildsPaginationSelector[specId] || {}
   }
 )
 
 
 const mapStateToProps = (state) => {
   return {
-    postsList: getPostsEntities(state),
-    postsPagination: getPostsPagination(state)
+    buildsList: getBuildsEntities(state),
+    buildsPagination: getBuildsPagination(state)
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchPosts: (pageUrl) => {
-      dispatch (fetchPosts (pageUrl))
+    fetchBuilds: (pageUrl) => {
+      dispatch (fetchBuilds (pageUrl))
     }
   }
 }
 
-class PostListView extends Component {
+class BuildsList extends Component {
 
   constructor (props) {
     super (props)
@@ -57,30 +57,28 @@ class PostListView extends Component {
     this.state = {
       dataSource: ds,
       data: [],
-      postsPagination: props.postsPagination
+      buildsPagination: props.buildsPagination
     }
     this.renderRow = this.renderRow.bind(this)
   }
   componentWillMount () {
-    this.props.fetchPosts()
+    this.props.fetchBuilds()
   }
 
   componentWillReceiveProps (nextProps) {
-    let {postsList, postsPagination} = nextProps
-    if (nextProps.postsList !== this.props.postsList) {
-      // let rowIds = postsList.map ((post)=>{return post.postId})
-      let newBlob = union (this.state.data, postsList)
-      console.log ('newblob', newBlob)
+    let {buildsList, buildsPagination} = nextProps
+    if (nextProps.buildsList !== this.props.buildsList) {
+      let newBlob = union (this.state.data, buildsList)
       this.setState ({
         data: newBlob,
         dataSource: this.state.dataSource.cloneWithRows (newBlob),
-        postsPagination
+        buildsPagination
       })
     }
   }
 
   render () {
-    let {dataSource, postsPagination} = this.state
+    let {dataSource, buildsPagination} = this.state
       , listContent = (
         <ListView
           style={{flex: 1, marginBottom: 50, backgroundColor: '#FFF0F5'}}
@@ -89,8 +87,8 @@ class PostListView extends Component {
           renderEmptyList={this._renderEmptyList}
           enableEmptySections={true}
           onEndReached={()=>{
-            if (postsPagination.nextPageUrl) {
-              this.props.fetchPosts (postsPagination.nextPageUrl)
+            if (buildsPagination.nextPageUrl) {
+              this.props.fetchBuilds (buildsPagination.nextPageUrl)
             }
           }}
         />
@@ -100,25 +98,21 @@ class PostListView extends Component {
       )
       , emptyContent = (
         <View style={EmptyViewStyles.container}>
-        <TouchableWithoutFeedback onPress={()=>this.props.fetchPosts()}>
+        <TouchableWithoutFeedback onPress={()=>this.props.fetchBuilds()}>
           <EmptyHeading style={EmptyViewStyles.text}>
           {"No posts loaded, try loading again..."}
           </EmptyHeading>
         </TouchableWithoutFeedback>
         </View>
       )
-
-    // if (postsPagination.isFetching) return loadingContent
-    // if (postsPagination.hasError || dataSource.getRowCount() < 1) return emptyContent
-    // else return listContent
     return listContent
   }
 
   renderRow (postData, rowId) {
     return (
-      <Post data={postData}/>
+      <Build data={postData}/>
     )
   }
 }
 
-export default connect (mapStateToProps, mapDispatchToProps) (PostListView)
+export default connect (mapStateToProps, mapDispatchToProps) (BuildsList)

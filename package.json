@@ -38,6 +38,7 @@
     "react-native-dropdown": "0.0.6",
     "react-native-fbsdk": "^0.1.0",
     "react-native-floating-label-text-input": "0.0.8",
+    "react-native-grid": "^0.1.1",
     "react-native-grid-view": "^0.3.7",
     "react-native-image-picker": "^0.18.15",
     "react-native-infinite-scroll-view": "^0.3.1",

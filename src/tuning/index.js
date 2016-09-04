@@ -12,7 +12,7 @@ import React, {
 import {Actions} from 'react-native-router-flux'
 import {connect} from 'react-redux'
 import {createSelector} from 'reselect'
-import PostListView from '../Posts/PostListView'
+import BuildsList from '../tuning/BuildsList'
 
 import TagFilters from '../filters/TagFilters'
 import TagsHeader from '../common/TagsHeader'
@@ -99,7 +99,7 @@ class Tuning extends Component {
       <View style={{flex: 1}}>
       <F8Header title="Tuning" foreground='dark' leftItem={leftItem} rightItem={rightItem}/>
       <TagsHeader onPress={Actions.PostFilters} color="black" tagAction={togglePostTag} tags={tags}/>
-      <PostListView/>
+      <BuildsList/>
       </View>
     )
   }

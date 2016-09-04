@@ -7,7 +7,7 @@ const stockCarFilterInitialState = Record ({
   selectedMake: '',
   selectedModel: '',
   selectedSubmodel: '',
-  selectedSpecId: '',
+  selectedSpecId: 'home',
   tags: new (List),
 })
 
