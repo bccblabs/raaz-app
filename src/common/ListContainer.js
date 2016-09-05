@@ -286,7 +286,6 @@ class ListContainer extends React.Component {
       });
       transform = [{translateY}];
     }
-    console.log ('transform', transform, 'stickyHeaderHeight', this.state.stickyHeaderHeight)
 
     return (
       <Animated.View
@@ -299,7 +298,6 @@ class ListContainer extends React.Component {
   }
 
   handleStickyHeaderLayout({nativeEvent: { layout, target }}: any) {
-    console.log ('stickyHeaderHeight', layout, target)
     this.setState({stickyHeaderHeight: layout.height});
   }
 

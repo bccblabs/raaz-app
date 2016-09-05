@@ -52,40 +52,6 @@ class Spec extends Component {
         <Text style={{marginLeft: 8, position: 'absolute', 'bottom': 0}}>{size.toFixed(1) + ` L ${configuration}-${cylinders} ${compressor}`}</Text>
         </View>
     )
-    // return (
-    //   <View style={styles.container}>
-    //     <TouchableOpacity style={{position: 'absolute', bottom: 4, right: 8}} onPress={()=>{
-    //       saveSpecId (spec)
-    //       Actions.TuningBySpec ({specId: spec.specId})
-    //     }}>
-    //     </TouchableOpacity>
-    //     <View>
-    //     <View style={{flexDirection: 'row',flex: 1, paddingHorizontal: 12}}>
-    //     <Heading2>{"Engine"}</Heading2>
-    //     <Text style={{marginLeft: 8, position: 'absolute', 'bottom': 0}}>{size.toFixed(1) + ` L ${configuration}-${cylinders} ${compressor}`}</Text>
-    //     </View>
-    //     <MetricsGraph data={[{entries:dataArray}]}/>
-    //     <View style={{flex: 1, paddingHorizontal: 12}}>
-    //     <EmptyHeading>{`${transmissionSpeed} speed ${transmission}`}</EmptyHeading>
-    //     <EmptyHeading>{`${drivenWheels}`}</EmptyHeading>
-    //     </View>
-    //     </View>
-    //     <View style={styles.elementContainer}>
-    //     <ScrollView
-    //       showsHorizontalScrollIndicator={false}
-    //       horizontal={true}
-    //       style={SliderStyles.horizontalScrollContainer}
-    //       contentContainerStyle={[Styles.scrollContainer, {justifyContent: 'center'}]}>
-    //
-    //       { tagsArray && tagsArray.map ((tag, idx)=> {
-    //         return (<View style={styles.tagStyle}>
-    //           <Text style={{color: 'black'}} key={idx}>{`#${tag}`}</Text>
-    //         </View>)
-    //       })}
-    //       </ScrollView>
-    //     </View>
-    //   </View>
-    // );
   }
 }
 

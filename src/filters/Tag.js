@@ -23,7 +23,6 @@ class Tag extends Component {
   _onPressTag () {
     let {action, dispatch} = this.props,
         toggleSelect = !this.state.selected
-    console.log ('tag pressed', action, dispatch)
     dispatch (action)
     this.setState ({selected: toggleSelect})
   }

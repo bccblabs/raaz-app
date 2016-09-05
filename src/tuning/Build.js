@@ -35,21 +35,20 @@ export default class Post extends Component {
 
   render () {
     if (!this.props.data) return <View/>
-    const {created, name, manufacturer, listing, media, tags} = this.props.data,
+    const {created, name, manufacturers, listing, media, tags, buildId} = this.props.data,
           daysAgo = moment(created).fromNow()
-    console.log ('media', media)
     let imageContent = (
       <View style={{flex: 1}}>
-        <View style={PostStyles.header}>
-            {name && (<Text style={PostStyles.title}>{name}</Text>)}
-            <Text style={PostStyles.created}>{`${daysAgo}`}</Text>
+      <View style={PostStyles.header}>
+          {name && (<Text style={PostStyles.title}>{name}</Text>)}
+          <Text style={PostStyles.created}>{`${daysAgo}`}</Text>
+      </View>
+      {listing && (
+        <View style={PostStyles.listingSection}>
+          <Icon name="price-tag" size={30} color={"red"}/>
+          <Text style={PostStyles.price}>{`$${numeral(listing.amount).format ('0,0')} ${listing.currency}`}</Text>
         </View>
-        {listing && (
-          <View style={PostStyles.listingSection}>
-            <Icon name="price-tag" size={30} color={"red"}/>
-            <Text style={PostStyles.price}>{`$${numeral(listing.amount).format ('0,0')} ${listing.currency}`}</Text>
-          </View>
-        )}
+      )}
         <Grid style={PostStyles.imageContainer}>
           <Col>
             <Image source={{uri:media[0]}} style={PostStyles.largeImage}/>
@@ -63,7 +62,7 @@ export default class Post extends Component {
             </Row>
           </Col>
         </Grid>
-        <ScrollView style={PostStyles.tags} showsHorizontalScrollIndicator={false} horizontal={true} containerStyle={PostStyles.tagsContainer}>
+        <ScrollView style={PostStyles.buildtags} showsHorizontalScrollIndicator={false} horizontal={true} containerStyle={PostStyles.tagsContainer}>
           {tags && tags.map ((tag, idx)=> {return ( <Text key={idx} style={PostStyles.tag}>{`#${tag}`}</Text> )})}
         </ScrollView>
       </View>
@@ -71,6 +70,18 @@ export default class Post extends Component {
     return (
         <View style={PostStyles.container}>
           {imageContent}
+          <View>
+            {manufacturers && manufacturers.map ((item, idx)=> {
+              return (
+                <Image key={idx} source={{uri: item.logo}} style={{margin: 8, height:20, resizeMode: 'contain'}}/>
+              )
+            })}
+          </View>
+          <View style={{flexDirection:"row", justifyContent: 'space-between'}}>
+          <F8Button style={{}} type="tuningSub" caption="Details" icon={require ('../common/img/ic_build.png')}/>
+          <F8Button style={{}} type="tuningSub" caption="10 likes" icon={require('../common/img/ic_thumb_up.png')} />
+          <F8Button style={{}} type="tuningSub" caption="10 comments" icon={require ('../common/img/ic_comment.png')} />
+          </View>
         </View>
     )
   }

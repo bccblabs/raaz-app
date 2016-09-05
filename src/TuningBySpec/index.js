@@ -14,7 +14,6 @@ import {createSelector} from 'reselect'
 
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
-// Inside of a component's render() method:
 import {fetchCarDetails, toggleTuningTags, clearTuningTags} from '../reducers/tuning/filterActions'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 
@@ -89,7 +88,6 @@ class TuningBySpec extends Component {
   componentWillReceiveProps (nextProps) {
     let {tuningTags, specsPagination, specsDetails} = nextProps
       , specsInfo = this.state.specsDetails[0]
-    console.log (tuningTags)
     this.setState ({
       selectedTags: tuningTags,
       specsDetails,

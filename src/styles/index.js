@@ -308,7 +308,6 @@ export const SliderStyles = StyleSheet.create({
     alignSelf: 'flex-start',
     fontSize: 12,
     letterSpacing: 1,
-    fontFamily: 'FontAwesome'
   },
   avgText: {
     padding: 10,
@@ -474,6 +473,14 @@ export const PostStyles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
     position: 'absolute',
+    top: 90,
+    width: window.width,
+    paddingVertical: 8,
+  },
+  buildtags: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    position: 'absolute',
     bottom: 0,
     width: window.width,
     paddingVertical: 8,
@@ -481,8 +488,19 @@ export const PostStyles = StyleSheet.create({
   tagsContainer: {
     flex: 1,
     alignItems: 'flex-start',
-
   },
+  manufacturer: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    bottom: 0,
+    width: window.width,
+    height: 20
+  },
+  manufacturerContainer: {
+    flex: 1,
+    alignItems: 'flex-start',
+  },
+
   bottom: {
     flex: 1,
     flexDirection: 'row',
@@ -501,7 +519,7 @@ export const PostStyles = StyleSheet.create({
   },
   tag: {
     color: 'black',
-    fontSize: 13,
+    fontSize: 15,
     paddingHorizontal: 4,
     letterSpacing: 0.7,
     fontFamily: 'FontAwesome'
@@ -521,24 +539,24 @@ export const PostStyles = StyleSheet.create({
   },
   singlePostImage: {
     width: window.width,
-    height: 250,
+    height: window.height/2,
     resizeMode: 'cover',
     alignSelf: 'center'
   },
   imageContainer: {
     width: window.width,
-    height: window.height/3,
+    height: window.height/2,
   },
   largeImage: {
     width: window.width/2,
-    height: window.height/3,
+    height: window.height/2,
     resizeMode: 'cover',
     borderWidth: 3,
     borderColor: 'white'
   },
   smallImage: {
     width: window.width/2,
-    height: window.height/6,
+    height: window.height/4,
     resizeMode: 'cover',
     borderWidth: 3,
     borderColor: 'white'
@@ -558,30 +576,22 @@ export const PostStyles = StyleSheet.create({
   }
 })
 export const CarmeraStyles = StyleSheet.create ({
-  linearGradient: {
-    flex: 1,
-  },
-  buttonText: {
-    fontSize: 18,
-    fontFamily: 'Gill Sans',
-    textAlign: 'center',
-    margin: 10,
-    color: 'black',
-    backgroundColor: 'transparent',
+  text: {
+    fontSize: 11,
+    color: 'white',
+    letterSpacing: 1,
+    alignSelf: 'center',
+    textDecorationLine: 'underline',
+    padding: 16
   },
   wrapper: {
-    flex: 1,
-    alignItems: 'center'
-  },
-  image: {
-    height: 150,
-    width: window.width
-  },
-  background: {
-    height: 150,
+    flex: -1,
     width: window.width,
+    height: window.height/15,
+    alignItems: 'center',
+    flexDirection: 'row',
     justifyContent: 'center',
-  }
+  },
 })
 
 export const TuningBySpecStyles = StyleSheet.create ({

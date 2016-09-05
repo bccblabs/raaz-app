@@ -123,7 +123,7 @@ export default class MetricsGraph extends Component {
       case 'interior_vol':
         return 'Interior Volume (cubic inches)'
       default:
-        console.log ('key not defined', name)
+        console.error ('key not defined', name)
         return name
     }
   }

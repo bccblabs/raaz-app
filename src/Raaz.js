@@ -22,6 +22,7 @@ import Profile from './Profile'
 import Settings from './Profile/Settings'
 import Tuning from './tuning'
 import PartDetails from './tuning/PartDetails'
+import BuildDetails from './tuning/BuildDetails'
 import MakesList from './components/MakesList'
 import ModelsList from './components/ModelsList'
 import SubmodelsList from './components/SubmodelsList'
@@ -97,6 +98,7 @@ class Viicles extends Component {
             <Route name="Models" component={ModelsList} title="Choose Models" schema="floatFromRight" hideNavBar={true}/>
             <Route name="Submodels" component={SubmodelsList} title="Choose Trims" schema="floatFromRight" hideNavBar={true}/>
             <Route name="Specs" component={SpecsList} title="Choose Specs" schema="floatFromRight" hideNavBar={true}/>
+            <Route name="BuildDetails" component={BuildDetails} schema="default" hideNavBar={true}/>
             <Route name="PartDetails" component={PartDetails} schema="default" hideNavBar={true}/>
             <Route name="Order" component={Order} schema="default" hideNavBar={true}/>
             <Route name="TuningBySpec" component={TuningBySpec} schema="default" hideNavBar={true}/>

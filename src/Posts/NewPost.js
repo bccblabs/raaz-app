@@ -134,7 +134,6 @@ export default class NewPost extends Component {
                   onPress={()=>{
                     let images = this.state.videos.splice (idx, 1)
                     this.setState ({videos: this.state.videos})
-                    console.log (idx, this.state)
                     }}
                   type='secondary'
                   caption="Remove"/>
@@ -178,7 +177,6 @@ export default class NewPost extends Component {
   }
 
   render () {
-    console.log ('state=', this.state)
     const leftItem = {
             title: 'cancel',
             onPress: ()=>Actions.pop()

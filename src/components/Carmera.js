@@ -4,33 +4,59 @@ import React, {
   Image,
   Text,
   View,
+  TouchableOpacity
 } from 'react-native'
-import VRImage from '../cardboard/VRImage'
-import Overlay from 'react-native-overlay'
-import {VibrancyView} from 'react-native-blur'
 import {Actions} from 'react-native-router-flux'
-import {CarmeraStyles, Styles} from '../styles'
-import LinearGradient from 'react-native-linear-gradient';
-import {Heading1, Heading2} from '../common/F8Text'
+const { VibrancyView } = require('react-native-blur');
+
 import F8Button from '../common/F8Button'
+
+import {CarmeraStyles, Styles} from '../styles'
+import {Heading1, Heading2} from '../common/F8Text'
+
+var ImagePickerManager = require('NativeModules').ImagePickerManager
+import {ImageOptions, VideoOptions} from '../constants/pickerOptions'
+
 export default class Carmera extends Component {
-    render () {
-      return (
-        <View style={CarmeraStyles.wrapper}>
-        <View style={{flex: 1,alignItems: 'center', padding: 32}}>
-        <Image
-          style={{height: 40, width: 40, marginBottom: 8}}
-          source={require('../images/carmera.png')}/>
-        <Text style={{
-          textAlign:'center',
-          fontWeight: '700',
-          size: 8,
-          color: 'black',
-          marginBottom: 8}}>
-          {"...Or try finding cars using photos"}
-        </Text>
-        </View>
-        </View>
-      )
+
+  constructor(props) {
+    super (props)
+    this.pickImage = this.pickImage.bind (this)
+    this.state = {
+      images: [],
     }
+  }
+
+  render () {
+    return (
+      <View style={CarmeraStyles.wrapper}>
+      <TouchableOpacity onPress={this.pickImage}>
+      <Image source={require ('../images/2jz.png')} style={CarmeraStyles.wrapper}>
+      <VibrancyView blurType="xlight" style={CarmeraStyles.wrapper}>
+      <Image
+        style={{height: 32, width: 32}}
+        source={require('../images/carmera.png')}/>
+      <Text style={CarmeraStyles.text}>{"Find Builds Using Camera"}</Text>
+      </VibrancyView>
+      </Image>
+      </TouchableOpacity>
+      </View>
+    )
+  }
+
+
+  pickImage () {
+    ImagePickerManager.showImagePicker(ImageOptions, (response) => {
+      if (response.didCancel) {
+        return
+      }
+        let images = this.state.images
+        const source = Platform.OS === 'ios'
+                      ? {uri: response.uri.replace('file://', ''), isStatic: true, width: response.width, height: response.height}
+                      : {uri: response.uri, isStatic: true, width: response.width, height: response.height}
+        images.push (source)
+        this.setState({images})
+    });
+  }
+
 }

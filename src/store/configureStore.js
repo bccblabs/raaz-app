@@ -42,7 +42,7 @@ const createStoreWithMiddleware = applyMiddleware(
   thunk,
   api,
   storageMiddleware,
-  logger,
+  // logger,
   promise,
   array
 )(createStore);

@@ -70,7 +70,6 @@ class PostListView extends Component {
     if (nextProps.postsList !== this.props.postsList) {
       // let rowIds = postsList.map ((post)=>{return post.postId})
       let newBlob = union (this.state.data, postsList)
-      console.log ('newblob', newBlob)
       this.setState ({
         data: newBlob,
         dataSource: this.state.dataSource.cloneWithRows (newBlob),

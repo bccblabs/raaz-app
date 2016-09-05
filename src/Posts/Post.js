@@ -41,6 +41,7 @@ export default class Post extends Component {
     imageContent = (
       <View style={{flex: 1}}>
       <View style={PostStyles.header}>
+        {title && (<Text style={PostStyles.title}>{'YOOO'}</Text>)}
         <Image source={{uri:user.picture}} style={PostStyles.userPhotoStyle}/>
           <View style={{flexDirection: 'column', flex: 1, justifyContent: 'center'}}>
             <Text style={PostStyles.authorName}>{`${user.name}`}</Text>
@@ -55,8 +56,11 @@ export default class Post extends Component {
     )
     return (
         <View style={PostStyles.container}>
-          {title && (<Text style={PostStyles.title}>{'YOOO'}</Text>)}
           {imageContent}
+          <View style={{flexDirection:"row", justifyContent: 'space-around'}}>
+          <F8Button style={{}} type="tuningSub" caption="10 likes" icon={require('../common/img/ic_thumb_up.png')} />
+          <F8Button style={{}} type="tuningSub" caption="10 comments" icon={require ('../common/img/ic_comment.png')} />
+          </View>
         </View>
     )
   }

@@ -13,7 +13,7 @@ import {Actions} from 'react-native-router-flux'
 import {connect} from 'react-redux'
 import {createSelector} from 'reselect'
 import BuildsList from '../tuning/BuildsList'
-
+import Carmera from '../components/Carmera'
 import TagFilters from '../filters/TagFilters'
 import TagsHeader from '../common/TagsHeader'
 import {toggleCarTag, fetchCategoriesFromApi} from '../reducers/stockCar/filterActions'
@@ -96,9 +96,10 @@ class Tuning extends Component {
     }
 
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor:'transparent'}}>
       <F8Header title="Tuning" foreground='dark' leftItem={leftItem} rightItem={rightItem}/>
       <TagsHeader onPress={Actions.PostFilters} color="black" tagAction={togglePostTag} tags={tags}/>
+      <Carmera/>
       <BuildsList/>
       </View>
     )

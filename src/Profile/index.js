@@ -51,8 +51,6 @@ class Profile extends Component {
 
   render () {
 
-    console.log ('profile, state=', this.state)
-
     const {picture, name, email, phone, facebook, instagram, } = this.state.profileData
           ,leftItem = { title: "Back", onPress:()=>{Actions.pop()}}
           ,rightItem = {
@@ -68,8 +66,6 @@ class Profile extends Component {
               </View>
             </View>
           )
-
-    console.log ('profilePage', picture)
     return (
       <ListContainer
         refs={this.storeInnerRef}

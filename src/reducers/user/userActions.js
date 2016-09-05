@@ -47,12 +47,9 @@ function fetchUserProfileApi (access_token) {
       method: 'GET',
     })
     .then ((resp)=>{
-      console.log (resp)
       return resp.json()
     })
     .then ((respJson)=>{
-
-      console.log ('fetchUserProfileApi: api json', respJson)
       return respJson
     })
     .catch ((err) => {return err})

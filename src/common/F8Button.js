@@ -73,7 +73,7 @@ class F8Button extends React.Component {
       );
     } else if (this.props.type === 'tuningSub') {
       content = (
-        <View style={styles.button}>
+        <View style={styles.tuningSub}>
           {icon}
           <Text style={[styles.caption, styles.subTuningCaption]}>
             {caption}
@@ -117,7 +117,18 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 40,
-
+  },
+  tuningSub: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 16,
+  },
+  subTuningCaption: {
+    color: 'black',
+    fontWeight: '600',
+    fontSize: 8,
   },
   border: {
     borderWidth: 1,
@@ -148,12 +159,6 @@ var styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: 'bold',
   },
-  subTuningCaption: {
-    color: 'black',
-    fontSize: 12,
-    position: 'absolute',
-    left: 0
-  }
 
 });
 

@@ -7,7 +7,6 @@ import {Heading1, Heading2, Text} from '../common/F8Text.js'
 import F8Header from '../common/F8Header'
 import F8Button from '../common/F8Button'
 
-import FilterCards from '../FilterCards'
 import ParallaxScrollView from 'react-native-parallax-scroll-view'
 import {FilterStyles, ParallaxScrollStyles, Styles} from '../styles'
 
@@ -39,7 +38,6 @@ export default class Order extends Component {
           },
           captionText = price?'Order for $' + price:"Inquire"
 
-      console.log ('Order: optionsData: ', optionsData)
       return (
         <View style={{backgroundColor: 'transparent', flex: 1}}>
         <ParallaxScrollView
@@ -55,9 +53,6 @@ export default class Order extends Component {
           renderForeground={()=> {
             return (
               <View style={{flex: 1, backgroundColor: 'transparent', paddingTop: F8Header.height}}>
-                <FilterCards
-                  optionsData={optionsData}
-                  touchEnabled={false}/>
               </View>
             )
           }}
@@ -104,7 +99,6 @@ export default class Order extends Component {
           <F8Button
             type="secondary"
             caption={captionText}
-            onPress={()=>{console.log ('dispatching order action')}}
             style={Styles.contactDealerButton}/>
         </View>
       )
