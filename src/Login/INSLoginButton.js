@@ -37,7 +37,7 @@ class INSLoginButton extends Component {
     }
 
     return (
-      <F8Button type="tuning" style={Styles.loginButton} onPress={() => this.logIn()} caption="Instagram"/>
+      <F8Button icon={require ('../images/ins-logo.png')} type="tuning" style={Styles.loginButton} onPress={() => this.logIn()} caption="Instagram"/>
     )
   }
 

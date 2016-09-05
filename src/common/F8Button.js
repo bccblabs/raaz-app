@@ -145,7 +145,7 @@ var styles = StyleSheet.create({
   },
   tuningCaption: {
     color: 'white',
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: 'bold',
   },
   subTuningCaption: {

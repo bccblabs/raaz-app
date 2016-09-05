@@ -37,7 +37,7 @@ class FBLoginButton extends Component {
     }
 
     return (
-      <F8Button type="tuning" style={Styles.loginButton} onPress={() => this.logIn()} caption="Facebook"/>
+      <F8Button icon={require ('../images/f-logo.png')} type="tuning" style={Styles.loginButton} onPress={() => this.logIn()} caption="Facebook"/>
     )
   }
 

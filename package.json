@@ -36,6 +36,7 @@
     "react-native-collapsible": "^0.5.5",
     "react-native-drawer": "^1.16.7",
     "react-native-dropdown": "0.0.6",
+    "react-native-easy-grid": "^0.1.6",
     "react-native-fbsdk": "^0.1.0",
     "react-native-floating-label-text-input": "0.0.8",
     "react-native-grid": "^0.1.1",

@@ -3,6 +3,7 @@ import React, {
   Component,
   Image,
   PropTypes,
+  ScrollView,
   Text,
   TouchableOpacity,
   View,
@@ -41,15 +42,15 @@ export default class Post extends Component {
       <View style={{flex: 1}}>
       <View style={PostStyles.header}>
         <Image source={{uri:user.picture}} style={PostStyles.userPhotoStyle}/>
-          <View style={{flexDirection: 'column', flex: 1, justifyContent: 'center', paddingHorizontal: 8}}>
+          <View style={{flexDirection: 'column', flex: 1, justifyContent: 'center'}}>
             <Text style={PostStyles.authorName}>{`${user.name}`}</Text>
             <Text style={PostStyles.created}>{`${daysAgo}`}</Text>
           </View>
       </View>
       <ResponsiveImage style={PostStyles.singlePostImage} source={{uri: media[0]}} initWidth={initWidth} initHeight={initHeight}/>
-      <View style={PostStyles.tags}>
-      {tags && tags.map ((tag, idx)=> {return ( <Text key={idx} style={PostStyles.tag}>{`#${tag}`}</Text> )})}
-      </View>
+      <ScrollView style={PostStyles.tags} showsHorizontalScrollIndicator={false} horizontal={true} containerStyle={PostStyles.tagsContainer}>
+        {tags && tags.map ((tag, idx)=> {return ( <Text key={idx} style={PostStyles.tag}>{`#${tag}`}</Text> )})}
+      </ScrollView>
       </View>
     )
     return (

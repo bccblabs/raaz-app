@@ -36,7 +36,7 @@ export const Styles = StyleSheet.create ({
     backgroundColor: 'rgba(0,0,0,0.5)',
     alignSelf: 'center',
     height: 40,
-    width: window.width/4,
+    width: window.width/2.5,
     margin: 12,
   },
 
@@ -446,6 +446,11 @@ export const EmptyViewStyles = StyleSheet.create ({
 export const ScrollColorsNum = ScrollColorsArray.length
 export const RecallColorsNum = RecallColorsArray.length
 export const PostStyles = StyleSheet.create({
+  listingSection: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    paddingHorizontal: 8,
+  },
   linearGradient: {
     flex: 1,
     paddingLeft: 15,
@@ -462,17 +467,21 @@ export const PostStyles = StyleSheet.create({
     backgroundColor: 'transparent',
     flexDirection: 'row',
     alignItems: 'flex-start',
-    paddingVertical: 16,
+    paddingVertical: 8,
     flex: 1,
   },
   tags: {
-    flex: 1,
     flexWrap: 'wrap',
     flexDirection: 'row',
-    alignItems: 'flex-start',
     position: 'absolute',
     bottom: 0,
+    width: window.width,
     paddingVertical: 8,
+  },
+  tagsContainer: {
+    flex: 1,
+    alignItems: 'flex-start',
+
   },
   bottom: {
     flex: 1,
@@ -483,6 +492,7 @@ export const PostStyles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: '500',
+    paddingHorizontal: 8
   },
   lc: {
     fontWeight: '600',
@@ -515,12 +525,36 @@ export const PostStyles = StyleSheet.create({
     resizeMode: 'cover',
     alignSelf: 'center'
   },
+  imageContainer: {
+    width: window.width,
+    height: window.height/3,
+  },
+  largeImage: {
+    width: window.width/2,
+    height: window.height/3,
+    resizeMode: 'cover',
+    borderWidth: 3,
+    borderColor: 'white'
+  },
+  smallImage: {
+    width: window.width/2,
+    height: window.height/6,
+    resizeMode: 'cover',
+    borderWidth: 3,
+    borderColor: 'white'
+  },
   userPhotoStyle: {
     height: 40,
     width: 40,
     backgroundColor: 'black',
     marginHorizontal: 8,
     resizeMode: 'contain'
+  },
+  price: {
+    fontSize: 14,
+    fontWeight: '700',
+    padding: 8,
+    color: 'purple',
   }
 })
 export const CarmeraStyles = StyleSheet.create ({
