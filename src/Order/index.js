@@ -1,15 +1,11 @@
 'use strict'
 import React, {Component, ScrollView, StyleSheet, View} from 'react-native'
-
 import {Actions} from 'react-native-router-flux'
-
 import {Heading1, Heading2, Text} from '../common/F8Text.js'
 import F8Header from '../common/F8Header'
 import F8Button from '../common/F8Button'
-
 import ParallaxScrollView from 'react-native-parallax-scroll-view'
 import {FilterStyles, ParallaxScrollStyles, Styles} from '../styles'
-
 export default class Order extends Component {
   render () {
       let {

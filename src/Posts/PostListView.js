@@ -1,6 +1,12 @@
 'use strict'
 
-import React, { Component, View, ListView, StyleSheet, TouchableWithoutFeedback } from 'react-native'
+import React, {
+  Component,
+  View,
+  ListView,
+  StyleSheet,
+  TouchableWithoutFeedback
+} from 'react-native'
 
 import {connect} from 'react-redux'
 import {createSelector} from 'reselect'
@@ -61,6 +67,7 @@ class PostListView extends Component {
     }
     this.renderRow = this.renderRow.bind(this)
   }
+
   componentWillMount () {
     this.props.fetchPosts()
   }

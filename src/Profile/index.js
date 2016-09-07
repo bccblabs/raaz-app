@@ -57,7 +57,7 @@ class Profile extends Component {
                       title: 'Settings',
                       onPress:()=>{Actions.Settings()}
                     }
-          ,profilePicture = picture && <Image source={{uri: picture}} style={{borderWidth: 3, borderColor: 'white', width: 64, height: 64, borderRadius: 16, alignSelf: 'center'}}/>
+          ,profilePicture = picture && <Image source={{uri: picture}} style={{borderWidth: 0.5, borderColor: 'white', width: 100, height: 100, borderRadius: 16, alignSelf: 'center'}}/>
           ,parallaxContent= (
             <View style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: window.width}}>
               <View style={{backgroundColor: 'transparent'}}>
