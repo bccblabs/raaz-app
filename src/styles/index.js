@@ -341,6 +341,7 @@ export const FilterCardStyles = StyleSheet.create ({
     backgroundColor: 'black',
   },
   titleTextStyle: {
+    flex: 1,
     position: 'absolute',
     bottom: 8,
     right: 8,
@@ -348,9 +349,21 @@ export const FilterCardStyles = StyleSheet.create ({
     fontSize: 12,
     fontWeight: 'bold',
   },
+  partTextStyle: {
+    padding: 8,
+    flex: -1,
+    position: 'absolute',
+    bottom: 8,
+    color: 'black',
+    fontSize: 10,
+    backgroundColor: 'white',
+    opacity: 0.9,
+    fontWeight: '600',
+  },
   containerStyle: {
     marginLeft: 8,
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+
   },
   horizontalButtonContainer: {
     height: 64,
@@ -481,9 +494,9 @@ export const PostStyles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
     position: 'absolute',
-    bottom: 0,
+    bottom: 100,
     width: window.width,
-    paddingVertical: 8,
+    paddingVertical: 4,
   },
   tagsContainer: {
     flex: 1,

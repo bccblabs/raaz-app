@@ -60,7 +60,12 @@ class FilterCard extends Component {
                                     }]}
                                 />)
                               :
-                              (<View/>)
+                              (<Animated.View
+                                  style={[
+                                  FilterCardStyles.cardStyle,
+                                  {opacity: 1
+                                  }]}
+                              />)
               }
             </TouchableWithoutFeedback>
           </Image>
