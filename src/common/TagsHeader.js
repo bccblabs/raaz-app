@@ -41,7 +41,7 @@ class TagsHeader extends Component {
   render () {
     let {tags, tagAction, color} = this.props
     return (
-      <View style={[styles.container, {backgroundColor: color}]}>
+      <View style={[styles.container, {backgroundColor: 'white'}]}>
         <TouchableOpacity
           accessibilityLabel="Clear filter"
           accessibilityTraits="button"
@@ -74,7 +74,7 @@ var styles = StyleSheet.create({
   },
   text: {
     fontSize: 10,
-    color: 'white',
+    color: 'black',
     letterSpacing: 1,
     alignSelf: 'center',
     textDecorationLine: 'underline'

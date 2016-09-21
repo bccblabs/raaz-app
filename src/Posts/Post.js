@@ -57,9 +57,9 @@ export default class Post extends Component {
     return (
         <View style={PostStyles.container}>
           {imageContent}
-          <View style={{flexDirection:"row", justifyContent: 'space-around'}}>
-          <F8Button style={{}} type="tuningSub" caption="10 likes" icon={require('../common/img/ic_thumb_up.png')} />
-          <F8Button style={{}} type="tuningSub" caption="10 comments" icon={require ('../common/img/ic_comment.png')} />
+          <View style={{flexDirection:"row", justifyContent: 'flex-start'}}>
+          <F8Button style={{}} type="tuningSub" caption="10 likes"/>
+          <F8Button style={{}} type="tuningSub" caption="10 comments"/>
           </View>
         </View>
     )

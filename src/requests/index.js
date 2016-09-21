@@ -26,13 +26,21 @@ const RequestUtils = {
             .catch ((error) => {throw error})
   },
 
-  fetchPartDetails (partId) {
-    let url = API_ENDPOINT + '/tuning/' + partId
-
+  fetchPartDetails (partId, specId) {
+    let url = API_ENDPOINT + '/tuning/' + partId + '?specId=' + specId
     return fetchWithTimeout (REQ_TIMEOUT, url, GETOPTS)
             .then ((resp)=> {return resp.json()})
             .catch ((err)=> {throw err})
   },
+
+  fetchBuildDetails (buildId) {
+    let url = API_ENDPOINT + '/build/details/' + buildId
+    return fetchWithTimeout (REQ_TIMEOUT, url, GETOPTS)
+          .then ((resp) => {
+            return resp.json()
+          })
+          .catch ((err) => {throw err})
+  }
 };
 
 

@@ -27,7 +27,7 @@ import PartsGrid from './PartsGrid'
 import PostsList from '../Posts/PostListView'
 import {VRImage} from '../cardboard'
 
-import {Styles ,TuningBySpecStyles} from '../styles'
+import {Styles, TuningBySpecStyles, SliderStyles} from '../styles'
 const specIdSelector = (state) => (state.stockCar.selectedSpecId)
 const specDetailsSelector = (state) => (state.entities.specDetails)
 const specDetailsPagination = (state) => (state.pagination.specDetailsPagination)
@@ -105,10 +105,11 @@ class TuningBySpec extends Component {
         , graphKeys = ['horsepower', 'torque']
 
       const dataArray = graphKeys.map ((key)=>{return {name: key, value: specs[key]}})
+
       let tuningcomponent = (specsInfo.tuning && specsInfo.tuning.length )?(
         <View>
-          <Heading3 style={TuningBySpecStyles.subtitle}>{"Tuning By Categories"}</Heading3>
-          <PartsGrid data={tuning}/>
+          <Heading3 style={SliderStyles.sliderTitle}>{"Tuning By Categories"}</Heading3>
+          <PartsGrid data={tuning} specId={specId}/>
           <F8Button onPress={()=>{Actions.TuningPager({specId})}} type="secondary" caption="Search Tuning!" style={Styles.contactDealerButton}/>
         </View>
       ): (<View/>)
@@ -129,7 +130,7 @@ class TuningBySpec extends Component {
             }}
             renderBackground={() => <VRImage style={TuningBySpecStyles.VRImageHolder}/>}>
             <View style={{flex: 1}}>
-            <Heading3 style={TuningBySpecStyles.subtitle}>{"Specs"}</Heading3>
+            <Heading3 style={SliderStyles.sliderTitle}>{"Specs"}</Heading3>
             <View style={{padding: 16}}>
             <Heading3 style={TuningBySpecStyles.subtitle}>{size.toFixed(1) + ` L ${configuration}-${cylinders} ${compressor}`}</Heading3>
             <Heading3 style={TuningBySpecStyles.subtitle}>{`${transmissionSpeed} speed ${transmission}`}</Heading3>
@@ -138,7 +139,7 @@ class TuningBySpec extends Component {
             </View>
             {tuningcomponent}
             </View>
-            <Heading3 style={TuningBySpecStyles.subtitle}>{"Posts"}</Heading3>
+            <Heading3 style={SliderStyles.sliderTitle}>{"Posts"}</Heading3>
             {
               posts.map ((post, idx)=>{
                 console.log (post)

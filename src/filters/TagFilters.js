@@ -26,14 +26,13 @@ class TagFilters extends Component {
   }
 
   render() {
-    let {data, onPress, selectedTags, isTuning, touchEnabled} = this.props
+    let {data, onPress, selectedTags, isTuning} = this.props
     if (!data) return (<View><Text style={{color: 'black'}}>{"Email Us For More..."}</Text></View>)
     else {
     return (
       <View style={isTuning?[styles.container, {marginBottom: 16}]:styles.container}>
         <View>
         {data.map ((optionRow, idx)=>{
-          console.log (optionRow)
           return (
             <View style={{backgroundColor: 'white'}} key={`tf-${idx}`}>
             <Paragraph style={SliderStyles.sliderTitle}>
@@ -47,13 +46,15 @@ class TagFilters extends Component {
               {
                 optionRow.options.map ((filterChoice, idx)=> {
                   let isFilterSelected = (selectedTags.indexOf (filterChoice.name) > -1)
-                  console.log (filterChoice)
-                  return ( <FilterCard
-                              touchEnabled={touchEnabled}
-                              selected={isFilterSelected}
-                              key={idx}
-                              action={onPress(filterChoice.name)}
-                              {...filterChoice}/>)
+                  return (
+                      <FilterCard
+                        touchEnabled={true}
+                        selected={isFilterSelected}
+                        key={idx}
+                        action={onPress(filterChoice.name)}
+                        {...filterChoice}
+                      />
+                  )
                 })
               }
             </ScrollView>

@@ -114,9 +114,6 @@ class PostListView extends Component {
         </View>
       )
 
-    // if (postsPagination.isFetching) return loadingContent
-    // if (postsPagination.hasError || dataSource.getRowCount() < 1) return emptyContent
-    // else return listContent
     return listContent
   }
 

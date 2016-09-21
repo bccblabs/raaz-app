@@ -57,14 +57,12 @@ export const Styles = StyleSheet.create ({
   topLevelScrollStyle: {
     height: window.height,
     width: window.width,
-    paddingLeft: 16,
-    paddingRight: 16,
-    paddingBottom: 49
   },
   horizontalScrollContainer: {
     height: 32,
     width: window.width,
     marginTop: 0,
+    backgroundColor: '#FFF0F5'
   },
   horizontalButtonContainer: {
     height: 64,
@@ -353,15 +351,14 @@ export const FilterCardStyles = StyleSheet.create ({
     padding: 8,
     flex: -1,
     position: 'absolute',
-    bottom: 8,
+    top: 0,
     color: 'black',
-    fontSize: 10,
+    fontSize: 12,
     backgroundColor: 'white',
     opacity: 0.9,
     fontWeight: '600',
   },
   containerStyle: {
-    marginLeft: 8,
     backgroundColor: 'transparent',
 
   },

@@ -98,8 +98,8 @@ class Tuning extends Component {
     return (
       <View style={{flex: 1, backgroundColor:'transparent'}}>
       <F8Header title="Tuning" foreground='dark' leftItem={leftItem} rightItem={rightItem}/>
-      <TagsHeader onPress={Actions.PostFilters} color="black" tagAction={togglePostTag} tags={tags}/>
       <Carmera/>
+      <TagsHeader onPress={Actions.PostFilters} color="black" tagAction={togglePostTag} tags={tags}/>
       <BuildsList/>
       </View>
     )

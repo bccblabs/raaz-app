@@ -12,13 +12,13 @@ import React, {
 import {connect} from 'react-redux'
 import {Paragraph} from '../common/F8Text'
 import Image from 'react-native-responsive-image'
-
+const DESELECTED_OPACITY = 0.6
 import {FilterCardStyles} from '../styles'
 
 class FilterCard extends Component {
     constructor (props) {
       super (props)
-      let opacityVal = this.props.selected?0:0.5
+      let opacityVal = this.props.selected?0:DESELECTED_OPACITY
       this.state = {
         opacity: new Animated.Value (opacityVal),
         selected: this.props.selected
@@ -30,7 +30,7 @@ class FilterCard extends Component {
           toggleSelect = !this.state.selected
       Animated.timing (
         this.state.opacity,
-        {toValue: toggleSelect?0:0.5, duration: 200}
+        {toValue: toggleSelect?0:DESELECTED_OPACITY, duration: 200}
       ).start()
       InteractionManager.runAfterInteractions (()=>{
         dispatch (action)
@@ -40,7 +40,7 @@ class FilterCard extends Component {
 
     componentWillReceiveProps (nextProps) {
       let selectedVal = nextProps.selected,
-          opacityVal = selectedVal?0:0.5
+          opacityVal = selectedVal?0:DESELECTED_OPACITY
       this.setState ({selected: selectedVal, opacity: new Animated.Value (opacityVal)})
     }
     render () {
@@ -60,12 +60,7 @@ class FilterCard extends Component {
                                     }]}
                                 />)
                               :
-                              (<Animated.View
-                                  style={[
-                                  FilterCardStyles.cardStyle,
-                                  {opacity: 1
-                                  }]}
-                              />)
+                              (<View/>)
               }
             </TouchableWithoutFeedback>
           </Image>

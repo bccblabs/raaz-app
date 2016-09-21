@@ -10,15 +10,20 @@ import React, {
   TouchableHighlight,
   Dimensions
 } from 'react-native'
+
 import {Styles, GraphColorsArray} from '../styles'
-var numeral = require ('numeral')
+import numeral from 'numeral'
+import Icon from 'react-native-vector-icons/EvilIcons'
+import {Heading3} from '../common/F8Text'
+import {TuningBySpecStyles} from '../styles'
+import keys from 'lodash/keys'
 const window = Dimensions.get ('window')
-const maxWidth = 350
+const maxWidth = 300
 const scalars = {
   'city': 5,
   'displacement': 1/20,
-  'horsepower': 1/1.5,
-  'torque': 1/1.5,
+  'horsepower': 1/2.5,
+  'torque': 1/2.5,
   'highway': 5,
   'max_hp_rpm': 1/20,
   'max_tq_rpm': 1/20,
@@ -44,22 +49,33 @@ const scalars = {
   'invoice': 1/100,
   'msrp': 1/100,
   'mileage': 1/100,
+
+  'tqGain': 15,
+  'hpGain': 15,
+  'maxHp': 1/2,
+  'maxTq': 1/2,
+  'labor': 20,
+  'weight': 10,
+  'rearLowering': 20,
+  'frontLowering': 20,
+  'rearSpringRateStiffness': 20,
+  'frontSpringRateStiffness': 20
+
 }
 
-var Icon = require('react-native-vector-icons/EvilIcons');
-import {Heading3} from '../common/F8Text'
-import {TuningBySpecStyles} from '../styles'
 export default class MetricsGraph extends Component {
   constructor (...args) {
     super (...args)
-    let firstPageData = this.getWidth (this.props.data[0])
-
+    let entries = this.props.data[0]
+      , firstPageData = this.getWidth (entries)
     this.state = {
       currentIndex: 0,
-      val0: new Animated.Value(firstPageData['val0']?firstPageData['val0']:0),
-      val1: new Animated.Value(firstPageData['val1']?firstPageData['val1']:0),
+      entriesOnDisplay: firstPageData,
+      data: Object.assign (...this.props.data[0].entries.map ((item=>({[item['name']]:item['value']} ))) )
     }
+    console.log ('constructor, state=', this.state)
   }
+
   _parseLabelName (name) {
     switch (name) {
       case 'horsepower':
@@ -122,31 +138,42 @@ export default class MetricsGraph extends Component {
         return 'Mileage'
       case 'interior_vol':
         return 'Interior Volume (cubic inches)'
+      case 'tqGain':
+        return 'Torque Gain (LB/FT)'
+      case 'hpGain':
+        return 'Horsepower Gain (HP)'
+      case 'maxHp':
+        return 'Maximum Horsepower (HP)'
+      case 'maxTq':
+        return 'Maximum Torque (LB/FT)'
+      case 'labor':
+        return 'Labor (Hours)'
+      case 'weight':
+        return 'Weight (LB)'
+      case 'rearLowering':
+        return 'Rear Lowering (inches)'
+      case 'frontLowering':
+        return 'Front Lowering (inches)'
+      case 'rearSpringRateStiffness':
+        return 'Rear Spring Stiffness Rate (%)'
+      case 'frontSpringRateStiffness':
+        return 'Front Spring Stiffness Rate (%)'
       default:
         console.error ('key not defined', name)
         return name
     }
   }
+
   getWidth (data) {
     let entryWidth = {}, widthCap
-    for (let i = 0; i < 3; i++) {
-      let entryName = data&&data.entries&&data.entries[i]?data.entries[i].name:''
-      let entryValue = data&&data.entries&&data.entries[i]?data.entries[i].value:0
+    for (let i = 0; i < data.entries.length; i++) {
+      let entryName = data.entries[i].name
+      let entryValue = data.entries[i].value
       widthCap = entryValue * scalars[entryName] || 10
-      entryWidth [`val${i}`] = (widthCap <= maxWidth) ? widthCap:(maxWidth-50)
+      if (entryValue)
+        entryWidth [entryName] = Math.abs((widthCap <= maxWidth) ? widthCap:(maxWidth-50))
     }
     return entryWidth
-  }
-
-  onPressLeft () {
-    const {currentIndex} = this.state,
-          {data} = this.props
-    if (currentIndex < data.length - 1) this.handleAnimation(currentIndex + 1)
-  }
-
-  onPressRight () {
-    const {currentIndex} = this.state
-    if (currentIndex > 0) this.handleAnimation(currentIndex - 1)
   }
 
   handleAnimation (idx) {
@@ -162,28 +189,24 @@ export default class MetricsGraph extends Component {
   }
 
   render () {
-    const {currentIndex, val0, val1} = this.state,
-          {data} = this.props,
-          dataOnDisplay = data[currentIndex],
-          entriesOnDisplay = this.getWidth (dataOnDisplay),
-          canNext = currentIndex < this.props.data.length - 1 ? 1 : 0,
-          canPrev = currentIndex > 0 ? 1 : 0
+    const {currentIndex, entriesOnDisplay, data} = this.state
 
     return (
           <View style={{flex: 1, marginTop: 4}}>
           {
-            dataOnDisplay && entriesOnDisplay && [val0, val1].map ((itemValue, idx)=>{
-              let dataEntry = dataOnDisplay.entries[idx],
-                  labelName = dataEntry?this._parseLabelName (dataEntry['name']):'',
-                  labelValue = dataEntry?numeral(dataEntry['value']).format ('0,0'):''
-              return (
-                itemValue && <View style={styles.item} key={idx}>
+            entriesOnDisplay && keys (entriesOnDisplay).map ((entryKey, idx)=>{
+              let dataEntry = entriesOnDisplay[entryKey]
+                , labelName = this._parseLabelName (entryKey)
+                , labelValue = numeral(data[entryKey]).format('0,0')
+
+            return (
+              <View style={styles.item} key={idx}>
                 <Heading3 style={TuningBySpecStyles.subtitle}>{labelName}</Heading3>
                 <View style={styles.data}>
-                      <Animated.View style={[styles.bar, GraphColorsArray[idx%GraphColorsArray.length], {width: itemValue}]}/>
-                      <Heading3 style={TuningBySpecStyles.subtitle}>{labelValue}</Heading3>
+                  <Animated.View style={[styles.bar, GraphColorsArray[idx%GraphColorsArray.length], {width: dataEntry}]}/>
+                  <Heading3 style={TuningBySpecStyles.subtitle}>{labelValue}</Heading3>
                 </View>
-                  </View>
+              </View>
               )
             })
           }
@@ -200,31 +223,14 @@ const styles = StyleSheet.create({
     marginTop: 6,
     justifyContent: 'center'
   },
-  // Item
   item: {
     flexDirection: 'column',
     marginBottom: 5,
-  },
-  label: {
-    color: '#CBCBCB',
-    flex: 1,
-    fontSize: 16,
-    position: 'relative',
-    top: 2
   },
   data: {
     flex: 2,
     flexDirection: 'row'
   },
-  dataLabel: {
-    color: 'black',
-    fontSize: 14
-  },
-  dataNumber: {
-    color: 'black',
-    fontSize: 12
-  },
-  // Bar
   bar: {
     alignSelf: 'center',
     borderRadius: 5,
@@ -233,37 +239,4 @@ const styles = StyleSheet.create({
     marginLeft: 10,
 
   },
-    // controller
-  controller: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: 15
-  },
-  button: {
-    flex: 1,
-    position: 'relative',
-    top: -1
-  },
-  chevronLeft: {
-    alignSelf: 'flex-end',
-    height: 28,
-    marginRight: 10,
-    width: 28
-  },
-  chevronRight: {
-    alignSelf: 'flex-start',
-    height: 28,
-    marginLeft: 10,
-    width: 28
-  },
-  date: {
-    color: '#6B7C96',
-    flex: 1,
-    fontSize: 22,
-    fontWeight: '300',
-    height: 28,
-    textAlign: 'center'
-  }
-
 })

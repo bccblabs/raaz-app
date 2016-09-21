@@ -25,7 +25,7 @@ class PartsGrid extends Component {
   }
 
   render() {
-    let {data, onPress} = this.props
+    let {data, onPress, specId} = this.props
     return (
       <View style={[styles.container, {marginBottom: 16}]}>
         <View>
@@ -41,11 +41,13 @@ class PartsGrid extends Component {
               style={SliderStyles.horizontalScrollContainer}
               contentContainerStyle={Styles.scrollContainer}>
               {
-                optionRow.options.map ((filterChoice, cidx)=> {
-                  let {name, media, partId} = filterChoice
+                optionRow.options.map ((data, cidx)=> {
+                  let {name, media, partId} = data,
+                      passProps = Object.assign ({}, data, {specId})
+
                   return (
                     <View style={{height:200, width: 200}}>
-                    <TouchableWithoutFeedback style={{margin: 16}} key={`pg-${cidx}`} onPress={()=>{Actions.PartDetails ({partId})}}>
+                    <TouchableWithoutFeedback style={{margin: 16}} key={`pg-${cidx}`} onPress={()=>{Actions.PartDetails ({data: passProps})}}>
                       <View style={FilterCardStyles.containerStyle}>
                         <Image
                           source={{uri: media}}
