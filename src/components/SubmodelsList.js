@@ -91,7 +91,7 @@ class SubmodelsList extends Component {
       <View style={FilterStyles.container}>
         <F8Header
           foreground="dark"
-          title={this.state.selectedModel}
+          title={this.state.selectedModel.toUpperCase()}
           leftItem={leftItem}
           style={FilterStyles.headerStyle}/>
           {content}

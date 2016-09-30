@@ -17,7 +17,7 @@ import {connect} from 'react-redux'
 import {createSelector} from 'reselect'
 
 import isArray from 'lodash/isArray'
-import {SliderStyles, FilterStyles, Styles, FilterCardStyles} from '../styles'
+import {PartStyles} from '../styles'
 
 class PartsGrid extends Component {
   constructor (props) {
@@ -27,35 +27,33 @@ class PartsGrid extends Component {
   render() {
     let {data, onPress, specId} = this.props
     return (
-      <View style={[styles.container, {marginBottom: 16}]}>
+      <View style={{backgroundColor: 'white', marginBottom: 16}}>
         <View>
         {data.map ((optionRow, idx)=>{
           return (
             <View style={{backgroundColor: 'white'}} key={`pg-${idx}`}>
-            <Paragraph style={SliderStyles.sliderTitle}>
+            <Paragraph style={PartStyles.partSectionTitle}>
             {optionRow.name.toUpperCase()}
             </Paragraph>
             <ScrollView
               showsHorizontalScrollIndicator={false}
               horizontal={true}
-              style={SliderStyles.horizontalScrollContainer}
-              contentContainerStyle={Styles.scrollContainer}>
+              style={PartStyles.partsScrollStyle}>
               {
                 optionRow.options.map ((data, cidx)=> {
-                  let {name, media, partId} = data,
+                  let {name, media, partId, recCnt} = data,
                       passProps = Object.assign ({}, data, {specId})
 
                   return (
-                    <View style={{height:200, width: 200}}>
-                    <TouchableWithoutFeedback style={{margin: 16}} key={`pg-${cidx}`} onPress={()=>{Actions.PartDetails ({data: passProps})}}>
-                      <View style={FilterCardStyles.containerStyle}>
-                        <Image
-                          source={{uri: media}}
-                          style={{height:200, width: 200, resizeMode: 'contain'}}>
-                        </Image>
-                      </View>
+                    <View key={`pelem-${cidx}`} style={PartStyles.partContainer}>
+                    <TouchableWithoutFeedback onPress={()=>{Actions.PartDetails ({data: passProps})}}>
+                      <Image
+                        source={{uri: media}}
+                        style={PartStyles.partImage}>
+                      </Image>
                     </TouchableWithoutFeedback>
-                    <Text style={FilterCardStyles.partTextStyle}>{name}</Text>
+                    <Text style={PartStyles.partTitle}>{name}</Text>
+                    <Text style={PartStyles.rating}>{recCnt?recCnt:'n/a' + ' Recommendations'}</Text>
                     </View>
                   )
                 })
@@ -75,17 +73,6 @@ var styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  title: {
-    textAlign: 'center',
-    marginBottom: 10,
-  },
-  image: {
-    marginBottom: 10,
-  },
-  text: {
-    textAlign: 'center',
-    marginBottom: 35,
-  }
 })
 
 export default connect () (PartsGrid)

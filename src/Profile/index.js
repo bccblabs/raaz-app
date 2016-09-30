@@ -52,11 +52,8 @@ class Profile extends Component {
   render () {
 
     const {picture, name, email, phone, facebook, instagram, } = this.state.profileData
-          ,leftItem = { title: "Back", onPress:()=>{Actions.pop()}}
-          ,rightItem = {
-                      title: 'Settings',
-                      onPress:()=>{Actions.Settings()}
-                    }
+          ,leftItem = {title: "Back", onPress:Actions.pop}
+          ,rightItem = {title: 'Settings', onPress: Actions.Settings}
           ,profilePicture = picture && <Image source={{uri: picture}} style={{borderWidth: 0.5, borderColor: 'white', width: 100, height: 100, borderRadius: 16, alignSelf: 'center'}}/>
           ,parallaxContent= (
             <View style={{flex: 1, justifyContent: 'center', alignSelf: 'center', width: window.width}}>

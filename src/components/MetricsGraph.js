@@ -11,11 +11,10 @@ import React, {
   Dimensions
 } from 'react-native'
 
-import {Styles, GraphColorsArray} from '../styles'
+import {Specs, GraphColorsArray} from '../styles'
 import numeral from 'numeral'
 import Icon from 'react-native-vector-icons/EvilIcons'
 import {Heading3} from '../common/F8Text'
-import {TuningBySpecStyles} from '../styles'
 import keys from 'lodash/keys'
 const window = Dimensions.get ('window')
 const maxWidth = 300
@@ -73,7 +72,6 @@ export default class MetricsGraph extends Component {
       entriesOnDisplay: firstPageData,
       data: Object.assign (...this.props.data[0].entries.map ((item=>({[item['name']]:item['value']} ))) )
     }
-    console.log ('constructor, state=', this.state)
   }
 
   _parseLabelName (name) {
@@ -190,21 +188,19 @@ export default class MetricsGraph extends Component {
 
   render () {
     const {currentIndex, entriesOnDisplay, data} = this.state
-
     return (
-          <View style={{flex: 1, marginTop: 4}}>
+          <View style={Specs.container}>
           {
             entriesOnDisplay && keys (entriesOnDisplay).map ((entryKey, idx)=>{
               let dataEntry = entriesOnDisplay[entryKey]
                 , labelName = this._parseLabelName (entryKey)
                 , labelValue = numeral(data[entryKey]).format('0,0')
-
             return (
-              <View style={styles.item} key={idx}>
-                <Heading3 style={TuningBySpecStyles.subtitle}>{labelName}</Heading3>
-                <View style={styles.data}>
-                  <Animated.View style={[styles.bar, GraphColorsArray[idx%GraphColorsArray.length], {width: dataEntry}]}/>
-                  <Heading3 style={TuningBySpecStyles.subtitle}>{labelValue}</Heading3>
+              <View style={Specs.item} key={idx}>
+                <Heading3 style={Specs.subtitle}>{labelName}</Heading3>
+                <View style={Specs.data}>
+                  <Animated.View style={[Specs.bar, GraphColorsArray[idx%GraphColorsArray.length], {width: dataEntry}]}/>
+                  <Heading3 style={Specs.subtitle}>{labelValue}</Heading3>
                 </View>
               </View>
               )
@@ -213,30 +209,4 @@ export default class MetricsGraph extends Component {
           </View>
     )
   }
-
 }
-
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'column',
-    marginTop: 6,
-    justifyContent: 'center'
-  },
-  item: {
-    flexDirection: 'column',
-    marginBottom: 5,
-  },
-  data: {
-    flex: 2,
-    flexDirection: 'row'
-  },
-  bar: {
-    alignSelf: 'center',
-    borderRadius: 5,
-    height: 10,
-    marginRight: 5,
-    marginLeft: 10,
-
-  },
-})

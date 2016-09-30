@@ -147,4 +147,12 @@ export default keyMirror ({
   UPDATE_COUNTRY: null,
   UPDATE_ZIP: null,
 
+  POST_COMMENT_REQ: null,
+  POST_COMMENT_SUCCESS: null,
+  POST_COMMENT_ERR: null,
+
+  REPLY_COMMENT_REQ: null,
+  REPLY_COMMENT_SUCCESS: null,
+  REPLY_COMMENT_ERR: null,
+
 })

@@ -36,7 +36,7 @@ var View = require('View');
 
 class F8Button extends React.Component {
   props: {
-    type: 'primary' | 'secondary' | 'bordered' | 'tuning' | 'tuningSub';
+    type: 'primary' | 'secondary' | 'bordered' | 'tuning' | 'tertiary';
     icon: number;
     caption: string;
     style: any;
@@ -71,9 +71,9 @@ class F8Button extends React.Component {
           </Text>
         </View>
       );
-    } else if (this.props.type === 'tuningSub') {
+    } else if (this.props.type === 'tertiary') {
       content = (
-        <View style={styles.tuningSub}>
+        <View style={styles.tertiary}>
           {icon}
           <Text style={[styles.caption, styles.subTuningCaption]}>
             {caption}
@@ -118,7 +118,7 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 40,
   },
-  tuningSub: {
+  tertiary: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
@@ -129,6 +129,7 @@ var styles = StyleSheet.create({
     color: 'black',
     fontWeight: '600',
     fontSize: 8,
+    alignSelf: 'center'
   },
   border: {
     borderWidth: 1,
@@ -140,6 +141,7 @@ var styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   icon: {
+    flex: -1,
     marginRight: 12,
   },
   caption: {

@@ -75,8 +75,8 @@ export default class Post extends Component {
           {imageContent}
           {tagsContent}
           <View style={{flexDirection:"row", justifyContent: 'flex-start'}}>
-          <F8Button style={{}} type="tuningSub" caption="10 likes"/>
-          <F8Button style={{}} type="tuningSub" caption="10 comments"/>
+          <F8Button icon={require ('../common/img/like.png')} style={{}} type="tertiary" caption="10 likes"/>
+          <F8Button icon={require ('../common/img/comment.png')} style={{}} type="tertiary" caption="10 comments"/>
           </View>
         </View>
       </TouchableWithoutFeedback>

@@ -14,7 +14,7 @@ import RNRF, {
 } from 'react-native-router-flux'
 
 import { connect } from 'react-redux'
-
+import Saved from './Saved/'
 import Posts from './Posts/'
 import NewPost from './Posts/NewPost'
 import Login from './Login'
@@ -105,6 +105,7 @@ class Viicles extends Component {
             <Route name="NewPost" component={NewPost} schema="default" hideNavBar={true}/>
             <Route name="TuningPager" component={TuningPager} schema="default" hideNavBar={true}/>
             <Route name="PostFilters" component={PostFilters} schema="default" hideNavBar={true}/>
+            <Route name="WatchList" component={Saved} schema="default" hideNavBar={true}/>
           </Router>
       )
   }

@@ -81,8 +81,8 @@ class Tuning extends Component {
   }
 
   render () {
-    const leftItem = {title: 'Saved', onPress: ()=>{Actions.SavedItems()}},
-          rightItem = {title: 'Orders', onPress: ()=>{Actons.Orders()}},
+    const leftItem = {title: 'Saved', onPress:Actions.WatchList},
+          rightItem = {title: 'Orders', onPress: Actions.Orders},
           selectedTags = this.state.selectedTags
 
     let {categories} = this.state

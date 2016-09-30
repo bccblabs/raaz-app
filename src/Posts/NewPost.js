@@ -10,31 +10,58 @@ import React, {
   Image,
 } from 'react-native'
 
-var {Icon} = require ('react-native-vector-icons/FontAwesome')
-import Video from 'react-native-video'
-var ImagePickerManager = require('NativeModules').ImagePickerManager
-var FloatLabelTextInput = require('react-native-floating-label-text-input')
+import {connect} from 'react-redux'
+import {createSelector} from 'reselect'
+import { Actions } from 'react-native-router-flux'
 
+import FloatLabelTextInput from 'react-native-floating-label-text-input'
 import F8Header from '../common/F8Header'
+import F8Button from '../common/F8Button'
 import FilterCard from '../filters/FilterCard'
 
-import MainButton from '../common/MainButton'
 import { Text, Paragraph } from '../common/F8Text'
-import { ButtonStyles, NewPostStyles, SliderStyles, Styles, FilterStyles } from '../styles'
-import { Actions } from 'react-native-router-flux'
+import { NewPostStyles, General, ListingStyles, PostStyles } from '../styles'
 import {ImageOptions, VideoOptions} from '../constants/pickerOptions'
 
+const mapStateToProps = (state) => {
+  return {
+    profileData: state.user.profileData
+  }
+}
 
-export default class NewPost extends Component {
+const mapDispatchToProps = (dispatch) => {
+  return {dispatch}
+}
+
+class NewPost extends Component {
   constructor (props) {
     super (props)
     this.pickImage = this.pickImage.bind (this)
+    this.renderEditLog = this.renderEditLog.bind (this)
     this.renderImagesContainer = this.renderImagesContainer.bind (this)
     this.renderVideosContainer = this.renderVideosContainer.bind (this)
     this.state = {
       images: [],
       videos: [],
-      postType: 'log'
+
+      selectedMake: null,
+      selectedModel: null,
+      selectedSubmodel: null,
+      selectedSpecId: null,
+
+      parts: [],
+      taggedUsers: [],
+
+      title: null,
+      desription: null,
+
+      listedPrice: null,
+      listedMileage: null,
+      vin: null,
+
+      listing: false,
+
+      profileData: props.profileData
     }
   }
 
@@ -70,28 +97,29 @@ export default class NewPost extends Component {
   renderGenericInput() {
     return (
       <View>
-        <TextInput
-          placeholder="Wassup with your ride..."
-          placeholderColor="gray"
-          multiline={true}
-          maxLength={140}
-          style={NewPostStyles.largeBlockInput}/>
-          <Text style={NewPostStyles.divTitleStyle}>Car</Text>
-          <TextInput
-            placeholder="2016 Ford Mustang "
-            placeholderColor="gray"
-            multiline={true}
-            maxLength={140}
-            style={NewPostStyles.singleLineBlockInput}/>
-
       </View>
     )
 
   }
   renderEditLog() {
+    const {picture, name} = this.state.profileData
+
     return (
       <View style={{paddingTop: 20, paddingBottom: 20}}>
-      {this.renderGenericInput()}
+      <F8Button icon={require ('../common/img/car.png')} onPress={()=>this.pickVideo('panorama')} type="tertiary" caption="Tag Your Car" style={[NewPostStyles.bottomButtonStyle, {borderWidth: 1, borderColor: '#eee'}]}/>
+      <View style={PostStyles.header}>
+        <Image source={{uri: picture}} style={PostStyles.userPhotoStyle}/>
+          <TextInput
+            placeholder="Tag Line"
+            multiline={true}
+            maxLength={20}
+            style={NewPostStyles.singleLineBlockInput}/>
+      </View>
+      <TextInput
+        placeholder="OMG IT'S FAST"
+        multiline={true}
+        maxLength={140}
+        style={NewPostStyles.largeBlockInput}/>
       </View>
     )
   }
@@ -99,19 +127,18 @@ export default class NewPost extends Component {
   renderEditListing() {
     return (
       <View style={{paddingTop: 20, paddingBottom: 20}}>
-      {this.renderGenericInput()}
       <FloatLabelTextInput
         placeHolder={"Asking Price ($)"}
-        value={"70,000"}
+        value={"0"}
         />
       <FloatLabelTextInput
         placeHolder={"Mileage"}
         value={"0"}
         />
-        <FloatLabelTextInput
-          placeHolder={"VIN"}
-          value={"Your VIN here..."}
-        />
+      <FloatLabelTextInput
+        placeHolder={"VIN"}
+        value={"Your VIN here..."}
+      />
      </View>
     )
   }
@@ -177,16 +204,10 @@ export default class NewPost extends Component {
   }
 
   render () {
-    const leftItem = {
-            title: 'cancel',
-            onPress: ()=>Actions.pop()
-          },
-          rightItem = {
-            title: 'preview',
-            onPress: ()=>Actions.SavePublishPost()
-          },
-          accessibilityTraits = ['button']
+    const leftItem = {title: 'cancel', onPress: Actions.pop}
+        , rightItem = {title: 'preview', onPress: Actions.previewDraft}
 
+    let {profileData} = this.props
 
     return (
       <View style={{flex: 1}}>
@@ -194,44 +215,25 @@ export default class NewPost extends Component {
           foreground="dark"
           leftItem={leftItem}
           rightItem={rightItem}
-          title="New Log"
-          style={FilterStyles.headerStyle}/>
-          <ScrollView>
-          {this.renderImagesContainer()}
-          {this.renderVideosContainer()}
-          {this.state.postType==='log'?this.renderEditLog():this.renderEditListing()}
-        <View style={NewPostStyles.bottomBar}>
-          <Text style={NewPostStyles.divTitleStyle}>Add Media</Text>
-          <ScrollView
-            horizontal={true}
-            showsVerticalScrollIndicator={false}
-            showsHorizontalScrollIndicator={false}>
-            <View style={{padding: 4}}>
-              <MainButton
-                type='bordered'
-                style={NewPostStyles.addMediaButtonStyle}
-                caption="Panorama"
-                onPress={()=>{this.pickVideo('panorama')}}/>
-            </View>
-            <View style={{padding: 4}}>
-              <MainButton
-                type='bordered'
-                style={NewPostStyles.addMediaButtonStyle}
-                caption="Photos"
-                onPress={()=>{this.pickImage('normal')}}/>
-            </View>
-            <View style={{padding: 4}}>
-              <MainButton
-                type='bordered'
-                style={NewPostStyles.addMediaButtonStyle}
-                caption="Videos"
-                onPress={()=>{pickVideo('normal')}}/>
-            </View>
+          title="New Post"
+          style={General.headerStyle}/>
 
-          </ScrollView>
-          </View>
-          </ScrollView>
+        {this.renderEditLog()}
+        {this.renderImagesContainer()}
+        {this.renderVideosContainer()}
+
+        <View style={NewPostStyles.bottomBar}>
+          <F8Button icon={require ('../common/img/tuning.png')} onPress={()=>this.pickVideo('panorama')} type="tertiary" caption="Tag Tuned Parts" style={NewPostStyles.bottomButtonStyle}/>
+          <F8Button icon={require ('../common/img/listing.png')} onPress={()=>this.pickVideo('panorama')} type="tertiary" caption="Post As Listing" style={NewPostStyles.bottomButtonStyle}/>
+          <F8Button icon={require ('../common/img/photo.png')} onPress={()=>this.pickImage('normal')} type="tertiary" caption="Add Photos" style={NewPostStyles.bottomButtonStyle}/>
+          <F8Button icon={require ('../common/img/panoimage.png')} onPress={()=>this.pickImage('panorama')} type="tertiary" caption="Add 360 Photos" style={NewPostStyles.bottomButtonStyle}/>
+          <F8Button icon={require ('../common/img/video.png')} onPress={()=>this.pickVideo('normal')} type="tertiary" caption="Add Videos" style={NewPostStyles.bottomButtonStyle}/>
+          <F8Button icon={require ('../common/img/panovideo.png')} onPress={()=>this.pickVideo('panorama')} type="tertiary" caption="Add 360 Video" style={NewPostStyles.bottomButtonStyle}/>
         </View>
+
+      </View>
     )
   }
 }
+
+export default connect (mapStateToProps, mapDispatchToProps) (NewPost)

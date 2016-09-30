@@ -2,8 +2,6 @@
 import {REQ_TIMEOUT, API_ENDPOINT} from '../constants/'
 
 const GETOPTS = {method: 'GET',headers: {'Accept': 'application/json'}}
-    , POSTOPTS = {method: 'POST',headers: {'Accept': 'application/json'}}
-
 const requestTimeout = (ms) => {
   return new Promise ((resolve, reject) => {
       setTimeout (() => {
@@ -15,6 +13,15 @@ const requestTimeout = (ms) => {
 const fetchWithTimeout = (time_out, ...args) => {
   return Promise.race ([fetch (...args), requestTimeout (time_out)])
 };
+
+
+function checkStatus(response) {
+  if (response.status >= 200 && response.status < 300) {
+    return response.json()
+  } else {
+    return null
+  }
+}
 
 const RequestUtils = {
 
@@ -40,7 +47,54 @@ const RequestUtils = {
             return resp.json()
           })
           .catch ((err) => {throw err})
+  },
+
+  fetchSavedBuilds (userId, partTags, pageUrl) {
+    let url = pageUrl ? (API_ENDPOINT + '/user/' + userId + '/savedBuilds' + pageUrl) : (API_ENDPOINT + '/user/' + userId + '/savedBuilds')
+      , postOpts = {
+                  method: 'POST',
+                  headers: {
+                    'Accept': 'application/json',
+                    'Content-Type':'application/json'
+                  },
+                  partTags
+        }
+
+    return fetchWithTimeout (REQ_TIMEOUT, url, postOpts)
+          .then (checkStatus)
+          .then ((data) => {
+            console.log('parsed json', data)
+            return data
+          })
+          .catch ((err) => {
+            console.error (err)
+            return null
+          })
+  },
+
+  fetchSavedParts (userId, partTags, pageUrl) {
+      let url = pageUrl ? (API_ENDPOINT + '/user/' + userId + '/savedParts' + pageUrl) : (API_ENDPOINT + '/user/' + userId + '/savedParts')
+        , postOpts = {
+                    method: 'POST',
+                    headers: {
+                      'Accept': 'application/json',
+                      'Content-Type':'application/json'
+                    },
+                    partTags
+          }
+      return fetchWithTimeout (REQ_TIMEOUT, url, postOpts)
+            .then (checkStatus)
+            .then ((data) => {
+              console.log('parsed json', data)
+              return data
+            })
+            .catch ((err) => {
+              console.error (err)
+              return null
+            })
   }
+
+
 };
 
 

@@ -73,7 +73,7 @@ class PostListView extends Component {
   _renderEmptyList () {
     return (
       <View style={{flex: 1, paddingTop: 180}}>
-        <F8Button onPress={Actions.NewPost} type="tuningSub" caption="Yo Post Something!"/>
+        <F8Button onPress={Actions.NewPost} type="tertiary" caption="Yo Post Something!"/>
       </View>
     )
   }

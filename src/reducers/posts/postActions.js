@@ -1,10 +1,4 @@
 'use strict'
-import React, {
-  Component,
-  Platform,
-  Navigator,
-} from 'react-native'
-
 const {
   POSTS_REQUEST,
   POSTS_SUCCESS,

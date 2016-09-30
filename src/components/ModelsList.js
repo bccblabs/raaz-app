@@ -89,7 +89,7 @@ class ModelsList extends Component {
       <View style={FilterStyles.container}>
         <F8Header
           foreground="dark"
-          title={this.state.selectedMake}
+          title={this.state.selectedMake.toUpperCase()}
           leftItem={leftItem}
           style={FilterStyles.headerStyle}/>
           {content}

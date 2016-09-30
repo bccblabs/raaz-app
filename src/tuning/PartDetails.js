@@ -87,8 +87,8 @@ class PartDetails extends Component {
           'rearSpringRateStiffness','frontSpringRateStiffness']
         , dataArray = graphKeys.map ((key)=>{return {name: key, value: tuning[key]}})
         , manufacturerContent = manufacturer && (
-          <View style={{flexDirection: 'row', paddingTop: 4, paddingBottom: 8, justifyContent: 'flex-start'}}>
-            <Image source={{uri: manufacturer.logo}} resizeMode="contain" style={{height: 32, flex: 1}}/>
+          <View style={{flexDirection: 'row', padding: 8, justifyContent: 'flex-start'}}>
+            <Image source={{uri: manufacturer.logo}} resizeMode="contain" style={{height: 16, flex: 1}}/>
           </View>
         )
         , specsContent = dataArray && (<MetricsGraph data={[{entries: dataArray}]}/>)
@@ -105,6 +105,7 @@ class PartDetails extends Component {
                 renderPage={(media)=>{return (<Image source={{uri:media, resizeMode: 'contain'}} style={Styles.largeImageStyle}/>)}}
                 dataSource={this.state.mediaDataSource}
               />
+              {manufacturerContent}
               <View style={{paddingBottom: 49}}>
               {
                 specsContent && (
@@ -135,13 +136,12 @@ class PartDetails extends Component {
               )}
 
               </View>
-            </ScrollView>
-            {manufacturerContent}
             <F8Button
               type="secondary"
               caption="Inquire"
               onPress={()=>{Actions.Order ({})}}
               style={[Styles.contactDealerButton, {bottom: 0, marginBottom: 0}]}/>
+              </ScrollView>
         </View>
       )
     }

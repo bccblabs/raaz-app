@@ -13,6 +13,12 @@ import {
   API_ENDPOINT,
 } from '../../constants'
 
+import {
+  CALL_API,
+  Schemas
+} from '../../middlewares/api'
+
+
 const {
   LOGIN,
   LOGGED_IN,
@@ -23,6 +29,16 @@ const {
   UPDATE_STATE,
   UPDATE_COUNTRY,
   UPDATE_ZIP,
+
+  POST_COMMENT_REQ,
+  POST_COMMENT_SUCCESS,
+  POST_COMMENT_ERR,
+
+  REPLY_COMMENT_REQ,
+  REPLY_COMMENT_SUCCESS,
+  REPLY_COMMENT_ERR,
+
+
 } = require ('../../constants').default
 
 async function handleLinking (event) {
@@ -86,5 +102,28 @@ function logOut() {
   }
 }
 
+function postComment (comment, postId) {
+  let endpoint = '/post/' + postId + '/comment'
+  return {
+    comment,
+    [CALL_API]: {
+      endpoint,
+      types: [POST_COMMENT_REQ, POST_COMMENT_SUCCESS, POST_COMMENT_ERR],
+      schema: Schemas.COMMENT_ARRAY,
+    }
+  }
+}
+
+function replyComment (comment, commentId) {
+  let endpoint = '/comment/' + commentId + '/reply'
+  return {
+    comment,
+    [CALL_API]: {
+      endpoint,
+      types: [REPLY_COMMENT_REQ, REPLY_COMMENT_SUCCESS, REPLY_COMMENT_ERR],
+      schema: Schemas.REPLY_ARRAY,
+    }
+  }
+}
 
 module.exports = {loginWithFacebook, loginWithInstagram, logOut, setUserData};

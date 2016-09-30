@@ -27,7 +27,7 @@ import PartsGrid from './PartsGrid'
 import PostsList from '../Posts/PostListView'
 import {VRImage} from '../cardboard'
 
-import {Styles, TuningBySpecStyles, SliderStyles} from '../styles'
+import {TuningBySpecStyles, General, ListingStyles, Specs, Titles} from '../styles'
 const specIdSelector = (state) => (state.stockCar.selectedSpecId)
 const specDetailsSelector = (state) => (state.entities.specDetails)
 const specDetailsPagination = (state) => (state.pagination.specDetailsPagination)
@@ -95,8 +95,8 @@ class TuningBySpec extends Component {
     if (specsPagination.isFetching || !specsInfo) return (<FullScreenLoadingView/>)
     else {
       const leftItem = {title: 'Back', onPress: ()=> {Actions.pop ()}}
-          , headerComponent = (<F8Header foreground="light" leftItem={leftItem}/>)
           , {make, model, submodel, specId, tuning, specs, posts} = specsInfo
+          , headerContent = (<F8Header title={(model + ' ' + submodel).toUpperCase()} foreground="dark" style={General.headerStyle} leftItem={leftItem}/>)
 
       let {
             cylinders, compressor, configuration,
@@ -108,47 +108,49 @@ class TuningBySpec extends Component {
 
       let tuningcomponent = (specsInfo.tuning && specsInfo.tuning.length )?(
         <View>
-          <Heading3 style={SliderStyles.sliderTitle}>{"Tuning By Categories"}</Heading3>
+          <Heading3 style={Titles.buildSectionTitle}>{"Tuning By Categories"}</Heading3>
           <PartsGrid data={tuning} specId={specId}/>
-          <F8Button onPress={()=>{Actions.TuningPager({specId})}} type="secondary" caption="Search Tuning!" style={Styles.contactDealerButton}/>
+          <F8Button onPress={()=>{Actions.TuningPager({specId})}} type="secondary" caption="Search Tuning!" style={ListingStyles.contactDealerButton}/>
         </View>
       ): (<View/>)
         return (
+          <View style={{flex: 1}}>
           <ParallaxScrollView
             backgroundColor="black"
             contentBackgroundColor="white"
             backgroundSpeed={1}
             parallaxHeaderHeight={300}
-            renderFixedHeader={() => headerComponent}
+            renderStickyHeader={() => headerContent}
+            stickyHeaderHeight={64}
             renderForeground={()=>{
               return (<View style={{flex: 1, alignSelf: 'center', justifyContent: 'center'}}>
-                          <Heading1>{make}</Heading1>
-                          <Heading1>{model}</Heading1>
-                          <Heading1>{submodel}</Heading1>
+                          <Heading1>{make.toUpperCase()}</Heading1>
+                          <Heading1>{model.toUpperCase()}</Heading1>
+                          <Heading1>{submodel.toUpperCase()}</Heading1>
                      </View>)
 
             }}
             renderBackground={() => <VRImage style={TuningBySpecStyles.VRImageHolder}/>}>
             <View style={{flex: 1}}>
-            <Heading3 style={SliderStyles.sliderTitle}>{"Specs"}</Heading3>
+            <Heading3 style={Titles.buildSectionTitle}>{"Specs"}</Heading3>
             <View style={{padding: 16}}>
-            <Heading3 style={TuningBySpecStyles.subtitle}>{size.toFixed(1) + ` L ${configuration}-${cylinders} ${compressor}`}</Heading3>
-            <Heading3 style={TuningBySpecStyles.subtitle}>{`${transmissionSpeed} speed ${transmission}`}</Heading3>
-            <Heading3 style={TuningBySpecStyles.subtitle}>{`${drivenWheels}`}</Heading3>
+            <Heading3 style={Specs.subtitle}>{size.toFixed(1) + ` L ${configuration}-${cylinders} ${compressor}`.toUpperCase()}</Heading3>
+            <Heading3 style={Specs.subtitle}>{`${transmissionSpeed} speed ${transmission}`.toUpperCase()}</Heading3>
+            <Heading3 style={Specs.subtitle}>{`${drivenWheels}`.toUpperCase()}</Heading3>
             <MetricsGraph data={[{entries:dataArray}]}/>
             </View>
             {tuningcomponent}
             </View>
-            <Heading3 style={SliderStyles.sliderTitle}>{"Posts"}</Heading3>
+            <Heading3 style={Titles.buildSectionTitle}>{"Posts"}</Heading3>
             {
               posts.map ((post, idx)=>{
-                console.log (post)
-                if (post.labels.indexOf ('Build') > -1) return (<Build key={`pl-${idx}`} data={post}/>)
-                else return (<Post data={post} key={`pl-${idx}`}/>)
+                if (post.labels.indexOf ('Build') > -1) return (<Build key={`build-${idx}`} data={post}/>)
+                else return (<Post data={post} key={`post-${idx}`}/>)
               })
             }
-          <F8Button onPress={()=>{Actions.PostsBySpecId({specId})}} type="secondary" caption="View All Posts" style={Styles.contactDealerButton}/>
+          <F8Button onPress={()=>{Actions.PostsBySpecId({specId})}} type="secondary" caption="View All Posts" style={ListingStyles.contactDealerButton}/>
           </ParallaxScrollView>
+          </View>
         );
     }
   }

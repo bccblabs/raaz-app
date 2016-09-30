@@ -17,12 +17,10 @@ import {createSelector} from 'reselect'
 
 
 import Icon from 'react-native-vector-icons/Foundation';
-import {Heading1, Heading2, Heading3, Paragraph} from '../common/F8Text'
+import {Heading1, Heading3} from '../common/F8Text'
 import MetricsGraph from '../components/MetricsGraph'
-import {PostStyles, Styles, TuningBySpecStyles, FilterStyles, SliderStyles, FilterCardStyles} from '../styles'
+import {ListingStyles, Titles, General, FilterStyles, PartStyles} from '../styles'
 import numeral from 'numeral'
-import moment from 'moment'
-
 import F8Button from '../common/F8Button'
 import F8Header from '../common/F8Header'
 import FullScreenLoadingView from '../components/FullScreenLoadingView'
@@ -39,7 +37,6 @@ class BuildDetails extends Component {
       hasError: false,
       isLoading: true
     }
-
     this.fetchBuildDetails = this.fetchBuildDetails.bind (this)
   }
 
@@ -48,8 +45,6 @@ class BuildDetails extends Component {
       let {buildId} = this.state
         , data = await RequestUtils.fetchBuildDetails (buildId)
         , mediaDataSource = this.state.mediaDataSource.cloneWithPages (data.media)
-
-      console.log (data)
       this.setState ({
         hasError: false,
         isLoading: false,
@@ -57,7 +52,6 @@ class BuildDetails extends Component {
         mediaDataSource: mediaDataSource
       })
     } catch (err) {
-      console.log ('build details fetch err = ', err)
       this.setState ({hasError: true, isLoading: false})
     }
   }
@@ -83,7 +77,7 @@ class BuildDetails extends Component {
         foreground="dark"
         leftItem={leftItem}
         rightItem={rightItem}
-        style={FilterStyles.headerStyle}/>
+        style={General.headerStyle}/>
     )
     if (isLoading) {
       return (
@@ -113,31 +107,38 @@ class BuildDetails extends Component {
         listing
       } = this.state.data
       , dataArray = keys (partEffects).map((key)=>{return {name: key, value: partEffects[key]}})
+      , socialContent = (
+        <View style={{flexDirection:"row", justifyContent: 'flex-start'}}>
+        <F8Button style={{}} type="tertiary" caption="10 likes"/>
+        <F8Button style={{}} type="tertiary" caption="10 comments"/>
+        </View>
+      )
       , specsContent = dataArray && (<MetricsGraph data={[{entries: dataArray}]}/>)
       , installedParts = (
         <View>
+        {socialContent}
+        <Heading3 style={Titles.buildSectionTitle}>{"Specs"}</Heading3>
         {specsContent}
-        <Heading3 style={[SliderStyles.sliderTitle, {marginTop: 16}]}>{"Parts Installed"}</Heading3>
+        <Heading3 style={Titles.buildSectionTitle}>{"Parts Installed"}</Heading3>
         <ScrollView
           showsHorizontalScrollIndicator={false}
           horizontal={true}
-          style={[SliderStyles.horizontalScrollContainer, {backgroundColor: '#FFF0F5', margin: 8}]}
-          contentContainerStyle={[Styles.scrollContainer, {paddingHorizontal: 4, paddingVertical: 0}]}>
+          pagingEnabled={true}
+          style={PartStyles.partsScrollStyle}>
           {
             parts.map ((data, cidx)=> {
-              let {name, medium, partId} = data,
+              let {name, medium, partId, recCnt} = data,
                   passProps = Object.assign ({}, data, {specId})
               return (
-                <View style={{height:200, width: 200, margin: 8, backgroundColor: 'white'}}>
+                <View style={PartStyles.partContainer}>
                 <TouchableWithoutFeedback key={`pg-${cidx}`} onPress={()=>{Actions.PartDetails ({data: passProps})}}>
-                  <View style={FilterCardStyles.containerStyle}>
-                    <Image
-                      source={{uri: medium[0]}}
-                      style={{height:200, width: 200, resizeMode: 'contain'}}>
-                    </Image>
-                  </View>
+                  <Image
+                    source={{uri: medium[0]}}
+                    style={PartStyles.partImage}>
+                  </Image>
                 </TouchableWithoutFeedback>
-                <Text style={FilterCardStyles.partTextStyle}>{name}</Text>
+                <Text style={PartStyles.partTitle}>{name}</Text>
+                <Text style={PartStyles.rating}>{recCnt?recCnt:'n/a' + ' Recommendations'}</Text>
                 </View>
               )
             })
@@ -148,18 +149,18 @@ class BuildDetails extends Component {
       return (
         <View style={{flex: 1}}>
           {headerContent}
-          <ScrollView style={Styles.topLevelScrollStyle} containerStyle={Styles.topScrollContainerStyle}>
-          <Heading1 style={{padding:16,color: 'black', justifyContent: 'flex-start'}}>{name}</Heading1>
+          <ScrollView style={General.topLevelScrollStyle}>
+          <Heading1 style={Titles.buildTitle}>{name}</Heading1>
             {listing && (
-              <View style={PostStyles.listingSection}>
-                <Icon name="price-tag" size={30} color={"red"}/>
-                <Text style={PostStyles.price}>{`$${numeral(listing.amount).format ('0,0')} ${listing.currency}`}</Text>
+              <View style={ListingStyles.listingSection}>
+                <Icon name="price-tag" size={24} color={"red"}/>
+                <Text style={ListingStyles.priceLargeTitle}>{`$${numeral(listing.amount).format ('0,0')} ${listing.currency}`}</Text>
               </View>
             )}
             <ViewPager
               renderPageIndicator={()=>(<View/>)}
               renderPage={(media)=>{
-                return (<Image source={{uri:media}} style={Styles.largeImageStyle}/>)
+                return (<Image source={{uri:media}} style={General.largeImageStyle}/>)
               }}
               dataSource={this.state.mediaDataSource}/>
           {installedParts}
@@ -167,7 +168,7 @@ class BuildDetails extends Component {
             type="secondary"
             caption="Inquire"
             onPress={()=>{Actions.Order ({...this.props.data})}}
-            style={Styles.contactDealerButton}/>
+            style={ListingStyles.contactDealerButton}/>
           </ScrollView>
         </View>
       )

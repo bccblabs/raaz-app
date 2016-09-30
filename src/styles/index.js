@@ -2,6 +2,147 @@
 import React, {Dimensions, StyleSheet, Platform} from 'react-native'
 import F8Colors from '../common/F8Colors'
 const window = Dimensions.get ('window')
+
+export const General = StyleSheet.create ({
+  headerStyle: {
+    backgroundColor: 'white'
+  },
+  largeImageStyle: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 320,
+    width: 240,
+    resizeMode: 'contain',
+  },
+  topLevelScrollStyle: {
+    height: window.height,
+    width: window.width,
+  },
+
+})
+
+export const Specs = StyleSheet.create ({
+  container: {
+    flex: 1,
+    marginTop: 4
+  },
+  item: {
+    flexDirection: 'column',
+    marginBottom: 4
+  },
+  subtitle: {
+    flex: 1,
+    fontSize: 10,
+    color: 'black',
+    padding: 8,
+    paddingTop: 2,
+    paddingBottom: 0,
+  },
+  data: {
+    flex: 2,
+    flexDirection: 'row'
+  },
+  bar: {
+    alignSelf: 'center',
+    borderRadius: 5,
+    height: 10,
+    marginRight: 5,
+    marginLeft: 10,
+  }
+})
+
+export const Titles = StyleSheet.create ({
+  buildSectionTitle: {
+    padding: 10,
+    fontWeight:'bold',
+    color: 'black',
+    alignSelf: 'flex-start',
+    fontSize: 12,
+    letterSpacing: 0.6,
+    marginTop: 32,
+    textDecorationLine: 'underline'
+  },
+  buildTitle: {
+    padding: 16,
+    color: 'black',
+    justifyContent: 'flex-start'
+  },
+})
+
+export const ListingStyles = StyleSheet.create ({
+  priceLargeTitle: {
+    fontSize: 12,
+    fontWeight: '900',
+    padding: 8,
+    color: 'black',
+  },
+  listingSection: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    paddingHorizontal: 8,
+  },
+  contactDealerButton: {
+    borderTopWidth: 1,
+    borderTopColor: '#eee',
+    backgroundColor: 'blue',
+    alignSelf: 'center',
+    flex: 0,
+    height: 50,
+    width: window.width,
+    margin: 50,
+  },
+})
+
+export const PartStyles = StyleSheet.create ({
+  partsScrollStyle: {
+    height: 208,
+    width: window.width,
+    backgroundColor: '#FFF0F5'
+  },
+  partContainer: {
+    height: 200,
+    width: 200,
+    margin: 4,
+    backgroundColor: 'white'
+  },
+  partImage: {
+    height: 200,
+    width: 200,
+    resizeMode: 'contain'
+  },
+  partTitle: {
+    padding: 8,
+    flex: -1,
+    position: 'absolute',
+    top: 0,
+    color: 'black',
+    fontSize: 12,
+    backgroundColor: 'white',
+    opacity: 0.9,
+    fontWeight: '800',
+  },
+  rating: {
+    flex: -1,
+    position: 'absolute',
+    bottom: 8,
+    left: 6,
+    color: 'black',
+    fontSize: 10,
+    backgroundColor: 'white',
+    opacity: 1,
+    fontWeight: '800',
+  },
+  partSectionTitle: {
+    margin: 10,
+    fontWeight:'bold',
+    color: 'black',
+    alignSelf: 'flex-start',
+    fontSize: 12,
+    letterSpacing: 1,
+  }
+})
+
 export const Styles = StyleSheet.create ({
   button: {
     borderRadius: 4,
@@ -16,17 +157,6 @@ export const Styles = StyleSheet.create ({
     padding: 30,
     paddingTop: 75,
     alignItems: 'center',
-  },
-
-  contactDealerButton: {
-    borderTopWidth: 1,
-    borderTopColor: '#eee',
-    backgroundColor: 'orange',
-    alignSelf: 'center',
-    flex: 0,
-    height: 50,
-    width: window.width,
-    margin: 16,
   },
 
   loginButton: {
@@ -210,9 +340,9 @@ export const RecallColorsArray = [
 ]
 export const GraphColorsArray = [
   {backgroundColor: '#4D98E4'},
-  // {backgroundColor: '#59838B'},
+  {backgroundColor: '#59838B'},
   {backgroundColor: '#418E50'},
-  // {backgroundColor: '#7B7FEC'},
+  {backgroundColor: '#7B7FEC'},
 ]
 export const ParallaxScrollStyles = {
   STICKY_HEADER_HEIGHT: 60,
@@ -257,9 +387,6 @@ export const FilterStyles = StyleSheet.create({
     backgroundColor: '#EFEFF4',
     paddingBottom: 20,
     flex: 1
-  },
-  headerStyle: {
-    backgroundColor: 'transparent'
   },
   optionsContainer: {
     marginLeft: 16,
@@ -377,21 +504,24 @@ export const NewPostStyles = StyleSheet.create ({
   largeBlockInput: {
     margin: 8,
     width: window.width,
-    height: window.height/8
+    height: window.height/8,
+    fontSize: 32,
+
   },
   singleLineBlockInput: {
     margin: 8,
     width: window.width,
-    height: window.height/32
+    height: window.height/16,
+    fontSize: 18,
+    fontWeight: '800'
   },
   headerStyle: {
     backgroundColor: 'black'
   },
   bottomBar: {
     backgroundColor: 'transparent',
-    // position: 'absolute',
-    // bottom: 64,
-    // height: 100,
+    position: 'absolute',
+    bottom: 0,
     width: window.width,
   },
   divTitleStyle: {
@@ -402,20 +532,14 @@ export const NewPostStyles = StyleSheet.create ({
     fontSize: 12,
     fontFamily: 'FontAwesome'
   },
-  addMediaButtonStyle: {
+  bottomButtonStyle: {
+    borderTopWidth: 1,
+    borderTopColor: '#eee',
+    backgroundColor: 'white',
     alignSelf: 'center',
-    width: 120,
-    padding: 10,
-  },
-  postTypeButtonStyle: {
-    alignSelf: 'center',
-    width: 156,
-    padding: 10,
-  },
-  actionButtonStyle: {
-    borderColor: 'black',
-    width: 120,
-    padding: 10,
+    flex: 0,
+    height: 50,
+    width: window.width,
   }
 })
 export const PostScreenStyles = StyleSheet.create ({
@@ -455,11 +579,6 @@ export const EmptyViewStyles = StyleSheet.create ({
 export const ScrollColorsNum = ScrollColorsArray.length
 export const RecallColorsNum = RecallColorsArray.length
 export const PostStyles = StyleSheet.create({
-  listingSection: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    paddingHorizontal: 8,
-  },
   linearGradient: {
     flex: 1,
     paddingLeft: 15,
@@ -578,12 +697,7 @@ export const PostStyles = StyleSheet.create({
     marginHorizontal: 8,
     resizeMode: 'contain'
   },
-  price: {
-    fontSize: 14,
-    fontWeight: '700',
-    padding: 8,
-    color: 'purple',
-  }
+
 })
 export const CarmeraStyles = StyleSheet.create ({
   text: {
@@ -610,14 +724,4 @@ export const TuningBySpecStyles = StyleSheet.create ({
     height: 300,
     alignSelf: 'center'
   },
-  subtitle: {
-      flex: 1,
-      fontSize: 10,
-      color: 'black',
-      padding: 8,
-      paddingTop: 2,
-      paddingBottom: 0,
-      letterSpacing: 0.7,
-  },
-
 })
