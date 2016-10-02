@@ -12,17 +12,17 @@ import { FilterStyles } from '../styles'
 import keys from 'lodash/keys'
 import union from 'lodash/union'
 import F8Header from '../common/F8Header'
-import FullScreenLoadingView from './FullScreenLoadingView'
+import FullScreenLoadingView from '../components/FullScreenLoadingView'
 import MultipleChoice from 'react-native-multiple-choice'
 
 import { Map } from 'immutable'
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
-import { fetchMakes, fetchModels, setMake } from '../reducers/stockCar/filterActions'
-
+import { fetchMakes, fetchModels} from '../reducers/stockCar/filterActions'
+import {setMake} from '../reducers/newpost/newpostActions'
 const mapStateToProps = (state) => {
   return {
-    selectedMake: state.stockCar.selectedMake,
+    selectedMake: state.newpost.pickedMake,
     makes: keys (state.entities.makes).sort(),
   }
 }
@@ -66,7 +66,6 @@ class MakesList extends Component {
 
   render () {
     let {makes, selectedMake, isFetching} = this.state
-      , {setMake} = this.props
     const leftItem = {
             title: 'Cancel',
             onPress: ()=>Actions.pop()
@@ -82,9 +81,9 @@ class MakesList extends Component {
                 renderIndicator={(option)=>{return (<View/>)}}
                 onSelection={(option)=>{
                   this.props.fetchModels (option)
-                  setMake (option)
+                  this.props.setMake (option)
                   this.setState ({selectedMake: [option]})
-                  Actions.Models()
+                  Actions.PickModels()
                 }}/>
             </ScrollView>
           )

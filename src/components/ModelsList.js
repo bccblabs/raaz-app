@@ -20,7 +20,7 @@ import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
 
 import {createSelector} from 'reselect'
-import {fetchSubmodels} from '../reducers/stockCar/filterActions'
+import {fetchSubmodels, setModel} from '../reducers/stockCar/filterActions'
 
 const mapStateToProps = (state) => {
   return {
@@ -32,8 +32,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchSubmodels: (model) => {
-      dispatch (fetchSubmodels (model))
+    fetchSubmodels: (make, model) => {
+      dispatch (fetchSubmodels (make, model))
+    },
+    setModel: (model) => {
+      dispatch (setModel (model))
     }
   }
 }
@@ -63,7 +66,7 @@ class ModelsList extends Component {
 
   render () {
     let {models, selectedMake, selectedModel, isFetching} = this.state,
-        {fetchSubmodels} = this.props
+        {fetchSubmodels, setModel} = this.props
     const leftItem = {
             title: 'Makes',
             onPress: ()=>Actions.pop()
@@ -78,7 +81,8 @@ class ModelsList extends Component {
                 renderSeparator={(option)=>{return (<View/>)}}
                 renderIndicator={(option)=>{return (<View/>)}}
                 onSelection={(option)=>{
-                  fetchSubmodels (option)
+                  setModel (option)
+                  fetchSubmodels (selectedMake, option)
                   this.setState ({selectedModel: [option]})
                   Actions.Submodels()
                 }}/>

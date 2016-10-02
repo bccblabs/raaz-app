@@ -23,10 +23,19 @@ import Settings from './Profile/Settings'
 import Tuning from './tuning'
 import PartDetails from './tuning/PartDetails'
 import BuildDetails from './tuning/BuildDetails'
+
 import MakesList from './components/MakesList'
 import ModelsList from './components/ModelsList'
 import SubmodelsList from './components/SubmodelsList'
 import SpecsList from './components/SpecsList'
+
+import PickMakes from './Posts/PickMakes'
+import PickModels from './Posts/PickModels'
+import PickSubmodels from './Posts/PickSubmodels'
+import PickSpecs from './Posts/PickSpecs'
+
+
+
 import Notifications from './Notifications'
 import TuningBySpec from './TuningBySpec'
 import TuningPager from './tuning/TuningPager'
@@ -94,10 +103,19 @@ class Viicles extends Component {
 
             <Route name="Profile" component={Profile} key="profile" title="Profile" schema="default" hideNavBar={true} />
             <Route name="Settings" component={Settings} title="Settings" hideNavBar={true} schema="default"/>
+
             <Route name="Makes" component={MakesList} title="Choose Makes" schema="floatFromRight" hideNavBar={true}/>
             <Route name="Models" component={ModelsList} title="Choose Models" schema="floatFromRight" hideNavBar={true}/>
             <Route name="Submodels" component={SubmodelsList} title="Choose Trims" schema="floatFromRight" hideNavBar={true}/>
             <Route name="Specs" component={SpecsList} title="Choose Specs" schema="floatFromRight" hideNavBar={true}/>
+
+            <Route name="PickMakes" component={PickMakes} title="Choose Makes" schema="floatFromRight" hideNavBar={true}/>
+            <Route name="PickModels" component={PickModels} title="Choose Models" schema="floatFromRight" hideNavBar={true}/>
+            <Route name="PickSubmodels" component={PickSubmodels} title="Choose Trims" schema="floatFromRight" hideNavBar={true}/>
+            <Route name="PickSpecs" component={PickSpecs} title="Choose Specs" schema="floatFromRight" hideNavBar={true}/>
+
+
+
             <Route name="BuildDetails" component={BuildDetails} schema="default" hideNavBar={true}/>
             <Route name="PartDetails" component={PartDetails} schema="default" hideNavBar={true}/>
             <Route name="Order" component={Order} schema="default" hideNavBar={true}/>

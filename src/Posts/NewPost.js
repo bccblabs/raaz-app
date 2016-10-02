@@ -23,9 +23,12 @@ import { Text, Paragraph } from '../common/F8Text'
 import { NewPostStyles, General, ListingStyles, PostStyles } from '../styles'
 import {ImageOptions, VideoOptions} from '../constants/pickerOptions'
 
+import {newpostTaggedCars} from '../selectors/newpost'
+
 const mapStateToProps = (state) => {
   return {
-    profileData: state.user.profileData
+    profileData: state.user.profileData,
+    taggedCars: newpostTaggedCars (state)
   }
 }
 
@@ -44,10 +47,7 @@ class NewPost extends Component {
       images: [],
       videos: [],
 
-      selectedMake: null,
-      selectedModel: null,
-      selectedSubmodel: null,
-      selectedSpecId: null,
+      taggedCars: props.taggedCars,
 
       parts: [],
       taggedUsers: [],
@@ -106,7 +106,6 @@ class NewPost extends Component {
 
     return (
       <View style={{paddingTop: 20, paddingBottom: 20}}>
-      <F8Button icon={require ('../common/img/car.png')} onPress={()=>this.pickVideo('panorama')} type="tertiary" caption="Tag Your Car" style={[NewPostStyles.bottomButtonStyle, {borderWidth: 1, borderColor: '#eee'}]}/>
       <View style={PostStyles.header}>
         <Image source={{uri: picture}} style={PostStyles.userPhotoStyle}/>
           <TextInput
@@ -223,8 +222,9 @@ class NewPost extends Component {
         {this.renderVideosContainer()}
 
         <View style={NewPostStyles.bottomBar}>
-          <F8Button icon={require ('../common/img/tuning.png')} onPress={()=>this.pickVideo('panorama')} type="tertiary" caption="Tag Tuned Parts" style={NewPostStyles.bottomButtonStyle}/>
-          <F8Button icon={require ('../common/img/listing.png')} onPress={()=>this.pickVideo('panorama')} type="tertiary" caption="Post As Listing" style={NewPostStyles.bottomButtonStyle}/>
+          <F8Button icon={require ('../common/img/car.png')} onPress={Actions.PickMakes} type="tertiary" caption="Tag Your Car" style={[NewPostStyles.bottomButtonStyle, {borderWidth: 1, borderColor: '#eee'}]}/>
+          <F8Button icon={require ('../common/img/tuning.png')} onPress={Actions.TagTuning} type="tertiary" caption="Tag Tuned Parts" style={NewPostStyles.bottomButtonStyle}/>
+          <F8Button icon={require ('../common/img/listing.png')} onPress={Actions.TagListing} type="tertiary" caption="Post As Listing" style={NewPostStyles.bottomButtonStyle}/>
           <F8Button icon={require ('../common/img/photo.png')} onPress={()=>this.pickImage('normal')} type="tertiary" caption="Add Photos" style={NewPostStyles.bottomButtonStyle}/>
           <F8Button icon={require ('../common/img/panoimage.png')} onPress={()=>this.pickImage('panorama')} type="tertiary" caption="Add 360 Photos" style={NewPostStyles.bottomButtonStyle}/>
           <F8Button icon={require ('../common/img/video.png')} onPress={()=>this.pickVideo('normal')} type="tertiary" caption="Add Videos" style={NewPostStyles.bottomButtonStyle}/>

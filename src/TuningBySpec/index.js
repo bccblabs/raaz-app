@@ -135,9 +135,9 @@ class TuningBySpec extends Component {
             <Heading3 style={Titles.buildSectionTitle}>{"Specs"}</Heading3>
             <View style={{padding: 16}}>
             <Heading3 style={Specs.subtitle}>{size.toFixed(1) + ` L ${configuration}-${cylinders} ${compressor}`.toUpperCase()}</Heading3>
+            <MetricsGraph data={[{entries:dataArray}]}/>
             <Heading3 style={Specs.subtitle}>{`${transmissionSpeed} speed ${transmission}`.toUpperCase()}</Heading3>
             <Heading3 style={Specs.subtitle}>{`${drivenWheels}`.toUpperCase()}</Heading3>
-            <MetricsGraph data={[{entries:dataArray}]}/>
             </View>
             {tuningcomponent}
             </View>

@@ -16,6 +16,7 @@ import stockCarFilterInitialState from './reducers/stockCar/filterInitialState'
 import tuningFilterInitialState from './reducers/tuning/filterInitialState'
 import userInitialState from './reducers/user/userInitialState'
 import postInitialState from './reducers/posts/postInitialState'
+import newpostInitialState from './reducers/newpost/newpostInitialState'
 
 import Raaz from './Raaz'
 

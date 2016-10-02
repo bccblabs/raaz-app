@@ -73,7 +73,7 @@ export function fetchMakes() {
   }
 }
 
-export function fetchModelsFromApi (makeName) {
+export function fetchModels (makeName) {
   return {
     [CALL_API]: {
       types: [MODEL_REQUEST, MODEL_SUCCESS, MODEL_ERROR],
@@ -83,14 +83,9 @@ export function fetchModelsFromApi (makeName) {
   }
 }
 
-export function fetchModels (makeName) {
-  return (dispatch, getState) => {
-    dispatch (setMake (makeName))
-    dispatch (fetchModelsFromApi (makeName))
-  }
-}
 
-export function fetchSubmodelsFromApi (makeName, modelName) {
+export function fetchSubmodels (makeName, modelName) {
+  console.log (makeName, modelName, 'fetch')
   return {
     [CALL_API]: {
       types: [SUBMODEL_REQUEST, SUBMODEL_SUCCESS, SUBMODEL_ERROR],
@@ -100,30 +95,14 @@ export function fetchSubmodelsFromApi (makeName, modelName) {
   }
 }
 
-export function fetchSubmodels (modelName) {
-  return (dispatch, getState) => {
-    let make = getState().stockCar.selectedMake
-    dispatch (setModel (modelName))
-    dispatch (fetchSubmodelsFromApi (make, modelName))
-  }
-}
 
-export function fetchSpecsFromApi (makeName, modelName, submodelName) {
+export function fetchSpecs (makeName, modelName, submodelName) {
   return {
     [CALL_API]: {
       types: [SPECS_REQUEST, SPECS_SUCCESS, SPECS_ERROR],
       endpoint: '/car/makes/' + makeName + '/models/' + modelName + '/submodels/' + submodelName,
       schema: Schemas.SPEC_ARRAY,
     }
-  }
-}
-
-export function fetchSpecs (submodelName) {
-  return (dispatch, getState) => {
-    let make = getState().stockCar.selectedMake,
-        model = getState().stockCar.selectedModel
-    dispatch (setSubmodel (submodelName))
-    dispatch (fetchSpecsFromApi (make, model, submodelName))
   }
 }
 

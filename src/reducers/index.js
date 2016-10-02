@@ -7,6 +7,8 @@ import paginate from './paginate/paginateReducer'
 import history from './history/historyReducer'
 import posts from './posts/postsReducer'
 import user from './user/userReducer'
+import newpost from './newpost/newpostReducer'
+
 import assign from 'lodash/assign'
 
 import {combineReducers} from 'redux'
@@ -65,7 +67,7 @@ let initState = {
   events: {},
   posts: {},
   specsDetails: {},
-
+  newpost: {},
   postTags: {},
   tuningTags: {},
   eventTags: {},
@@ -147,6 +149,7 @@ const rootReducer = combineReducers ({
   stockCar,
   tuning,
   posts,
+  newpost,
 })
 
 

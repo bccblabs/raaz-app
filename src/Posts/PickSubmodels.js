@@ -12,21 +12,21 @@ import { FilterStyles } from '../styles'
 import keys from 'lodash/keys'
 
 import F8Header from '../common/F8Header'
-import FullScreenLoadingView from './FullScreenLoadingView'
+import FullScreenLoadingView from '../components/FullScreenLoadingView'
 import MultipleChoice from 'react-native-multiple-choice'
 
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
 
-import { fetchSpecs, setSubmodel } from '../reducers/stockCar/filterActions'
-
+import { fetchSpecs } from '../reducers/stockCar/filterActions'
+import {setSubmodel} from '../reducers/newpost/newpostActions'
 
 const mapStateToProps = (state) => {
   return {
     submodels: keys(state.entities.submodels).sort(),
-    selectedMake: state.stockCar.selectedMake,
-    selectedModel: state.stockCar.selectedModel,
-    selectedSubmodel: state.stockCar.selectedSubmodel,
+    selectedMake: state.newpost.pickedMake,
+    selectedModel: state.newpost.pickedModel,
+    selectedSubmodel: state.newpost.pickedSubmodel,
   }
 }
 
@@ -48,7 +48,7 @@ class SubmodelsList extends Component {
       submodels: props.submodels,
       selectedMake: props.selectedMake,
       selectedModel: props.selectedModel,
-      selectedSubmodel: props.selectedMake,
+      selectedSubmodel: props.selectedSubmodel,
       isFetching: true,
     }
   }
@@ -86,7 +86,7 @@ class SubmodelsList extends Component {
                   fetchSpecs (selectedMake, selectedModel, option)
                   setSubmodel (option)
                   this.setState ({selectedSubmodel: [option]})
-                  Actions.Specs()
+                  Actions.PickSpecs()
                 }}/>
             </ScrollView>
           )

@@ -11,64 +11,65 @@ import { FilterStyles } from '../styles'
 
 import keys from 'lodash/keys'
 import union from 'lodash/union'
+
 import F8Header from '../common/F8Header'
-import FullScreenLoadingView from './FullScreenLoadingView'
+import FullScreenLoadingView from '../components/FullScreenLoadingView'
 import MultipleChoice from 'react-native-multiple-choice'
 
-import { Map } from 'immutable'
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
-import { fetchMakes, fetchModels, setMake } from '../reducers/stockCar/filterActions'
+
+import {createSelector} from 'reselect'
+import {fetchSubmodels} from '../reducers/stockCar/filterActions'
+import {setModel} from '../reducers/newpost/newpostActions'
 
 const mapStateToProps = (state) => {
   return {
-    selectedMake: state.stockCar.selectedMake,
-    makes: keys (state.entities.makes).sort(),
+    models: keys(state.entities.models).sort(),
+    selectedMake: state.newpost.pickedMake,
+    selectedModel: state.newpost.pickedModel,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchMakes: () => {
-      dispatch (fetchMakes())
+    fetchSubmodels: (make, model) => {
+      dispatch (fetchSubmodels (make, model))
     },
-    fetchModels: (makeName) => {
-      dispatch (fetchModels(makeName))
-    },
-    setMake: (makeName) => {
-      dispatch (setMake (makeName))
+    setModel: (model) => {
+      dispatch (setModel (model))
     }
   }
 }
 
-
-class MakesList extends Component {
+class ModelsList extends Component {
   constructor (props) {
     super (props)
     this.state = {
+      models: props.models,
+      selectedModel: props.selectedModel,
       selectedMake: props.selectedMake,
-      makes: this.props.makes,
       isFetching: true,
     }
   }
 
   componentWillMount () {
-    let {makes, selectedMake, fetchMakes} = this.props
-    this.setState ({makes, selectedMake})
-    fetchMakes()
+    let {models, selectedMake, selectedModel, fetchSubmodels} = this.props
+    this.setState ({models, selectedMake, selectedModel, isFetching: true})
   }
 
+
   componentWillReceiveProps (nextProps) {
-    let {makes, selectedMake} = nextProps,
-        isFetching = makes.length?false:true
-    this.setState ({makes, selectedMake, isFetching})
+    let {models, selectedModel, selectedMake} = nextProps,
+        isFetching = models.length?false:true
+    this.setState ({models, selectedModel, selectedMake, isFetching})
   }
 
   render () {
-    let {makes, selectedMake, isFetching} = this.state
-      , {setMake} = this.props
+    let {models, selectedMake, selectedModel, isFetching} = this.state,
+        {fetchSubmodels, setModel} = this.props
     const leftItem = {
-            title: 'Cancel',
+            title: 'Makes',
             onPress: ()=>Actions.pop()
           },
           content = isFetching?(<FullScreenLoadingView/>):(
@@ -76,15 +77,15 @@ class MakesList extends Component {
               <MultipleChoice
                 maxSelectedOptions={1}
                 renderText={(option)=> {return (<Text style={FilterStyles.multipleChoiceText}>{option.toUpperCase()}</Text>)}}
-                options={this.state.makes}
-                selectedOptions={[this.state.selectedMake]}
+                options={this.state.models}
+                selectedOptions={[this.state.selectedModel]}
                 renderSeparator={(option)=>{return (<View/>)}}
                 renderIndicator={(option)=>{return (<View/>)}}
                 onSelection={(option)=>{
-                  this.props.fetchModels (option)
-                  setMake (option)
-                  this.setState ({selectedMake: [option]})
-                  Actions.Models()
+                  setModel (option)
+                  fetchSubmodels (selectedMake, option)
+                  this.setState ({selectedModel: [option]})
+                  Actions.PickSubmodels()
                 }}/>
             </ScrollView>
           )
@@ -93,7 +94,7 @@ class MakesList extends Component {
       <View style={FilterStyles.container}>
         <F8Header
           foreground="dark"
-          title="Makes"
+          title={this.state.selectedMake.toUpperCase()}
           leftItem={leftItem}
           style={FilterStyles.headerStyle}/>
           {content}
@@ -102,4 +103,4 @@ class MakesList extends Component {
   }
 }
 
-export default connect (mapStateToProps, mapDispatchToProps) (MakesList)
+export default connect (mapStateToProps, mapDispatchToProps) (ModelsList)

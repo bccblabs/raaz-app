@@ -37,6 +37,13 @@ export default keyMirror ({
   LIKE_USER_POST: null,
   VIEW_USER_POST: null,
 
+  PICK_MAKE: null,
+  PICK_MODEL: null,
+  PICK_SUBMODEL: null,
+  PICK_SPECID: null,
+
+  ADD_TO_TAGGED_CARS: null,
+  REMOVE_FROM_TAGGED_CARS: null,
 
   /* Events */
   EVENTS_REQUEST: null,
