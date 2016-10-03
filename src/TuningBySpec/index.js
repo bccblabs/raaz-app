@@ -11,8 +11,7 @@ import React, {
 import {Actions} from 'react-native-router-flux'
 import {connect} from 'react-redux'
 import {createSelector} from 'reselect'
-import Post from '../Posts/Post'
-import Build from '../tuning/Build'
+import PostCard from '../Posts/PostCard'
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
 import {fetchCarDetails} from '../reducers/tuning/filterActions'
@@ -27,7 +26,7 @@ import PartsGrid from './PartsGrid'
 import PostsList from '../Posts/PostListView'
 import {VRImage} from '../cardboard'
 
-import {TuningBySpecStyles, General, ListingStyles, Specs, Titles} from '../styles'
+import {TuningBySpecStyles, General, ListingStyles, Specs, Titles, PartStyles} from '../styles'
 const specIdSelector = (state) => (state.stockCar.selectedSpecId)
 const specDetailsSelector = (state) => (state.entities.specDetails)
 const specDetailsPagination = (state) => (state.pagination.specDetailsPagination)
@@ -107,12 +106,23 @@ class TuningBySpec extends Component {
       const dataArray = graphKeys.map ((key)=>{return {name: key, value: specs[key]}})
 
       let tuningcomponent = (specsInfo.tuning && specsInfo.tuning.length )?(
-        <View>
-          <Heading3 style={Titles.buildSectionTitle}>{"Tuning By Categories"}</Heading3>
-          <PartsGrid data={tuning} specId={specId}/>
-          <F8Button onPress={()=>{Actions.TuningPager({specId})}} type="secondary" caption="Search Tuning!" style={ListingStyles.contactDealerButton}/>
-        </View>
-      ): (<View/>)
+                              <View>
+                                <Heading3 style={Titles.buildSectionTitle}>{"Tuning By Categories"}</Heading3>
+                                <PartsGrid data={tuning} specId={specId}/>
+                                <F8Button onPress={()=>{Actions.TuningPager({specId})}} type="secondary" caption="Search Tuning!" style={ListingStyles.contactDealerButton}/>
+                              </View>
+                            ): (<View/>)
+        , postsContent = posts?(
+          <View>
+          <Heading3 style={Titles.buildSectionTitle}>{"Posts"}</Heading3>
+            <ScrollView
+              style={PartStyles.partsScrollStyle}>
+              {posts.map ((post, idx)=>(<PostCard key={`pc-${idx}`} data={post}/>))}
+            </ScrollView>
+          <F8Button onPress={()=>{Actions.PostsBySpecId({specId})}} type="secondary" caption="View All Posts" style={ListingStyles.contactDealerButton}/>
+          </View>
+        ):(<View/>)
+
         return (
           <View style={{flex: 1}}>
           <ParallaxScrollView
@@ -139,27 +149,14 @@ class TuningBySpec extends Component {
             <Heading3 style={Specs.subtitle}>{`${transmissionSpeed} speed ${transmission}`.toUpperCase()}</Heading3>
             <Heading3 style={Specs.subtitle}>{`${drivenWheels}`.toUpperCase()}</Heading3>
             </View>
+            {postsContent}
             {tuningcomponent}
             </View>
-            <Heading3 style={Titles.buildSectionTitle}>{"Posts"}</Heading3>
-            {
-              posts.map ((post, idx)=>{
-                if (post.labels.indexOf ('Build') > -1) return (<Build key={`build-${idx}`} data={post}/>)
-                else return (<Post data={post} key={`post-${idx}`}/>)
-              })
-            }
-          <F8Button onPress={()=>{Actions.PostsBySpecId({specId})}} type="secondary" caption="View All Posts" style={ListingStyles.contactDealerButton}/>
           </ParallaxScrollView>
           </View>
         );
     }
   }
-  renderRow (postData, rowId) {
-    return (
-      <Post data={postData}/>
-    )
-  }
-
 }
 
 export default connect (mapStateToProps, mapDispatchToProps) (TuningBySpec)

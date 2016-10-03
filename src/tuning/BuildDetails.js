@@ -24,6 +24,8 @@ import numeral from 'numeral'
 import F8Button from '../common/F8Button'
 import F8Header from '../common/F8Header'
 import FullScreenLoadingView from '../components/FullScreenLoadingView'
+import LikeBtn from '../common/LikeBtn'
+import CommentBtn from '../common/CommentBtn'
 
 var ViewPager = require('react-native-viewpager');
 
@@ -104,13 +106,15 @@ class BuildDetails extends Component {
         dealer,
         specId,
         partEffects,
-        listing
+        listing,
+        likes,
+        comments,
       } = this.state.data
       , dataArray = keys (partEffects).map((key)=>{return {name: key, value: partEffects[key]}})
       , socialContent = (
         <View style={{flexDirection:"row", justifyContent: 'flex-start'}}>
-        <F8Button style={{}} type="tertiary" caption="10 likes"/>
-        <F8Button style={{}} type="tertiary" caption="10 comments"/>
+          <LikeBtn postId={buildId} numlikes={likes.length}/>
+          <CommentBtn postId={buildId} commentsCnt={comments}/>
         </View>
       )
       , specsContent = dataArray && (<MetricsGraph data={[{entries: dataArray}]}/>)

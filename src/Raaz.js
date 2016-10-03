@@ -33,7 +33,7 @@ import PickMakes from './Posts/PickMakes'
 import PickModels from './Posts/PickModels'
 import PickSubmodels from './Posts/PickSubmodels'
 import PickSpecs from './Posts/PickSpecs'
-
+import TagTuning from './search/TagTuning'
 
 
 import Notifications from './Notifications'
@@ -113,7 +113,7 @@ class Viicles extends Component {
             <Route name="PickModels" component={PickModels} title="Choose Models" schema="floatFromRight" hideNavBar={true}/>
             <Route name="PickSubmodels" component={PickSubmodels} title="Choose Trims" schema="floatFromRight" hideNavBar={true}/>
             <Route name="PickSpecs" component={PickSpecs} title="Choose Specs" schema="floatFromRight" hideNavBar={true}/>
-
+            <Route name="TagTuning" component={TagTuning} title="Tag Parts" schema="floatFromRight" hideNavBar={true}/>
 
 
             <Route name="BuildDetails" component={BuildDetails} schema="default" hideNavBar={true}/>

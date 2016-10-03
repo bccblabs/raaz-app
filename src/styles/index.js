@@ -90,7 +90,6 @@ export const ListingStyles = StyleSheet.create ({
     flex: 0,
     height: 50,
     width: window.width,
-    margin: 50,
   },
 })
 
@@ -496,6 +495,10 @@ export const FilterCardStyles = StyleSheet.create ({
 
 })
 export const NewPostStyles = StyleSheet.create ({
+  taggedCarsScroll: {
+    width: window.width,
+    backgroundColor: 'transparent'
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -540,6 +543,11 @@ export const NewPostStyles = StyleSheet.create ({
     flex: 0,
     height: 50,
     width: window.width,
+  },
+  topButtonStyle: {
+    alignSelf: 'center',
+    flex: 1,
+    height: 50,
   }
 })
 export const PostScreenStyles = StyleSheet.create ({

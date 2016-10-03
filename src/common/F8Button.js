@@ -71,11 +71,38 @@ class F8Button extends React.Component {
           </Text>
         </View>
       );
+    } else if (this.props.type === 'carTag') {
+      content = (
+        <View style={styles.carTag}>
+          <Image source={this.props.icon} style={styles.tagIcon} />
+          <Text style={[styles.caption, styles.carTagCaption]}>
+            {caption}
+          </Text>
+        </View>
+      );
+    } else if (this.props.type === 'search') {
+      content = (
+        <View style={styles.search}>
+          <Image source={this.props.icon} style={styles.tagIcon} />
+          <Text style={[styles.caption, styles.carTagCaption]}>
+            {caption}
+          </Text>
+        </View>
+      );
     } else if (this.props.type === 'tertiary') {
       content = (
         <View style={styles.tertiary}>
-          {icon}
+          <Image source={this.props.icon} style={styles.tagIcon} />
           <Text style={[styles.caption, styles.subTuningCaption]}>
+            {caption}
+          </Text>
+        </View>
+      );
+    } else if (this.props.type === 'liked') {
+      content = (
+        <View style={styles.tertiary}>
+          <Image source={this.props.icon} style={styles.tagIcon} />
+          <Text style={[styles.caption, styles.subTuningCaption, {color: 'red'}]}>
             {caption}
           </Text>
         </View>
@@ -111,12 +138,44 @@ var styles = StyleSheet.create({
     // borderRadius: HEIGHT / 2,
     // borderWidth: 1 / PixelRatio.get(),
   },
+  search: {
+    flex: -1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    padding: 3,
+    margin: 8,
+    backgroundColor: 'lightgray',
+  },
   button: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 40,
+  },
+  tagIcon: {
+    height: 12,
+    width: 12,
+    flex: -1,
+    margin: 8
+  },
+  carTag: {
+    flex: -1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    padding: 3,
+    backgroundColor: '#6A6AD5',
+  },
+  carTagCaption: {
+    color: 'white',
+    fontWeight: '600',
+    fontSize: 8,
+    padding: 3,
+    alignSelf: 'center'
   },
   tertiary: {
     flex: 1,

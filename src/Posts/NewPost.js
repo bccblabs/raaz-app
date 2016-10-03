@@ -23,7 +23,8 @@ import { Text, Paragraph } from '../common/F8Text'
 import { NewPostStyles, General, ListingStyles, PostStyles } from '../styles'
 import {ImageOptions, VideoOptions} from '../constants/pickerOptions'
 
-import {newpostTaggedCars} from '../selectors/newpost'
+import {newpostTaggedCars} from '../selectors'
+import {removeFromTaggedCars} from '../reducers/newpost/newpostActions'
 
 const mapStateToProps = (state) => {
   return {
@@ -33,7 +34,9 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {dispatch}
+  return {
+    removeFromTaggedCars: (specId) => {dispatch (removeFromTaggedCars (specId))}
+  }
 }
 
 class NewPost extends Component {
@@ -63,6 +66,12 @@ class NewPost extends Component {
 
       profileData: props.profileData
     }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    let {taggedCars} = nextProps
+    this.setState ({taggedCars})
+    console.log (this.props, 'componentWillUpdate')
   }
 
   pickImage (type) {
@@ -99,13 +108,30 @@ class NewPost extends Component {
       <View>
       </View>
     )
-
   }
+
   renderEditLog() {
     const {picture, name} = this.state.profileData
-
+        , {taggedCars} = this.state
+        , {removeFromTaggedCars} = this.props
     return (
-      <View style={{paddingTop: 20, paddingBottom: 20}}>
+      <View style={{paddingTop: 4, paddingBottom: 20}}>
+      <ScrollView
+        showsHorizontalScrollIndicator={false}
+        horizontal={true}
+        pagingEnabled={false}
+        style={NewPostStyles.taggedCarsScroll}>
+        { taggedCars && taggedCars.map ((car, idx)=> {
+          return (<F8Button
+                    key={`cartag-${idx}`}
+                    type="carTag"
+                    onPress={()=>{removeFromTaggedCars (car.specId)}}
+                    icon={require ('../images/x.png')}
+                    caption={`${car.make} ${car.model} ${car.submodel}`}
+                    style={{margin: 4}}/>)
+        })
+        }
+      </ScrollView>
       <View style={PostStyles.header}>
         <Image source={{uri: picture}} style={PostStyles.userPhotoStyle}/>
           <TextInput
@@ -216,15 +242,16 @@ class NewPost extends Component {
           rightItem={rightItem}
           title="New Post"
           style={General.headerStyle}/>
-
+        <View style={{flexDirection: 'row'}}>
+          <F8Button icon={require ('../common/img/car.png')} onPress={Actions.PickMakes} type="tertiary" caption="Tag Your Car" style={NewPostStyles.topButtonStyle}/>
+          <View style={{width: 1, backgroundColor: 'lightgray', marginVertical: 12}}/>
+          <F8Button icon={require ('../common/img/tuning.png')} onPress={Actions.TagTuning} type="tertiary" caption="Tag Tuned Parts" style={NewPostStyles.topButtonStyle}/>
+        </View>
         {this.renderEditLog()}
         {this.renderImagesContainer()}
         {this.renderVideosContainer()}
 
         <View style={NewPostStyles.bottomBar}>
-          <F8Button icon={require ('../common/img/car.png')} onPress={Actions.PickMakes} type="tertiary" caption="Tag Your Car" style={[NewPostStyles.bottomButtonStyle, {borderWidth: 1, borderColor: '#eee'}]}/>
-          <F8Button icon={require ('../common/img/tuning.png')} onPress={Actions.TagTuning} type="tertiary" caption="Tag Tuned Parts" style={NewPostStyles.bottomButtonStyle}/>
-          <F8Button icon={require ('../common/img/listing.png')} onPress={Actions.TagListing} type="tertiary" caption="Post As Listing" style={NewPostStyles.bottomButtonStyle}/>
           <F8Button icon={require ('../common/img/photo.png')} onPress={()=>this.pickImage('normal')} type="tertiary" caption="Add Photos" style={NewPostStyles.bottomButtonStyle}/>
           <F8Button icon={require ('../common/img/panoimage.png')} onPress={()=>this.pickImage('panorama')} type="tertiary" caption="Add 360 Photos" style={NewPostStyles.bottomButtonStyle}/>
           <F8Button icon={require ('../common/img/video.png')} onPress={()=>this.pickVideo('normal')} type="tertiary" caption="Add Videos" style={NewPostStyles.bottomButtonStyle}/>
@@ -235,5 +262,8 @@ class NewPost extends Component {
     )
   }
 }
+
+// <View style={{width: 1, backgroundColor: 'lightgray', marginVertical: 12}}/>
+// <F8Button icon={require ('../common/img/listing.png')} onPress={Actions.TagListing} type="tertiary" caption="Post As Listing" style={NewPostStyles.topButtonStyle}/>
 
 export default connect (mapStateToProps, mapDispatchToProps) (NewPost)

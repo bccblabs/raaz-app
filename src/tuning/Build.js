@@ -15,16 +15,15 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 import moment from 'moment'
 import {EmptyHeading} from '../common/F8Text'
 import ProfilePicture from '../common/ProfilePicture'
-import F8Button from '../common/F8Button'
 import ResponsiveImage from 'react-native-responsive-image'
 import Icon from 'react-native-vector-icons/Foundation';
 import {PostStyles} from '../styles'
 import numeral from 'numeral'
 
+import LikeBtn from '../common/LikeBtn'
+import CommentBtn from '../common/CommentBtn'
+
 export default class Post extends Component {
-  constructor (...args) {
-    super (...args)
-  }
 
   constructMetroGridItems (media) {
     if (media.length === 1)
@@ -33,7 +32,7 @@ export default class Post extends Component {
 
   render () {
     if (!this.props.data) return <View/>
-    const {created, name, manufacturers, listing, media, tags, buildId} = this.props.data,
+    const {created, name, manufacturers, listing, media, tags, buildId, likes, comments} = this.props.data,
           daysAgo = moment(created).fromNow()
     let manufacturerContent = manufacturers && (
               <View>
@@ -68,6 +67,8 @@ export default class Post extends Component {
             {tags && tags.map ((tag, idx)=> {return ( <Text key={idx} style={PostStyles.tag}>{`#${tag}`}</Text> )})}
           </ScrollView>
       )
+    , likesContent = (<LikeBtn postId={buildId} numlikes={likes.length}/>)
+    , commentsContent = (<CommentBtn postId={buildId} commentsCnt={comments}/>)
 
     return (
       <TouchableWithoutFeedback onPress={()=>Actions.BuildDetails({buildId: buildId, name: name})}>
@@ -75,8 +76,8 @@ export default class Post extends Component {
           {imageContent}
           {tagsContent}
           <View style={{flexDirection:"row", justifyContent: 'flex-start'}}>
-          <F8Button icon={require ('../common/img/like.png')} style={{}} type="tertiary" caption="10 likes"/>
-          <F8Button icon={require ('../common/img/comment.png')} style={{}} type="tertiary" caption="10 comments"/>
+          {likesContent}
+          {commentsContent}
           </View>
         </View>
       </TouchableWithoutFeedback>

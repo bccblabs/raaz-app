@@ -15,9 +15,10 @@ import Metro from 'react-native-metro-grid'
 import moment from 'moment'
 
 import ProfilePicture from '../common/ProfilePicture'
-import F8Button from '../common/F8Button'
 import ResponsiveImage from 'react-native-responsive-image'
 import {PostStyles} from '../styles'
+import LikeBtn from '../common/LikeBtn'
+import CommentBtn from '../common/CommentBtn'
 
 export default class Post extends Component {
   constructor (...args) {
@@ -31,13 +32,16 @@ export default class Post extends Component {
 
   render () {
     if (!this.props.data) return <View/>
-    const {post, tags, user} = this.props.data,
+    const {post, tags, user, likes, postId, comments} = this.props.data,
           {media, created, title} = post,
           daysAgo = moment(created).fromNow()
           , imageSize = media[0].split ('-')[1].split ('x')
           , initWidth = imageSize[0]
           , initHeight = imageSize[1]
     let imageContent
+      , likesContent = (<LikeBtn postId={postId} numlikes={likes.length}/>)
+      , commentsContent = (<CommentBtn postId={postId} commentsCnt={comments}/>)
+
     imageContent = (
       <View style={{flex: 1}}>
       <View style={PostStyles.header}>
@@ -54,12 +58,13 @@ export default class Post extends Component {
       </ScrollView>
       </View>
     )
+
     return (
         <View style={PostStyles.container}>
           {imageContent}
           <View style={{flexDirection:"row", justifyContent: 'flex-start'}}>
-          <F8Button style={{}} type="tertiary" caption="10 likes"/>
-          <F8Button style={{}} type="tertiary" caption="10 comments"/>
+          {likesContent}
+          {commentsContent}
           </View>
         </View>
     )
