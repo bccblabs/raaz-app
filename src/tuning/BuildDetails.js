@@ -121,9 +121,9 @@ class BuildDetails extends Component {
       , installedParts = (
         <View>
         {socialContent}
-        <Heading3 style={Titles.buildSectionTitle}>{"Specs"}</Heading3>
+        <Heading3 style={Titles.buildSectionTitle}>{"SPECS"}</Heading3>
         {specsContent}
-        <Heading3 style={Titles.buildSectionTitle}>{"Parts Installed"}</Heading3>
+        <Heading3 style={Titles.buildSectionTitle}>{"PARTS INSTALLED"}</Heading3>
         <ScrollView
           showsHorizontalScrollIndicator={false}
           horizontal={true}

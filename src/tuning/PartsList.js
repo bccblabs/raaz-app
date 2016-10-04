@@ -12,8 +12,8 @@ class PartsList extends Component {
     super (props)
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     this.state = {
-      specId: this.props.specId,
-      tagName: this.props.tag,
+      specId: props.specId,
+      tagName: props.tag,
       dataSource: ds.cloneWithRows ([]),
       isFetching: true,
       hasError: false,
@@ -47,7 +47,7 @@ class PartsList extends Component {
     let {dataSource, isFetching, hasError} = this.state
       , content
     if (isFetching) content = (<FullScreenLoadingView/>)
-    if (hasError) content = (<Text>{"Error Occurred..."}</Text>)
+    else if (hasError) content = (<Text>{"Error Occurred..."}</Text>)
     else {
       content =  (
         <ListView

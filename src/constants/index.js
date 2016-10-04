@@ -31,7 +31,6 @@ export default keyMirror ({
   RESET_POSTS_FILTER_STATE: null,
   SET_POSTS_FILTER_HASH: null,
   SET_POSTS_FILTER_STATE: null,
-  TOGGLE_POST_FILTER_LIST_VALUE: null,
 
   SAVE_POST_DRAFT: null,
   LIKE_USER_POST: null,
@@ -44,6 +43,8 @@ export default keyMirror ({
 
   ADD_TO_TAGGED_CARS: null,
   REMOVE_FROM_TAGGED_CARS: null,
+
+  TOGGLE_POST_LIKE: null,
 
   /* Events */
   EVENTS_REQUEST: null,
@@ -58,10 +59,11 @@ export default keyMirror ({
 
   /* Builds, Cars, Listings, Tuning, etc. */
 
-  TOGGLE_CAR_TAG: null,
+  TOGGLE_PART_TAG: null,
+  CLEAR_PART_TAG: null,
 
-  TOGGLE_TUNING_TAGS: null,
-  CLEAR_TUNING_TAGS: null,
+  TOGGLE_BUILD_TAG: null,
+  CLEART_BUILD_TAG: null,
 
   BUILDS_REQUEST: null,
   BUILDS_SUCCESS: null,

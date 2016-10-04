@@ -1,8 +1,11 @@
 'use strict'
 import { CALL_API, Schemas } from '../../middlewares/api'
 const {
-    TOGGLE_TUNING_TAGS,
-    CLEAR_TUNING_TAGS,
+    TOGGLE_PART_TAG,
+    CLEAR_PART_TAG,
+
+    TOGGLE_BUILD_TAG,
+    CLEART_BUILD_TAG,
 
     BUILDS_REQUEST,
     BUILDS_SUCCESS,
@@ -24,6 +27,9 @@ const {
     SPECS_DETAILS_SUCCESS,
     SPECS_DETAILS_ERROR,
 
+    CAT_REQUEST,
+    CAT_SUCCESS,
+    CAT_ERROR,
 
 } = require ('../../constants').default
 
@@ -52,18 +58,32 @@ export function fetchBuilds (paging) {
   }
 }
 
-export function clearTuningTags () {
+export function clearPartTags () {
   return {
-    type: CLEAR_TUNING_TAGS
+    type: CLEAR_PART_TAG
   }
 }
 
-export function toggleTuningTags (tag) {
+export function togglePartTag (tag) {
   return {
-    type: TOGGLE_TUNING_TAGS,
+    type: TOGGLE_PART_TAG,
     payload: tag
   }
 }
+
+export function toggleBuildTag (tag) {
+  return {
+    type: TOGGLE_BUILD_TAG,
+    payload: tag
+  }
+}
+
+export function clearBuildTag () {
+  return {
+    type: CLEAR_BUILD_TAG
+  }
+}
+
 
 export function fetchDealsFromApi (specId) {
   let endpoint = '/deal', key = specId
@@ -87,6 +107,19 @@ export function fetchCarDetails (specId) {
       types: [SPECS_DETAILS_REQUEST, SPECS_DETAILS_SUCCESS, SPECS_DETAILS_ERROR],
       endpoint: endpoint,
       schema: Schemas.SPEC_DETAILS_ARRAY,
+    }
+  }
+}
+
+
+export function fetchCategoriesFromApi (key) {
+  let endpoint = (key==='car')?'/car/category':'/tuning/category/?specId=' + key
+  return {
+    key,
+    [CALL_API]: {
+      types: [CAT_REQUEST, CAT_SUCCESS, CAT_ERROR],
+      endpoint: endpoint,
+      schema: Schemas.CAT_ARRAY,
     }
   }
 }

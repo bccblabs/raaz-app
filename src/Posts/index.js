@@ -24,9 +24,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchCategories: ()=> {
-      dispatch (fetchCategoriesFromApi ('home'))
-    },
     setUserData: (profileData)=> {
       dispatch (setUserData (profileData))
     },
@@ -43,7 +40,6 @@ class Raaz extends Component {
     this.state = {}
   }
   componentWillMount () {
-    this.props.fetchCategories()
     let {profileData, setUserData, saveAccessToken, access_token, user} = this.props
     if (access_token && user) {
       setUserData (user)

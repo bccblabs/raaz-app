@@ -53,7 +53,7 @@ class TagsHeader extends Component {
           accessibilityLabel="Clear filter"
           accessibilityTraits="button"
           style={styles.clear}
-          onPress={Actions.PostFilters}>
+          onPress={()=>Actions.PostFilters({key: 'car'})}>
           <Text style={styles.text}>{("Filter Builds").toUpperCase()}</Text>
         </TouchableOpacity>
       </View>

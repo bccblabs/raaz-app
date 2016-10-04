@@ -107,14 +107,14 @@ class TuningBySpec extends Component {
 
       let tuningcomponent = (specsInfo.tuning && specsInfo.tuning.length )?(
                               <View>
-                                <Heading3 style={Titles.buildSectionTitle}>{"Tuning By Categories"}</Heading3>
+                                <Heading3 style={Titles.buildSectionTitle}>{"TUNING BY CATEGORY"}</Heading3>
                                 <PartsGrid data={tuning} specId={specId}/>
-                                <F8Button onPress={()=>{Actions.TuningPager({specId})}} type="secondary" caption="Search Tuning!" style={ListingStyles.contactDealerButton}/>
+                                <F8Button onPress={()=>{Actions.PartFilter({filterId: specId})}} type="secondary" caption="Search and Compare!" style={ListingStyles.contactDealerButton}/>
                               </View>
                             ): (<View/>)
         , postsContent = posts?(
           <View>
-          <Heading3 style={Titles.buildSectionTitle}>{"Posts"}</Heading3>
+          <Heading3 style={Titles.buildSectionTitle}>{"POSTS"}</Heading3>
             <ScrollView
               style={PartStyles.partsScrollStyle}>
               {posts.map ((post, idx)=>(<PostCard key={`pc-${idx}`} data={post}/>))}
@@ -142,7 +142,7 @@ class TuningBySpec extends Component {
             }}
             renderBackground={() => <VRImage style={TuningBySpecStyles.VRImageHolder}/>}>
             <View style={{flex: 1}}>
-            <Heading3 style={Titles.buildSectionTitle}>{"Specs"}</Heading3>
+            <Heading3 style={Titles.buildSectionTitle}>{"SPECS"}</Heading3>
             <View style={{padding: 16}}>
             <Heading3 style={Specs.subtitle}>{size.toFixed(1) + ` L ${configuration}-${cylinders} ${compressor}`.toUpperCase()}</Heading3>
             <MetricsGraph data={[{entries:dataArray}]}/>

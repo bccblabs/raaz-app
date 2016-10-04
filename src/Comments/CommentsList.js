@@ -1,55 +1,67 @@
 'use strict'
+
 import React, {
   Component,
   ListView,
   View
 } from 'react-native'
 
+import {Actions} from 'react-native-router-flux'
+
 import Comment from './Comment'
 import CreateComment from './CreateComment'
-export default class CommentsList extends Compoenent {
+import moment from 'moment'
+
+import F8Header from '../common/F8Header'
+import LikeBtn from '../common/LikeBtn'
+import FullScreenLoadingView from '../components/FullScreenLoadingView'
+import RequestUtils from '../requests'
+import {PostStyles} from '../styles'
+
+export default class CommentsList extends Component {
 
   constructor (props) {
     super (props)
-    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+    let dataSource = new ListView.DataSource ({rowHasChanged: (r1, r2) => r1 !== r2})
+
     this.state = {
+      postId: props.postId,
+      dataSource: dataSource.cloneWithRows ([]),
+      isFetching: true,
       hasError: false,
-      isLoading: true,
-      dataSource: ds.cloneWithRows ([]),
-      nextPageUrl: null
+      nextPageUrl: null,
     }
-    this.fetchCommentsByPost = this.fetchCommentsByPost.bind (this)
+
+    this.fetchComments = this.fetchComments.bind (this)
   }
 
-  async fetchCommentsByPost () {
+  async fetchComments () {
     try {
-      let {postId} = this.props,
-        , comments = await RequestUtils.fetchComments (postId)
+      let {postId} = this.state
+        , data = await RequestUtils.fetchComments (postId)
+        , dataSource = this.state.dataSource.cloneWithRows (data.comments)
 
       this.setState ({
-        dataSource: this.state.dataSource.cloneWithRows (comments && comments.data)
         hasError: false,
         isLoading: false,
+        data: data,
+        dataSource: dataSource
       })
-
     } catch (err) {
-      this.setState ({
-        hasError: true,
-        isLoading: false
-      })
+      this.setState ({hasError: true, isLoading: false})
     }
   }
 
   componentWillMount () {
-    this.fetchCommentsByPost ()
+    this.fetchComments ()
   }
 
   render () {
     let {dataSource, isFetching, hasError} = this.state
       , content
+      , leftItem = {title: 'Back', onPress:Actions.pop}
     if (isFetching) content = (<FullScreenLoadingView/>)
-    if (hasError) content = (<Text>{"Error Occurred..."}</Text>)
-    if (!dataSource.getRowCount()) content = (<Text>{"0 Comments"}</Text>)
+    else if (hasError) content = (<Text>{"Error Occurred..."}</Text>)
     else {
       content =  (
         <ListView
@@ -60,8 +72,10 @@ export default class CommentsList extends Compoenent {
         />
       )
     }
+
     return (
       <View style={{flex: 1}}>
+      <F8Header foreground="dark" leftItem={leftItem} title="Comments"/>
       {content}
       <CreateComment/>
       </View>

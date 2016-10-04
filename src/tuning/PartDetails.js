@@ -19,7 +19,7 @@ import {createSelector} from 'reselect'
 import {Heading1, Heading2, Heading3, Paragraph} from '../common/F8Text'
 import MetricsGraph from '../components/MetricsGraph'
 import {syncProduct} from '../reducers/history/historyActions'
-import {Styles, TuningBySpecStyles, FilterStyles, SliderStyles} from '../styles'
+import {Styles, General, Titles, TuningBySpecStyles, FilterStyles, SliderStyles} from '../styles'
 
 import F8Button from '../common/F8Button'
 import F8Header from '../common/F8Header'
@@ -98,7 +98,7 @@ class PartDetails extends Component {
             foreground="dark"
             leftItem={leftItem}
             rightItem={rightItem}
-            style={FilterStyles.headerStyle}/>
+            style={General.headerStyle}/>
             <ScrollView>
               <Heading1 style={{padding:16,color: 'black'}}>{name}</Heading1>
               <ViewPager
@@ -110,21 +110,21 @@ class PartDetails extends Component {
               {
                 specsContent && (
                   <View>
-                  <Paragraph style={SliderStyles.sliderTitle}>{"Specs"}</Paragraph>
+                  <Paragraph style={Titles.filterSectionTitle}>{"SPECS"}</Paragraph>
                   {specsContent}
                   </View>
                 )
               }
               {description && (
                 <View>
-                <Paragraph style={SliderStyles.sliderTitle}>{"Description"}</Paragraph>
+                <Paragraph style={Titles.filterSectionTitle}>{"DESCRIPTION"}</Paragraph>
                 <Heading3 style={TuningBySpecStyles.subtitle}>{description}</Heading3>
                 </View>
               )}
 
               {details && (
                 <View>
-                <Paragraph style={SliderStyles.sliderTitle}>{"Details"}</Paragraph>
+                <Paragraph style={Titles.filterSectionTitle}>{"DETAILS"}</Paragraph>
                 {
                   details.map ((detail, idx)=> {
                     return (

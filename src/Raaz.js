@@ -40,8 +40,15 @@ import Notifications from './Notifications'
 import TuningBySpec from './TuningBySpec'
 import TuningPager from './tuning/TuningPager'
 import Order from './Order'
-import PostFilters from './Posts/PostFilters'
+
+
+import BuildFilter from './filters/BuildFilter'
+import PartFilter from './filters/PartFilter'
+
 import {computeFilterHash, fetchMakeModelYears, fetchStockCars, rootUrl} from './reducers/stockCar/filterActions'
+
+
+import CommentsList from './Comments/CommentsList'
 
 const mapStateToProps = (state) => {
   return {
@@ -115,6 +122,7 @@ class Viicles extends Component {
             <Route name="PickSpecs" component={PickSpecs} title="Choose Specs" schema="floatFromRight" hideNavBar={true}/>
             <Route name="TagTuning" component={TagTuning} title="Tag Parts" schema="floatFromRight" hideNavBar={true}/>
 
+            <Route name="Comments" component={CommentsList} title="Comments" schema="default" hideNavBar={true}/>
 
             <Route name="BuildDetails" component={BuildDetails} schema="default" hideNavBar={true}/>
             <Route name="PartDetails" component={PartDetails} schema="default" hideNavBar={true}/>
@@ -122,7 +130,10 @@ class Viicles extends Component {
             <Route name="TuningBySpec" component={TuningBySpec} schema="default" hideNavBar={true}/>
             <Route name="NewPost" component={NewPost} schema="default" hideNavBar={true}/>
             <Route name="TuningPager" component={TuningPager} schema="default" hideNavBar={true}/>
-            <Route name="PostFilters" component={PostFilters} schema="default" hideNavBar={true}/>
+
+            <Route name="BuildFilter" component={BuildFilter} schema="default" hideNavBar={true}/>
+            <Route name="PartFilter" component={PartFilter} schema="default" hideNavBar={true}/>
+
             <Route name="WatchList" component={Saved} schema="default" hideNavBar={true}/>
           </Router>
       )

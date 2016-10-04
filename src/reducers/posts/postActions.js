@@ -3,9 +3,7 @@ const {
   POSTS_REQUEST,
   POSTS_SUCCESS,
   POSTS_ERROR,
-  RESET_POSTS_FILTER_STATE,
   SET_POSTS_FILTER_HASH,
-  TOGGLE_POST_FILTER_LIST_VALUE,
 } = require ('../../constants').default
 
 import {
@@ -58,18 +56,5 @@ export function fetchPosts (pageUrl) {
     } else {
       dispatch (fetchPostsFromApi (pageUrl, filterHash, undefined))
     }
-  }
-}
-
-export function togglePostTag (tag) {
-  return {
-    type: TOGGLE_POST_FILTER_LIST_VALUE,
-    payload: tag
-  }
-}
-
-export function resetPostFilters () {
-  return {
-    type: RESET_POSTS_FILTER_STATE
   }
 }

@@ -27,9 +27,6 @@ const {
     SET_SELECTED_SUBMODEL,
     SET_SELECTED_SPECID,
 
-    CAT_REQUEST,
-    CAT_SUCCESS,
-    CAT_ERROR,
 
     TOGGLE_CAR_TAG,
 } = require ('../../constants').default
@@ -110,16 +107,5 @@ export function toggleCarTag (tag) {
   return {
     type: TOGGLE_CAR_TAG,
     payload: tag
-  }
-}
-
-export function fetchCategoriesFromApi (category) {
-  return {
-    key: category,
-    [CALL_API]: {
-      types: [CAT_REQUEST, CAT_SUCCESS, CAT_ERROR],
-      endpoint: '/car/category',
-      schema: Schemas.CAT_ARRAY,
-    }
   }
 }

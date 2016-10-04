@@ -13,9 +13,6 @@ import {Actions} from 'react-native-router-flux'
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 import moment from 'moment'
-import {EmptyHeading} from '../common/F8Text'
-import ProfilePicture from '../common/ProfilePicture'
-import ResponsiveImage from 'react-native-responsive-image'
 import Icon from 'react-native-vector-icons/Foundation';
 import {PostStyles} from '../styles'
 import numeral from 'numeral'

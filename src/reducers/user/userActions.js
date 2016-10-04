@@ -38,6 +38,7 @@ const {
   REPLY_COMMENT_SUCCESS,
   REPLY_COMMENT_ERR,
 
+  TOGGLE_POST_LIKE,
 
 } = require ('../../constants').default
 
@@ -123,6 +124,13 @@ function replyComment (comment, commentId) {
       types: [REPLY_COMMENT_REQ, REPLY_COMMENT_SUCCESS, REPLY_COMMENT_ERR],
       schema: Schemas.REPLY_ARRAY,
     }
+  }
+}
+
+function togglePostLike (postId) {
+  return {
+    type: TOGGLE_POST_LIKE,
+    payload: postId
   }
 }
 

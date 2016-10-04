@@ -2,7 +2,8 @@
 
 const {List, Record} = require ('immutable')
 const tuningFilterInitialState = Record ({
-  filterTags: new (List),
+  buildTags: new (List),
+  partTags: new (List),
 })
 
 export default tuningFilterInitialState

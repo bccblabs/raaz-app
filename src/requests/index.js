@@ -26,7 +26,7 @@ function checkStatus(response) {
 const RequestUtils = {
 
   fetchParts (specId, tagName, pageUrl) {
-    let url = pageUrl ? (API_ENDPOINT + '/tuning/' + specId + '/' + tagName + pageUrl) : (API_ENDPOINT + '/tuning/' + specId + '/' + tagName)
+    let url = pageUrl ? (API_ENDPOINT + '/tuning/spec/' + specId + '/' + tagName + pageUrl) : (API_ENDPOINT + '/tuning/spec/' + specId + '/' + tagName)
 
     return fetchWithTimeout (REQ_TIMEOUT, url, GETOPTS)
             .then ((resp) => {return resp.json()})
@@ -34,7 +34,7 @@ const RequestUtils = {
   },
 
   fetchPartDetails (partId, specId) {
-    let url = API_ENDPOINT + '/tuning/' + partId + '?specId=' + specId
+    let url = API_ENDPOINT + '/tuning/parts/' + partId + '?specId=' + specId
     return fetchWithTimeout (REQ_TIMEOUT, url, GETOPTS)
             .then ((resp)=> {return resp.json()})
             .catch ((err)=> {throw err})

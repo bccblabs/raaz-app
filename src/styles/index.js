@@ -2,7 +2,7 @@
 import React, {Dimensions, StyleSheet, Platform} from 'react-native'
 import F8Colors from '../common/F8Colors'
 const window = Dimensions.get ('window')
-
+const btnColor = '#b8cdfb'
 export const General = StyleSheet.create ({
   headerStyle: {
     backgroundColor: 'white'
@@ -19,7 +19,15 @@ export const General = StyleSheet.create ({
     height: window.height,
     width: window.width,
   },
-
+  bottomButtonStyle: {
+    borderTopWidth: 1,
+    borderTopColor: '#eee',
+    backgroundColor: btnColor,
+    alignSelf: 'center',
+    flex: 0,
+    height: 50,
+    width: window.width,
+  }
 })
 
 export const Specs = StyleSheet.create ({
@@ -59,9 +67,16 @@ export const Titles = StyleSheet.create ({
     color: 'black',
     alignSelf: 'flex-start',
     fontSize: 12,
-    letterSpacing: 0.6,
+    letterSpacing: 1,
     marginTop: 32,
-    textDecorationLine: 'underline'
+  },
+  filterSectionTitle: {
+    padding: 10,
+    fontWeight:'bold',
+    color: 'black',
+    alignSelf: 'flex-start',
+    fontSize: 12,
+    letterSpacing: 1,
   },
   buildTitle: {
     padding: 16,
@@ -85,7 +100,7 @@ export const ListingStyles = StyleSheet.create ({
   contactDealerButton: {
     borderTopWidth: 1,
     borderTopColor: '#eee',
-    backgroundColor: 'blue',
+    backgroundColor: btnColor,
     alignSelf: 'center',
     flex: 0,
     height: 50,
@@ -425,14 +440,6 @@ export const SliderStyles = StyleSheet.create({
     fontSize: 12,
     position: 'absolute', right: 0, padding: 16
   },
-  sliderTitle: {
-    padding: 10,
-    fontWeight:'bold',
-    color: 'black',
-    alignSelf: 'flex-start',
-    fontSize: 12,
-    letterSpacing: 1,
-  },
   avgText: {
     padding: 10,
     fontWeight:'bold',
@@ -472,27 +479,7 @@ export const FilterCardStyles = StyleSheet.create ({
     color: 'white',
     fontSize: 12,
     fontWeight: 'bold',
-  },
-  partTextStyle: {
-    padding: 8,
-    flex: -1,
-    position: 'absolute',
-    top: 0,
-    color: 'black',
-    fontSize: 12,
-    backgroundColor: 'white',
-    opacity: 0.9,
-    fontWeight: '600',
-  },
-  containerStyle: {
-    backgroundColor: 'transparent',
-
-  },
-  horizontalButtonContainer: {
-    height: 64,
-    flexDirection: 'row'
-  },
-
+  }
 })
 export const NewPostStyles = StyleSheet.create ({
   taggedCarsScroll: {
@@ -517,6 +504,25 @@ export const NewPostStyles = StyleSheet.create ({
     height: window.height/16,
     fontSize: 18,
     fontWeight: '800'
+  },
+  commentInput: {
+    flex: -1,
+    paddingHorizontal: 8,
+    width: window.width-80,
+    height: window.height/20,
+    fontSize: 12,
+    fontWeight: '800',
+    backgroundColor: '#e0e0e0',
+    borderRadius: 10,
+  },
+  postCommentBtn: {
+    borderTopWidth: 1,
+    borderTopColor: '#eee',
+    backgroundColor: '#b8cdfb',
+    alignSelf: 'center',
+    flex: 0,
+    height: 50,
+    width: window.width,
   },
   headerStyle: {
     backgroundColor: 'black'

@@ -18,7 +18,7 @@ import {
 } from '../reducers/tuning/filterActions'
 
 import isArray from 'lodash/isArray'
-import {SliderStyles, FilterStyles, Styles} from '../styles'
+import {Titles} from '../styles'
 
 class TagFilters extends Component {
   constructor (props) {
@@ -35,14 +35,12 @@ class TagFilters extends Component {
         {data.map ((optionRow, idx)=>{
           return (
             <View style={{backgroundColor: 'white'}} key={`tf-${idx}`}>
-            <Paragraph style={SliderStyles.sliderTitle}>
+            <Paragraph style={Titles.filterSectionTitle}>
             {optionRow.name.toUpperCase()}
             </Paragraph>
             <ScrollView
               showsHorizontalScrollIndicator={false}
-              horizontal={true}
-              style={SliderStyles.horizontalScrollContainer}
-              contentContainerStyle={Styles.scrollContainer}>
+              horizontal={true}>
               {
                 optionRow.options.map ((filterChoice, idx)=> {
                   let isFilterSelected = (selectedTags.indexOf (filterChoice.name) > -1)

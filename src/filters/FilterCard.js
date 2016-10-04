@@ -44,13 +44,13 @@ class FilterCard extends Component {
       this.setState ({selected: selectedVal, opacity: new Animated.Value (opacityVal)})
     }
     render () {
-      let {name, media, touchEnabled} = this.props,
-          imageStyle=this.props.imageStyle?this.props.imageStyle:{height: 150, width:150}
+      let {name, media, touchEnabled} = this.props
+
       return (
-        <View style={FilterCardStyles.containerStyle}>
+        <View style={{backgroundColor: 'transparent', marginHorizontal: 2}}>
           <Image
             source={{uri: media.replace ('#', '%23')}}
-            style={imageStyle}>
+            style={{height: 150, width:150}}>
             <TouchableWithoutFeedback onPress={this._onPressCard}>
               {
                 touchEnabled ? (<Animated.View

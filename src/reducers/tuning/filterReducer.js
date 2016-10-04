@@ -1,8 +1,11 @@
 'use strict'
 
 const {
-  TOGGLE_TUNING_TAGS,
-  CLEAR_TUNING_TAGS,
+  TOGGLE_PART_TAG,
+  CLEAR_PART_TAG,
+
+  TOGGLE_BUILD_TAG,
+  CLEAR_BUILD_TAG,
 } = require ('../../constants').default
 
 const {Map, List} = require ('immutable')
@@ -17,9 +20,9 @@ export default function tuningReducer (state=initialState, action) {
   let nextState
   switch (action.type) {
 
-    case TOGGLE_TUNING_TAGS: {
+    case TOGGLE_PART_TAG: {
       let value = action.payload,
-          filter_list = state.getIn (['filterTags']),
+          filter_list = state.getIn (['partTags']),
           new_filter_list
 
       if (filter_list.indexOf (value) > -1) {
@@ -27,13 +30,30 @@ export default function tuningReducer (state=initialState, action) {
       } else {
         new_filter_list = filter_list.push (value)
       }
-      nextState = state.setIn (['filterTags'], new_filter_list, val=>new_filter_list)
+      nextState = state.setIn (['partTags'], new_filter_list, val=>new_filter_list)
       return nextState
     }
 
-    case CLEAR_TUNING_TAGS: {
+    case TOGGLE_BUILD_TAG: {
+      let value = action.payload,
+          filter_list = state.getIn (['buildTags']),
+          new_filter_list
+      if (filter_list.indexOf (value) > -1) {
+        new_filter_list = filter_list.delete (filter_list.indexOf (value))
+      } else {
+        new_filter_list = filter_list.push (value)
+      }
+      return state.setIn (['buildTags'], new_filter_list, (val)=>new_filter_list)
+    }
+
+    case CLEAR_PART_TAG: {
       return initialState
     }
+
+    case CLEAR_BUILD_TAG: {
+      return initialState
+    }
+
     default: {
       return state
     }
