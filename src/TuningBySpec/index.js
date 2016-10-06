@@ -20,13 +20,13 @@ import F8Header from '../common/F8Header'
 import F8Button from '../common/F8Button'
 import {Heading1, Heading2, Heading3, EmptyHeading, Paragraph} from '../common/F8Text'
 
-import FullScreenLoadingView from '../components/FullScreenLoadingView'
+import LoadingPage from '../components/LoadingPage'
 import MetricsGraph from '../components/MetricsGraph'
 import PartsGrid from './PartsGrid'
 import PostsList from '../Posts/PostListView'
 import {VRImage} from '../cardboard'
 
-import {TuningBySpecStyles, General, ListingStyles, Specs, Titles, PartStyles} from '../styles'
+import {TuningBySpecStyles, General, Specs, Titles, PartStyles} from '../styles'
 const specIdSelector = (state) => (state.stockCar.selectedSpecId)
 const specDetailsSelector = (state) => (state.entities.specDetails)
 const specDetailsPagination = (state) => (state.pagination.specDetailsPagination)
@@ -91,12 +91,11 @@ class TuningBySpec extends Component {
   render () {
     let {specsDetails, specsPagination} = this.state
       , specsInfo = this.state.specsDetails[0]
-    if (specsPagination.isFetching || !specsInfo) return (<FullScreenLoadingView/>)
+    if (specsPagination.isFetching || !specsInfo) return (<LoadingPage/>)
     else {
       const leftItem = {title: 'Back', onPress: ()=> {Actions.pop ()}}
           , {make, model, submodel, specId, tuning, specs, posts} = specsInfo
           , headerContent = (<F8Header title={(model + ' ' + submodel).toUpperCase()} foreground="dark" style={General.headerStyle} leftItem={leftItem}/>)
-
       let {
             cylinders, compressor, configuration,
             transmissionSpeed, transmission, drivenWheels, size,
@@ -109,7 +108,6 @@ class TuningBySpec extends Component {
                               <View>
                                 <Heading3 style={Titles.buildSectionTitle}>{"TUNING BY CATEGORY"}</Heading3>
                                 <PartsGrid data={tuning} specId={specId}/>
-                                <F8Button onPress={()=>{Actions.PartFilter({filterId: specId})}} type="secondary" caption="Search and Compare!" style={ListingStyles.contactDealerButton}/>
                               </View>
                             ): (<View/>)
         , postsContent = posts?(
@@ -119,7 +117,7 @@ class TuningBySpec extends Component {
               style={PartStyles.partsScrollStyle}>
               {posts.map ((post, idx)=>(<PostCard key={`pc-${idx}`} data={post}/>))}
             </ScrollView>
-          <F8Button onPress={()=>{Actions.PostsBySpecId({specId})}} type="secondary" caption="View All Posts" style={ListingStyles.contactDealerButton}/>
+          <F8Button onPress={()=>{Actions.PostsBySpecId({specId})}} type="secondary" caption="View All Posts" style={General.bottomButtonStyle}/>
           </View>
         ):(<View/>)
 
@@ -133,11 +131,13 @@ class TuningBySpec extends Component {
             renderStickyHeader={() => headerContent}
             stickyHeaderHeight={64}
             renderForeground={()=>{
-              return (<View style={{flex: 1, alignSelf: 'center', justifyContent: 'center'}}>
+              return (
+                    <View style={{flex: 1,alignSelf: 'center', justifyContent: 'center'}}>
                           <Heading1>{make.toUpperCase()}</Heading1>
                           <Heading1>{model.toUpperCase()}</Heading1>
                           <Heading1>{submodel.toUpperCase()}</Heading1>
-                     </View>)
+                     </View>
+                )
 
             }}
             renderBackground={() => <VRImage style={TuningBySpecStyles.VRImageHolder}/>}>
@@ -153,6 +153,7 @@ class TuningBySpec extends Component {
             {tuningcomponent}
             </View>
           </ParallaxScrollView>
+          <F8Button onPress={()=>{Actions.PartFilter({filterId: specId, title: model + ' ' + submodel})}} type="secondary" caption="Search Tuning" style={General.bottomButtonStyle}/>
           </View>
         );
     }

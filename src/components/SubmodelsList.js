@@ -12,7 +12,8 @@ import { FilterStyles } from '../styles'
 import keys from 'lodash/keys'
 
 import F8Header from '../common/F8Header'
-import FullScreenLoadingView from './FullScreenLoadingView'
+import LoadingPage from './LoadingPage'
+import ErrorPage from '../common/ErrorPage'
 import MultipleChoice from 'react-native-multiple-choice'
 
 import { Actions } from 'react-native-router-flux'
@@ -73,7 +74,7 @@ class SubmodelsList extends Component {
             title: 'Models',
             onPress: ()=>Actions.pop()
           },
-          content = isFetching?(<FullScreenLoadingView/>):(
+          content = isFetching?(<LoadingPage/>):(
             <ScrollView style={FilterStyles.optionsContainer}>
               <MultipleChoice
                 maxSelectedOptions={1}

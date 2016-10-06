@@ -23,7 +23,7 @@ import {ListingStyles, Titles, General, FilterStyles, PartStyles} from '../style
 import numeral from 'numeral'
 import F8Button from '../common/F8Button'
 import F8Header from '../common/F8Header'
-import FullScreenLoadingView from '../components/FullScreenLoadingView'
+import LoadingPage from '../components/LoadingPage'
 import LikeBtn from '../common/LikeBtn'
 import CommentBtn from '../common/CommentBtn'
 
@@ -85,7 +85,7 @@ class BuildDetails extends Component {
       return (
         <View style={{flex: 1}}>
           {headerContent}
-          <FullScreenLoadingView/>
+          <LoadingPage/>
         </View>
       )
     }
@@ -134,8 +134,8 @@ class BuildDetails extends Component {
               let {name, medium, partId, recCnt} = data,
                   passProps = Object.assign ({}, data, {specId})
               return (
-                <View style={PartStyles.partContainer}>
-                <TouchableWithoutFeedback key={`pg-${cidx}`} onPress={()=>{Actions.PartDetails ({data: passProps})}}>
+                <View key={`pg-${cidx}`} style={PartStyles.partContainer}>
+                <TouchableWithoutFeedback onPress={()=>{Actions.PartDetails ({data: passProps})}}>
                   <Image
                     source={{uri: medium[0]}}
                     style={PartStyles.partImage}>
@@ -168,12 +168,12 @@ class BuildDetails extends Component {
               }}
               dataSource={this.state.mediaDataSource}/>
           {installedParts}
+          </ScrollView>
           <F8Button
             type="secondary"
             caption="Inquire"
             onPress={()=>{Actions.Order ({...this.props.data})}}
-            style={ListingStyles.contactDealerButton}/>
-          </ScrollView>
+            style={General.bottomButtonStyle}/>
         </View>
       )
 

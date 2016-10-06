@@ -12,15 +12,13 @@ var Spinner = require('react-native-spinkit')
 const window = Dimensions.get('window')
 import {Actions} from 'react-native-router-flux'
 
-export default class FullScreenLoadingView extends Component {
+export default class LoadingPage extends Component {
   render () {
     return (
       <View style={{
           flex: 1,
           alignItems: 'center',
           justifyContent: 'center',
-          width: window.width,
-          height: window.height,
           backgroundColor: 'transparent'
         }}>
         <Spinner style={{}} isVisible={true} size={50} type={'Wave'} color={'#CC0000'}/>

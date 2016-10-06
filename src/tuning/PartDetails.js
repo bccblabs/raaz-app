@@ -23,7 +23,7 @@ import {Styles, General, Titles, TuningBySpecStyles, FilterStyles, SliderStyles}
 
 import F8Button from '../common/F8Button'
 import F8Header from '../common/F8Header'
-import FullScreenLoadingView from '../components/FullScreenLoadingView'
+import LoadingPage from '../components/LoadingPage'
 
 class PartDetails extends Component {
   constructor (props) {
@@ -76,7 +76,7 @@ class PartDetails extends Component {
           }
         , {data, hasError, isLoading} = this.state
 
-    if (isLoading) return (<FullScreenLoadingView/>)
+    if (isLoading) return (<LoadingPage/>)
     else {
       let {part, manufacturer, listings, comments, tuning} = data
         , {name, partId, details, description} = part
@@ -136,12 +136,12 @@ class PartDetails extends Component {
               )}
 
               </View>
-            <F8Button
-              type="secondary"
-              caption="Inquire"
-              onPress={()=>{Actions.Order ({})}}
-              style={[Styles.contactDealerButton, {bottom: 0, marginBottom: 0}]}/>
               </ScrollView>
+              <F8Button
+                type="secondary"
+                caption="View All Listings"
+                onPress={()=>{Actions.Order ({})}}
+                style={General.bottomButtonStyle}/>
         </View>
       )
     }

@@ -62,6 +62,15 @@ class F8Button extends React.Component {
           </Text>
         </LinearGradient>
       );
+    } else if (this.props.type === 'error') {
+      content = (
+        <View style={styles.button}>
+          {icon}
+          <Text style={styles.errorCaption}>
+            {caption}
+          </Text>
+        </View>
+      );
     } else if (this.props.type === 'tuning') {
       content = (
         <View style={[styles.button, border]}>
@@ -220,7 +229,11 @@ var styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: 'bold',
   },
-
+  errorCaption: {
+    color: 'black',
+    fontSize: 15,
+    fontWeight: 'bold'
+  }
 });
 
 module.exports = F8Button;

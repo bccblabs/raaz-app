@@ -4,6 +4,95 @@ var diff = require ('changeset')
 
 export const Utils = {
 
+
+    parseLabelName (name) {
+      switch (name) {
+        case 'horsepower':
+          return 'Horsepower (hp)'
+        case 'torque':
+          return 'Torque (lb/ft)'
+        case 'city':
+          return 'City MPG'
+        case 'highway':
+          return 'Highway MPG'
+        case 'displacement':
+          return 'Displacement (cc)'
+        case 'max_hp_rpm':
+          return 'Max Horsepower RPM'
+        case 'max_tq_rpm':
+          return 'Max Torque RPM'
+        case 'baseMSRP':
+          return 'Base MSRP ($)'
+        case 'baseInvoice':
+          return 'Base Invoice ($)'
+        case 'usedTmvRetail':
+          return 'Used Retail By Edmunds True Market Value ($)'
+        case 'usedPrivateParty':
+          return 'Used Private Seller By Edmunds ($)'
+        case 'usedTradeIn':
+          return 'Used Trade-In By Edmunds ($)'
+        case 'compressionRatio':
+          return 'Compression Ratio'
+        case 'cylinder':
+          return 'Cylinders'
+        case 'cargo_capacity':
+          return 'Cargo Capacity (cubic inches)'
+        case 'wheel_base':
+          return 'Wheel Base (ft)'
+        case 'turning_diameter':
+          return 'Turning Diameter'
+        case 'zero_sixty':
+          return '0-60 MPH (s)'
+        case 'ground_clearance':
+          return 'Ground Clearance'
+        case 'curb_weight':
+          return 'Curb Weight'
+        case 'drag':
+          return 'Drag'
+        case 'fuel':
+          return '5-Year Fuel Cost ($)'
+        case 'depreciation':
+          return '5-Year Depreciation Cost ($)'
+        case 'repairs':
+          return '5-Year Repairs Cost ($)'
+        case 'maintenance':
+          return '5-Year Maintenance Cost ($)'
+        case 'insurance':
+          return '5-Year Insurance Cost ($)'
+        case 'invoice':
+          return 'Dealer Invoice Price ($)'
+        case 'msrp':
+          return 'Dealer MSRP ($)'
+        case 'mileage':
+          return 'Mileage'
+        case 'interior_vol':
+          return 'Interior Volume (cubic inches)'
+        case 'tqGain':
+          return 'Torque Gain (LB/FT)'
+        case 'hpGain':
+          return 'Horsepower Gain (HP)'
+        case 'maxHp':
+          return 'Maximum Horsepower (HP)'
+        case 'maxTq':
+          return 'Maximum Torque (LB/FT)'
+        case 'labor':
+          return 'Labor (Hours)'
+        case 'weight':
+          return 'Weight (LB)'
+        case 'rearLowering':
+          return 'Rear Lowering (inches)'
+        case 'frontLowering':
+          return 'Front Lowering (inches)'
+        case 'rearSpringRateStiffness':
+          return 'Rear Spring Stiffness Rate (%)'
+        case 'frontSpringRateStiffness':
+          return 'Front Spring Stiffness Rate (%)'
+        default:
+          console.error ('key not defined', name)
+          return name
+      }
+    },
+
   parsePriceName (priceName) {
     switch (priceName) {
       case 'listPrice':

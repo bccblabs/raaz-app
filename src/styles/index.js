@@ -2,7 +2,7 @@
 import React, {Dimensions, StyleSheet, Platform} from 'react-native'
 import F8Colors from '../common/F8Colors'
 const window = Dimensions.get ('window')
-const btnColor = '#b8cdfb'
+export const btnColor = '#b8cdfb'
 export const General = StyleSheet.create ({
   headerStyle: {
     backgroundColor: 'white'
@@ -20,12 +20,12 @@ export const General = StyleSheet.create ({
     width: window.width,
   },
   bottomButtonStyle: {
-    borderTopWidth: 1,
-    borderTopColor: '#eee',
     backgroundColor: btnColor,
     alignSelf: 'center',
     flex: 0,
-    height: 50,
+    height: 60,
+    borderWidth: 4,
+    borderColor: 'white',
     width: window.width,
   }
 })
@@ -46,6 +46,23 @@ export const Specs = StyleSheet.create ({
     padding: 8,
     paddingTop: 2,
     paddingBottom: 0,
+  },
+  subtitle1: {
+    flex: 1,
+    fontSize: 8,
+    color: 'black',
+    padding: 8,
+    paddingTop: 2,
+    paddingBottom: 0,
+  },
+  subtitle2: {
+    flex: 1,
+    fontSize: 16,
+    color: 'black',
+    padding: 8,
+    paddingTop: 2,
+    paddingBottom: 0,
+    fontWeight: '700'
   },
   data: {
     flex: 2,
@@ -97,15 +114,6 @@ export const ListingStyles = StyleSheet.create ({
     alignItems: 'flex-start',
     paddingHorizontal: 8,
   },
-  contactDealerButton: {
-    borderTopWidth: 1,
-    borderTopColor: '#eee',
-    backgroundColor: btnColor,
-    alignSelf: 'center',
-    flex: 0,
-    height: 50,
-    width: window.width,
-  },
 })
 
 export const PartStyles = StyleSheet.create ({
@@ -118,11 +126,13 @@ export const PartStyles = StyleSheet.create ({
     height: 200,
     width: 200,
     margin: 4,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   partImage: {
-    height: 200,
-    width: 200,
+    height: 100,
+    width: 100,
     resizeMode: 'contain'
   },
   partTitle: {
@@ -132,7 +142,7 @@ export const PartStyles = StyleSheet.create ({
     top: 0,
     color: 'black',
     fontSize: 12,
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     opacity: 0.9,
     fontWeight: '800',
   },

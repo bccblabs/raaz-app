@@ -10,7 +10,7 @@ import React, {
 } from 'react-native'
 
 import F8Header from '../common/F8Header'
-import FullScreenLoadingView from '../components/FullScreenLoadingView'
+import LoadingPage from '../components/LoadingPage'
 import PureListView from '../common/PureListView'
 import ListContainer from '../common/ListContainer'
 import MultipleChoice from 'react-native-multiple-choice'
@@ -83,7 +83,7 @@ class SpecsList extends Component {
             title: 'Back',
             onPress: ()=>Actions.pop(),
           },
-    content = isFetching?(<FullScreenLoadingView/>):(
+    content = isFetching?(<LoadingPage/>):(
                 <ScrollView style={FilterStyles.optionsContainer}>
                   <MultipleChoice
                     maxSelectedOptions={1}

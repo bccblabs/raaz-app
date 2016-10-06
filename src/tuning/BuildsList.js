@@ -9,7 +9,7 @@ import {EmptyHeading} from '../common/F8Text'
 import F8Button from '../common/F8Button'
 import Build from './Build'
 import {EmptyViewStyles} from '../styles'
-import FullScreenLoadingView from '../components/FullScreenLoadingView'
+import LoadingPage from '../components/LoadingPage'
 import {fetchBuilds} from '../reducers/tuning/filterActions'
 import {union} from 'lodash'
 
@@ -94,7 +94,7 @@ class BuildsList extends Component {
         />
       )
       , loadingContent = (
-        <FullScreenLoadingView/>
+        <LoadingPage/>
       )
       , emptyContent = (
         <View style={EmptyViewStyles.container}>

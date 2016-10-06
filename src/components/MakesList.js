@@ -12,7 +12,7 @@ import { FilterStyles } from '../styles'
 import keys from 'lodash/keys'
 import union from 'lodash/union'
 import F8Header from '../common/F8Header'
-import FullScreenLoadingView from './FullScreenLoadingView'
+import LoadingPage from './LoadingPage'
 import MultipleChoice from 'react-native-multiple-choice'
 
 import { Map } from 'immutable'
@@ -71,7 +71,7 @@ class MakesList extends Component {
             title: 'Cancel',
             onPress: ()=>Actions.pop()
           },
-          content = isFetching?(<FullScreenLoadingView/>):(
+          content = isFetching?(<LoadingPage/>):(
             <ScrollView style={FilterStyles.optionsContainer}>
               <MultipleChoice
                 maxSelectedOptions={1}

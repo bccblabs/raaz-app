@@ -15,8 +15,8 @@ import RequestUtils from '../requests'
 
 import F8Button from '../common/F8Button'
 import Reload from '../common/Reload'
-import FullScreenLoadingView from '../components/FullScreenLoadingView'
-
+import LoadingPage from '../components/LoadingPage'
+import ErrorPage from '../common/ErrorPage'
 const mapStateToProps = (state) => {
   return {
     userId: state.userProfileData.user_id,
@@ -101,8 +101,8 @@ class Likes extends Component {
           style={[Styles.contactDealerButton,{backgroundColor: 'gray'}]}/>
         )
       , content
-      if (isFetching) content = (<FullScreenLoadingView/>)
-      else if (hasError) content = (<Reload/>)
+      if (isFetching) content = (<LoadingPage/>)
+      else if (hasError) content = (<ErrorPage onPress={this.fetchLikes}/>)
       else content = (<ListView
           style={{flex: 1, backgroundColor: '#F5F5F5'}}
           dataSource={dataSource}

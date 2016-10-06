@@ -34,8 +34,8 @@ const buildSchema = new Schema ('builds', {
   idAttribute: 'buildId'
 })
 
-const partSchema = new Schema ('tuningItems', {
-  idAttribute: 'key'
+const partSchema = new Schema ('parts', {
+  idAttribute: 'partId'
 })
 
 const postSchema = new Schema ('posts', {
@@ -74,6 +74,10 @@ specsDetailsSchema.define ({
   specsDetails: arrayOf (specsDetailsSchema)
 })
 
+partSchema.define ({
+  parts: arrayOf (partSchema)
+})
+
 export const Schemas = {
   MAKE_ARRAY: arrayOf (makeSchema),
   MODEL_ARRAY: arrayOf (modelSchema),
@@ -87,7 +91,6 @@ export const Schemas = {
 
   TAGS_ARRAY: arrayOf (tagSchema),
   DEALS_ARRAY: arrayOf (dealSchema),
-
   CAT_ARRAY: arrayOf (categorySchema)
 }
 

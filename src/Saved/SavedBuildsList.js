@@ -1,7 +1,8 @@
 'use strict'
 
 import React, {Component, ListView, Text, View} from 'react-native'
-import FullScreenLoadingView from '../components/FullScreenLoadingView'
+import LoadingPage from '../components/LoadingPage'
+import ErrorPage from '../common/ErrorPage'
 import {connect} from 'react-redux'
 import {Actions} from 'react-native-router-flux'
 import RequestUtils from '../requests'
@@ -55,8 +56,8 @@ class SavedBuildsList extends Component {
   render () {
     let {dataSource, isFetching, hasError} = this.state
       , content
-    if (isFetching) content = (<FullScreenLoadingView/>)
-    if (hasError) content = (<Text>{"Error Occurred..."}</Text>)
+    if (isFetching) content = (<LoadingPage/>)
+    if (hasError) content = (<ErrorPage onPress={this.fetchSavedBuildsFromUrl}/>)
     else {
       content =  (
         <ListView

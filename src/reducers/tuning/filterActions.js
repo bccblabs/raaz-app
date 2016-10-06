@@ -41,7 +41,7 @@ export function fetchBuildsFromApi (pageUrl, tags, specId) {
       types: [BUILDS_REQUEST, BUILDS_SUCCESS, BUILDS_ERROR],
       endpoint: pageUrl,
       schema: Schemas.BUILDS_ARRAY,
-      filters: tags
+      data: tags
     }
   }
 }
@@ -111,6 +111,18 @@ export function fetchCarDetails (specId) {
   }
 }
 
+export function fetchParts (nextPageUrl, specId, tags) {
+  let endpoint = nextPageUrl?('/tuning/spec/' + specId + nextPageUrl):('/tuning/spec/' + specId)
+  return {
+    specId,
+    [CALL_API]: {
+      types: [PARTS_REQUEST, PARTS_SUCCESS, PARTS_ERROR],
+      endpoint: endpoint,
+      schema: Schemas.PARTS_ARRAY,
+      data: tags
+    }
+  }
+}
 
 export function fetchCategoriesFromApi (key) {
   let endpoint = (key==='car')?'/car/category':'/tuning/category/?specId=' + key

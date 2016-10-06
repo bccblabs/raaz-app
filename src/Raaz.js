@@ -44,6 +44,8 @@ import Order from './Order'
 
 import BuildFilter from './filters/BuildFilter'
 import PartFilter from './filters/PartFilter'
+import PartsList from './tuning/PartsList'
+
 
 import {computeFilterHash, fetchMakeModelYears, fetchStockCars, rootUrl} from './reducers/stockCar/filterActions'
 
@@ -133,6 +135,7 @@ class Viicles extends Component {
 
             <Route name="BuildFilter" component={BuildFilter} schema="default" hideNavBar={true}/>
             <Route name="PartFilter" component={PartFilter} schema="default" hideNavBar={true}/>
+            <Route name="PartsList" component={PartsList} schema="default" hideNavBar={true}/>
 
             <Route name="WatchList" component={Saved} schema="default" hideNavBar={true}/>
           </Router>

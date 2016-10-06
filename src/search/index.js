@@ -7,7 +7,7 @@ import React, {
   Text
 } from 'react-native'
 
-import FullScreenLoadingView from '../components/FullScreenLoadingView'
+import LoadingPage from '../components/LoadingPage'
 import {connect} from 'react-redux'
 import {Actions} from 'react-native-router-flux'
 import RequestUtils from '../requests'
@@ -51,7 +51,7 @@ export default class TuningCategoriesList extends Component {
   render () {
     let {dataSource, isFetching, hasError} = this.state
       , content
-    if (isFetching) content = (<FullScreenLoadingView/>)
+    if (isFetching) content = (<LoadingPage/>)
     else if (hasError) content = (<Text>{"Error Occurred..."}</Text>)
     else {
       content =  (

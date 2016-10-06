@@ -11,77 +11,64 @@ import React, {
 
 import {Actions} from 'react-native-router-flux'
 import {connect} from 'react-redux'
-import {resetPostFilters} from '../reducers/posts/postActions'
 import {SliderStyles, Styles} from '../styles'
 import Tag from '../filters/Tag'
 
-const mapStateToProps = (state) => {
-  return {
-    selectedTags: state.posts.tags,
-  }
-}
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    resetFilters: ()=> {
-      dispatch (resetPostFilters())
-    }
-  }
-}
-
-class TagsHeader extends Component {
+export default class TagsHeader extends Component {
   constructor (props) {
     super (props)
-    this.state = {selectedTags: props.selectedTags}
+    this.state = {selectedTags: props.selectedTags, tags: props.selectedTags}
   }
 
   componentWillReceiveProps (nextProps) {
     this.setState ({selectedTags: nextProps.selectedTags})
   }
   render () {
-    let {tags, tagAction, color} = this.props
+    let {selectedTags, tagAction, color} = this.props
+      , {tags} = this.state
     return (
-      <View style={[styles.container, {backgroundColor: 'white'}]}>
-        <TouchableOpacity
-          accessibilityLabel="Clear filter"
-          accessibilityTraits="button"
-          style={styles.clear}
-          onPress={Actions.Makes}>
-          <Text style={styles.text}>{("Tuning By Car").toUpperCase()}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          accessibilityLabel="Clear filter"
-          accessibilityTraits="button"
-          style={styles.clear}
-          onPress={()=>Actions.PostFilters({key: 'car'})}>
-          <Text style={styles.text}>{("Filter Builds").toUpperCase()}</Text>
-        </TouchableOpacity>
+      <View style={[styles.container, {backgroundColor: color}]}>
+        <Image style={styles.clear} source={require('../common/img/filter.png')} />
+        <ScrollView
+          showsHorizontalScrollIndicator={false}
+          horizontal={true}
+          style={{marginHorizontal: 8}}
+          contentContainerStyle={{justifyContent: 'center'}}>
+          {
+            tags && tags.map ((tag, idx)=> {
+              let isFilterSelected = (this.state.selectedTags.indexOf (tag) > -1)
+              return ( <Tag
+                          touchEnabled={true}
+                          title={tag} key={idx}
+                          selected={isFilterSelected}
+                          action={tagAction(tag)}
+                          />)
+            })
+          }
+        </ScrollView>
       </View>
     );
   }
 }
-
-export default connect (mapStateToProps, mapDispatchToProps) (TagsHeader)
 
 var styles = StyleSheet.create({
   container: {
     height: 44,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    opacity: 0.6,
-    justifyContent: 'center'
+    marginTop: 8,
+    paddingLeft: 8,
+    paddingRight: 8,
   },
   text: {
-    fontSize: 10,
-    color: 'black',
-    letterSpacing: 1,
-    alignSelf: 'center',
-    textDecorationLine: 'underline'
+    flex: 1,
+    fontSize: 12,
+    color: 'white',
   },
   clear: {
-    flex: 1,
-    alignSelf: 'stretch',
+    marginHorizontal: 2,
+    alignSelf: 'center',
     justifyContent: 'center',
   },
   filters: {

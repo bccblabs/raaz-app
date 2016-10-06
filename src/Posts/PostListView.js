@@ -16,7 +16,8 @@ import F8Button from '../common/F8Button'
 import Post from './Post'
 import {fetchPosts} from '../reducers/posts/postActions'
 import {EmptyViewStyles} from '../styles'
-import FullScreenLoadingView from '../components/FullScreenLoadingView'
+import LoadingPage from '../components/LoadingPage'
+import ErrorPage from '../common/ErrorPage'
 import {union} from 'lodash'
 
 const filterHashSelector = (state) => (state.posts.postsFilterHash)
@@ -75,7 +76,6 @@ class PostListView extends Component {
   componentWillReceiveProps (nextProps) {
     let {postsList, postsPagination} = nextProps
     if (nextProps.postsList !== this.props.postsList) {
-      // let rowIds = postsList.map ((post)=>{return post.postId})
       let newBlob = union (this.state.data, postsList)
       this.setState ({
         data: newBlob,
@@ -87,12 +87,21 @@ class PostListView extends Component {
 
   render () {
     let {dataSource, postsPagination} = this.state
+      , emptyContent = (
+        <View style={EmptyViewStyles.container}>
+        <TouchableWithoutFeedback onPress={()=>this.props.fetchPosts()}>
+          <EmptyHeading style={EmptyViewStyles.text}>
+          {"No posts loaded, try loading again..."}
+          </EmptyHeading>
+        </TouchableWithoutFeedback>
+        </View>
+      )
       , listContent = (
         <ListView
           style={{flex: 1, marginBottom: 50, backgroundColor: '#FFF0F5'}}
           dataSource={dataSource}
           renderRow={this.renderRow}
-          renderEmptyList={this._renderEmptyList}
+          renderEmptyList={()=>{return emptyContent}}
           enableEmptySections={true}
           onEndReached={()=>{
             if (postsPagination.nextPageUrl) {
@@ -102,16 +111,7 @@ class PostListView extends Component {
         />
       )
       , loadingContent = (
-        <FullScreenLoadingView/>
-      )
-      , emptyContent = (
-        <View style={EmptyViewStyles.container}>
-        <TouchableWithoutFeedback onPress={()=>this.props.fetchPosts()}>
-          <EmptyHeading style={EmptyViewStyles.text}>
-          {"No posts loaded, try loading again..."}
-          </EmptyHeading>
-        </TouchableWithoutFeedback>
-        </View>
+        <LoadingPage/>
       )
 
     return listContent

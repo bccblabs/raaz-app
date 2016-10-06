@@ -14,7 +14,8 @@ import moment from 'moment'
 
 import F8Header from '../common/F8Header'
 import LikeBtn from '../common/LikeBtn'
-import FullScreenLoadingView from '../components/FullScreenLoadingView'
+import LoadingPage from '../components/LoadingPage'
+import ErrorPage from '../common/ErrorPage'
 import RequestUtils from '../requests'
 import {PostStyles} from '../styles'
 
@@ -60,8 +61,8 @@ export default class CommentsList extends Component {
     let {dataSource, isFetching, hasError} = this.state
       , content
       , leftItem = {title: 'Back', onPress:Actions.pop}
-    if (isFetching) content = (<FullScreenLoadingView/>)
-    else if (hasError) content = (<Text>{"Error Occurred..."}</Text>)
+    if (isFetching) content = (<LoadingPage/>)
+    else if (hasError) content = (<ErrorPage onPress={this.fetchComments}/>)
     else {
       content =  (
         <ListView

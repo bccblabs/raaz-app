@@ -62,16 +62,10 @@ let initState = {
   submodels: {},
   specs: {},
   builds: {},
-  tuningItems: {},
-  listings: {},
-  events: {},
+  parts: {},
   posts: {},
   specsDetails: {},
   newpost: {},
-  postTags: {},
-  tuningTags: {},
-  eventTags: {},
-  carTags: {},
 }
 
 function entities(state=initState, action) {
