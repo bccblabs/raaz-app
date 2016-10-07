@@ -5,10 +5,10 @@ import React, { Component, View, ListView, StyleSheet, TouchableWithoutFeedback 
 import {connect} from 'react-redux'
 import {createSelector} from 'reselect'
 import {Actions} from 'react-native-router-flux'
-import {EmptyHeading} from '../common/F8Text'
+import {EmptyHeading, Heading3} from '../common/F8Text'
 import F8Button from '../common/F8Button'
 import Build from './Build'
-import {EmptyViewStyles} from '../styles'
+import {EmptyViewStyles, Titles} from '../styles'
 import LoadingPage from '../components/LoadingPage'
 import {fetchBuilds} from '../reducers/tuning/filterActions'
 import {union} from 'lodash'
@@ -80,8 +80,10 @@ class BuildsList extends Component {
   render () {
     let {dataSource, buildsPagination} = this.state
       , listContent = (
+        <View>
+        <Heading3 style={Titles.filterSectionTitle}>{"Builds"}</Heading3>
         <ListView
-          style={{flex: 1, marginBottom: 50, backgroundColor: '#FFF0F5'}}
+          style={{flex: 1, marginBottom: 50, backgroundColor: 'white'}}
           dataSource={dataSource}
           renderRow={this.renderRow}
           renderEmptyList={this._renderEmptyList}
@@ -92,6 +94,7 @@ class BuildsList extends Component {
             }
           }}
         />
+        </View>
       )
       , loadingContent = (
         <LoadingPage/>

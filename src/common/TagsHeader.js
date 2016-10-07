@@ -18,7 +18,7 @@ import Tag from '../filters/Tag'
 export default class TagsHeader extends Component {
   constructor (props) {
     super (props)
-    this.state = {selectedTags: props.selectedTags, tags: props.selectedTags}
+    this.state = {selectedTags: props.selectedTags, tags: props.tags}
   }
 
   componentWillReceiveProps (nextProps) {

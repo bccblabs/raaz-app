@@ -21,6 +21,10 @@ const {
   PARTS_SUCCESS,
   PARTS_ERROR,
 
+  PARTS_MANU_REQUEST,
+  PARTS_MANU_SUCCESS,
+  PARTS_MANU_ERROR,
+
   POSTS_REQUEST,
   POSTS_SUCCESS,
   POSTS_ERROR,
@@ -129,6 +133,15 @@ const pagination = combineReducers ({
       SPECS_DETAILS_REQUEST,
       SPECS_DETAILS_SUCCESS,
       SPECS_DETAILS_ERROR,
+    ]
+  }),
+
+  partsPaginationByManufacturer: paginate ({
+    mapActionToKey: action=>action.manufacturerId,
+    types: [
+      PARTS_MANU_REQUEST,
+      PARTS_MANU_SUCCESS,
+      PARTS_MANU_ERROR,
     ]
   })
 })

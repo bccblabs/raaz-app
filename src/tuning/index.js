@@ -11,10 +11,9 @@ import React, {
 
 import {Actions} from 'react-native-router-flux'
 import BuildsList from '../tuning/BuildsList'
-import Carmera from '../components/Carmera'
 import F8Header from '../common/F8Header'
 import F8Button from '../common/F8Button'
-
+import {btnColor} from '../styles'
 export default class Tuning extends Component {
   render () {
     const leftItem = {title: 'Saved', onPress:Actions.WatchList}
@@ -23,23 +22,9 @@ export default class Tuning extends Component {
     return (
       <View style={{flex: 1, backgroundColor:'transparent'}}>
       <F8Header title="Tuning" foreground='dark' leftItem={leftItem} rightItem={rightItem}/>
-      <Carmera/>
-      <View style={[styles.container, {backgroundColor: 'white'}]}>
-        <TouchableOpacity
-          accessibilityLabel="Clear filter"
-          accessibilityTraits="button"
-          style={styles.clear}
-          onPress={Actions.Makes}>
-          <Text style={styles.text}>{("Tuning By Car").toUpperCase()}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          accessibilityLabel="Clear filter"
-          accessibilityTraits="button"
-          style={styles.clear}
-          onPress={()=>Actions.BuildFilter({filterId: 'car'})}>
-          <Text style={styles.text}>{("Filter Builds").toUpperCase()}</Text>
-        </TouchableOpacity>
-      </View>
+      <F8Button onPress={Actions.Makes}
+                caption="search by car" type="search"
+                icon={require ('../common/img/search.png')}/>
       <BuildsList/>
       </View>
     )
@@ -53,11 +38,15 @@ const styles = StyleSheet.create ({
     alignItems: 'center',
     paddingHorizontal: 16,
     opacity: 0.6,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderTopWidth:0.5,
+    borderBottomWidth:0.5,
+    borderColor: 'black'
   },
   text: {
     fontSize: 10,
     color: 'black',
+    fontWeight: '700',
     letterSpacing: 1,
     alignSelf: 'center',
     textDecorationLine: 'underline'

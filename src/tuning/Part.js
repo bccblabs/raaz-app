@@ -46,11 +46,11 @@ export default class Part extends Component {
           </View>
         </View>
       </TouchableOpacity>
-      <ScrollView style={{marginHorizontal: 8}} pagingEnabled={true}
+      <ScrollView style={{marginHorizontal: 8, backgroundColor: 'white'}} pagingEnabled={true}
       horizontal={true} showsHorizontalScrollIndicator={false}>
       {specsArray.map((rec, idx)=>{
         return (
-          <View style={{padding: 6, backgroundColor: 'white', borderWidth: 0.5, borderColor: 'lightgray'}}>
+          <View key={`psp-${idx}`} style={{width: 120,padding: 6, backgroundColor: 'white', borderWidth: 0.5, borderColor: 'lightgray'}}>
           <Text style={Specs.subtitle1}>{rec.name}</Text>
           <Text style={Specs.subtitle2}>{rec.value}</Text>
           </View>

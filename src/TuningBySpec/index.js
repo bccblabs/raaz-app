@@ -14,7 +14,7 @@ import {createSelector} from 'reselect'
 import PostCard from '../Posts/PostCard'
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
-import {fetchCarDetails} from '../reducers/tuning/filterActions'
+import {fetchCarDetails, fetchCategoriesFromApi} from '../reducers/tuning/filterActions'
 
 import F8Header from '../common/F8Header'
 import F8Button from '../common/F8Button'
@@ -22,7 +22,7 @@ import {Heading1, Heading2, Heading3, EmptyHeading, Paragraph} from '../common/F
 
 import LoadingPage from '../components/LoadingPage'
 import MetricsGraph from '../components/MetricsGraph'
-import PartsGrid from './PartsGrid'
+import Manufacturers from './Manufacturers'
 import PostsList from '../Posts/PostListView'
 import {VRImage} from '../cardboard'
 
@@ -59,7 +59,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchSpecsDetails: (specId)=>{
       dispatch (fetchCarDetails (specId))
-    }
+    },
+    fetchCategories: (key)=> {
+      dispatch (fetchCategoriesFromApi (key))
+    },
   }
 }
 
@@ -74,8 +77,9 @@ class TuningBySpec extends Component {
   }
 
   componentWillMount () {
-    let {specId, fetchSpecsDetails} = this.props
+    let {specId, fetchSpecsDetails, fetchCategories} = this.props
     fetchSpecsDetails(specId)
+    fetchCategories (specId)
   }
 
   componentWillReceiveProps (nextProps) {
@@ -106,8 +110,8 @@ class TuningBySpec extends Component {
 
       let tuningcomponent = (specsInfo.tuning && specsInfo.tuning.length )?(
                               <View>
-                                <Heading3 style={Titles.buildSectionTitle}>{"TUNING BY CATEGORY"}</Heading3>
-                                <PartsGrid data={tuning} specId={specId}/>
+                                <Heading3 style={Titles.buildSectionTitle}>{"BRANDS BY CATEGORY"}</Heading3>
+                                <Manufacturers data={tuning} specId={specId}/>
                               </View>
                             ): (<View/>)
         , postsContent = posts?(

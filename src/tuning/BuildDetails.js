@@ -15,6 +15,7 @@ import {connect} from 'react-redux'
 import {Actions} from 'react-native-router-flux'
 import {createSelector} from 'reselect'
 
+import Part from './Part'
 
 import Icon from 'react-native-vector-icons/Foundation';
 import {Heading1, Heading3} from '../common/F8Text'
@@ -124,30 +125,15 @@ class BuildDetails extends Component {
         <Heading3 style={Titles.buildSectionTitle}>{"SPECS"}</Heading3>
         {specsContent}
         <Heading3 style={Titles.buildSectionTitle}>{"PARTS INSTALLED"}</Heading3>
-        <ScrollView
-          showsHorizontalScrollIndicator={false}
-          horizontal={true}
-          pagingEnabled={true}
-          style={PartStyles.partsScrollStyle}>
-          {
-            parts.map ((data, cidx)=> {
-              let {name, medium, partId, recCnt} = data,
-                  passProps = Object.assign ({}, data, {specId})
-              return (
-                <View key={`pg-${cidx}`} style={PartStyles.partContainer}>
-                <TouchableWithoutFeedback onPress={()=>{Actions.PartDetails ({data: passProps})}}>
-                  <Image
-                    source={{uri: medium[0]}}
-                    style={PartStyles.partImage}>
-                  </Image>
-                </TouchableWithoutFeedback>
-                <Text style={PartStyles.partTitle}>{name}</Text>
-                <Text style={PartStyles.rating}>{recCnt?recCnt:'n/a' + ' Recommendations'}</Text>
-                </View>
-              )
-            })
-          }
-        </ScrollView>
+        <View>
+        {
+          parts.map ((data, cidx)=> {
+            return (
+              <Part key={`p-${cidx}`} data={data} specId={specId}/>
+            )
+          })
+        }
+        </View>
         </View>
       )
       return (

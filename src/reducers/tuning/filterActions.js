@@ -4,6 +4,8 @@ const {
     TOGGLE_PART_TAG,
     CLEAR_PART_TAG,
 
+    SET_TUNING_TAGS,
+
     TOGGLE_BUILD_TAG,
     CLEART_BUILD_TAG,
 
@@ -14,6 +16,10 @@ const {
     PARTS_REQUEST,
     PARTS_SUCCESS,
     PARTS_ERROR,
+
+    PARTS_MANU_REQUEST,
+    PARTS_MANU_SUCCESS,
+    PARTS_MANU_ERROR,
 
     DEALS_REQUEST,
     DEALS_SUCCESS,
@@ -134,4 +140,27 @@ export function fetchCategoriesFromApi (key) {
       schema: Schemas.CAT_ARRAY,
     }
   }
+}
+
+export function setSelectedTags (tags) {
+  return {
+    type: SET_TUNING_TAGS,
+    payload: tags
+  }
+}
+
+export function fetchPartsByManufacturer (manufacturerId, nextPageUrl, specId, category) {
+  let endpoint = '/tuning/manufacturer/' + manufacturerId + '/spec/' + specId + '?category=' + category
+    , url = nextPageUrl?(endpoint + nextPageUrl):endpoint
+
+  return {
+    manufacturerId,
+    [CALL_API]: {
+      types: [PARTS_MANU_REQUEST, PARTS_MANU_SUCCESS, PARTS_MANU_ERROR],
+      endpoint: url,
+      schema: Schemas.PARTS_ARRAY,
+      data: []
+    }
+  }
+
 }

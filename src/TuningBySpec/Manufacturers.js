@@ -19,7 +19,7 @@ import {createSelector} from 'reselect'
 import isArray from 'lodash/isArray'
 import {PartStyles} from '../styles'
 
-class PartsGrid extends Component {
+class Manufacturers extends Component {
   constructor (props) {
     super (props)
   }
@@ -40,20 +40,20 @@ class PartsGrid extends Component {
               horizontal={true}
               style={PartStyles.partsScrollStyle}>
               {
-                optionRow.options.map ((data, cidx)=> {
-                  let {name, media, partId, recCnt} = data,
-                      passProps = Object.assign ({}, data, {specId})
+                optionRow.data.map ((data, cidx)=> {
+                  let {name, logo, manufacturerId} = data,
+                      passProps = Object.assign ({}, {manufacturerId}, {name}, {specId}, {categoryName: optionRow.name})
+
 
                   return (
                     <View key={`pelem-${cidx}`} style={PartStyles.partContainer}>
-                    <TouchableWithoutFeedback onPress={()=>{Actions.PartDetails ({data: passProps})}}>
+                    <TouchableWithoutFeedback onPress={()=>{Actions.PartByManufacturer ({...passProps})}}>
                       <Image
-                        source={{uri: media}}
+                        source={{uri: logo}}
                         style={PartStyles.partImage}>
                       </Image>
                     </TouchableWithoutFeedback>
                     <Text style={PartStyles.partTitle}>{name}</Text>
-                    <Text style={PartStyles.rating}>{recCnt?recCnt:'n/a' + ' Recommendations'}</Text>
                     </View>
                   )
                 })
@@ -75,4 +75,4 @@ var styles = StyleSheet.create({
   },
 })
 
-export default connect () (PartsGrid)
+export default connect () (Manufacturers)

@@ -23,6 +23,12 @@ export const getCategoriesSelector = createSelector (
   }
 )
 
+export const categoryTagsSelector = (state, props) => {
+  let tags = state.entities.categories ? state.entities.categories[props.categoryName] : []
+  console.log ('tags', tags)
+  return tags.options.map ((opt)=>opt.name)
+}
+
 /* parts */
 export const partsEntitiesSelector = (state, props) => (state.entities.parts || {})
 export const partsPaginationSelector = (state, props) => (state.pagination.partsPagination && state.pagination.partsPagination[props.specId] || {})
@@ -30,6 +36,16 @@ export const partsBySpecIdSelector = createSelector (
   [partsEntitiesSelector, partsPaginationSelector],
   (partsEntities, partsPagination) => {
     let ids = partsPagination.ids?partsPagination.ids:[]
+    return ids.map (id=>partsEntities[id]).filter (elem=>elem)
+  }
+)
+
+
+export const partsByManufacturerPaginationSelector = (state, props) => (state.pagination.partsPaginationByManufacturer && state.pagination.partsPaginationByManufacturer[props.manufacturerId] || {})
+export const partsByManufacturerSelector = createSelector (
+  [partsEntitiesSelector, partsByManufacturerPaginationSelector],
+  (partsEntities, partsPagination) => {
+    let ids = partsPagination.ids ? partsPagination.ids: []
     return ids.map (id=>partsEntities[id]).filter (elem=>elem)
   }
 )

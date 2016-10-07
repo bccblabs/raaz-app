@@ -62,6 +62,8 @@ export default keyMirror ({
   TOGGLE_PART_TAG: null,
   CLEAR_PART_TAG: null,
 
+  SET_TUNING_TAGS: null,
+
   TOGGLE_BUILD_TAG: null,
   CLEART_BUILD_TAG: null,
 
@@ -72,6 +74,10 @@ export default keyMirror ({
   PARTS_REQUEST: null,
   PARTS_SUCCESS: null,
   PARTS_ERROR: null,
+
+  PARTS_MANU_REQUEST: null,
+  PARTS_MANU_SUCCESS: null,
+  PARTS_MANU_ERROR: null,
 
   DEALS_REQUEST: null,
   DEALS_SUCCESS: null,

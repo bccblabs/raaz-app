@@ -14,7 +14,6 @@ import {connect} from 'react-redux'
 import F8Header from '../common/F8Header'
 import F8Button from '../common/F8Button'
 import TagFilters from '../filters/TagFilters'
-import {fetchCategoriesFromApi} from '../reducers/tuning/filterActions'
 import {Heading3, Paragraph} from '../common/F8Text'
 import {General} from '../styles'
 
@@ -30,12 +29,7 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchCategories: (key)=> {
-      dispatch (fetchCategoriesFromApi (key))
-    },
-
-  }
+    return {dispatch}
 }
 
 class PostFilters extends Component {
@@ -47,12 +41,6 @@ class PostFilters extends Component {
       categoriesPagination: props.categoriesPagination,
     }
   }
-
-  componentDidMount () {
-    let {fetchCategories, filterId} = this.props
-    fetchCategories (filterId)
-  }
-
   componentWillReceiveProps (nextProps) {
     let {categories, categoryPagination, selectedTags} = nextProps
     this.setState ({categories, categoryPagination, selectedTags})
