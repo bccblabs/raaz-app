@@ -37,9 +37,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveSpecId: (userId, specId) => {
-      dispatch (syncSpec (userId, specId))
-    },
     setSelectedSpecId: (specId) => {
       dispatch (setSpecId (specId))
     },
@@ -78,7 +75,7 @@ class SpecsList extends Component {
 
   render () {
     let {specs, selectedSubmodel, isFetching, selectedMake, selectedModel} = this.state,
-        {saveSpecId, userId, setSelectedSpecId, addToTaggedCars, clearCarSelection} = this.props
+        {userId, setSelectedSpecId, addToTaggedCars, clearCarSelection} = this.props
     const leftItem = {
             title: 'Back',
             onPress: ()=>Actions.pop(),

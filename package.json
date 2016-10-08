@@ -55,6 +55,8 @@
     "react-native-overlay": "^0.4.2",
     "react-native-parallax": "^0.2.2",
     "react-native-parallax-scroll-view": "^0.18.2",
+    "react-native-qrcode": "^0.2.2",
+    "react-native-qrcode-scanner": "0.0.5",
     "react-native-responsive-image": "^1.1.4",
     "react-native-router-flux": "^2.3.13",
     "react-native-scrollable-mixin": "^1.0.1",

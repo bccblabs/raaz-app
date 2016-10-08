@@ -612,31 +612,21 @@ export const PostStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    marginVertical: 16,
+    marginVertical: 8,
     padding: 8
   },
   header: {
     backgroundColor: 'transparent',
     flexDirection: 'row',
     alignItems: 'flex-start',
-    paddingVertical: 8,
+    paddingVertical: 4,
     flex: 1,
   },
   tags: {
     flexWrap: 'wrap',
     flexDirection: 'row',
-    position: 'absolute',
-    top: 90,
     width: window.width,
     paddingVertical: 8,
-  },
-  buildtags: {
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    position: 'absolute',
-    bottom: 100,
-    width: window.width,
-    paddingVertical: 4,
   },
   tagsContainer: {
     flex: 1,
@@ -672,9 +662,8 @@ export const PostStyles = StyleSheet.create({
   },
   tag: {
     color: 'black',
-    fontSize: 15,
+    fontSize: 10,
     paddingHorizontal: 4,
-    letterSpacing: 0.7,
     fontFamily: 'FontAwesome'
   },
   created: {
@@ -685,10 +674,9 @@ export const PostStyles = StyleSheet.create({
     fontFamily: 'FontAwesome'
   },
   authorName: {
-    fontSize: 15,
-    color: F8Colors.lightText,
-    letterSpacing: 0.3,
-    fontFamily: 'FontAwesome'
+    fontSize: 18,
+    color: 'black',
+    fontWeight: '500',
   },
   singlePostImage: {
     width: window.width,

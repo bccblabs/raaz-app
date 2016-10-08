@@ -3,8 +3,8 @@
 const {Record, OrderedSet, Map} = require ('immutable')
 
 const InitialState = Record ({
-  productIds: new (OrderedSet),
-  specIds: new (OrderedSet),
+  parts: new (Map),
+  specs: new (Map),
   access_token: null,
 })
 

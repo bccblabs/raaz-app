@@ -27,7 +27,6 @@ const mapStateToProps = (state) => {
     submodels: keys(state.entities.submodels).sort(),
     selectedMake: state.stockCar.selectedMake,
     selectedModel: state.stockCar.selectedModel,
-    selectedSubmodel: state.stockCar.selectedSubmodel,
   }
 }
 
@@ -49,25 +48,24 @@ class SubmodelsList extends Component {
       submodels: props.submodels,
       selectedMake: props.selectedMake,
       selectedModel: props.selectedModel,
-      selectedSubmodel: props.selectedMake,
       isFetching: true,
     }
   }
 
   componentWillMount () {
-    let {submodels, selectedMake, selectedModel, selectedSubmodel} = this.props
+    let {submodels, selectedMake, selectedModel} = this.props
     this.setState ({submodels, selectedMake, selectedModel, isFetching: true})
   }
 
 
   componentWillReceiveProps (nextProps) {
-    let {submodels, selectedMake, selectedModel, selectedSubmodel} = nextProps,
+    let {submodels, selectedMake, selectedModel} = nextProps,
         isFetching = submodels.length?false:true
-    this.setState ({submodels, selectedModel, selectedMake, isFetching, selectedSubmodel})
+    this.setState ({submodels, selectedModel, selectedMake, isFetching})
   }
 
   render () {
-    let {submodels, selectedMake, selectedModel, selectedSubmodel, isFetching} = this.state,
+    let {submodels, selectedMake, selectedModel, isFetching} = this.state,
         {fetchSpecs, setSubmodel} = this.props
 
     const leftItem = {
@@ -80,7 +78,6 @@ class SubmodelsList extends Component {
                 maxSelectedOptions={1}
                 renderText={(option)=> {return (<Text style={FilterStyles.multipleChoiceText}>{option.toUpperCase()}</Text>)}}
                 options={this.state.submodels}
-                selectedOptions={[this.state.selectedSubmodel]}
                 renderSeparator={(option)=>{return (<View/>)}}
                 renderIndicator={(option)=>{return (<View/>)}}
                 onSelection={(option)=>{

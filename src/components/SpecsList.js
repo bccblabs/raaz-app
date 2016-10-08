@@ -21,7 +21,7 @@ import { FilterStyles } from '../styles'
 
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
-import { syncSpec } from '../reducers/history/historyActions'
+import { addSpecToHistory } from '../reducers/history/historyActions'
 import { setSpecId } from '../reducers/stockCar/filterActions'
 
 const mapStateToProps = (state) => {
@@ -31,17 +31,21 @@ const mapStateToProps = (state) => {
   return {
     specs,
     userId: state.user.profileData.user_id,
+
+    selectedMake: state.stockCar.selectedMake,
+    selectedModel: state.stockCar.selectedModel,
     selectedSubmodel: state.stockCar.selectedSubmodel,
+
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveSpecId: (userId, specId) => {
-      dispatch (syncSpec (userId, specId))
-    },
     setSelectedSpecId: (specId) => {
       dispatch (setSpecId (specId))
+    },
+    addSpecToHistory: (selectedMake, selectedModel, selectedSubmodel, specId) => {
+      dispatch (addSpecToHistory (selectedMake, selectedModel, selectedSubmodel, specId))
     }
   }
 }
@@ -54,14 +58,13 @@ class SpecsList extends Component {
     this.storeInnerRef = this.storeInnerRef.bind (this)
     this.state = {
       specs: props.specs,
-      selectedSubmodel: props.selectedSubmodel,
       isFetching: true,
     }
   }
 
   componentWillMount () {
-    let {specs, selectedSubmodel, isFetching} = this.props
-    this.setState ({specs, selectedSubmodel, isFetching: true})
+    let {specs, isFetching} = this.props
+    this.setState ({specs, isFetching: true})
   }
 
 
@@ -72,8 +75,9 @@ class SpecsList extends Component {
   }
 
   render () {
-    let {specs, selectedSubmodel, isFetching} = this.state,
-        {saveSpecId, userId, setSelectedSpecId} = this.props
+    let {specs, isFetching} = this.state,
+        {addSpecToHistory, userId, setSelectedSpecId,
+        selectedMake, selectedModel, selectedSubmodel} = this.props
     const leftItem = {
             title: 'Back',
             onPress: ()=>Actions.pop(),
@@ -91,7 +95,7 @@ class SpecsList extends Component {
                         return (
                           <TouchableOpacity onPress={()=>{
                             setSelectedSpecId (specId)
-                            saveSpecId (userId, specId)
+                            addSpecToHistory (selectedMake, selectedModel, selectedSubmodel, option)
                             Actions.TuningBySpec ({specId: specId})
                           }}>
                           <Text style={FilterStyles.multipleChoiceText}>

@@ -26,7 +26,6 @@ const mapStateToProps = (state) => {
   return {
     models: keys(state.entities.models).sort(),
     selectedMake: state.stockCar.selectedMake,
-    selectedModel: state.stockCar.selectedModel,
   }
 }
 
@@ -46,26 +45,25 @@ class ModelsList extends Component {
     super (props)
     this.state = {
       models: props.models,
-      selectedModel: props.selectedModel,
       selectedMake: props.selectedMake,
       isFetching: true,
     }
   }
 
   componentWillMount () {
-    let {models, selectedMake, selectedModel, fetchSubmodels} = this.props
-    this.setState ({models, selectedMake, selectedModel, isFetching: true})
+    let {models, selectedMake, fetchSubmodels} = this.props
+    this.setState ({models, selectedMake, isFetching: true})
   }
 
 
   componentWillReceiveProps (nextProps) {
-    let {models, selectedModel, selectedMake} = nextProps,
+    let {models, selectedMake} = nextProps,
         isFetching = models.length?false:true
-    this.setState ({models, selectedModel, selectedMake, isFetching})
+    this.setState ({models, selectedMake, isFetching})
   }
 
   render () {
-    let {models, selectedMake, selectedModel, isFetching} = this.state,
+    let {models, selectedMake, isFetching} = this.state,
         {fetchSubmodels, setModel} = this.props
     const leftItem = {
             title: 'Makes',
@@ -77,13 +75,11 @@ class ModelsList extends Component {
                 maxSelectedOptions={1}
                 renderText={(option)=> {return (<Text style={FilterStyles.multipleChoiceText}>{option.toUpperCase()}</Text>)}}
                 options={this.state.models}
-                selectedOptions={[this.state.selectedModel]}
                 renderSeparator={(option)=>{return (<View/>)}}
                 renderIndicator={(option)=>{return (<View/>)}}
                 onSelection={(option)=>{
                   setModel (option)
                   fetchSubmodels (selectedMake, option)
-                  this.setState ({selectedModel: [option]})
                   Actions.Submodels()
                 }}/>
             </ScrollView>

@@ -80,10 +80,11 @@ class BuildsList extends Component {
   render () {
     let {dataSource, buildsPagination} = this.state
       , listContent = (
-        <View>
+        <View
+        style={{flex: 1, marginBottom: 50, backgroundColor: 'white'}}
+        >
         <Heading3 style={Titles.filterSectionTitle}>{"Builds"}</Heading3>
         <ListView
-          style={{flex: 1, marginBottom: 50, backgroundColor: 'white'}}
           dataSource={dataSource}
           renderRow={this.renderRow}
           renderEmptyList={this._renderEmptyList}

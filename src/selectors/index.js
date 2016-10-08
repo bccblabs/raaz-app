@@ -2,7 +2,12 @@
 import {createSelector} from 'reselect'
 
 
+/* cars by specs selector */
 export const newpostTaggedCars = (state) => {return state.newpost.taggedCars.toIndexedSeq().toArray()}
+
+export const savedSpecsSelector = (state) => {return state.history.specs.toIndexedSeq().toArray()}
+export const savedPartsSelector = (state) => {return state.history.parts.toIndexedSeq().toArray()}
+
 export const isLikedByUser = (state) => {return true}
 export const profileSelector = (state) => {return state.user.profileData}
 export const selectedTagsSelector = (state, props) => {

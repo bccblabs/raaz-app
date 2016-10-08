@@ -43,7 +43,6 @@ export default class Post extends Component {
           {name && (<Text style={PostStyles.title}>{name}</Text>)}
           <Text style={PostStyles.created}>{`${daysAgo}`}</Text>
         </View>
-        {manufacturerContent}
         <Grid style={PostStyles.imageContainer}>
           <Col>
             <Image source={{uri:media[0]}} style={PostStyles.largeImage}/>
@@ -60,7 +59,7 @@ export default class Post extends Component {
       </View>
     )
     , tagsContent = tags && (
-          <ScrollView style={PostStyles.buildtags} showsHorizontalScrollIndicator={false} horizontal={true} containerStyle={PostStyles.tagsContainer}>
+          <ScrollView style={PostStyles.tags} showsHorizontalScrollIndicator={false} horizontal={true} containerStyle={PostStyles.tagsContainer}>
             {tags && tags.map ((tag, idx)=> {return ( <Text key={idx} style={PostStyles.tag}>{`#${tag}`}</Text> )})}
           </ScrollView>
       )
@@ -68,16 +67,19 @@ export default class Post extends Component {
     , commentsContent = (<CommentBtn postId={buildId} commentsCnt={comments}/>)
 
     return (
+      <View style={PostStyles.container}>
       <TouchableWithoutFeedback onPress={()=>Actions.BuildDetails({buildId: buildId, name: name})}>
-        <View style={PostStyles.container}>
+        <View>
           {imageContent}
+          {manufacturerContent}
           {tagsContent}
-          <View style={{flexDirection:"row", justifyContent: 'flex-start'}}>
-          {likesContent}
-          {commentsContent}
-          </View>
         </View>
       </TouchableWithoutFeedback>
+      <View style={{flexDirection:"row", justifyContent: 'flex-start'}}>
+      {likesContent}
+      {commentsContent}
+      </View>
+      </View>
     )
   }
 }

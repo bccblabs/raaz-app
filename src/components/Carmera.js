@@ -35,8 +35,8 @@ export default class Carmera extends Component {
       <VibrancyView blurType="xlight" style={CarmeraStyles.wrapper}>
       <Image
         style={{height: 32, width: 32}}
-        source={require('../images/carmera.png')}/>
-      <Text style={CarmeraStyles.text}>{"Find Builds Using Camera"}</Text>
+        source={require('../common/img/qr.png')}/>
+      <Text style={CarmeraStyles.text}>{"Post Your Car Meme"}</Text>
       </VibrancyView>
       </Image>
       </TouchableOpacity>

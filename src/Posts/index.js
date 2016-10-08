@@ -15,7 +15,7 @@ import {fetchCategoriesFromApi} from '../reducers/stockCar/filterActions'
 
 import PostListView from './PostListView'
 import F8Header from '../common/F8Header'
-
+import Carmera from '../components/Carmera'
 const mapStateToProps = (state) => {
   return {
     profileData: state.user.profileData,
@@ -63,6 +63,7 @@ class Raaz extends Component {
     return (
       <View style={{flex: 1}}>
       <F8Header title="Posts" foreground='dark' leftItem={leftItem} rightItem={rightItem}/>
+      <Carmera/>
       <PostListView/>
       </View>
     )

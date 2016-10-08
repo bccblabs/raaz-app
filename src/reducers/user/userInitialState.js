@@ -1,6 +1,6 @@
 'use strict'
 
-const {Record} = require ('immutable')
+const {Map, Record} = require ('immutable')
 
 const userInitialState = Record ({
   profileData: new (Record ({
@@ -25,6 +25,8 @@ const userInitialState = Record ({
 
     facebook: null,
     instagram: null,
+
+    specsHistory: new (Map)
   })),
 
   loginType: null,
