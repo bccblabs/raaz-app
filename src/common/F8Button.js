@@ -89,6 +89,14 @@ class F8Button extends React.Component {
           </Text>
         </View>
       );
+    } else if (this.props.type === 'spec') {
+      content = (
+        <View style={[styles.button,  {paddingHorizontal: 8,backgroundColor: 'white'}]}>
+          <Text style={[styles.carTagCaption, {color: 'blue'}]}>
+            {caption}
+          </Text>
+        </View>
+      );
     } else if (this.props.type === 'search') {
       content = (
         <View style={styles.search}>

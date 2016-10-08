@@ -25,6 +25,8 @@ export default class TagsHeader extends Component {
     this.setState ({selectedTags: nextProps.selectedTags})
   }
   render () {
+
+    console.log (this.state)
     let {selectedTags, tagAction, color} = this.props
       , {tags} = this.state
     return (
@@ -37,13 +39,20 @@ export default class TagsHeader extends Component {
           contentContainerStyle={{justifyContent: 'center'}}>
           {
             tags && tags.map ((tag, idx)=> {
-              let isFilterSelected = (this.state.selectedTags.indexOf (tag) > -1)
-              return ( <Tag
-                          touchEnabled={true}
-                          title={tag} key={idx}
-                          selected={isFilterSelected}
-                          action={tagAction(tag)}
-                          />)
+              if (tag.specId) {
+                console.log ('tag', tag)
+                return (
+                  <Tag touchEnabled={true} title={tag.make + ' ' + tag.model + ' ' + tag.submodel}
+                       key={idx} selected={true} action={tagAction ({specId: tag.specId})}
+                   />)
+              } else {
+                let isFilterSelected = (this.state.selectedTags.indexOf (tag) > -1)
+                return (
+                  <Tag touchEnabled={true} title={tag}
+                       key={idx} selected={isFilterSelected}
+                      action={tagAction(tag)}
+                  />)
+              }
             })
           }
         </ScrollView>

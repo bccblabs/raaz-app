@@ -1,11 +1,12 @@
 'use strict'
 // handle saving and loading of listings
 const {
-  SAVE_PRODUCT,
-  LOAD_PRODUCTS,
 
-  SAVE_SPEC,
-  LOAD_SPECS,
+  ADD_TO_SAVED_SPECS,
+  REMOVE_SAVED_SPECS,
+
+  ADD_TO_SAVED_PRODUCT,
+  REMOVE_SAVED_PRODUCT,
 
   SET_ACCESS_TOKEN,
   LOAD_ACCESS_TOKEN,
@@ -20,28 +21,31 @@ var Immutable = require('immutable')
 export default function historyReducer (state=initialState, action) {
   if (!(state instanceof InitialState)) return state.merge (initialState)
   switch (action.type) {
-    case SAVE_PRODUCT: {
-      return state.setIn (['productIds'], state.get ('productIds').add(action.payload.id))
+
+    case ADD_TO_SAVED_SPECS: {
+      let {payload} = action
+        , specs = state.get ('specs').set (payload.specId, payload)
+      return state.setIn (['specs'], specs, val=> specs)
     }
-    case LOAD_PRODUCTS: {
-      if (action.payload !== undefined) {
-        return action.payload['history'] &&
-                state.setIn (['productIds'], Immutable.Set (action.payload['history']['productIds'])) || state
-      } else {
-        return state
-      }
+
+    case REMOVE_SAVED_SPECS: {
+      let {payload} = action
+        , specs = state.get ('specs').delete (payload)
+      return state.setIn (['specs'], specs, val=> specs)
     }
-    case SAVE_SPEC: {
-      return state.setIn (['specIds'], state.get('specIds').add (action.payload.specId))
+
+    case ADD_TO_SAVED_PRODUCT: {
+      let {payload} = action
+        , parts = state.get ('parts').set (payload.partId, payload)
+      return state.setIn (['parts'], parts, val=> parts)
     }
-    case LOAD_SPECS: {
-      if (action.payload !== undefined) {
-        return action.payload['history'] &&
-                state.setIn (['specIds'], Immutable.Set (action.payload['history']['specIds'])) || state
-      } else {
-        return state
-      }
+
+    case REMOVE_SAVED_PRODUCT: {
+      let {payload} = action
+        , parts = state.get ('parts').delete (payload)
+      return state.setIn (['parts'], parts, val=> parts)
     }
+
     case SET_ACCESS_TOKEN: {
       return state.setIn (['access_token'], action.payload)
     }

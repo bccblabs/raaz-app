@@ -10,11 +10,17 @@ import React, {
 } from 'react-native'
 
 import {Actions} from 'react-native-router-flux'
+import {connect} from 'react-redux'
+
 import BuildsList from '../tuning/BuildsList'
 import F8Header from '../common/F8Header'
 import F8Button from '../common/F8Button'
-import {btnColor} from '../styles'
+
 export default class Tuning extends Component {
+  constructor (props) {
+    super (props)
+  }
+
   render () {
     const leftItem = {title: 'Saved', onPress:Actions.WatchList}
         , rightItem = {title: 'Orders', onPress: Actions.Orders}

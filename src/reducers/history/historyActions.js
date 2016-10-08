@@ -22,10 +22,11 @@ const {
 
 
 
-export function addSpecToHistory (make, model, submodel, specId) {
+export function addSpecToHistory (make, model, submodel, specInfo) {
+  let {horsepower, specId} = specInfo
   return {
     type: ADD_TO_SAVED_SPECS,
-    payload: {make, model, submodel, specId}
+    payload: {make, model, submodel, specId, horsepower}
   }
 }
 

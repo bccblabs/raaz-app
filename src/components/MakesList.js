@@ -7,22 +7,22 @@ import React, {
   Text
 } from 'react-native'
 
-import { FilterStyles } from '../styles'
+import { FilterStyles, btnColor, Titles } from '../styles'
 
-import keys from 'lodash/keys'
-import union from 'lodash/union'
 import F8Header from '../common/F8Header'
 import LoadingPage from './LoadingPage'
+import SpecsHistoryHeader from './SpecsHistoryHeader'
+
 import MultipleChoice from 'react-native-multiple-choice'
 
-import { Map } from 'immutable'
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
 import { fetchMakes, fetchModels, setMake } from '../reducers/stockCar/filterActions'
+import { makesSelector } from '../selectors'
 
 const mapStateToProps = (state) => {
   return {
-    makes: keys (state.entities.makes).sort(),
+    makes: makesSelector (state),
   }
 }
 
@@ -65,6 +65,7 @@ class MakesList extends Component {
   render () {
     let {makes, isFetching} = this.state
       , {setMake} = this.props
+
     const leftItem = {
             title: 'Cancel',
             onPress: ()=>Actions.pop()
@@ -92,6 +93,7 @@ class MakesList extends Component {
           title="Makes"
           leftItem={leftItem}
           style={FilterStyles.headerStyle}/>
+          <SpecsHistoryHeader/>
           {content}
       </View>
     )

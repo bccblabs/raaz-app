@@ -30,6 +30,32 @@ export const General = StyleSheet.create ({
   }
 })
 
+export const Header = StyleSheet.create ({
+  container: {
+    height: 44,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
+    paddingLeft: 8,
+    paddingRight: 8,
+    borderWidth: 0.5,
+    borderColor: 'black'
+  },
+  clear: {
+    marginHorizontal: 2,
+    alignSelf: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 9,
+    paddingVertical: 8,
+    fontWeight: '500',
+    color: 'black',
+    letterSpacing: 0.3,
+  }
+
+})
+
 export const Specs = StyleSheet.create ({
   container: {
     flex: 1,

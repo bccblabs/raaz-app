@@ -1,12 +1,18 @@
 'use strict'
 import {createSelector} from 'reselect'
+import keys from 'lodash/keys'
 
+/* car selector entities */
+
+export const makesSelector = (state) => {return keys (state.entities.makes).sort()}
 
 /* cars by specs selector */
 export const newpostTaggedCars = (state) => {return state.newpost.taggedCars.toIndexedSeq().toArray()}
 
+/* history selectors */
 export const savedSpecsSelector = (state) => {return state.history.specs.toIndexedSeq().toArray()}
 export const savedPartsSelector = (state) => {return state.history.parts.toIndexedSeq().toArray()}
+
 
 export const isLikedByUser = (state) => {return true}
 export const profileSelector = (state) => {return state.user.profileData}
