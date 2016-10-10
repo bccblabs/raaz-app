@@ -1,9 +1,4 @@
 'use strict'
-import {
-  LOAD,
-  SYNC,
-} from 'redux-storage'
-
 import { CALL_API, Schemas } from '../../middlewares/api'
 
 const {
@@ -11,12 +6,11 @@ const {
   ADD_TO_SAVED_SPECS,
   REMOVE_SAVED_SPECS,
 
-  ADD_TO_SAVED_PRODUCT,
-  REMOVE_SAVED_PRODUCT,
+  TOGGLE_SAVE_PRODUCT,
 
   SET_ACCESS_TOKEN,
-  LOAD_ACCESS_TOKEN,
 
+  LOAD_HISTORY
 
 } = require  ('../../constants').default
 
@@ -38,20 +32,20 @@ export function removeSpecToHistory (specId) {
   }
 }
 
-export function addPartToHistory (part) {
+export function toggleSaveProduct (part) {
   return {
-    type: ADD_TO_SAVED_PRODUCT,
-    payload: part
+    type: TOGGLE_SAVE_PRODUCT,
+    payload: Object.assign ({}, {...part}, {media: part.media && part.media[0] || ''})
   }
 }
 
-export function removePartFromHistory (partId) {
+
+export function loadHisory (history) {
   return {
-    type: REMOVE_SAVED_PRODUCT,
-    payload: partId
+    type: LOAD_HISTORY,
+    payload: history
   }
 }
-
 
 // export function syncSpec (specId, userId) {
 //   return {

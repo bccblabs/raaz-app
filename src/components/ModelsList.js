@@ -13,8 +13,9 @@ import keys from 'lodash/keys'
 import union from 'lodash/union'
 
 import F8Header from '../common/F8Header'
-import LoadingPage from './LoadingPage'
+import LoadingView from './LoadingView'
 import MultipleChoice from 'react-native-multiple-choice'
+import SpecsHistoryHeader from './SpecsHistoryHeader'
 
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
@@ -69,7 +70,7 @@ class ModelsList extends Component {
             title: 'Makes',
             onPress: ()=>Actions.pop()
           },
-          content = isFetching?(<LoadingPage/>):(
+          content = isFetching?(<LoadingView/>):(
             <ScrollView style={FilterStyles.optionsContainer}>
               <MultipleChoice
                 maxSelectedOptions={1}
@@ -92,6 +93,7 @@ class ModelsList extends Component {
           title={this.state.selectedMake.toUpperCase()}
           leftItem={leftItem}
           style={FilterStyles.headerStyle}/>
+          <SpecsHistoryHeader/>
           {content}
       </View>
     )

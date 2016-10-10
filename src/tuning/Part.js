@@ -35,7 +35,6 @@ export default class Part extends Component {
         ]
         , specsArray = intersection (keysArray, Object.keys(data)).map ((key)=>{return {name: Utils.parseLabelName(key), value: data[key]}})
 
-    console.log (specsArray)
     return (
       <View>
       <TouchableOpacity onPress={()=>{Actions.PartDetails({data: Object.assign (data, {specId})})}}>

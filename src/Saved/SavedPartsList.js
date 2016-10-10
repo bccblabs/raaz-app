@@ -1,16 +1,22 @@
 'use strict'
 
 import React, {Component, ListView, Text, View} from 'react-native'
-import LoadingPage from '../components/LoadingPage'
-import ErrorPage from '../common/ErrorPage'
+
+import LoadingView from '../components/LoadingView'
+import ErrorView from '../common/ErrorView'
+import EmptyView from '../common/EmptyView'
+
 import {connect} from 'react-redux'
 import {Actions} from 'react-native-router-flux'
 import RequestUtils from '../requests'
 import Part from '../tuning/Part'
+import PartsList from '../components/PartsList'
+
+import {savedPartsSelector} from '../selectors'
 
 const mapStateToProps = (state) => {
   return {
-    userId: state.user.profileData.user_id
+    savedParts: savedPartsSelector (state)
   }
 }
 
@@ -19,62 +25,39 @@ class SavedPartsList extends Component {
     super (props)
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     this.state = {
-      userId: this.props.userId,
-      partTags: [],
       dataSource: ds.cloneWithRows ([]),
-      isFetching: true,
-      hasError: false,
-      nextPageUrl: null,
-    }
-    this.fetchSavedPartsFromUrl = this.fetchSavedPartsFromUrl.bind (this)
-  }
-
-  async fetchSavedPartsFromUrl () {
-    try {
-      let {userId, partTags, nextPageUrl} = this.state
-      let data = await RequestUtils.fetchSavedParts (userId, partTags, nextPageUrl)
-
-      this.setState ({
-        dataSource: this.state.dataSource.cloneWithRows (data && data.parts || []),
-        partTags: data && data.tags,
-        hasError: false,
-        isFetching: false,
-      })
-    } catch (err) {
-      console.error (err)
-      this.setState ({
-        hasError: true,
-        isFetching: false
-      })
     }
   }
 
   componentWillMount () {
-    this.fetchSavedPartsFromUrl ()
+    let {savedParts} = this.props
+    this.setState ({dataSource: this.state.dataSource.cloneWithRows (savedParts)})
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.savedParts != this.props.savedParts) {
+      this.setState ({dataSource: this.state.dataSource.cloneWithRows (nextProps.savedParts)})
+    }
+
   }
 
   render () {
-    let {dataSource, isFetching, hasError} = this.state
-      , content
-    if (isFetching) content = (<LoadingPage/>)
-    if (hasError) content = (<ErrorPage onPress={this.fetchSavedPartsFromUrl}/>)
-    else {
-      content =  (
+    let {dataSource} = this.state
+    if (!dataSource.getRowCount()) {
+      return (<EmptyView
+                caption={"You haven\'t saved any parts, let\'s start browsing!"}
+                onPress={Actions.pop}
+                />)
+    }
+    return (
         <ListView
           style={{flex: 1, backgroundColor: '#F5F5F5'}}
           dataSource={dataSource}
           enableEmptySections={true}
-          renderRow={(data, rowId)=>{return (<Part data={data}/>)}}
+          renderRow={(data, rowId)=>{return (<Part data={data} specId={data.specId}/>)}}
         />
-      )
-    }
-    return (
-      <View style={{flex: 1}}>
-      {content}
-      </View>
     )
   }
-
 }
 
-export default connect () (SavedPartsList)
+export default connect (mapStateToProps, ) (SavedPartsList)

@@ -13,7 +13,7 @@ import keys from 'lodash/keys'
 import union from 'lodash/union'
 
 import F8Header from '../common/F8Header'
-import LoadingPage from '../components/LoadingPage'
+import LoadingView from '../components/LoadingView'
 import MultipleChoice from 'react-native-multiple-choice'
 
 import { Actions } from 'react-native-router-flux'
@@ -72,7 +72,7 @@ class ModelsList extends Component {
             title: 'Makes',
             onPress: ()=>Actions.pop()
           },
-          content = isFetching?(<LoadingPage/>):(
+          content = isFetching?(<LoadingView/>):(
             <ScrollView style={FilterStyles.optionsContainer}>
               <MultipleChoice
                 maxSelectedOptions={1}

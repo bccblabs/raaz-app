@@ -247,16 +247,12 @@ class NewPost extends Component {
           <View style={{width: 1, backgroundColor: 'lightgray', marginVertical: 12}}/>
           <F8Button icon={require ('../common/img/tuning.png')} onPress={Actions.TagTuning} type="tertiary" caption="Tag Tuned Parts" style={NewPostStyles.topButtonStyle}/>
         </View>
+        <F8Button icon={require ('../common/img/photo.png')} onPress={()=>this.pickImage('normal')} type="tertiary" caption="Add Photos" style={NewPostStyles.bottomButtonStyle}/>
+        <F8Button icon={require ('../common/img/panovideo.png')} onPress={()=>this.pickVideo('panorama')} type="tertiary" caption="Add Video" style={NewPostStyles.bottomButtonStyle}/>
         {this.renderEditLog()}
         {this.renderImagesContainer()}
         {this.renderVideosContainer()}
 
-        <View style={NewPostStyles.bottomBar}>
-          <F8Button icon={require ('../common/img/photo.png')} onPress={()=>this.pickImage('normal')} type="tertiary" caption="Add Photos" style={NewPostStyles.bottomButtonStyle}/>
-          <F8Button icon={require ('../common/img/panoimage.png')} onPress={()=>this.pickImage('panorama')} type="tertiary" caption="Add 360 Photos" style={NewPostStyles.bottomButtonStyle}/>
-          <F8Button icon={require ('../common/img/video.png')} onPress={()=>this.pickVideo('normal')} type="tertiary" caption="Add Videos" style={NewPostStyles.bottomButtonStyle}/>
-          <F8Button icon={require ('../common/img/panovideo.png')} onPress={()=>this.pickVideo('panorama')} type="tertiary" caption="Add 360 Video" style={NewPostStyles.bottomButtonStyle}/>
-        </View>
 
       </View>
     )

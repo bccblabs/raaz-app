@@ -14,19 +14,19 @@ var promise = require ('./promise'),
     array = require ('./array')
 
 const {
-  SAVE_LISTING,
-  SAVE_TRIM,
+  ADD_TO_SAVED_SPECS,
+  TOGGLE_SAVE_PRODUCT,
   SET_ACCESS_TOKEN,
 } = require ('../constants').default
 
 // sets up storage engine
 export const asyncStorageEngine = filter (createEngine('viewed_listings'),[
-                ['history', 'listings'],
-                ['history', 'skus'],
-                ['history', 'trims'],
+                ['history', 'specs'],
+                ['history', 'parts'],
                 ['history', 'access_token']]),
-             storageMiddleware = storage.createMiddleware (asyncStorageEngine, [],
-                [SAVE_LISTING, SAVE_TRIM, SET_ACCESS_TOKEN])
+             storageMiddleware = storage.createMiddleware (
+                asyncStorageEngine, [],
+                [ADD_TO_SAVED_SPECS, TOGGLE_SAVE_PRODUCT, SET_ACCESS_TOKEN])
 
 /* logger initialization */
 

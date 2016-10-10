@@ -5,19 +5,18 @@ const {
   ADD_TO_SAVED_SPECS,
   REMOVE_SAVED_SPECS,
 
-  ADD_TO_SAVED_PRODUCT,
-  REMOVE_SAVED_PRODUCT,
+  TOGGLE_SAVE_PRODUCT,
 
   SET_ACCESS_TOKEN,
-  LOAD_ACCESS_TOKEN,
+  LOAD_HISTORY,
 
 } = require ('../../constants').default
-
+import {Map, List} from 'immutable'
 const InitialState = require ('./historyInitialState').default
 const initialState = new InitialState
 var _ = require ('lodash')
 var Immutable = require('immutable')
-
+import keys from 'lodash/keys'
 export default function historyReducer (state=initialState, action) {
   if (!(state instanceof InitialState)) return state.merge (initialState)
   switch (action.type) {
@@ -34,29 +33,42 @@ export default function historyReducer (state=initialState, action) {
       return state.setIn (['specs'], specs, val=> specs)
     }
 
-    case ADD_TO_SAVED_PRODUCT: {
+    case TOGGLE_SAVE_PRODUCT: {
       let {payload} = action
-        , parts = state.get ('parts').set (payload.partId, payload)
-      return state.setIn (['parts'], parts, val=> parts)
-    }
-
-    case REMOVE_SAVED_PRODUCT: {
-      let {payload} = action
-        , parts = state.get ('parts').delete (payload)
+        , {partId} = payload
+        , parts = state.get ('parts')
+      if (parts.has (partId)) {
+          parts = parts.delete (partId)
+      } else {
+          parts = parts.set (payload.partId, payload)
+      }
       return state.setIn (['parts'], parts, val=> parts)
     }
 
     case SET_ACCESS_TOKEN: {
       return state.setIn (['access_token'], action.payload)
     }
-    case LOAD_ACCESS_TOKEN: {
-      if (action.payload !== undefined) {
-        return action.payload['history'] &&
-                state.setIn (['access_token'], Immutable.fromJS(action.payload['history']['access_token'])) || state
-      } else {
-        return state
-      }
+
+    case LOAD_HISTORY: {
+      let {history} = action.payload
+        , wl = ['parts', 'specs', 'access_token']
+      console.log (history)
+      wl.forEach ((key)=>{
+        if (key === 'access_token') state = state.setIn ([key], history[key], val=> history[key])
+        else {
+          if (!history || !history[key]) state = state.set (key, new (Map))
+          else {
+            let value = history[key]
+              , valueMap = new (Map)
+            keys (value).forEach ((keyy)=> {valueMap = valueMap.set (keyy, value[keyy])})
+            console.log (valueMap)
+            state = state.set (key, valueMap)
+          }
+        }
+      })
+      return state
     }
+
     default:
     return state
   }

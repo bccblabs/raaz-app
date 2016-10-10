@@ -15,22 +15,30 @@ import {connect} from 'react-redux'
 import BuildsList from '../tuning/BuildsList'
 import F8Header from '../common/F8Header'
 import F8Button from '../common/F8Button'
-
+import Carmera from '../components/Carmera'
 export default class Tuning extends Component {
   constructor (props) {
     super (props)
   }
 
   render () {
-    const leftItem = {title: 'Saved', onPress:Actions.WatchList}
-        , rightItem = {title: 'Orders', onPress: Actions.Orders}
+    const leftItem = {title: 'Orders', onPress: Actions.Orders}
+        , rightItem = {title: 'Saved', onPress:Actions.WatchList}
 
     return (
       <View style={{flex: 1, backgroundColor:'transparent'}}>
       <F8Header title="Tuning" foreground='dark' leftItem={leftItem} rightItem={rightItem}/>
-      <F8Button onPress={Actions.Makes}
+
+      <View style={{flexDirection: 'row', justifyContent: 'space-between', flex: -1}}>
+      <F8Button style={{flex: 1}}
+                onPress={Actions.QRScan}
+                type="search"
+                icon={require ('../common/img/qr.png')}
+                caption={"By QR Code"}/>
+      <F8Button style={{flex: 1}}  onPress={Actions.Makes}
                 caption="search by car" type="search"
                 icon={require ('../common/img/search.png')}/>
+      </View>
       <BuildsList/>
       </View>
     )

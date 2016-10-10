@@ -5,7 +5,7 @@ import { Provider, connect } from 'react-redux'
 var FacebookSDK = require ('FacebookSDK')
 
 import { setStore } from './reducers/global/globalActions'
-import { loadProductIds, loadSpecIds, loadAccessToken } from './reducers/history/historyActions'
+import { loadHisory } from './reducers/history/historyActions'
 import { asyncStorageEngine, configureStore } from './store/configureStore'
 import * as storage from 'redux-storage'
 
@@ -43,7 +43,7 @@ function setup (): Component {
             store = configureStore(getInitialState())
       load(store)
           .then((history) => {
-            store.dispatch (loadAccessToken (history))
+            store.dispatch (loadHisory (history))
             this.setState ({isLoading: false})
           })
       this.state = {

@@ -124,6 +124,23 @@ class F8Button extends React.Component {
           </Text>
         </View>
       );
+    } else if (this.props.type === 'unsaved') {
+      content = (
+        <View style={[styles.button, {backgroundColor: 'blue'}]}>
+          <Text style={[styles.caption, styles.subTuningCaption, {color: 'white'}]}>
+            {caption}
+          </Text>
+        </View>
+      );
+    } else if (this.props.type === 'saved') {
+      content = (
+        <View style={[styles.button, {backgroundColor: 'red'}]}>
+          <Text style={[styles.caption, styles.subTuningCaption, {color: 'white'}]}>
+            {caption}
+          </Text>
+        </View>
+      );
+
     } else {
       var border = this.props.type === 'bordered' && styles.border;
       content = (
@@ -239,7 +256,8 @@ var styles = StyleSheet.create({
   },
   errorCaption: {
     color: 'black',
-    fontSize: 15,
+    fontSize: 10,
+    flex: 1,
     fontWeight: 'bold'
   }
 });

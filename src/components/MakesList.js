@@ -10,7 +10,7 @@ import React, {
 import { FilterStyles, btnColor, Titles } from '../styles'
 
 import F8Header from '../common/F8Header'
-import LoadingPage from './LoadingPage'
+import LoadingView from './LoadingView'
 import SpecsHistoryHeader from './SpecsHistoryHeader'
 
 import MultipleChoice from 'react-native-multiple-choice'
@@ -70,7 +70,7 @@ class MakesList extends Component {
             title: 'Cancel',
             onPress: ()=>Actions.pop()
           },
-          content = isFetching?(<LoadingPage/>):(
+          content = isFetching?(<LoadingView/>):(
             <ScrollView style={FilterStyles.optionsContainer}>
               <MultipleChoice
                 maxSelectedOptions={1}

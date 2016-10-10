@@ -28,15 +28,16 @@ export default class Carmera extends Component {
   }
 
   render () {
+    let {title, media} = this.props
     return (
       <View style={CarmeraStyles.wrapper}>
-      <TouchableOpacity onPress={this.pickImage}>
+      <TouchableOpacity onPress={this.props.onPress || this.pickImage}>
       <Image source={require ('../images/2jz.png')} style={CarmeraStyles.wrapper}>
       <VibrancyView blurType="xlight" style={CarmeraStyles.wrapper}>
       <Image
         style={{height: 32, width: 32}}
-        source={require('../common/img/qr.png')}/>
-      <Text style={CarmeraStyles.text}>{"Post Your Car Meme"}</Text>
+        source={media}/>
+      <Text style={CarmeraStyles.text}>{title}</Text>
       </VibrancyView>
       </Image>
       </TouchableOpacity>

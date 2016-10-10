@@ -22,8 +22,9 @@ import {syncProduct} from '../reducers/history/historyActions'
 import {Styles, General, Titles, TuningBySpecStyles, FilterStyles, SliderStyles} from '../styles'
 
 import F8Button from '../common/F8Button'
+import SaveProductButton from '../components/SaveProductButton'
 import F8Header from '../common/F8Header'
-import LoadingPage from '../components/LoadingPage'
+import LoadingView from '../components/LoadingView'
 
 class PartDetails extends Component {
   constructor (props) {
@@ -70,13 +71,9 @@ class PartDetails extends Component {
             title: 'Back',
             onPress: ()=> {Actions.pop()}
           }
-        , rightItem = {
-            title: 'Save',
-            onPress: ()=> {this.props.dispatch (syncProduct(partId))}
-          }
         , {data, hasError, isLoading} = this.state
 
-    if (isLoading) return (<LoadingPage/>)
+    if (isLoading) return (<LoadingView/>)
     else {
       let {part, manufacturer, listings, comments, tuning} = data
         , {name, partId, details, description} = part
@@ -97,7 +94,6 @@ class PartDetails extends Component {
           <F8Header
             foreground="dark"
             leftItem={leftItem}
-            rightItem={rightItem}
             style={General.headerStyle}/>
             <ScrollView>
               <Heading1 style={{padding:16,color: 'black'}}>{name}</Heading1>
@@ -106,6 +102,7 @@ class PartDetails extends Component {
                 dataSource={this.state.mediaDataSource}
               />
               {manufacturerContent}
+              <SaveProductButton part={Object.assign ({}, {...part}, {...tuning}, {specId: this.state.specId})}/>
               <View style={{paddingBottom: 49}}>
               {
                 specsContent && (

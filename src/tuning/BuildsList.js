@@ -9,7 +9,7 @@ import {EmptyHeading, Heading3} from '../common/F8Text'
 import F8Button from '../common/F8Button'
 import Build from './Build'
 import {EmptyViewStyles, Titles} from '../styles'
-import LoadingPage from '../components/LoadingPage'
+import LoadingView from '../components/LoadingView'
 import {fetchBuilds} from '../reducers/tuning/filterActions'
 import {union} from 'lodash'
 
@@ -83,7 +83,6 @@ class BuildsList extends Component {
         <View
         style={{flex: 1, marginBottom: 50, backgroundColor: 'white'}}
         >
-        <Heading3 style={Titles.filterSectionTitle}>{"Builds"}</Heading3>
         <ListView
           dataSource={dataSource}
           renderRow={this.renderRow}
@@ -98,7 +97,7 @@ class BuildsList extends Component {
         </View>
       )
       , loadingContent = (
-        <LoadingPage/>
+        <LoadingView/>
       )
       , emptyContent = (
         <View style={EmptyViewStyles.container}>

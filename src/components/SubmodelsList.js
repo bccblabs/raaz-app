@@ -12,10 +12,10 @@ import { FilterStyles } from '../styles'
 import keys from 'lodash/keys'
 
 import F8Header from '../common/F8Header'
-import LoadingPage from './LoadingPage'
-import ErrorPage from '../common/ErrorPage'
+import LoadingView from './LoadingView'
+import ErrorView from '../common/ErrorView'
 import MultipleChoice from 'react-native-multiple-choice'
-
+import SpecsHistoryHeader from './SpecsHistoryHeader'
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
 
@@ -72,7 +72,7 @@ class SubmodelsList extends Component {
             title: 'Models',
             onPress: ()=>Actions.pop()
           },
-          content = isFetching?(<LoadingPage/>):(
+          content = isFetching?(<LoadingView/>):(
             <ScrollView style={FilterStyles.optionsContainer}>
               <MultipleChoice
                 maxSelectedOptions={1}
@@ -96,6 +96,7 @@ class SubmodelsList extends Component {
           title={this.state.selectedModel.toUpperCase()}
           leftItem={leftItem}
           style={FilterStyles.headerStyle}/>
+          <SpecsHistoryHeader/>
           {content}
       </View>
     )

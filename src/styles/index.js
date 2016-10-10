@@ -565,8 +565,6 @@ export const NewPostStyles = StyleSheet.create ({
   },
   bottomBar: {
     backgroundColor: 'transparent',
-    position: 'absolute',
-    bottom: 0,
     width: window.width,
   },
   divTitleStyle: {
@@ -743,7 +741,6 @@ export const CarmeraStyles = StyleSheet.create ({
     color: 'white',
     letterSpacing: 1,
     alignSelf: 'center',
-    textDecorationLine: 'underline',
     padding: 16
   },
   wrapper: {

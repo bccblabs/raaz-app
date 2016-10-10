@@ -21,7 +21,11 @@ export const selectedTagsSelector = (state, props) => {
   else return state.tuning.partTags
 }
 
-
+export const isPartSavedSelector = (state, props) => {
+  let {part} = props
+    , {partId} = part
+  return state.history.parts.has (partId)
+}
 
 /* categories */
 export const categoriesEntitiesSelector = (state, props) => (state.entities.categories || {})

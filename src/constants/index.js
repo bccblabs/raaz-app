@@ -123,12 +123,10 @@ export default keyMirror ({
   /* History */
 
   ADD_TO_SAVED_SPECS: null,
-  ADD_TO_SAVED_PRODUCT: null,
-  REMOVE_SAVED_PRODUCT: null,
-  REMOVE_SAVED_SPECS: null,
+  TOGGLE_SAVE_PRODUCT: null,
 
   SET_ACCESS_TOKEN: null,
-  LOAD_ACCESS_TOKEN: null,
+  LOAD_HISTORY: null,
 
   /* Social Login and Profile */
   LOGIN: null,

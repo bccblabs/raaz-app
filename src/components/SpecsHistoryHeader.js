@@ -8,6 +8,7 @@ import React, {
 } from 'react-native'
 
 import { btnColor, Titles, Header } from '../styles'
+import {Actions} from 'react-native-router-flux'
 import {connect} from 'react-redux'
 import {savedSpecsSelector} from '../selectors'
 import F8Button from '../common/F8Button'

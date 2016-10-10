@@ -9,7 +9,7 @@ import F8Button from '../common/F8Button'
 import {Actions} from 'react-native-router-flux'
 import {connect} from 'react-redux'
 import MultipleChoice from 'react-native-multiple-choice'
-import LoadingPage from '../components/LoadingPage'
+import LoadingView from '../components/LoadingView'
 import F8Header from '../common/F8Header'
 import {General} from '../styles'
 const mapStateToProps = (state) => {

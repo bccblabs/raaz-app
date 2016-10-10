@@ -2,10 +2,10 @@
 import React, {Component, ListView, Text, View} from 'react-native'
 
 import Part from '../tuning/Part'
-import ErrorPage from '../common/ErrorPage'
+import ErrorView from '../common/ErrorView'
 import F8Header from '../common/F8Header'
 import TagsHeader from '../common/TagsHeader'
-import LoadingPage from '../components/LoadingPage'
+import LoadingView from '../components/LoadingView'
 import {union} from 'lodash'
 import {Actions} from 'react-native-router-flux'
 import {togglePartTag} from '../reducers/tuning/filterActions'
@@ -55,8 +55,8 @@ export default class PartsList extends Component {
       , header = (<F8Header foreground="dark" title={title.toUpperCase()} leftItem={leftItem} rightItem={rightItem}/>)
       , content
 
-    if (isFetching) content = (<LoadingPage/>)
-    else if (hasError) content = (<ErrorPage onPress={()=>fetchParts(nextPageUrl, specId, selectedTags)}/>)
+    if (isFetching) content = (<LoadingView/>)
+    else if (hasError) content = (<ErrorView onPress={()=>fetchParts(nextPageUrl, specId, selectedTags)}/>)
     else {
       content = (
         <ListView

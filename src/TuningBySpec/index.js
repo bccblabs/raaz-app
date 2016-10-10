@@ -20,7 +20,7 @@ import F8Header from '../common/F8Header'
 import F8Button from '../common/F8Button'
 import {Heading1, Heading2, Heading3, EmptyHeading, Paragraph} from '../common/F8Text'
 
-import LoadingPage from '../components/LoadingPage'
+import LoadingView from '../components/LoadingView'
 import MetricsGraph from '../components/MetricsGraph'
 import Manufacturers from './Manufacturers'
 import PostsList from '../Posts/PostListView'
@@ -95,7 +95,7 @@ class TuningBySpec extends Component {
   render () {
     let {specsDetails, specsPagination} = this.state
       , specsInfo = this.state.specsDetails[0]
-    if (specsPagination.isFetching || !specsInfo) return (<LoadingPage/>)
+    if (specsPagination.isFetching || !specsInfo) return (<LoadingView/>)
     else {
       const leftItem = {title: 'Back', onPress: ()=> {Actions.pop ()}}
           , {make, model, submodel, specId, tuning, specs, posts} = specsInfo

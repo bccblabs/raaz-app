@@ -53,17 +53,17 @@ class Raaz extends Component {
   render () {
     const {picture, name} = this.state
           ,leftItem = {
-                      title: "New Post",
-                      onPress:()=>{Actions.NewPost()}
+                      title: "Profile",
+                      onPress: Actions.Profile
                     }
           ,rightItem = {
-                      title: 'Me',
-                      onPress:()=>{Actions.Profile()}
+                      title: 'Settings',
+                      onPress: Actions.Settings
                     }
     return (
       <View style={{flex: 1}}>
-      <F8Header title="Posts" foreground='dark' leftItem={leftItem} rightItem={rightItem}/>
-      <Carmera/>
+      <F8Header title="Raaz" foreground='dark' leftItem={leftItem} rightItem={rightItem}/>
+      <Carmera media={require ('../images/carmera.png')} title={"New Post"} onPress={Actions.NewPost}/>
       <PostListView/>
       </View>
     )

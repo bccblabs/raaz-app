@@ -16,8 +16,8 @@ import F8Button from '../common/F8Button'
 import Post from './Post'
 import {fetchPosts} from '../reducers/posts/postActions'
 import {EmptyViewStyles} from '../styles'
-import LoadingPage from '../components/LoadingPage'
-import ErrorPage from '../common/ErrorPage'
+import LoadingView from '../components/LoadingView'
+import ErrorView from '../common/ErrorView'
 import {union} from 'lodash'
 
 const filterHashSelector = (state) => (state.posts.postsFilterHash)
@@ -111,7 +111,7 @@ class PostListView extends Component {
         />
       )
       , loadingContent = (
-        <LoadingPage/>
+        <LoadingView/>
       )
 
     return listContent

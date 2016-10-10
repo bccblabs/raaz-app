@@ -5,10 +5,10 @@ import {connect} from 'react-redux'
 import {Actions} from 'react-native-router-flux'
 
 import Part from './Part'
-import ErrorPage from '../common/ErrorPage'
+import ErrorView from '../common/ErrorView'
 import F8Header from '../common/F8Header'
 import TagsHeader from '../common/TagsHeader'
-import LoadingPage from '../components/LoadingPage'
+import LoadingView from '../components/LoadingView'
 
 import {fetchPartsByManufacturer, togglePartTag} from '../reducers/tuning/filterActions'
 import {partsByManufacturerSelector, partsByManufacturerPaginationSelector, selectedTagsSelector, categoryTagsSelector} from '../selectors'

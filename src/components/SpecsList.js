@@ -10,12 +10,12 @@ import React, {
 } from 'react-native'
 
 import F8Header from '../common/F8Header'
-import LoadingPage from './LoadingPage'
-import ErrorPage from '../common/ErrorPage'
+import LoadingView from './LoadingView'
+import ErrorView from '../common/ErrorView'
 import PureListView from '../common/PureListView'
 import ListContainer from '../common/ListContainer'
 import MultipleChoice from 'react-native-multiple-choice'
-
+import SpecsHistoryHeader from './SpecsHistoryHeader'
 import keys from 'lodash/keys'
 import { FilterStyles } from '../styles'
 
@@ -82,7 +82,7 @@ class SpecsList extends Component {
             title: 'Back',
             onPress: ()=>Actions.pop(),
           },
-    content = isFetching?(<LoadingPage/>):(
+    content = isFetching?(<LoadingView/>):(
                 <ScrollView style={FilterStyles.optionsContainer}>
                   <MultipleChoice
                     maxSelectedOptions={1}
@@ -117,6 +117,7 @@ class SpecsList extends Component {
           title={"Specs"}
           leftItem={leftItem}
           style={FilterStyles.headerStyle}/>
+          <SpecsHistoryHeader/>
           {content}
       </View>
     )

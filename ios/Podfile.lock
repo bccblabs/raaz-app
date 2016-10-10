@@ -41,6 +41,8 @@ PODS:
   - react-native-braintree (0.5.0):
     - Braintree
     - React
+  - react-native-camera (0.3.8):
+    - React
   - react-native-fbsdkcore (0.1.0):
     - FBSDKCoreKit
     - React
@@ -71,6 +73,7 @@ DEPENDENCIES:
   - BVLinearGradient (from `../node_modules/react-native-linear-gradient`)
   - CardboardSDK
   - react-native-braintree (from `../node_modules/react-native-braintree`)
+  - react-native-camera (from `../node_modules/react-native-camera`)
   - react-native-fbsdkcore (from `../node_modules/react-native-fbsdk/iOS/core`)
   - react-native-fbsdklogin (from `../node_modules/react-native-fbsdk/iOS/login`)
   - react-native-fbsdkshare (from `../node_modules/react-native-fbsdk/iOS/share`)
@@ -89,6 +92,8 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native
   react-native-braintree:
     :path: ../node_modules/react-native-braintree
+  react-native-camera:
+    :path: ../node_modules/react-native-camera
   react-native-fbsdkcore:
     :path: ../node_modules/react-native-fbsdk/iOS/core
   react-native-fbsdklogin:
@@ -110,12 +115,13 @@ SPEC CHECKSUMS:
   FBSDKShareKit: c9438df7573b33780ac8c3451201c5ebb260ffca
   React: 386bbe687faee56ab75bad6132813945d5857403
   react-native-braintree: 982b6f10d5ad436a4dc18bfc17a640d54fa0a324
+  react-native-camera: 95b0a1ffb596ec6d2e7db3f39824192c90fe824d
   react-native-fbsdkcore: 4b4f0d94b9d19dc8d21427fbb0fe54180486885c
   react-native-fbsdklogin: 9857d698accf58ab07039fd39320df9476eb40a6
   react-native-fbsdkshare: 30022ca3609aa4bfe5daf0a77a7444084e8e7c9f
   react-native-maps: 4f3e98448befec2f355b952daeb7b9adb17241a3
   RNVectorIcons: d3d4e80e180750ae8967fa7b2a4de50592703859
 
-PODFILE CHECKSUM: cb8825b7be326bb9009560a96df54a14af9789b2
+PODFILE CHECKSUM: c8d4678044285bda0d9e7e6a6c24bc3d5ff77f3d
 
 COCOAPODS: 1.0.1

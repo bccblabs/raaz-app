@@ -16,7 +16,7 @@ target 'Viicles' do
   pod 'CardboardSDK'
   pod 'react-native-braintree', :path => '../node_modules/react-native-braintree'
   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
-
+  pod 'react-native-camera', path: '../node_modules/react-native-camera'
 
 end
 

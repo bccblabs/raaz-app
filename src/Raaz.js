@@ -47,6 +47,8 @@ import PartFilter from './filters/PartFilter'
 import PartsList from './tuning/PartsList'
 import PartByManufacturer from './tuning/PartByManufacturer'
 
+import QRScreen from './components/QRScreen'
+
 import {computeFilterHash, fetchMakeModelYears, fetchStockCars, rootUrl} from './reducers/stockCar/filterActions'
 
 
@@ -138,6 +140,8 @@ class Viicles extends Component {
             <Route name="PartsList" component={PartsList} schema="default" hideNavBar={true}/>
             <Route name="PartByManufacturer" component={PartByManufacturer} schema="default" hideNavBar={true}/>
             <Route name="WatchList" component={Saved} schema="default" hideNavBar={true}/>
+
+            <Route name="QRScan" component={QRScreen} schema="default" hideNavBar={true}/>
           </Router>
       )
   }

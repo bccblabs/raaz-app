@@ -24,7 +24,7 @@ import {ListingStyles, Titles, General, FilterStyles, PartStyles} from '../style
 import numeral from 'numeral'
 import F8Button from '../common/F8Button'
 import F8Header from '../common/F8Header'
-import LoadingPage from '../components/LoadingPage'
+import LoadingView from '../components/LoadingView'
 import LikeBtn from '../common/LikeBtn'
 import CommentBtn from '../common/CommentBtn'
 
@@ -86,7 +86,7 @@ class BuildDetails extends Component {
       return (
         <View style={{flex: 1}}>
           {headerContent}
-          <LoadingPage/>
+          <LoadingView/>
         </View>
       )
     }

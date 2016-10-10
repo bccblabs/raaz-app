@@ -12,7 +12,7 @@ var Spinner = require('react-native-spinkit')
 const window = Dimensions.get('window')
 import {Actions} from 'react-native-router-flux'
 
-export default class LoadingPage extends Component {
+export default class LoadingView extends Component {
   render () {
     return (
       <View style={{
