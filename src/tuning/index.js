@@ -1,34 +1,52 @@
 'use strict'
 import React, {
   Component,
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
+  View,
 } from 'react-native'
 
 import {Actions} from 'react-native-router-flux'
 import {connect} from 'react-redux'
+import {TuningBySpecStyles} from '../styles'
 
-import BuildsList from '../tuning/BuildsList'
+
 import F8Header from '../common/F8Header'
 import F8Button from '../common/F8Button'
 import Carmera from '../components/Carmera'
-export default class Tuning extends Component {
+
+
+import BuildsList from '../components/BuildsList'
+import {buildsSelector, buildsPaginationSelector, userIdSelector, buildCategoriesSelector} from '../selectors'
+import {fetchCategoriesFromApi, fetchBuilds} from '../reducers/tuning/filterActions'
+
+const mapStateToProps = (state) => {
+  return {
+    data: buildsSelector (state),
+    pagination: buildsPaginationSelector(state),
+    tags: buildCategoriesSelector (state),
+    userId: userIdSelector (state),
+  }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    fetchTags: () => { dispatch (fetchCategoriesFromApi ('car'))},
+    fetchData: (pageUrl) => {dispatch (fetchBuilds (pageUrl))}
+  }
+}
+
+class Tuning extends Component {
   constructor (props) {
     super (props)
   }
 
   render () {
-    const leftItem = {title: 'Orders', onPress: Actions.Orders}
+    const leftItem = {title: 'My Cars', onPress: ()=>{Actions.BuildsByUser ({userId: this.props.userId}) } }
         , rightItem = {title: 'Saved', onPress:Actions.WatchList}
 
+    let {data, pagination, tags, userId, fetchTags, fetchData} = this.props
     return (
       <View style={{flex: 1, backgroundColor:'transparent'}}>
       <F8Header title="Tuning" foreground='dark' leftItem={leftItem} rightItem={rightItem}/>
-
       <View style={{flexDirection: 'row', justifyContent: 'space-between', flex: -1}}>
       <F8Button style={{flex: 1}}
                 onPress={Actions.QRScan}
@@ -38,42 +56,12 @@ export default class Tuning extends Component {
       <F8Button style={{flex: 1}}  onPress={Actions.Makes}
                 caption="search by car" type="search"
                 icon={require ('../common/img/search.png')}/>
+
       </View>
-      <BuildsList/>
+      <BuildsList data={data} pagination={pagination} tags={tags} fetchTags={fetchTags} fetchData={fetchData}/>
       </View>
     )
   }
 }
 
-const styles = StyleSheet.create ({
-  container: {
-    height: 44,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    opacity: 0.6,
-    justifyContent: 'center',
-    borderTopWidth:0.5,
-    borderBottomWidth:0.5,
-    borderColor: 'black'
-  },
-  text: {
-    fontSize: 10,
-    color: 'black',
-    fontWeight: '700',
-    letterSpacing: 1,
-    alignSelf: 'center',
-    textDecorationLine: 'underline'
-  },
-  clear: {
-    flex: 1,
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-  },
-  header: {
-    height: 44,
-    flexDirection: 'row',
-    backgroundColor: 'black',
-    opacity: 0.6,
-  },
-})
+export default connect (mapStateToProps, mapDispatchToProps) (Tuning)

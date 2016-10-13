@@ -19,7 +19,7 @@ import {createSelector} from 'reselect'
 import {Heading1, Heading2, Heading3, Paragraph} from '../common/F8Text'
 import MetricsGraph from '../components/MetricsGraph'
 import {syncProduct} from '../reducers/history/historyActions'
-import {Styles, General, Titles, TuningBySpecStyles, FilterStyles, SliderStyles} from '../styles'
+import {Styles, General, Titles, TuningBySpecStyles} from '../styles'
 
 import F8Button from '../common/F8Button'
 import SaveProductButton from '../components/SaveProductButton'

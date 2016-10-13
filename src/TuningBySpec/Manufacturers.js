@@ -53,7 +53,6 @@ class Manufacturers extends Component {
                         style={PartStyles.partImage}>
                       </Image>
                     </TouchableWithoutFeedback>
-                    <Text style={PartStyles.partTitle}>{name}</Text>
                     </View>
                   )
                 })

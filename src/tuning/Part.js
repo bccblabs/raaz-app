@@ -18,7 +18,7 @@ import {Heading2, Text} from '../common/F8Text'
 import {Utils} from '../utils'
 import ProfilePicture from '../common/ProfilePicture'
 import PartDetails from './PartDetails'
-import {Specs, RecallColorsArray} from '../styles'
+import {Specs} from '../styles'
 import intersection from 'lodash/intersection'
 export default class Part extends Component {
   constructor (...args) {

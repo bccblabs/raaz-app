@@ -87,7 +87,6 @@ class Deals extends Component {
         loop={true}
         autoplay={true}
         height={200}
-        style={SliderStyles.wrapper}
         showButtons={true}>
         {
           dealsList.map ((deal, idx)=>{

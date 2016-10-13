@@ -13,23 +13,22 @@ export const newpostTaggedCars = (state) => {return state.newpost.taggedCars.toI
 export const savedSpecsSelector = (state) => {return state.history.specs.toIndexedSeq().toArray()}
 export const savedPartsSelector = (state) => {return state.history.parts.toIndexedSeq().toArray()}
 
-
+/* user selectors */
 export const isLikedByUser = (state) => {return true}
 export const profileSelector = (state) => {return state.user.profileData}
+export const userIdSelector = (state) => {return state.user.profileData.user_id}
+
+/* filter tags selectors */
+
 export const selectedTagsSelector = (state, props) => {
   if (props.filterId === 'car') return state.tuning.buildTags
   else return state.tuning.partTags
 }
 
-export const isPartSavedSelector = (state, props) => {
-  let {part} = props
-    , {partId} = part
-  return state.history.parts.has (partId)
-}
-
 /* categories */
 export const categoriesEntitiesSelector = (state, props) => (state.entities.categories || {})
 export const categoriesPaginationSelector = (state, props) => (state.pagination.categoriesPagination && state.pagination.categoriesPagination[props.filterId] || {})
+
 export const getCategoriesSelector = createSelector (
   [categoriesEntitiesSelector, categoriesPaginationSelector],
   (categoryEntities, categoryPagination) => {
@@ -44,7 +43,31 @@ export const categoryTagsSelector = (state, props) => {
   return tags.options.map ((opt)=>opt.name)
 }
 
+/* builds */
+export const buildsEntitiesSelector = (state) => (state.entities.builds || {})
+export const buildsPaginationSelector = (state) => (state.pagination.buildsPagination && state.pagination.buildsPagination['home'] || {})
+
+export const buildsSelector = createSelector (
+  [buildsEntitiesSelector, buildsPaginationSelector],
+  (buildsEntities, buildsPagination) => {
+    console.log ({buildsEntities}, {buildsPagination})
+    let ids = buildsPagination.ids?buildsPagination.ids:[]
+    return ids.map (id=>buildsEntities[id]).filter (elem=>elem)
+  }
+)
+
+/* build categories */
+export const buildCategoriesSelector = (state) => (state.entities.categories && keys (state.entities.categories['car']))
+
 /* parts */
+export const isPartSavedSelector = (state, props) => {
+  let {part} = props
+    , {partId} = part
+  return state.history.parts.has (partId)
+}
+
+
+
 export const partsEntitiesSelector = (state, props) => (state.entities.parts || {})
 export const partsPaginationSelector = (state, props) => (state.pagination.partsPagination && state.pagination.partsPagination[props.specId] || {})
 export const partsBySpecIdSelector = createSelector (

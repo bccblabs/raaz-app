@@ -1,14 +1,8 @@
 'use strict'
-import React, {Component, ListView, Text, View} from 'react-native'
+import React, {Component} from 'react-native'
 
 import {connect} from 'react-redux'
 import {Actions} from 'react-native-router-flux'
-
-import Part from './Part'
-import ErrorView from '../common/ErrorView'
-import F8Header from '../common/F8Header'
-import TagsHeader from '../common/TagsHeader'
-import LoadingView from '../components/LoadingView'
 
 import {fetchPartsByManufacturer, togglePartTag} from '../reducers/tuning/filterActions'
 import {partsByManufacturerSelector, partsByManufacturerPaginationSelector, selectedTagsSelector, categoryTagsSelector} from '../selectors'

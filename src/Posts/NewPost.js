@@ -8,6 +8,7 @@ import React, {
   View,
   Platform,
   Image,
+  TouchableWithoutFeedback
 } from 'react-native'
 
 import {connect} from 'react-redux'
@@ -25,6 +26,8 @@ import {ImageOptions, VideoOptions} from '../constants/pickerOptions'
 
 import {newpostTaggedCars} from '../selectors'
 import {removeFromTaggedCars} from '../reducers/newpost/newpostActions'
+
+const dismissKeyboard = require('dismissKeyboard')
 
 const mapStateToProps = (state) => {
   return {
@@ -235,6 +238,7 @@ class NewPost extends Component {
     let {profileData} = this.props
 
     return (
+      <TouchableWithoutFeedback onPress={()=> dismissKeyboard()}>
       <View style={{flex: 1}}>
         <F8Header
           foreground="dark"
@@ -242,19 +246,16 @@ class NewPost extends Component {
           rightItem={rightItem}
           title="New Post"
           style={General.headerStyle}/>
-        <View style={{flexDirection: 'row'}}>
-          <F8Button icon={require ('../common/img/car.png')} onPress={Actions.PickMakes} type="tertiary" caption="Tag Your Car" style={NewPostStyles.topButtonStyle}/>
-          <View style={{width: 1, backgroundColor: 'lightgray', marginVertical: 12}}/>
-          <F8Button icon={require ('../common/img/tuning.png')} onPress={Actions.TagTuning} type="tertiary" caption="Tag Tuned Parts" style={NewPostStyles.topButtonStyle}/>
-        </View>
-        <F8Button icon={require ('../common/img/photo.png')} onPress={()=>this.pickImage('normal')} type="tertiary" caption="Add Photos" style={NewPostStyles.bottomButtonStyle}/>
-        <F8Button icon={require ('../common/img/panovideo.png')} onPress={()=>this.pickVideo('panorama')} type="tertiary" caption="Add Video" style={NewPostStyles.bottomButtonStyle}/>
         {this.renderEditLog()}
         {this.renderImagesContainer()}
         {this.renderVideosContainer()}
-
-
+        <View style={{position: 'absolute', bottom: 0}}>
+        <F8Button icon={require ('../common/img/car.png')} onPress={Actions.PickMakes} type="tertiary" caption="Tag Car" style={NewPostStyles.bottomButtonStyle}/>
+        <F8Button icon={require ('../common/img/photo.png')} onPress={()=>this.pickImage('normal')} type="tertiary" caption="Photo" style={NewPostStyles.bottomButtonStyle}/>
+        <F8Button icon={require ('../common/img/panovideo.png')} onPress={()=>this.pickVideo('panorama')} type="tertiary" caption="Video" style={NewPostStyles.bottomButtonStyle}/>
+        </View>
       </View>
+      </TouchableWithoutFeedback>
     )
   }
 }

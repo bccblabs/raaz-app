@@ -13,6 +13,23 @@ const {
     BUILDS_SUCCESS,
     BUILDS_ERROR,
 
+    BUILDS_REQUEST_CAT,
+    BUILDS_SUCCESS_CAT,
+    BUILDS_ERROR_CAT,
+
+    BUILDS_REQUEST_TAG,
+    BUILDS_SUCCESS_TAG,
+    BUILDS_ERROR_TAG,
+
+    BUILDS_REQUEST_USER,
+    BUILDS_SUCCESS_USER,
+    BUILDS_ERROR_USER,
+
+    BUILDS_REQUEST_SPECID,
+    BUILDS_SUCCESS_SPECID,
+    BUILDS_ERROR_SPECID,
+
+
     PARTS_REQUEST,
     PARTS_SUCCESS,
     PARTS_ERROR,
@@ -39,28 +56,70 @@ const {
 
 } = require ('../../constants').default
 
-
-export function fetchBuildsFromApi (pageUrl, tags, specId) {
+export function fetchBuilds (paging, category, tag, specId, userId) {
+  let endpoint = '/build'
+  if (paging) endpoint += paging
   return {
-    specId,
+    key: 'home',
     [CALL_API]: {
       types: [BUILDS_REQUEST, BUILDS_SUCCESS, BUILDS_ERROR],
-      endpoint: pageUrl,
+      endpoint: endpoint,
       schema: Schemas.BUILDS_ARRAY,
-      data: tags
     }
   }
 }
 
-export function fetchBuilds (paging) {
+export function fetchBuildsByCategory (paging, category) {
+  let endpoint = '/build/category/' + category
+  if (paging) endpoint += paging
+  return {
+    category,
+    [CALL_API]: {
+      types: [BUILDS_REQUEST_CAT, BUILDS_SUCCESS_CAT, BUILDS_ERROR_CAT],
+      endpoint: endpoint,
+      schema: Schemas.BUILDS_ARRAY,
+    }
+  }
+}
 
-  if (paging) pageUrl += paging
-  return (dispatch, getState) => {
-    let tagsJson = getState().posts.tags.toJS()
-      , specId = getState().stockCar.selectedSpecId
-      , pageUrl = (specId!=='home')?('/build/' + specId):'/build'
+export function fetchBuildsByTag (paging, tag) {
+  let endpoint = '/build/tag/' + tag
+  if (paging) endpoint += paging
+  return {
+    tag,
+    [CALL_API]: {
+      types: [BUILDS_REQUEST_TAG, BUILDS_SUCCESS_TAG, BUILDS_ERROR_TAG],
+      endpoint: endpoint,
+      schema: Schemas.BUILDS_ARRAY,
+    }
+  }
 
-    dispatch (fetchBuildsFromApi(pageUrl, tagsJson, specId))
+}
+
+export function fetchBuildsBySpecId (paging, specId) {
+  let endpoint = '/build/specs/' + specId
+  if (paging) endpoint += paging
+  return {
+    specId,
+    [CALL_API]: {
+      types: [BUILDS_REQUEST_SPECID, BUILDS_SUCCESS_SPECID, BUILDS_ERROR_SPECID],
+      endpoint: endpoint,
+      schema: Schemas.BUILDS_ARRAY,
+    }
+  }
+
+}
+
+export function fetchBuildsByUserId (paging, userId) {
+  let endpoint = '/build/user/' + userId
+  if (paging) endpoint += paging
+  return {
+    userId,
+    [CALL_API]: {
+      types: [BUILDS_REQUEST_USER, BUILDS_SUCCESS_USER, BUILDS_ERROR_USER],
+      endpoint: endpoint,
+      schema: Schemas.BUILDS_ARRAY,
+    }
   }
 }
 

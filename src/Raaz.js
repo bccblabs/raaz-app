@@ -14,8 +14,8 @@ import RNRF, {
 } from 'react-native-router-flux'
 
 import { connect } from 'react-redux'
-import Saved from './Saved/'
-import Posts from './Posts/'
+import Saved from './Saved'
+import Posts from './Posts'
 import NewPost from './Posts/NewPost'
 import Login from './Login'
 import Profile from './Profile'
@@ -38,9 +38,6 @@ import TagTuning from './search/TagTuning'
 
 import Notifications from './Notifications'
 import TuningBySpec from './TuningBySpec'
-import TuningPager from './tuning/TuningPager'
-import Order from './Order'
-
 
 import BuildFilter from './filters/BuildFilter'
 import PartFilter from './filters/PartFilter'
@@ -48,9 +45,6 @@ import PartsList from './tuning/PartsList'
 import PartByManufacturer from './tuning/PartByManufacturer'
 
 import QRScreen from './components/QRScreen'
-
-import {computeFilterHash, fetchMakeModelYears, fetchStockCars, rootUrl} from './reducers/stockCar/filterActions'
-
 
 import CommentsList from './Comments/CommentsList'
 
@@ -87,25 +81,25 @@ class Viicles extends Component {
             <Route name="Login" component={Login} title="Login" hideNavBar={true} schema="default"/>
             <Route name="tabBar" hideNavBar={true}>
               <Router footer={TabBar} showNavigationBar={false}>
-                <Route name="Posts"
-                  component={Posts}
-                  key="posts"
-                  title="Posts"
-                  schema="tab"
-                  hideNavBar={true}
-                  initial={true}
-                  iconName={"Posts"}/>
                 <Route name="Tuning"
                   key="tuning"
                   component={Tuning}
-                  title="Tuning"
+                  title="TUNING"
                   schema="tab"
+                  initial={true}
                   hideNavBar={true}
                   iconName={"Cars"}/>
+                <Route name="Posts"
+                  component={Posts}
+                  key="posts"
+                  title="SQUAD"
+                  schema="tab"
+                  hideNavBar={true}
+                  iconName={"Posts"}/>
                 <Route name="Notifications"
                   key="notifications"
                   component={Notifications}
-                  title="Message"
+                  title="MESSAGE"
                   schema="tab"
                   hideNavBar={true}
                   iconName={"Notifications"}/>
@@ -130,10 +124,8 @@ class Viicles extends Component {
 
             <Route name="BuildDetails" component={BuildDetails} schema="default" hideNavBar={true}/>
             <Route name="PartDetails" component={PartDetails} schema="default" hideNavBar={true}/>
-            <Route name="Order" component={Order} schema="default" hideNavBar={true}/>
             <Route name="TuningBySpec" component={TuningBySpec} schema="default" hideNavBar={true}/>
             <Route name="NewPost" component={NewPost} schema="default" hideNavBar={true}/>
-            <Route name="TuningPager" component={TuningPager} schema="default" hideNavBar={true}/>
 
             <Route name="BuildFilter" component={BuildFilter} schema="default" hideNavBar={true}/>
             <Route name="PartFilter" component={PartFilter} schema="default" hideNavBar={true}/>

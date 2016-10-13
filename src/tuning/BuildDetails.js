@@ -20,7 +20,7 @@ import Part from './Part'
 import Icon from 'react-native-vector-icons/Foundation';
 import {Heading1, Heading3} from '../common/F8Text'
 import MetricsGraph from '../components/MetricsGraph'
-import {ListingStyles, Titles, General, FilterStyles, PartStyles} from '../styles'
+import {ListingStyles, Titles, General, PartStyles} from '../styles'
 import numeral from 'numeral'
 import F8Button from '../common/F8Button'
 import F8Header from '../common/F8Header'

@@ -52,7 +52,7 @@ export default function historyReducer (state=initialState, action) {
     case LOAD_HISTORY: {
       let {history} = action.payload
         , wl = ['parts', 'specs', 'access_token']
-      console.log (history)
+      if (!history) return initialState
       wl.forEach ((key)=>{
         if (key === 'access_token') state = state.setIn ([key], history[key], val=> history[key])
         else {

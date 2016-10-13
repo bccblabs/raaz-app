@@ -3,6 +3,7 @@ import React, {Dimensions, StyleSheet, Platform} from 'react-native'
 import F8Colors from '../common/F8Colors'
 const window = Dimensions.get ('window')
 export const btnColor = '#b8cdfb'
+
 export const General = StyleSheet.create ({
   headerStyle: {
     backgroundColor: 'white'
@@ -144,30 +145,29 @@ export const ListingStyles = StyleSheet.create ({
 
 export const PartStyles = StyleSheet.create ({
   partsScrollStyle: {
-    height: 208,
+    height: 128,
     width: window.width,
     backgroundColor: '#FFF0F5'
   },
   partContainer: {
-    height: 200,
-    width: 200,
+    height: 100,
+    width: window.width/3,
     margin: 4,
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center'
   },
   partImage: {
-    height: 100,
-    width: 100,
+    height: 80,
+    width: 80,
     resizeMode: 'contain'
   },
   partTitle: {
     padding: 8,
-    flex: -1,
-    position: 'absolute',
-    top: 0,
+    flex: 1,
     color: 'black',
-    fontSize: 12,
+    fontSize: 8,
+    alignSelf: 'center',
     backgroundColor: 'transparent',
     opacity: 0.9,
     fontWeight: '800',
@@ -194,21 +194,6 @@ export const PartStyles = StyleSheet.create ({
 })
 
 export const Styles = StyleSheet.create ({
-  button: {
-    borderRadius: 4,
-    padding: 10,
-    marginLeft: 10,
-    marginRight: 10,
-    backgroundColor: "#B8C",
-  },
-  contentContainer: {
-    flex: 1,
-    backgroundColor: 'white',
-    padding: 30,
-    paddingTop: 75,
-    alignItems: 'center',
-  },
-
   loginButton: {
     borderTopWidth: 1,
     borderRadius: 20,
@@ -219,101 +204,11 @@ export const Styles = StyleSheet.create ({
     width: window.width/2.5,
     margin: 12,
   },
-
-  photoButton: {
-    borderWidth: 0,
-    backgroundColor: 'white',
-    flex: 1,
-  },
-
-  topLevelContainer: {
-    flex: 1,
-    marginTop: Platform.OS === 'ios' ? 64 : 0,
-  },
-  topScrollContainerStyle: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  topLevelScrollStyle: {
-    height: window.height,
-    width: window.width,
-  },
-  horizontalScrollContainer: {
-    height: 32,
-    width: window.width,
-    marginTop: 0,
-    backgroundColor: '#FFF0F5'
-  },
-  horizontalButtonContainer: {
-    height: 64,
-    flexDirection: 'row'
-  },
-  horizontalImagesContainer: {
-    height: window.width,
-    flexDirection: 'row',
-  },
-  ItemsListStyle: {
-    margin: 8
-  },
   mapStyle: {
     alignSelf: 'center',
     marginTop: 16,
     height: 350,
     width:  350,
-  },
-  scrollItem: {
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 32,
-    width: window.width/2,
-    padding: 8
-  },
-  carDetailsTopContainer: {
-    width: window.width,
-  },
-  carDetailsContainer: {
-    height: 250,
-    width: 250,
-    alignItems: 'flex-start',
-  },
-  carDetailsTitle: {
-    alignSelf: 'flex-start',
-    margin: 8,
-    fontSize: 12,
-    color: 'black'
-  },
-  largeTitleStyle: {
-    color: 'black',
-    fontWeight: 'bold',
-    fontSize: 20,
-    margin: 16,
-  },
-  descriptionText: {
-    color: 'black',
-    fontSize: 14,
-    padding: 8
-  },
-  carDetailsSubtitle: {
-    alignSelf: 'flex-start',
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 16,
-    margin: 8,
-    marginTop: 16
-
-  },
-  ItemsListStyle: {
-    height: window.width,
-  },
-
-  ItemStyle: {
-    margin: 8
-  },
-  listingsHistoryParallaxBackground: {
-    height: window.height,
-    width: window.width,
-    backgroundColor: 'darkslategray'
   },
   largeImageStyle: {
     flex: 1,
@@ -326,117 +221,19 @@ export const Styles = StyleSheet.create ({
 })
 
 export const ButtonStyles = StyleSheet.create ({
-  filterActionButton: {
-    flex: 1,
-    height: 50  ,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    borderColor: 'transparent',
-    backgroundColor: 'transparent',
-  },
-
-  // details button
-  detailsButtonStyle: {
-    flex: 1,
-    height: 50,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    borderColor: 'cadetblue',
-    backgroundColor: 'transparent',
-    margin: 16
-  },
-  detailsButtonText: {
-    flexWrap: 'wrap',
-    padding: 8,
-    fontSize: 12,
-    color: 'cadetblue',
-    textAlign: 'center'
-  },
-
-  applyButton: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    padding: 8,
-    backgroundColor: '#1B3B79',
-  },
-
-  postOptionButton: {
-    borderColor: 'transparent',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
-    height: 32,
-    width: 10,
-    borderRadius: 32 / 2,
-    borderWidth: 1,
-  },
-  deselectedLabel: {
-    color: 'rgba(255, 255, 255, 0.7)',
-  },
-
 })
-export const ScrollColorsArray = [
-  {backgroundColor: 'lightcoral'},
-  {backgroundColor: 'mediumvioletred'},
-  {backgroundColor: 'teal'},
-  {backgroundColor: 'darkolivegreen'},
-  {backgroundColor: 'mediumseagreen'},
-]
-export const RecallColorsArray = [
-  {backgroundColor: 'darkolivegreen'},
-  {backgroundColor: 'mediumvioletred'},
-  {backgroundColor: 'lightcoral'},
-]
+
 export const GraphColorsArray = [
   {backgroundColor: '#4D98E4'},
   {backgroundColor: '#59838B'},
   {backgroundColor: '#418E50'},
   {backgroundColor: '#7B7FEC'},
 ]
-export const ParallaxScrollStyles = {
-  STICKY_HEADER_HEIGHT: 60,
-  PARALLAX_HEADER_HEIGHT: window.height,
-  BACKGROUND_IMAGE_HEIGHT: window.heigth,
-  BACKGROUND_IMAGE_WIDTH: window.width,
-  CARD_HEIGHT: 300,
-  parallaxBackgroundImageStyle: {
-    height: this.BACKGROUND_IMAGE_HEIGHT,
-    width: this.BACKGROUND_IMAGE_WIDTH
 
-  }
-}
 export const FilterStyles = StyleSheet.create({
   container: {
     flex: 1,
     marginBottom: 8
-  },
-  tabView: {
-    flex: 1,
-    padding: 10,
-    backgroundColor: 'rgba(0,0,0,0.01)',
-  },
-  card: {
-    borderWidth: 1,
-    backgroundColor: '#fff',
-    borderColor: 'rgba(0,0,0,0.1)',
-    margin: 5,
-    height: 150,
-    padding: 15,
-    shadowColor: '#ccc',
-    shadowOffset: { width: 2, height: 2, },
-    shadowOpacity: 0.5,
-    shadowRadius: 3,
-  },
-  icon: {
-    width: 300,
-    height: 300,
-    alignSelf: 'center',
-  },
-  stage: {
-    backgroundColor: '#EFEFF4',
-    paddingBottom: 20,
-    flex: 1
   },
   optionsContainer: {
     marginLeft: 16,
@@ -453,48 +250,10 @@ export const FilterStyles = StyleSheet.create({
   }
 })
 export const SliderStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    padding : 16,
-  },
-  rangeTextContainer: {
-    flexDirection: 'row',
-    width: window.width,
-    alignItems: 'stretch',
-    flex: 1
-  },
-  leftIndicator: {
-    position: 'absolute', left: 0, padding: 16,
-    fontWeight: 'bold',
-    fontSize: 12,
-    color: 'seagreen'
-  },
-  rightIndicator: {
-    color: 'olive',
-    fontWeight: 'bold',
-    fontSize: 12,
-    position: 'absolute', right: 0, padding: 16
-  },
-  avgText: {
-    padding: 10,
-    fontWeight:'bold',
-    color: 'gray',
-    alignSelf: 'center',
-    fontSize: 12,
-    fontFamily: 'FontAwesome'
-  },
-  imageStyle: {
-    height: 300,
-    width: window.width,
-    resizeMode: 'cover'
-  },
   slide: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  wrapper: {
   },
   image: {
     height: 200,
@@ -502,6 +261,7 @@ export const SliderStyles = StyleSheet.create({
     resizeMode: 'cover'
   }
 })
+
 export const FilterCardStyles = StyleSheet.create ({
   cardStyle: {
     flex: 1,
@@ -517,7 +277,10 @@ export const FilterCardStyles = StyleSheet.create ({
     fontWeight: 'bold',
   }
 })
+
 export const NewPostStyles = StyleSheet.create ({
+
+
   taggedCarsScroll: {
     width: window.width,
     backgroundColor: 'transparent'
@@ -590,24 +353,7 @@ export const NewPostStyles = StyleSheet.create ({
     height: 50,
   }
 })
-export const PostScreenStyles = StyleSheet.create ({
-  profileTitleStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    fontSize: 16,
-    letterSpacing: 1,
-  },
-  profileInfoView: {
-    width: 100,
-    backgroundColor: 'transparent'
-  },
-  profileContainer: {
-    flexDirection: 'row',
-    alignSelf: 'center',
-    margin: 16,
-  }
-})
+
 export const EmptyViewStyles = StyleSheet.create ({
   container: {
     flex: 1,
@@ -624,15 +370,8 @@ export const EmptyViewStyles = StyleSheet.create ({
   },
 
 })
-export const ScrollColorsNum = ScrollColorsArray.length
-export const RecallColorsNum = RecallColorsArray.length
+
 export const PostStyles = StyleSheet.create({
-  linearGradient: {
-    flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderRadius: 5
-  },
   container: {
     flex: 1,
     backgroundColor: 'white',
@@ -656,33 +395,10 @@ export const PostStyles = StyleSheet.create({
     flex: 1,
     alignItems: 'flex-start',
   },
-  manufacturer: {
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    bottom: 0,
-    width: window.width,
-    height: 20
-  },
-  manufacturerContainer: {
-    flex: 1,
-    alignItems: 'flex-start',
-  },
-
-  bottom: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    paddingVertical: 8,
-  },
   title: {
     fontSize: 18,
     fontWeight: '500',
     paddingHorizontal: 8
-  },
-  lc: {
-    fontWeight: '600',
-    color: 'black',
-    paddingHorizontal: 4
   },
   tag: {
     color: 'black',
@@ -714,17 +430,33 @@ export const PostStyles = StyleSheet.create({
   },
   largeImage: {
     width: window.width/2,
-    height: window.height/2,
+    height: window.height/3,
     resizeMode: 'cover',
-    borderWidth: 3,
     borderColor: 'white'
   },
-  smallImage: {
-    width: window.width/2,
-    height: window.height/4,
-    resizeMode: 'cover',
-    borderWidth: 3,
+  horizontalImage: {
+    width: window.width,
+    height: window.height/3,
+    resizeMode: 'contain',
     borderColor: 'white'
+  },
+
+  postsHorizontal: {
+    width: window.width,
+    height: window.height/3,
+  },
+  horizontalTitle: {
+    flex: 1,
+    position: 'absolute',
+    bottom: 10,
+    width: window.width/4,
+    left: window.width/12,
+    fontSize: 18,
+    fontWeight: '500',
+  },
+
+  horizontalImageContainer: {
+    flex: 1
   },
   userPhotoStyle: {
     height: 40,

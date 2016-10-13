@@ -6,6 +6,7 @@ import React, {
   StyleSheet,
   TouchableOpacity,
   View,
+  WebView,
 } from 'react-native'
 
 import {Actions} from 'react-native-router-flux'
@@ -26,7 +27,7 @@ import Manufacturers from './Manufacturers'
 import PostsList from '../Posts/PostListView'
 import {VRImage} from '../cardboard'
 
-import {TuningBySpecStyles, General, Specs, Titles, PartStyles} from '../styles'
+import {TuningBySpecStyles, General, Specs, Titles, PartStyles, PostStyles} from '../styles'
 const specIdSelector = (state) => (state.stockCar.selectedSpecId)
 const specDetailsSelector = (state) => (state.entities.specDetails)
 const specDetailsPagination = (state) => (state.pagination.specDetailsPagination)
@@ -116,12 +117,11 @@ class TuningBySpec extends Component {
                             ): (<View/>)
         , postsContent = posts?(
           <View>
-          <Heading3 style={Titles.buildSectionTitle}>{"POSTS"}</Heading3>
-            <ScrollView
-              style={PartStyles.partsScrollStyle}>
-              {posts.map ((post, idx)=>(<PostCard key={`pc-${idx}`} data={post}/>))}
-            </ScrollView>
-          <F8Button onPress={()=>{Actions.PostsBySpecId({specId})}} type="secondary" caption="View All Posts" style={General.bottomButtonStyle}/>
+          <Heading3 style={Titles.buildSectionTitle}>{"BUILDS"}</Heading3>
+          <ScrollView
+            style={PostStyles.postsHorizontal}>
+            {posts.map ((post, idx)=>(<PostCard key={`pc-${idx}`} data={post}/>))}
+          </ScrollView>
           </View>
         ):(<View/>)
 
@@ -144,7 +144,7 @@ class TuningBySpec extends Component {
                 )
 
             }}
-            renderBackground={() => <VRImage style={TuningBySpecStyles.VRImageHolder}/>}>
+            renderBackground={() => <WebView source={{uri: "https://storage.googleapis.com/vrview/index.html?image=https://s3.amazonaws.com/vr-web/images/IMG_3656.JPG&is_stereo=false"}} style={TuningBySpecStyles.VRImageHolder}/>}>
             <View style={{flex: 1}}>
             <Heading3 style={Titles.buildSectionTitle}>{"SPECS"}</Heading3>
             <View style={{padding: 16}}>
@@ -154,6 +154,12 @@ class TuningBySpec extends Component {
             <Heading3 style={Specs.subtitle}>{`${drivenWheels}`.toUpperCase()}</Heading3>
             </View>
             {postsContent}
+            <F8Button
+              style={{alignSelf: 'center', marginTop: 16}}
+              onPress={()=>{Actions.PostsBySpecId({specId})}}
+              type="tertiary" caption={`All Posts`}
+              icon={require ('../common/img/comment.png')}
+            />
             {tuningcomponent}
             </View>
           </ParallaxScrollView>

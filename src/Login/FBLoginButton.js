@@ -71,14 +71,4 @@ async function timeout(ms: number): Promise {
   });
 }
 
-var styles = StyleSheet.create({
-  button: {
-    borderWidth: 1,
-    borderColor: 'white',
-    width: 40,
-    height: 40,
-    borderRadius: 8,
-  }
-});
-
 module.exports = connect()(FBLoginButton);

@@ -36,6 +36,7 @@
     "react-native-button": "^1.4.2",
     "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
     "react-native-collapsible": "^0.5.5",
+    "react-native-dismiss-keyboard": "^1.0.0",
     "react-native-drawer": "^1.16.7",
     "react-native-dropdown": "0.0.6",
     "react-native-easy-grid": "^0.1.6",

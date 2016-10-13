@@ -13,7 +13,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view'
 
 import SavedPartsList from './SavedPartsList'
 
-export default class TuningPager extends Component {
+export default class SavedParts extends Component {
 
   render () {
     const leftItem = {

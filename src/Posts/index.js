@@ -2,7 +2,9 @@
 
 import React, {
   Component,
+  ScrollView,
   View,
+  WebView,
 } from 'react-native'
 
 import {Actions} from 'react-native-router-flux'
@@ -12,10 +14,11 @@ import {createSelector} from 'reselect'
 import {setUserData} from '../reducers/user/userActions'
 import {setAccessToken} from '../reducers/history/historyActions'
 import {fetchCategoriesFromApi} from '../reducers/stockCar/filterActions'
-
+import {TuningBySpecStyles} from '../styles'
 import PostListView from './PostListView'
 import F8Header from '../common/F8Header'
 import Carmera from '../components/Carmera'
+import VRVideo from '../cardboard/VRVideo'
 const mapStateToProps = (state) => {
   return {
     profileData: state.user.profileData,

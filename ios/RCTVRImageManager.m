@@ -6,7 +6,6 @@
 //  Copyright © 2016 Facebook. All rights reserved.
 //
 
-#import <MapKit/MapKit.h>
 #import "GCSPanoramaView.h"
 #import "RCTViewManager.h"
 
@@ -27,8 +26,6 @@ RCT_EXPORT_MODULE()
     [_panoView loadImage:[UIImage imageNamed:@"IMG_3656.JPG"]
                   ofType:kGCSPanoramaImageTypeMono];
     return _panoView;
-  return [[MKMapView alloc] init];
-
 }
 
 @end

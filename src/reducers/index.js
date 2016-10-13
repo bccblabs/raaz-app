@@ -17,6 +17,23 @@ const {
   BUILDS_SUCCESS,
   BUILDS_ERROR,
 
+  BUILDS_REQUEST_CAT,
+  BUILDS_SUCCESS_CAT,
+  BUILDS_ERROR_CAT,
+
+  BUILDS_REQUEST_TAG,
+  BUILDS_SUCCESS_TAG,
+  BUILDS_ERROR_TAG,
+
+  BUILDS_REQUEST_USER,
+  BUILDS_SUCCESS_USER,
+  BUILDS_ERROR_USER,
+
+  BUILDS_REQUEST_SPECID,
+  BUILDS_SUCCESS_SPECID,
+  BUILDS_ERROR_SPECID,
+
+
   PARTS_REQUEST,
   PARTS_SUCCESS,
   PARTS_ERROR,
@@ -83,12 +100,28 @@ function entities(state=initState, action) {
 const pagination = combineReducers ({
 
   buildsPagination: paginate ({
+    mapActionToKey: action =>action.key,
+    types: [BUILDS_REQUEST, BUILDS_SUCCESS, BUILDS_ERROR],
+  }),
+
+  buildsByCategoryPagination: paginate ({
+    mapActionToKey: action =>action.category,
+    types: [BUILDS_REQUEST_CAT, BUILDS_SUCCESS_CAT, BUILDS_ERROR_CAT],
+  }),
+
+  buildsByTagPagination: paginate ({
+    mapActionToKey: action =>action.tag,
+    types: [BUILDS_REQUEST_TAG, BUILDS_SUCCESS_TAG, BUILDS_ERROR_TAG],
+  }),
+
+  fetchBuildsBySpecId: paginate ({
     mapActionToKey: action =>action.specId,
-    types: [
-      BUILDS_REQUEST,
-      BUILDS_SUCCESS,
-      BUILDS_ERROR
-    ]
+    types: [BUILDS_REQUEST_SPECID, BUILDS_SUCCESS_SPECID, BUILDS_ERROR_SPECID],
+  }),
+
+  fetchBuildsByUserId: paginate ({
+    mapActionToKey: action =>action.userId,
+    types: [BUILDS_REQUEST_USER, BUILDS_SUCCESS_USER, BUILDS_ERROR_USER],
   }),
 
   dealsPagination: paginate ({

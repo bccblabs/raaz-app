@@ -11,7 +11,7 @@ import React, {
 
 import {Actions} from 'react-native-router-flux'
 import {connect} from 'react-redux'
-import {SliderStyles, Styles} from '../styles'
+import {Styles} from '../styles'
 import Tag from '../filters/Tag'
 
 
