@@ -77,9 +77,9 @@ export default class BuildsList extends Component {
       }
 
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, marginBottom: 50}}>
         {header}
-        {tags && <TagsHeader tags={tags} selectedTags={tags}
+        {tags && tags.length > 0 && <TagsHeader tags={tags} selectedTags={tags}
                     color={btnColor}/>}
         {content}
       </View>

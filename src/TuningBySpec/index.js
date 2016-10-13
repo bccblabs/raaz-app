@@ -116,13 +116,9 @@ class TuningBySpec extends Component {
                               </View>
                             ): (<View/>)
         , postsContent = posts?(
-          <View>
-          <Heading3 style={Titles.buildSectionTitle}>{"BUILDS"}</Heading3>
-          <ScrollView
-            style={PostStyles.postsHorizontal}>
+          <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} >
             {posts.map ((post, idx)=>(<PostCard key={`pc-${idx}`} data={post}/>))}
           </ScrollView>
-          </View>
         ):(<View/>)
 
         return (
@@ -157,7 +153,7 @@ class TuningBySpec extends Component {
             <F8Button
               style={{alignSelf: 'center', marginTop: 16}}
               onPress={()=>{Actions.PostsBySpecId({specId})}}
-              type="tertiary" caption={`All Posts`}
+              type="tertiary" caption={`All Builds`}
               icon={require ('../common/img/comment.png')}
             />
             {tuningcomponent}

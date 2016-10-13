@@ -52,7 +52,7 @@ export default class Post extends Component {
             <Text style={PostStyles.created}>{`${daysAgo}`}</Text>
           </View>
       </View>
-      <ResponsiveImage style={PostStyles.singlePostImage} source={{uri: media[0]}} initWidth={initWidth} initHeight={initHeight}/>
+      <ResponsiveImage style={PostStyles.primaryImage} source={{uri: media[0]}} initWidth={initWidth} initHeight={initHeight}/>
       <ScrollView style={PostStyles.tags} showsHorizontalScrollIndicator={false} horizontal={true} containerStyle={PostStyles.tagsContainer}>
         {tags && tags.map ((tag, idx)=> {return ( <Text key={idx} style={PostStyles.tag}>{`#${tag}`}</Text> )})}
       </ScrollView>

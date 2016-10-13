@@ -14,7 +14,7 @@ import { Col, Row, Grid } from "react-native-easy-grid";
 
 import moment from 'moment'
 import Icon from 'react-native-vector-icons/Foundation';
-import {PostStyles} from '../styles'
+import {PostStyles, PartStyles} from '../styles'
 import numeral from 'numeral'
 
 import LikeBtn from '../common/LikeBtn'
@@ -29,52 +29,55 @@ export default class Post extends Component {
 
   render () {
     if (!this.props.data) return <View/>
-    const {created, name, manufacturers, listing, media, tags, buildId, likes, comments} = this.props.data,
+    const {created, name, manufacturers, media, tags, buildId, likes, comments, parts} = this.props.data,
           daysAgo = moment(created).fromNow()
-    let manufacturerContent = manufacturers && (
-              <View>
-              {manufacturers.map ((item, idx)=> {return item.logo?(<Image key={idx} source={{uri: item.logo}} style={{margin: 8, height:20, resizeMode: 'contain'}}/>):(<View/>)})}
-              </View>
-      )
+
     , imageContent = (
-      <View style={{flex: 1}}>
-        <View style={PostStyles.header}>
-          {listing && <Icon name="price-tag" size={20} color={"red"}/>}
-          {name && (<Text style={PostStyles.title}>{name}</Text>)}
-          <Text style={PostStyles.created}>{`${daysAgo}`}</Text>
-        </View>
-        <Grid style={PostStyles.imageContainer}>
-          <Col>
-            <Image source={{uri:media[0]}} style={PostStyles.largeImage}/>
-          </Col>
-          <Col>
-            <Row>
-            <Image source={{uri:media[1]}} style={PostStyles.smallImage}/>
-            </Row>
-            <Row>
-            <Image source={{uri:media[2]}} style={PostStyles.smallImage}/>
-            </Row>
-          </Col>
-        </Grid>
+      <Image style={PostStyles.primaryImage} source={{uri: media}}>
+      <Text style={PostStyles.primaryTitle}>{name}</Text>
+      <View style={PostStyles.manufacturerContainer}>
+      {
+        manufacturers && manufacturers.map ((logo, idx)=> {
+          return (<Image
+            key={idx}
+            source={{uri: logo}}
+            style={PostStyles.manufacturerLogo}
+            />)
+          })
+      }
       </View>
+
+      </Image>
     )
+
     , tagsContent = tags && (
           <ScrollView style={PostStyles.tags} showsHorizontalScrollIndicator={false} horizontal={true} containerStyle={PostStyles.tagsContainer}>
             {tags && tags.map ((tag, idx)=> {return ( <Text key={idx} style={PostStyles.tag}>{`#${tag}`}</Text> )})}
           </ScrollView>
       )
+    , partContent = parts && (
+      <ScrollView style={{backgroundColor: 'white'}} pagingEnabled={true}
+      horizontal={true} showsHorizontalScrollIndicator={false}>
+      {parts.map((part, idx)=>{
+        return (
+          <View key={`psp-${idx}`} style={PostStyles.scrollTitleContainer}>
+          <Text style={PartStyles.partTitle}>{part}</Text>
+          </View>
+        )})
+      }
+      </ScrollView>
+
+    )
     , likesContent = (<LikeBtn postId={buildId} numlikes={likes.length}/>)
     , commentsContent = (<CommentBtn postId={buildId} commentsCnt={comments}/>)
 
     return (
       <View style={PostStyles.container}>
       <TouchableWithoutFeedback onPress={()=>Actions.BuildDetails({buildId: buildId, name: name})}>
-        <View>
-          {imageContent}
-          {manufacturerContent}
-          {tagsContent}
-        </View>
+      {imageContent}
       </TouchableWithoutFeedback>
+      {tagsContent}
+      {partContent}
       <View style={{flexDirection:"row", justifyContent: 'flex-start'}}>
       {likesContent}
       {commentsContent}

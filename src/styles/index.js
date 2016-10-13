@@ -145,21 +145,19 @@ export const ListingStyles = StyleSheet.create ({
 
 export const PartStyles = StyleSheet.create ({
   partsScrollStyle: {
-    height: 128,
+    height: window.height/6,
     width: window.width,
-    backgroundColor: '#FFF0F5'
   },
   partContainer: {
-    height: 100,
-    width: window.width/3,
-    margin: 4,
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center'
+    height: window.height/6,
+    width: window.height/6,
+    backgroundColor: 'black',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   partImage: {
-    height: 80,
-    width: 80,
+    height: window.height/8,
+    width: window.height/8,
     resizeMode: 'contain'
   },
   partTitle: {
@@ -295,7 +293,6 @@ export const NewPostStyles = StyleSheet.create ({
     width: window.width,
     height: window.height/8,
     fontSize: 32,
-
   },
   singleLineBlockInput: {
     margin: 8,
@@ -418,52 +415,73 @@ export const PostStyles = StyleSheet.create({
     color: 'black',
     fontWeight: '500',
   },
-  singlePostImage: {
-    width: window.width,
-    height: window.height/2,
-    resizeMode: 'cover',
-    alignSelf: 'center'
-  },
-  imageContainer: {
-    width: window.width,
-    height: window.height/2,
-  },
-  largeImage: {
-    width: window.width/2,
-    height: window.height/3,
-    resizeMode: 'cover',
-    borderColor: 'white'
-  },
-  horizontalImage: {
-    width: window.width,
-    height: window.height/3,
-    resizeMode: 'contain',
-    borderColor: 'white'
-  },
 
-  postsHorizontal: {
-    width: window.width,
-    height: window.height/3,
-  },
-  horizontalTitle: {
-    flex: 1,
-    position: 'absolute',
-    bottom: 10,
-    width: window.width/4,
-    left: window.width/12,
-    fontSize: 18,
-    fontWeight: '500',
-  },
-
-  horizontalImageContainer: {
-    flex: 1
-  },
   userPhotoStyle: {
     height: 40,
     width: 40,
     backgroundColor: 'black',
     marginHorizontal: 8,
     resizeMode: 'contain'
+  },
+
+  primaryImage: {
+    width: window.width,
+    height: window.height/2,
+    resizeMode: 'cover',
+    alignSelf: 'center'
+  },
+  secondaryImage: {
+    width: window.width/2,
+    height: window.height/3,
+    resizeMode: 'cover',
+  },
+  manufacturerLogo: {
+    margin: 8,
+    flex: 1,
+    resizeMode: 'contain',
+  },
+  manufacturerContainer: {
+    position: 'absolute',
+    backgroundColor: 'black',
+    height: 40,
+    width: 80,
+    bottom: 8,
+    left: 8,
+  },
+  postsHorizontal: {
+    width: window.width,
+    height: window.height/3,
+  },
+  secondaryTitle: {
+    flex: 1,
+    position: 'absolute',
+    bottom:4,
+    left: 4,
+    width: window.width/4,
+    fontSize: 16,
+    fontWeight: '700',
+    padding: 8,
+    paddingHorizontal: 12,
+  },
+
+  scrollTitleContainer: {
+    width: 120,
+    padding: 6,
+    backgroundColor: 'white',
+    borderRightWidth: 0.5,
+    borderColor: 'lightgray'
+  },
+
+  primaryTitle: {
+    flex: 1,
+    position: 'absolute',
+    top: 8,
+    width: window.width/2,
+    left: 8,
+    fontSize: 20,
+    fontWeight: '700',
+    padding: 8,
+    paddingHorizontal: 12,
   },
 
 })

@@ -14,7 +14,7 @@ import F8Button from '../common/F8Button'
 import Carmera from '../components/Carmera'
 
 
-import BuildsList from '../components/BuildsList'
+import List from '../components/List'
 import {buildsSelector, buildsPaginationSelector, userIdSelector, buildCategoriesSelector} from '../selectors'
 import {fetchCategoriesFromApi, fetchBuilds} from '../reducers/tuning/filterActions'
 
@@ -58,7 +58,7 @@ class Tuning extends Component {
                 icon={require ('../common/img/search.png')}/>
 
       </View>
-      <BuildsList data={data} pagination={pagination} tags={tags} fetchTags={fetchTags} fetchData={fetchData}/>
+      <List data={data} pagination={pagination} tags={tags} fetchTags={fetchTags} fetchData={fetchData}/>
       </View>
     )
   }

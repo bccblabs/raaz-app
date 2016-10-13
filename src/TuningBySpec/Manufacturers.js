@@ -46,8 +46,8 @@ class Manufacturers extends Component {
 
 
                   return (
-                    <View key={`pelem-${cidx}`} style={PartStyles.partContainer}>
-                    <TouchableWithoutFeedback onPress={()=>{Actions.PartByManufacturer ({...passProps})}}>
+                    <View key={`pelem-${cidx}`}  style={PartStyles.partContainer}>
+                    <TouchableWithoutFeedback  onPress={()=>{Actions.PartByManufacturer ({...passProps})}}>
                       <Image
                         source={{uri: logo}}
                         style={PartStyles.partImage}>
