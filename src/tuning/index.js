@@ -6,7 +6,7 @@ import React, {
 
 import {Actions} from 'react-native-router-flux'
 import {connect} from 'react-redux'
-import {TuningBySpecStyles} from '../styles'
+import {DetailStyles} from '../styles'
 
 
 import F8Header from '../common/F8Header'
@@ -14,7 +14,7 @@ import F8Button from '../common/F8Button'
 import Carmera from '../components/Carmera'
 
 
-import List from '../components/List'
+import BuildList from '../build/BuildList'
 import {buildsSelector, buildsPaginationSelector, userIdSelector, buildCategoriesSelector} from '../selectors'
 import {fetchCategoriesFromApi, fetchBuilds} from '../reducers/tuning/filterActions'
 
@@ -58,7 +58,7 @@ class Tuning extends Component {
                 icon={require ('../common/img/search.png')}/>
 
       </View>
-      <List data={data} pagination={pagination} tags={tags} fetchTags={fetchTags} fetchData={fetchData}/>
+      <BuildList data={data} pagination={pagination} tags={tags} fetchTags={fetchTags} fetchData={fetchData}/>
       </View>
     )
   }

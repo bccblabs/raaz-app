@@ -13,11 +13,12 @@ export default class QRScreen extends Component {
 
   render () {
     return (
-      <View>
-      <F8Header title="QR Scan" foreground="dark" leftItem={{title: 'Back', onPress: Actions.pop}}/>
+      <View style={{backgroundColor: 'black', flex: 1}}>
+      <F8Header title="QR Scan" foreground="light" leftItem={{title: 'Back', onPress: Actions.pop}}/>
       <QRCodeScanner
         onRead={(qrCode)=>{Actions.BuildDetails ({buildId: qrCode})}}
         topContent={(<View style={{paddingBottom: 8}}><Heading3 style={Titles.buildTitle}>{"Scan cars with RAAZ QR to discover more!"}</Heading3></View>)}
+        bottomContent={(<View style={{paddingBottom: 8}}><Heading3 style={Titles.buildTitle}>{"Scan cars with RAAZ QR to discover more!"}</Heading3></View>)}
         />
       </View>
     )

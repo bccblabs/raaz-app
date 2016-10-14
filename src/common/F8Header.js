@@ -298,7 +298,7 @@ module.exports.__cards__ = (define) => {
       title="Light Background"
       leftItem={{...menuItem, layout: 'title'}}
       rightItem={{...filterItem, layout: 'title'}}
-      style={{backgroundColor: 'white'}}
+      style={{backgroundColor: 'transparent'}}
       foreground="dark"
     />
   ));

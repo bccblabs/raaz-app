@@ -27,8 +27,7 @@ class Manufacturers extends Component {
   render() {
     let {data, onPress, specId} = this.props
     return (
-      <View style={{backgroundColor: 'white', marginBottom: 16}}>
-        <View>
+      <View style={{backgroundColor: 'white', flex: 1}}>
         {data.map ((optionRow, idx)=>{
           return (
             <View style={{backgroundColor: 'white'}} key={`pg-${idx}`}>
@@ -61,7 +60,6 @@ class Manufacturers extends Component {
             </View>
           )
         })}
-        </View>
       </View>
     )
   }

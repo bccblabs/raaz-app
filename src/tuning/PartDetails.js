@@ -8,35 +8,27 @@ import React, {
   View
 } from 'react-native'
 
-import RequestUtils from '../requests'
-import ViewPager from 'react-native-viewpager'
-
-import {connect} from 'react-redux'
 import {Actions} from 'react-native-router-flux'
-import {createSelector} from 'reselect'
+import ParallaxScrollView from 'react-native-parallax-scroll-view';
 
-
-import {Heading1, Heading2, Heading3, Paragraph} from '../common/F8Text'
-import MetricsGraph from '../components/MetricsGraph'
-import {syncProduct} from '../reducers/history/historyActions'
-import {Styles, General, Titles, TuningBySpecStyles} from '../styles'
+import RequestUtils from '../requests'
 
 import F8Button from '../common/F8Button'
-import SaveProductButton from '../components/SaveProductButton'
 import F8Header from '../common/F8Header'
-import LoadingView from '../components/LoadingView'
+import {Heading3, Paragraph} from '../common/F8Text'
 
-class PartDetails extends Component {
+import LoadingView from '../components/LoadingView'
+import ErrorView from '../common/ErrorView'
+import MetricsGraph from '../components/MetricsGraph'
+import SaveProductButton from '../components/SaveProductButton'
+
+import {General, Titles, DetailStyles, PostStyles, Specs} from '../styles'
+
+
+export default class PartDetails extends Component {
   constructor (props) {
     super (props)
-    let mediaDataSource = new ViewPager.DataSource({pageHasChanged: (p1, p2) => p1 !== p2})
-      , {data} = props
-
     this.state = {
-      mediaDataSource: mediaDataSource,
-      partId: data.partId,
-      specId: data.specId,
-
       hasError: false,
       isLoading: true
     }
@@ -46,15 +38,13 @@ class PartDetails extends Component {
 
   async fetchPartDetails () {
     try {
-      let {partId, specId} = this.state
+      let {partId, specId} = this.props.data
         , data = await RequestUtils.fetchPartDetails (partId, specId)
-        , mediaDataSource = this.state.mediaDataSource.cloneWithPages (data.part.media)
 
       this.setState ({
         hasError: false,
         isLoading: false,
         data: data,
-        mediaDataSource: mediaDataSource
       })
 
     } catch (err) {
@@ -67,82 +57,107 @@ class PartDetails extends Component {
   }
 
   render() {
+    let {partId} = this.props.data, content
     const leftItem = {
             title: 'Back',
             onPress: ()=> {Actions.pop()}
           }
+        , rightItem = {
+          title: 'Listings',
+          onPress: ()=> {Actions.Listings({partId})}
+        }
         , {data, hasError, isLoading} = this.state
+        , header = (
+            <F8Header
+              foreground="dark"
+              style={General.headerStyle}
+              leftItem={leftItem}
+              rightItem={rightItem}/>
+        )
 
-    if (isLoading) return (<LoadingView/>)
+    if (isLoading) {
+      return (<View style={{flex: 1}}>{header}<LoadingView/></View>)
+    }
+    else if (hasError) {
+      return (<View style={{flex: 1}}>{header}<ErrorView/></View>)
+    }
     else {
       let {part, manufacturer, listings, comments, tuning} = data
-        , {name, partId, details, description} = part
+        , {name, partId, details, description, media} = part
         , {emission, included} = tuning
         , graphKeys = [
           'tqGain', 'hpGain', 'maxHp', 'maxTq', 'labor', 'weight',
           'rearLowering', 'frontLowering',
           'rearSpringRateStiffness','frontSpringRateStiffness']
+
         , dataArray = graphKeys.map ((key)=>{return {name: key, value: tuning[key]}})
-        , manufacturerContent = manufacturer && (
-          <View style={{flexDirection: 'row', padding: 8, justifyContent: 'flex-start'}}>
-            <Image source={{uri: manufacturer.logo}} resizeMode="contain" style={{height: 16, flex: 1}}/>
+        , specsContent = dataArray && (<MetricsGraph data={[{entries: dataArray}]}/>)
+        , foregroundContent = (
+          <View style={DetailStyles.foregroundContainer}>
+          <Text style={DetailStyles.partTitle}>{name}</Text>
+            {manufacturer && (
+              <View style={{flex: 1, backgroundColor: 'white', height: 20, width: 80, marginVertical: 8}}>
+              <Image source={{uri: manufacturer.logo}}
+                      style={PostStyles.manufacturerLogo}/>
+              </View>
+            )
+            }
           </View>
         )
-        , specsContent = dataArray && (<MetricsGraph data={[{entries: dataArray}]}/>)
+        , images = (
+          <ScrollView
+            showsHorizontalScrollIndicator={false}
+            horizontal={true}>
+            {media.map ((mediaLink, idx)=> (<Image key={`${partId}-${idx}`} style={DetailStyles.scrollImage} source={{uri:mediaLink}}/>))}
+          </ScrollView>
+
+        )
       return (
         <View style={{flex: 1}}>
-          <F8Header
-            foreground="dark"
-            leftItem={leftItem}
-            style={General.headerStyle}/>
-            <ScrollView>
-              <Heading1 style={{padding:16,color: 'black'}}>{name}</Heading1>
-              <ViewPager
-                renderPage={(media)=>{return (<Image source={{uri:media, resizeMode: 'contain'}} style={Styles.largeImageStyle}/>)}}
-                dataSource={this.state.mediaDataSource}
-              />
-              {manufacturerContent}
-              <SaveProductButton part={Object.assign ({}, {...part}, {...tuning}, {specId: this.state.specId})}/>
-              <View style={{paddingBottom: 49}}>
-              {
-                specsContent && (
-                  <View>
-                  <Paragraph style={Titles.filterSectionTitle}>{"SPECS"}</Paragraph>
-                  {specsContent}
-                  </View>
-                )
-              }
-              {description && (
-                <View>
-                <Paragraph style={Titles.filterSectionTitle}>{"DESCRIPTION"}</Paragraph>
-                <Heading3 style={TuningBySpecStyles.subtitle}>{description}</Heading3>
-                </View>
-              )}
-
-              {details && (
-                <View>
-                <Paragraph style={Titles.filterSectionTitle}>{"DETAILS"}</Paragraph>
-                {
-                  details.map ((detail, idx)=> {
-                    return (
-                      <Heading3 key={`dtls-${idx}`} style={TuningBySpecStyles.subtitle}>{description}</Heading3>
-                    )
-                  })
-                }
-                </View>
-              )}
-
+        <ParallaxScrollView
+          backgroundColor="transparent"
+          contentBackgroundColor="white"
+          backgroundSpeed={1}
+          parallaxHeaderHeight={300}
+          renderFixedHeader={() => header}
+          stickyHeaderHeight={64}
+          renderForeground={()=>{return foregroundContent}}
+          renderBackground={() => <Image source={{uri: media[0]}} style={DetailStyles.VRImageHolder}/>}
+          >
+          <View style={{margin:16}}>
+          {images}
+          <SaveProductButton style={{margin: 16}} part={Object.assign ({}, {...part}, {...tuning}, {specId: this.state.specId})}/>
+          {
+            specsContent && (
+              <View style={DetailStyles.descriptionContainer}>
+              <Paragraph style={Titles.filterSectionTitle}>{"SPECS"}</Paragraph>
+              {specsContent}
               </View>
-              </ScrollView>
-              <F8Button
-                type="secondary"
-                caption="View All Listings"
-                onPress={()=>{Actions.Order ({})}}
-                style={General.bottomButtonStyle}/>
+            )
+          }
+          {description && description.length && (
+            <View style={DetailStyles.descriptionContainer}>
+            <Paragraph style={Titles.filterSectionTitle}>{"DESCRIPTION"}</Paragraph>
+            <Heading3 style={[Specs.subtitle, {alignSelf: 'flex-start', margin: 4}]}>{`${description}`}</Heading3>
+            </View>
+          )}
+
+          {details && details.length && (
+            <View style={DetailStyles.descriptionContainer}>
+            <Paragraph style={Titles.filterSectionTitle}>{"DETAILS"}</Paragraph>
+            {
+              details.map ((detail, idx)=> {
+                return (
+                  <Heading3 key={`dtls-${idx}`}  style={[Specs.subtitle, {alignSelf: 'flex-start', margin: 4}]}>{`- ${detail}`}</Heading3>
+                )
+              })
+            }
+            </View>
+          )}
+          </View>
+        </ParallaxScrollView>
         </View>
       )
     }
   }
 }
-
-export default connect () (PartDetails)

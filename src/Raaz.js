@@ -21,8 +21,9 @@ import Login from './Login'
 import Profile from './Profile'
 import Settings from './Profile/Settings'
 import Tuning from './tuning'
+
 import PartDetails from './tuning/PartDetails'
-import BuildDetails from './tuning/BuildDetails'
+import BuildDetails from './build/BuildDetails'
 
 import MakesList from './components/MakesList'
 import ModelsList from './components/ModelsList'
@@ -39,7 +40,6 @@ import TagTuning from './search/TagTuning'
 import Notifications from './Notifications'
 import TuningBySpec from './TuningBySpec'
 
-import BuildFilter from './filters/BuildFilter'
 import PartFilter from './filters/PartFilter'
 import PartsList from './tuning/PartsList'
 import PartByManufacturer from './tuning/PartByManufacturer'
@@ -127,7 +127,6 @@ class Viicles extends Component {
             <Route name="TuningBySpec" component={TuningBySpec} schema="default" hideNavBar={true}/>
             <Route name="NewPost" component={NewPost} schema="default" hideNavBar={true}/>
 
-            <Route name="BuildFilter" component={BuildFilter} schema="default" hideNavBar={true}/>
             <Route name="PartFilter" component={PartFilter} schema="default" hideNavBar={true}/>
             <Route name="PartsList" component={PartsList} schema="default" hideNavBar={true}/>
             <Route name="PartByManufacturer" component={PartByManufacturer} schema="default" hideNavBar={true}/>

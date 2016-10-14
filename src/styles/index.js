@@ -60,17 +60,16 @@ export const Header = StyleSheet.create ({
 export const Specs = StyleSheet.create ({
   container: {
     flex: 1,
-    marginTop: 4
+    margin: 4
   },
   item: {
     flexDirection: 'column',
-    marginBottom: 4
   },
   subtitle: {
     flex: 1,
     fontSize: 10,
     color: 'black',
-    padding: 8,
+    padding: 4,
     paddingTop: 2,
     paddingBottom: 0,
   },
@@ -78,7 +77,7 @@ export const Specs = StyleSheet.create ({
     flex: 1,
     fontSize: 8,
     color: 'black',
-    padding: 8,
+    padding: 4,
     paddingTop: 2,
     paddingBottom: 0,
   },
@@ -86,13 +85,13 @@ export const Specs = StyleSheet.create ({
     flex: 1,
     fontSize: 16,
     color: 'black',
-    padding: 8,
+    padding: 5,
     paddingTop: 2,
     paddingBottom: 0,
     fontWeight: '700'
   },
   data: {
-    flex: 2,
+    flex: 1,
     flexDirection: 'row'
   },
   bar: {
@@ -112,7 +111,6 @@ export const Titles = StyleSheet.create ({
     alignSelf: 'flex-start',
     fontSize: 12,
     letterSpacing: 1,
-    marginTop: 32,
   },
   filterSectionTitle: {
     padding: 10,
@@ -146,7 +144,7 @@ export const ListingStyles = StyleSheet.create ({
 export const PartStyles = StyleSheet.create ({
   partsScrollStyle: {
     height: window.height/6,
-    width: window.width,
+    margin: 16,
   },
   partContainer: {
     height: window.height/6,
@@ -436,7 +434,7 @@ export const PostStyles = StyleSheet.create({
     resizeMode: 'cover',
   },
   manufacturerLogo: {
-    margin: 8,
+    margin: 4,
     flex: 1,
     resizeMode: 'contain',
   },
@@ -462,6 +460,7 @@ export const PostStyles = StyleSheet.create({
     fontWeight: '700',
     padding: 8,
     paddingHorizontal: 12,
+    backgroundColor: 'white',
   },
 
   scrollTitleContainer: {
@@ -480,6 +479,7 @@ export const PostStyles = StyleSheet.create({
     left: 8,
     fontSize: 20,
     fontWeight: '700',
+    backgroundColor: 'white',
     padding: 8,
     paddingHorizontal: 12,
   },
@@ -503,10 +503,57 @@ export const CarmeraStyles = StyleSheet.create ({
   },
 })
 
-export const TuningBySpecStyles = StyleSheet.create ({
+export const DetailStyles = StyleSheet.create ({
   VRImageHolder : {
     width: window.width,
     height: 300,
     alignSelf: 'center'
   },
+    primaryTitle: {
+      flex: 1,
+      position: 'absolute',
+      bottom: 8,
+      width: window.width/4,
+      left: 8,
+      fontSize: 20,
+      fontWeight: '700',
+      backgroundColor: 'white',
+      padding: 8,
+      paddingHorizontal: 12,
+    },
+    foregroundContainer: {
+      marginTop: 88,
+      flex: 1,
+      position: 'absolute',
+      top: 8,
+      left: 8,
+      width: window.width/2,
+    },
+    partTitle: {
+      fontSize: 16,
+      fontWeight: '700',
+      color: 'white',
+      backgroundColor: 'black',
+      padding: 8,
+      paddingHorizontal: 12,
+    },
+    manufacturer: {
+      position: 'absolute',
+      bottom: 8,
+      right: 8,
+    },
+    scrollImage: {
+      flex: -1,
+      width: 100,
+      height: 100,
+      resizeMode: 'contain',
+      borderLeftWidth: 0.5,
+      margin: 4,
+      borderColor: 'black'
+    },
+    descriptionContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      margin: 16
+    }
 })

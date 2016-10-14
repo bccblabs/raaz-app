@@ -2,8 +2,6 @@
 
 import React, {Component, ListView, Text, View} from 'react-native'
 
-import Build from '../tuning/Build'
-
 import F8Header from '../common/F8Header'
 import TagsHeader from '../common/TagsHeader'
 import ErrorView from '../common/ErrorView'
@@ -15,7 +13,7 @@ import {Actions} from 'react-native-router-flux'
 import {General, btnColor} from '../styles'
 
 
-export default class BuildsList extends Component {
+export default class List extends Component {
 
   constructor (props) {
     super (props)
@@ -47,7 +45,7 @@ export default class BuildsList extends Component {
 
   render () {
     let {dataSource, pagination} = this.state
-      , {title, fetchData, fetchTags, tags} = this.props
+      , {title, fetchData, fetchTags, tags, renderRow} = this.props
       , {nextPageUrl, isFetching, hasError} = pagination
       , header = title?(<F8Header foreground="dark" title={title.toUpperCase()} leftItem={{title:'Back', onPress: Actions.pop}}/>):<View/>
       , content
@@ -68,7 +66,7 @@ export default class BuildsList extends Component {
             style={{flex: 1, backgroundColor: '#F5F5F5'}}
             dataSource={dataSource}
             enableEmptySections={true}
-            renderRow={(data, rowId)=>{return (<Build data={data}/>)}}
+            renderRow={renderRow}
             onEndReached={()=>{
               if (nextPageUrl) { fetchData (nextPageUrl)}
             }}
