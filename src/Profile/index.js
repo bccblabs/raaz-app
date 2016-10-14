@@ -17,7 +17,7 @@ import F8Button from '../common/F8Button'
 import F8Header from '../common/F8Header'
 
 import ListContainer from '../common/ListContainer'
-import PostListByUserId from '../Posts/PostListByUserId'
+import PostsByUserId from '../Posts/PostsByUserId'
 
 import {FilterStyles} from '../styles'
 
@@ -70,7 +70,7 @@ class Profile extends Component {
         parallaxContent={parallaxContent}
         leftItem={leftItem}
         rightItem={rightItem}>
-        <PostListByUserId title="Posts"/>
+        <PostsByUserId title="Posts"/>
       </ListContainer>
     )
   }

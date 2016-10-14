@@ -142,7 +142,7 @@ const pagination = combineReducers ({
   }),
 
   postsPagination: paginate ({
-    mapActionToKey: action =>action.filterHash,
+    mapActionToKey: action =>action.key,
     types: [
       POSTS_REQUEST,
       POSTS_SUCCESS,

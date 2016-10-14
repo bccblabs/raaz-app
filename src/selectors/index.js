@@ -2,6 +2,17 @@
 import {createSelector} from 'reselect'
 import keys from 'lodash/keys'
 
+/* post selectors */
+export const postEntitiesSelector = (state) => (state.entities.posts || {})
+
+export const homePostPaginationSelector = (state) => (state.pagination.postsPagination && state.pagination.postsPagination['home'] || {}) 
+export const homePostSelector = createSelector (
+  [postEntitiesSelector, homePostPaginationSelector],
+  (postEntities, postPagination) => {
+    let ids = postPagination.ids?postPagination.ids:[]
+    return ids.map (id=>postEntities[id]).filter (elem=>elem)
+  }
+)
 /* car selector entities */
 
 export const makesSelector = (state) => {return keys (state.entities.makes).sort()}

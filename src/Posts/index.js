@@ -15,13 +15,15 @@ import {setUserData} from '../reducers/user/userActions'
 import {setAccessToken} from '../reducers/history/historyActions'
 import {fetchCategoriesFromApi} from '../reducers/stockCar/filterActions'
 import {DetailStyles} from '../styles'
-import PostListView from './PostListView'
+import Posts from './Posts'
 import F8Header from '../common/F8Header'
 import Carmera from '../components/Carmera'
-import VRVideo from '../cardboard/VRVideo'
+
+import {userIdSelector, profileSelector} from '../selectors'
 const mapStateToProps = (state) => {
   return {
-    profileData: state.user.profileData,
+    profileData: profileSelector (state),
+    userId: userIdSelector (state)
   }
 }
 
@@ -67,7 +69,7 @@ class Raaz extends Component {
       <View style={{flex: 1}}>
       <F8Header title="Raaz" foreground='dark' leftItem={leftItem} rightItem={rightItem}/>
       <Carmera media={require ('../images/carmera.png')} title={"New Post"} onPress={Actions.NewPost}/>
-      <PostListView/>
+      <Posts userId={this.props.userId}/>
       </View>
     )
   }

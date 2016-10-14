@@ -3,7 +3,6 @@ const {
   POSTS_REQUEST,
   POSTS_SUCCESS,
   POSTS_ERROR,
-  SET_POSTS_FILTER_HASH,
 } = require ('../../constants').default
 
 import {
@@ -11,50 +10,15 @@ import {
   Schemas
 } from '../../middlewares/api'
 
-import {Actions} from 'react-native-router-flux'
-
-
-export function computePostsFilterHash () {
+export function fetchPosts (nextPageUrl, userId) {
+  let endpoint = nextPageUrl? '/post' + nextPageUrl : '/post'
+  endpoint = userId?( endpoint + '&' + 'userId=' + userId):endpoint
   return {
-    type: SET_POSTS_FILTER_HASH
-  }
-}
-
-export function fetchPostsFromApi (pageUrl, filterHash, filterTags) {
-  if (filterTags) {
-    let endpoint = pageUrl?('/post/search' + pageUrl):'/post/search'
-    return {
-      filterHash,
-      [CALL_API]: {
-        endpoint,
-        types: [POSTS_REQUEST, POSTS_SUCCESS, POSTS_ERROR],
-        schema: Schemas.POSTS_ARRAY,
-        filters: filterTags
-      }
-    }
-  } else {
-    let endpoint = pageUrl?('/post' + pageUrl):'/post'
-    return {
-      filterHash,
-      [CALL_API]: {
-        endpoint,
-        types: [POSTS_REQUEST, POSTS_SUCCESS, POSTS_ERROR],
-        schema: Schemas.POSTS_ARRAY,
-      }
-    }
-  }
-}
-
-export function fetchPosts (pageUrl) {
-  return (dispatch, getState) => {
-    dispatch (computePostsFilterHash())
-    let filterTags = getState().posts.tags.toJS()
-      , filterHash = getState().posts.getIn(['postsFilterHash'])
-
-    if (filterTags.length > 0) {
-      dispatch (fetchPostsFromApi (pageUrl, filterHash, filterTags))
-    } else {
-      dispatch (fetchPostsFromApi (pageUrl, filterHash, undefined))
+    key: 'home',
+    [CALL_API]: {
+      endpoint,
+      types: [POSTS_REQUEST, POSTS_SUCCESS, POSTS_ERROR],
+      schema: Schemas.POSTS_ARRAY,
     }
   }
 }
