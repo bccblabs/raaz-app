@@ -71,9 +71,9 @@ export default keyMirror ({
   BUILDS_SUCCESS: null,
   BUILDS_ERROR: null,
 
-  BUILDS_REQUEST_CAT: null,
-  BUILDS_SUCCESS_CAT: null,
-  BUILDS_ERROR_CAT: null,
+  BUILDS_REQUEST_PART: null,
+  BUILDS_SUCCESS_PART: null,
+  BUILDS_ERROR_PART: null,
 
   BUILDS_REQUEST_TAG: null,
   BUILDS_SUCCESS_TAG: null,

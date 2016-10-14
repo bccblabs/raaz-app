@@ -40,7 +40,7 @@ export default class PartDetails extends Component {
     try {
       let {partId, specId} = this.props.data
         , data = await RequestUtils.fetchPartDetails (partId, specId)
-
+      console.log('PartDetails',{data})
       this.setState ({
         hasError: false,
         isLoading: false,
@@ -82,7 +82,7 @@ export default class PartDetails extends Component {
       return (<View style={{flex: 1}}>{header}<ErrorView/></View>)
     }
     else {
-      let {part, manufacturer, listings, comments, tuning} = data
+      let {part, manufacturer, listings, comments, tuning, buildCnt} = data
         , {name, partId, details, description, media} = part
         , {emission, included} = tuning
         , graphKeys = [
@@ -156,6 +156,12 @@ export default class PartDetails extends Component {
           )}
           </View>
         </ParallaxScrollView>
+        <F8Button
+          style={DetailStyles.bottomButton}
+          type="tertiary" caption={`${buildCnt} Builds`}
+          icon={require ('../common/img/tuning.png')}
+          onPress={()=>Actions.BuildsByPartId ({partId})}
+        />
         </View>
       )
     }

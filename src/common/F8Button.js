@@ -190,10 +190,10 @@ var styles = StyleSheet.create({
     paddingHorizontal: 40,
   },
   tagIcon: {
-    height: 12,
-    width: 12,
+    height: 24,
+    width: 24,
     flex: -1,
-    margin: 8
+    margin: 4
   },
   carTag: {
     flex: -1,

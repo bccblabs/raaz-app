@@ -15,7 +15,6 @@ import union from 'lodash/union'
 import F8Header from '../common/F8Header'
 import LoadingView from './LoadingView'
 import MultipleChoice from 'react-native-multiple-choice'
-import SpecsHistoryHeader from './SpecsHistoryHeader'
 
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
@@ -93,7 +92,6 @@ class ModelsList extends Component {
           title={this.state.selectedMake.toUpperCase()}
           leftItem={leftItem}
           style={FilterStyles.headerStyle}/>
-          <SpecsHistoryHeader/>
           {content}
       </View>
     )

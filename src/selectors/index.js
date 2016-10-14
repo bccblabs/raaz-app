@@ -50,11 +50,29 @@ export const buildsPaginationSelector = (state) => (state.pagination.buildsPagin
 export const buildsSelector = createSelector (
   [buildsEntitiesSelector, buildsPaginationSelector],
   (buildsEntities, buildsPagination) => {
-    console.log ({buildsEntities}, {buildsPagination})
     let ids = buildsPagination.ids?buildsPagination.ids:[]
     return ids.map (id=>buildsEntities[id]).filter (elem=>elem)
   }
 )
+
+export const buildPaginationByPartIdSelector = (state, props) => (state.pagination.buildPaginationByPartId && state.pagination.buildPaginationByPartId[props.partId] || {})
+export const buildByPartIdSelector = createSelector (
+  [buildsEntitiesSelector, buildPaginationByPartIdSelector],
+  (buildsEntities, buildsPagination) => {
+    let ids = buildsPagination.ids?buildsPagination.ids:[]
+    return ids.map (id=>buildsEntities[id]).filter (elem=>elem)
+  }
+)
+
+export const buildPaginationBySpecIdSelector = (state, props) => (state.pagination.buildPaginationBySpecId && state.pagination.buildPaginationBySpecId[props.specId] || {})
+export const buildBySpecIdSelector = createSelector (
+  [buildsEntitiesSelector, buildPaginationBySpecIdSelector],
+  (buildsEntities, buildsPagination) => {
+    let ids = buildsPagination.ids?buildsPagination.ids:[]
+    return ids.map (id=>buildsEntities[id]).filter (elem=>elem)
+  }
+)
+
 
 /* build categories */
 export const buildCategoriesSelector = (state) => (state.entities.categories && keys (state.entities.categories['car']))

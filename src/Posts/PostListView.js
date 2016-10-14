@@ -18,7 +18,7 @@ import {fetchPosts} from '../reducers/posts/postActions'
 import {EmptyViewStyles} from '../styles'
 import LoadingView from '../components/LoadingView'
 import ErrorView from '../common/ErrorView'
-import {union} from 'lodash'
+import {isEqual, union} from 'lodash'
 
 const filterHashSelector = (state) => (state.posts.postsFilterHash)
 const postsSelector = (state) => (state.entities.posts)
@@ -75,7 +75,7 @@ class PostListView extends Component {
 
   componentWillReceiveProps (nextProps) {
     let {postsList, postsPagination} = nextProps
-    if (nextProps.postsList !== this.props.postsList) {
+    if (!isEqual(nextProps.postsList, this.props.postsList)) {
       let newBlob = union (this.state.data, postsList)
       this.setState ({
         data: newBlob,

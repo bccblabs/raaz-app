@@ -48,6 +48,8 @@ import QRScreen from './components/QRScreen'
 
 import CommentsList from './Comments/CommentsList'
 
+import {BuildsByPartId, BuildsByTag, BuildsBySpecId, BuildsByUserId} from './build'
+
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.user.user_id
@@ -131,6 +133,9 @@ class Viicles extends Component {
             <Route name="PartsList" component={PartsList} schema="default" hideNavBar={true}/>
             <Route name="PartByManufacturer" component={PartByManufacturer} schema="default" hideNavBar={true}/>
             <Route name="WatchList" component={Saved} schema="default" hideNavBar={true}/>
+
+            <Route name="BuildsByPartId" component={BuildsByPartId} schema="default" hideNavBar={true}/>
+            <Route name="BuildsBySpecId" component={BuildsBySpecId} schema="default" hideNavBar={true}/>
 
             <Route name="QRScan" component={QRScreen} schema="default" hideNavBar={true}/>
           </Router>

@@ -504,6 +504,9 @@ export const CarmeraStyles = StyleSheet.create ({
 })
 
 export const DetailStyles = StyleSheet.create ({
+bottomButton: {
+  borderTopWidth: 1,
+},
   VRImageHolder : {
     width: window.width,
     height: 300,
@@ -522,12 +525,12 @@ export const DetailStyles = StyleSheet.create ({
       paddingHorizontal: 12,
     },
     foregroundContainer: {
-      marginTop: 88,
+      marginTop: 68,
       flex: 1,
       position: 'absolute',
       top: 8,
       left: 8,
-      width: window.width/2,
+      width: window.width/3,
     },
     partTitle: {
       fontSize: 16,

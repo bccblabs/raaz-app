@@ -13,9 +13,9 @@ const {
     BUILDS_SUCCESS,
     BUILDS_ERROR,
 
-    BUILDS_REQUEST_CAT,
-    BUILDS_SUCCESS_CAT,
-    BUILDS_ERROR_CAT,
+    BUILDS_REQUEST_PART,
+    BUILDS_SUCCESS_PART,
+    BUILDS_ERROR_PART,
 
     BUILDS_REQUEST_TAG,
     BUILDS_SUCCESS_TAG,
@@ -69,13 +69,13 @@ export function fetchBuilds (paging, category, tag, specId, userId) {
   }
 }
 
-export function fetchBuildsByCategory (paging, category) {
-  let endpoint = '/build/category/' + category
+export function fetchBuildsByPartId (paging, partId) {
+  let endpoint = '/build/part/' + partId
   if (paging) endpoint += paging
   return {
-    category,
+    partId,
     [CALL_API]: {
-      types: [BUILDS_REQUEST_CAT, BUILDS_SUCCESS_CAT, BUILDS_ERROR_CAT],
+      types: [BUILDS_REQUEST_PART, BUILDS_SUCCESS_PART, BUILDS_ERROR_PART],
       endpoint: endpoint,
       schema: Schemas.BUILDS_ARRAY,
     }

@@ -7,8 +7,7 @@ import TagsHeader from '../common/TagsHeader'
 import ErrorView from '../common/ErrorView'
 import LoadingView from '../components/LoadingView'
 
-import {union} from 'lodash'
-
+import {union, isEqual} from 'lodash'
 import {Actions} from 'react-native-router-flux'
 import {General, btnColor} from '../styles'
 
@@ -27,13 +26,13 @@ export default class List extends Component {
 
   componentWillMount () {
     let {fetchTags, fetchData, pagination} = this.props
-    fetchTags ()
+    fetchTags && fetchTags ()
     fetchData (pagination.nextPageUrl)
   }
 
   componentWillReceiveProps (nextProps) {
     let {data, tags, pagination} = nextProps
-    if (data !== this.props.data) {
+    if (!isEqual(data, this.props.data)) {
       let newBlob = union (this.state.data, data)
       this.setState ({
         dataSource: this.state.dataSource.cloneWithRows (newBlob),

@@ -15,7 +15,6 @@ import ErrorView from '../common/ErrorView'
 import PureListView from '../common/PureListView'
 import ListContainer from '../common/ListContainer'
 import MultipleChoice from 'react-native-multiple-choice'
-import SpecsHistoryHeader from './SpecsHistoryHeader'
 import keys from 'lodash/keys'
 import { FilterStyles } from '../styles'
 
@@ -117,7 +116,6 @@ class SpecsList extends Component {
           title={"Specs"}
           leftItem={leftItem}
           style={FilterStyles.headerStyle}/>
-          <SpecsHistoryHeader/>
           {content}
       </View>
     )

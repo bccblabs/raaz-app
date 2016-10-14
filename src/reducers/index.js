@@ -17,9 +17,9 @@ const {
   BUILDS_SUCCESS,
   BUILDS_ERROR,
 
-  BUILDS_REQUEST_CAT,
-  BUILDS_SUCCESS_CAT,
-  BUILDS_ERROR_CAT,
+  BUILDS_REQUEST_PART,
+  BUILDS_SUCCESS_PART,
+  BUILDS_ERROR_PART,
 
   BUILDS_REQUEST_TAG,
   BUILDS_SUCCESS_TAG,
@@ -104,17 +104,16 @@ const pagination = combineReducers ({
     types: [BUILDS_REQUEST, BUILDS_SUCCESS, BUILDS_ERROR],
   }),
 
-  buildsByCategoryPagination: paginate ({
-    mapActionToKey: action =>action.category,
-    types: [BUILDS_REQUEST_CAT, BUILDS_SUCCESS_CAT, BUILDS_ERROR_CAT],
+  buildPaginationByPartId: paginate ({
+    mapActionToKey: action =>action.partId,
+    types: [BUILDS_REQUEST_PART, BUILDS_SUCCESS_PART, BUILDS_ERROR_PART],
   }),
 
   buildsByTagPagination: paginate ({
     mapActionToKey: action =>action.tag,
     types: [BUILDS_REQUEST_TAG, BUILDS_SUCCESS_TAG, BUILDS_ERROR_TAG],
   }),
-
-  fetchBuildsBySpecId: paginate ({
+  buildPaginationBySpecId: paginate ({
     mapActionToKey: action =>action.specId,
     types: [BUILDS_REQUEST_SPECID, BUILDS_SUCCESS_SPECID, BUILDS_ERROR_SPECID],
   }),

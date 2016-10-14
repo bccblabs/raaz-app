@@ -136,7 +136,7 @@ class TuningBySpec extends Component {
           </ScrollView>
           <F8Button
             style={{alignSelf: 'center', marginTop: 16}}
-            onPress={()=>{Actions.PostsBySpecId({specId})}}
+            onPress={()=>{Actions.BuildsBySpecId({specId})}}
             type="tertiary" caption={`All Builds`}
             icon={require ('../common/img/comment.png')}
           />

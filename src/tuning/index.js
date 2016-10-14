@@ -14,7 +14,7 @@ import F8Button from '../common/F8Button'
 import Carmera from '../components/Carmera'
 
 
-import BuildList from '../build/BuildList'
+import {BuildList} from '../build'
 import {buildsSelector, buildsPaginationSelector, userIdSelector, buildCategoriesSelector} from '../selectors'
 import {fetchCategoriesFromApi, fetchBuilds} from '../reducers/tuning/filterActions'
 
