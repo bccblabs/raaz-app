@@ -58,8 +58,8 @@ class Raaz extends Component {
   render () {
     const {picture, name} = this.state
           ,leftItem = {
-                      title: "Profile",
-                      onPress: Actions.Profile
+                      title: "My Posts",
+                      onPress: Actions.MyPosts
                     }
           ,rightItem = {
                       title: 'Settings',

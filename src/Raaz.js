@@ -18,8 +18,6 @@ import Saved from './Saved'
 import Posts from './Posts'
 import NewPost from './Posts/NewPost'
 import Login from './Login'
-import Profile from './Profile'
-import Settings from './Profile/Settings'
 import Tuning from './tuning'
 
 import MakesList from './components/MakesList'
@@ -43,6 +41,7 @@ import CommentsList from './Comments/CommentsList'
 
 import {BuildDetails, BuildsByPartId, BuildsByTag, BuildsBySpecId, BuildsByUserId} from './build'
 import {PartDetails, Parts, PartByManufacturer} from './part'
+import {MyBuilds, MyPosts, Settings} from './social'
 
 const mapStateToProps = (state) => {
   return {
@@ -102,8 +101,6 @@ class Viicles extends Component {
               </Router>
             </Route>
 
-            <Route name="Profile" component={Profile} key="profile" title="Profile" schema="default" hideNavBar={true} />
-            <Route name="Settings" component={Settings} title="Settings" hideNavBar={true} schema="default"/>
 
             <Route name="Makes" component={MakesList} title="Choose Makes" schema="floatFromRight" hideNavBar={true}/>
             <Route name="Models" component={ModelsList} title="Choose Models" schema="floatFromRight" hideNavBar={true}/>
@@ -116,7 +113,6 @@ class Viicles extends Component {
             <Route name="PickSpecs" component={PickSpecs} title="Choose Specs" schema="floatFromRight" hideNavBar={true}/>
             <Route name="TagTuning" component={TagTuning} title="Tag Parts" schema="floatFromRight" hideNavBar={true}/>
 
-            <Route name="Comments" component={CommentsList} title="Comments" schema="default" hideNavBar={true}/>
 
             <Route name="TuningBySpec" component={TuningBySpec} schema="default" hideNavBar={true}/>
             <Route name="NewPost" component={NewPost} schema="default" hideNavBar={true}/>
@@ -132,6 +128,11 @@ class Viicles extends Component {
             <Route name="BuildDetails" component={BuildDetails} schema="default" hideNavBar={true}/>
             <Route name="BuildsByPartId" component={BuildsByPartId} schema="default" hideNavBar={true}/>
             <Route name="BuildsBySpecId" component={BuildsBySpecId} schema="default" hideNavBar={true}/>
+           
+            <Route name="MyBuilds" component={MyBuilds} key="mybuilds" schema="default" hideNavBar={true} />
+            <Route name="MyPosts" component={MyPosts} key="myposts" schema="default" hideNavBar={true} />
+            <Route name="Settings" component={Settings} key="settings" schema="default" hideNavBar={true}/>
+            <Route name="Comments" component={CommentsList} title="Comments" schema="default" hideNavBar={true}/>
 
             <Route name="QRScan" component={QRScreen} schema="default" hideNavBar={true}/>
           </Router>

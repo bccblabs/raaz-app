@@ -417,9 +417,15 @@ export const PostStyles = StyleSheet.create({
   userPhotoStyle: {
     height: 40,
     width: 40,
-    backgroundColor: 'black',
     marginHorizontal: 8,
     resizeMode: 'contain'
+  },
+
+  largeUserPhoto: {
+    height: 80,
+    width: 80,
+    marginHorizontal: 8,
+    resizeMode: 'cover'
   },
 
   primaryImage: {
@@ -505,7 +511,9 @@ export const CarmeraStyles = StyleSheet.create ({
 
 export const DetailStyles = StyleSheet.create ({
 bottomButton: {
-  borderTopWidth: 1,
+
+    borderWidth: 2,
+    borderColor: 'white',
 },
   VRImageHolder : {
     width: window.width,
@@ -526,9 +534,14 @@ bottomButton: {
     },
     foregroundContainer: {
       marginTop: 68,
-      flex: 1,
       position: 'absolute',
       top: 8,
+      left: 8,
+      width: window.width/3,
+    },
+    userInfoContainer: {
+      position: 'absolute',
+      bottom: 8,
       left: 8,
       width: window.width/3,
     },
@@ -539,6 +552,15 @@ bottomButton: {
       backgroundColor: 'black',
       padding: 8,
       paddingHorizontal: 12,
+    },
+    lightTitle: {
+      fontSize: 16,
+      fontWeight: '700',
+      color: 'black',
+      backgroundColor: 'white',
+      padding: 8,
+      paddingHorizontal: 12,
+
     },
     manufacturer: {
       position: 'absolute',

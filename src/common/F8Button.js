@@ -246,8 +246,8 @@ var styles = StyleSheet.create({
   },
   secondaryCaption: {
     color: 'white',
-    fontWeight: '500',
-    fontSize: 10,
+    fontWeight: 'bold',
+    fontSize: 8,
   },
   tuningCaption: {
     color: 'white',

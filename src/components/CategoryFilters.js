@@ -54,8 +54,9 @@ class PostFilters extends Component {
       <F8Button
         type="secondary"
         caption="Get Sum"
+        icon={require ('../common/img/tuning.png')}
         onPress={()=>{Actions.PartsList({selectedTags, specId: filterId, title})}}
-        style={General.bottomButtonStyle}/>
+        style={[General.bottomButtonStyle, {backgroundColor: 'red'}]}/>
       ):(
       <F8Button
         type="secondary"

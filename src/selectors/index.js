@@ -16,23 +16,24 @@ import keys from 'lodash/keys'
 
 /* car selector entities */
 
-export const makesSelector = (state) => {return keys (state.entities.makes).sort()}
+export const makesSelector = (state) => (keys (state.entities.makes).sort())
 
 /* cars by specs selector */
-export const newpostTaggedCars = (state) => {return state.newpost.taggedCars.toIndexedSeq().toArray()}
+export const newpostTaggedCars = (state) => (state.newpost.taggedCars.toIndexedSeq().toArray())
 
 /* user selectors */
   export const isLikedByUser = (state) => {return true}
-  export const profileSelector = (state) => {return state.user.profileData}
-  export const userIdSelector = (state) => {return state.user.profileData.user_id}
+  export const profileSelector = (state) => (state.user.profileData)
+  export const userIdSelector = (state) => (state.user.profileData.user_id)
+  export const accessTokenSelector = (state) => (state.history.access_token)
 
 /* tags selectors */
   export const selectedTagsSelector = (state, props) => {
     return state.tuning.partTags
   }
-  export const tagEntitiesSelector = (state, props) => (state.entities && state.entities.tags)
+  export const tagEntitiesSelector = (state, props) => (state.entities && state.entities.tags || {})
   export const relatedTagPaginationSelector = (state, props) => (state.pagination.relatedTagPagination && state.pagination.relatedTagPagination[props.tag] || {})
-  export const relatedTagsSelectotr = createSelector (
+  export const relatedTagsSelector = createSelector (
     [tagEntitiesSelector, relatedTagPaginationSelector],
     (tagEntities, tagPagination) => {
       let ids = tagPagination.ids?tagPagination.ids:[]
@@ -59,6 +60,7 @@ export const newpostTaggedCars = (state) => {return state.newpost.taggedCars.toI
     let tags = state.entities.categories ? state.entities.categories[props.categoryName] : []
     return tags.options.map ((opt)=>opt.name)
   }
+
 /* builds */
   export const buildsEntitiesSelector = (state) => (state.entities.builds || {})
   export const buildsPaginationSelector = (state) => (state.pagination.buildsPagination && state.pagination.buildsPagination['home'] || {})
@@ -89,7 +91,7 @@ export const newpostTaggedCars = (state) => {return state.newpost.taggedCars.toI
     }
   )
 
-  export const buildPaginationByTagSelector = (state, props) => (state.pagination.buildPaginationByTag && state.pagination.buildPaginationByTag[props.tag])
+  export const buildPaginationByTagSelector = (state, props) => (state.pagination.buildPaginationByTag && state.pagination.buildPaginationByTag[props.tag] || {})
   export const buildByTagSelector = createSelector (
     [buildsEntitiesSelector, buildPaginationByTagSelector], 
     (buildsEntities, buildsPagination) => {
@@ -98,7 +100,7 @@ export const newpostTaggedCars = (state) => {return state.newpost.taggedCars.toI
     }
   )
 
-  export const buildPaginationByUserIdSelector = (state, props) => (state.pagination.buildPaginationByUserId && state.pagination.buildPaginationByUserId[props.userId])
+  export const buildPaginationByUserIdSelector = (state, props) => (state.pagination.buildPaginationByUserId && state.pagination.buildPaginationByUserId[props.userId] || {})
   export const buildByUserIdSelector = createSelector (
     [buildsEntitiesSelector, buildPaginationByUserIdSelector],
     (buildsEntities, buildsPagination) => {
@@ -109,8 +111,8 @@ export const newpostTaggedCars = (state) => {return state.newpost.taggedCars.toI
 
 
 /* history selector */
-  export const savedSpecsSelector = (state) => {return state.history.specs.toIndexedSeq().toArray()}
-  export const savedPartsSelector = (state) => {return state.history.parts.toIndexedSeq().toArray()}
+  export const savedSpecsSelector = (state) => (state.history.specs.toIndexedSeq().toArray())
+  export const savedPartsSelector = (state) => (state.history.parts.toIndexedSeq().toArray())
 
   export const isPartSavedSelector = (state, props) => {
     let {part} = props

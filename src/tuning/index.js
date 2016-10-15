@@ -15,7 +15,7 @@ import Carmera from '../components/Carmera'
 
 
 import {BuildList} from '../build'
-import {buildsSelector, buildsPaginationSelector, userIdSelector, buildCategoriesSelector} from '../selectors'
+import {buildsSelector, buildsPaginationSelector, buildCategoriesSelector} from '../selectors'
 import {fetchCategoriesFromApi, fetchBuilds} from '../reducers/tuning/filterActions'
 
 const mapStateToProps = (state) => {
@@ -23,7 +23,6 @@ const mapStateToProps = (state) => {
     data: buildsSelector (state),
     pagination: buildsPaginationSelector(state),
     tags: buildCategoriesSelector (state),
-    userId: userIdSelector (state),
   }
 }
 
@@ -40,7 +39,7 @@ class Tuning extends Component {
   }
 
   render () {
-    const leftItem = {title: 'My Cars', onPress: ()=>{Actions.BuildsByUser ({userId: this.props.userId}) } }
+    const leftItem = {title: 'My Cars', onPress: Actions.MyBuilds}
         , rightItem = {title: 'Saved', onPress:Actions.WatchList}
 
     let {data, pagination, tags, userId, fetchTags, fetchData} = this.props
