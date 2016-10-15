@@ -22,9 +22,6 @@ import Profile from './Profile'
 import Settings from './Profile/Settings'
 import Tuning from './tuning'
 
-import PartDetails from './tuning/PartDetails'
-import BuildDetails from './build/BuildDetails'
-
 import MakesList from './components/MakesList'
 import ModelsList from './components/ModelsList'
 import SubmodelsList from './components/SubmodelsList'
@@ -39,16 +36,13 @@ import TagTuning from './search/TagTuning'
 
 import Notifications from './Notifications'
 import TuningBySpec from './TuningBySpec'
-
 import PartFilter from './filters/PartFilter'
-import PartsList from './tuning/PartsList'
-import PartByManufacturer from './tuning/PartByManufacturer'
-
 import QRScreen from './components/QRScreen'
 
 import CommentsList from './Comments/CommentsList'
 
-import {BuildsByPartId, BuildsByTag, BuildsBySpecId, BuildsByUserId} from './build'
+import {BuildDetails, BuildsByPartId, BuildsByTag, BuildsBySpecId, BuildsByUserId} from './build'
+import {PartDetails, Parts, PartByManufacturer} from './part'
 
 const mapStateToProps = (state) => {
   return {
@@ -124,16 +118,18 @@ class Viicles extends Component {
 
             <Route name="Comments" component={CommentsList} title="Comments" schema="default" hideNavBar={true}/>
 
-            <Route name="BuildDetails" component={BuildDetails} schema="default" hideNavBar={true}/>
-            <Route name="PartDetails" component={PartDetails} schema="default" hideNavBar={true}/>
             <Route name="TuningBySpec" component={TuningBySpec} schema="default" hideNavBar={true}/>
             <Route name="NewPost" component={NewPost} schema="default" hideNavBar={true}/>
 
             <Route name="PartFilter" component={PartFilter} schema="default" hideNavBar={true}/>
-            <Route name="PartsList" component={PartsList} schema="default" hideNavBar={true}/>
-            <Route name="PartByManufacturer" component={PartByManufacturer} schema="default" hideNavBar={true}/>
             <Route name="WatchList" component={Saved} schema="default" hideNavBar={true}/>
 
+            <Route name="PartDetails" component={PartDetails} schema="default" hideNavBar={true}/>
+            <Route name="PartsList" component={Parts} schema="default" hideNavBar={true}/>
+            <Route name="PartByManufacturer" component={PartByManufacturer} schema="default" hideNavBar={true}/>
+
+
+            <Route name="BuildDetails" component={BuildDetails} schema="default" hideNavBar={true}/>
             <Route name="BuildsByPartId" component={BuildsByPartId} schema="default" hideNavBar={true}/>
             <Route name="BuildsBySpecId" component={BuildsBySpecId} schema="default" hideNavBar={true}/>
 

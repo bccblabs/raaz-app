@@ -49,13 +49,12 @@ export default class List extends Component {
       , header = title?(<F8Header foreground="dark" title={title.toUpperCase()} leftItem={{title:'Back', onPress: Actions.pop}}/>):<View/>
       , content
 
-      console.log ({nextPageUrl})
       if (isFetching) content = (<LoadingView/>)
       else if (hasError) {
         content = (<ErrorView
                     onPress={()=>{
-                      fetchTags()
-                      fetchData(nextPageUrl, specId, selectedTags)
+                      fetchTag && fetchTags()
+                      fetchData()
                     }}
                     />)
       }
@@ -76,8 +75,6 @@ export default class List extends Component {
     return (
       <View style={{flex: 1, marginBottom: 50}}>
         {header}
-        {tags && tags.length > 0 && <TagsHeader tags={tags} selectedTags={tags}
-                    color={btnColor}/>}
         {content}
       </View>
     )

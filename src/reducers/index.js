@@ -109,16 +109,17 @@ const pagination = combineReducers ({
     types: [BUILDS_REQUEST_PART, BUILDS_SUCCESS_PART, BUILDS_ERROR_PART],
   }),
 
-  buildsByTagPagination: paginate ({
+  buildPaginationByTag: paginate ({
     mapActionToKey: action =>action.tag,
     types: [BUILDS_REQUEST_TAG, BUILDS_SUCCESS_TAG, BUILDS_ERROR_TAG],
   }),
+
   buildPaginationBySpecId: paginate ({
     mapActionToKey: action =>action.specId,
     types: [BUILDS_REQUEST_SPECID, BUILDS_SUCCESS_SPECID, BUILDS_ERROR_SPECID],
   }),
 
-  fetchBuildsByUserId: paginate ({
+  buildPaginationByUserId: paginate ({
     mapActionToKey: action =>action.userId,
     types: [BUILDS_REQUEST_USER, BUILDS_SUCCESS_USER, BUILDS_ERROR_USER],
   }),

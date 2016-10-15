@@ -48,12 +48,13 @@ class PostFilters extends Component {
 
   render () {
     let {selectedTags} = this.state
-      , {onPress, toggleAction} = this.props
+      , {toggleAction, filterId, title} = this.props
+
     let buttonContent = selectedTags.size ? (
       <F8Button
         type="secondary"
         caption="Get Sum"
-        onPress={onPress}
+        onPress={()=>{Actions.PartsList({selectedTags, specId: filterId, title})}}
         style={General.bottomButtonStyle}/>
       ):(
       <F8Button
@@ -61,7 +62,6 @@ class PostFilters extends Component {
         caption="Please Select From Above"
         style={[General.bottomButtonStyle,{backgroundColor: 'gray'}]}/>
       )
-
       return (
         <View style={{flex: 1}}>
         <ScrollView>

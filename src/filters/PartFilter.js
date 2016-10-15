@@ -22,7 +22,7 @@ export default class BuildFilter extends Component {
       <F8Button onPress={Actions.SearchTuning}
                 caption="search" type="search"
                 icon={require ('../common/img/search.png')}/>
-      <CategoryFilters filterId={filterId} onPress={()=>{Actions.PartsList({specId: filterId, title: title})}} toggleAction={togglePartTag}/>
+      <CategoryFilters filterId={filterId} title={title} toggleAction={togglePartTag}/>
       </View>
     )
   }

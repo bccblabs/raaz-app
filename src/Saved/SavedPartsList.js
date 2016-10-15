@@ -9,8 +9,7 @@ import EmptyView from '../common/EmptyView'
 import {connect} from 'react-redux'
 import {Actions} from 'react-native-router-flux'
 import RequestUtils from '../requests'
-import Part from '../tuning/Part'
-import PartsList from '../components/PartsList'
+import {Part} from '../part'
 
 import {savedPartsSelector} from '../selectors'
 
