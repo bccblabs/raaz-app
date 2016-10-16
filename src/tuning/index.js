@@ -18,24 +18,38 @@ import {BuildList} from '../build'
 import {buildsSelector, buildsPaginationSelector, buildCategoriesSelector} from '../selectors'
 import {fetchCategoriesFromApi, fetchBuilds} from '../reducers/tuning/filterActions'
 
-const mapStateToProps = (state) => {
+import {userIdSelector, profileSelector} from '../selectors'
+
+import {setUserData} from '../reducers/user/userActions'
+import {setAccessToken} from '../reducers/history/historyActions'
+
+const mapStateToProps = (state, props) => {
   return {
     data: buildsSelector (state),
     pagination: buildsPaginationSelector(state),
     tags: buildCategoriesSelector (state),
+    user: props.user,
+    access_token: props.access_token
   }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
     fetchTags: () => { dispatch (fetchCategoriesFromApi ('car'))},
-    fetchData: (pageUrl) => {dispatch (fetchBuilds (pageUrl))}
+    fetchData: (pageUrl) => {dispatch (fetchBuilds (pageUrl))},
+    setUserData: () => { dispatch (setUserData (props.user))},
+    setAccessToken: () => {dispatch (setAccessToken (props.access_token))}
   }
 }
 
 class Tuning extends Component {
   constructor (props) {
     super (props)
+  }
+
+  componentWillMount() {
+    this.props.setUserData()
+    this.props.setAccessToken()
   }
 
   render () {

@@ -6,15 +6,15 @@ import {fetchPostsByBuildId} from '../reducers/posts/postActions'
 
 import PostList from './PostList'
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
-    data: postByBuildIdSelector(state),
-    pagination: postPaginationByBuildIdSelector(state)
+    data: postByBuildIdSelector(state, props),
+    pagination: postPaginationByBuildIdSelector(state, props)
     title: 'Posts'
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, props) => {
   return {
     fetchData: (pageUrl) => {dispatch (fetchPostsByBuildId (pageUrl, props.buildId))}
   }

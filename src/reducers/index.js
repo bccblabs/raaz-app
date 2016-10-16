@@ -46,6 +46,15 @@ const {
   POSTS_SUCCESS,
   POSTS_ERROR,
 
+  POSTS_REQUEST_USER,
+  POSTS_SUCCESS_USER,
+  POSTS_ERROR_USER,
+
+  POSTS_REQUEST_BUILD,
+  POSTS_SUCCESS_BUILD,
+  POSTS_ERROR_BUILD,
+
+
   MAKE_REQUEST,
   MAKE_SUCCESS,
   MAKE_ERROR,
@@ -133,21 +142,30 @@ const pagination = combineReducers ({
     ]
   }),
 
-  partsPagination: paginate ({
-    mapActionToKey: action =>action.specId,
-    types: [
-      PARTS_REQUEST,
-      PARTS_SUCCESS,
-      PARTS_ERROR
-    ]
-  }),
-
   postsPagination: paginate ({
     mapActionToKey: action =>action.key,
     types: [
       POSTS_REQUEST,
       POSTS_SUCCESS,
       POSTS_ERROR,
+    ]
+  }),
+
+  postPaginationByBuildId: paginate ({
+    mapActionToKey: action =>action.buildId,
+    types: [
+      POSTS_REQUEST_BUILD,
+      POSTS_SUCCESS_BUILD,
+      POSTS_ERROR_BUILD,
+    ]
+  }),
+
+  postPaginationByUserId: paginate ({
+    mapActionToKey: action =>action.userId,
+    types: [
+      POSTS_REQUEST_USER,
+      POSTS_SUCCESS_USER,
+      POSTS_ERROR_USER,
     ]
   }),
 
@@ -166,6 +184,15 @@ const pagination = combineReducers ({
       SPECS_DETAILS_REQUEST,
       SPECS_DETAILS_SUCCESS,
       SPECS_DETAILS_ERROR,
+    ]
+  }),
+
+  partsPagination: paginate ({
+    mapActionToKey: action =>action.specId,
+    types: [
+      PARTS_REQUEST,
+      PARTS_SUCCESS,
+      PARTS_ERROR
     ]
   }),
 

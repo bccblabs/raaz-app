@@ -14,6 +14,24 @@ import keys from 'lodash/keys'
     }
   )
 
+  export const postPaginationByBuildIdSelector = (state, props) => (state.pagination.postPaginationByBuildId && state.pagination.postPaginationByBuildId[props.buildId] || {}) 
+  export const postByBuildIdSelector = createSelector (
+    [postEntitiesSelector, postPaginationByBuildIdSelector],
+    (postEntities, postPagination) => {
+      let ids = postPagination.ids?postPagination.ids:[]
+      return ids.map (id=>postEntities[id]).filter (elem=>elem)
+    }
+  )
+
+  export const postPaginationByUserIdSelector = (state, props) => (state.pagination.postPaginationByUserId && state.pagination.postPaginationByUserId[props.userId] || {}) 
+  export const postByUserIdSelector = createSelector (
+    [postEntitiesSelector, postPaginationByUserIdSelector],
+    (postEntities, postPagination) => {
+      let ids = postPagination.ids?postPagination.ids:[]
+      return ids.map (id=>postEntities[id]).filter (elem=>elem)
+    }
+  )
+
 /* car selector entities */
 
 export const makesSelector = (state) => (keys (state.entities.makes).sort())

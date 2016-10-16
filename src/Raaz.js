@@ -43,11 +43,6 @@ import {BuildDetails, BuildsByPartId, BuildsByTag, BuildsBySpecId, BuildsByUserI
 import {PartDetails, Parts, PartByManufacturer} from './part'
 import {MyBuilds, MyPosts, Settings} from './social'
 
-const mapStateToProps = (state) => {
-  return {
-    isLoggedIn: state.user.user_id
-  }
-}
 
 class TabIcon extends Component {
   render() {
@@ -57,13 +52,7 @@ class TabIcon extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatch
-  }
-}
-
-class Viicles extends Component {
+class Raaz extends Component {
 
   render () {
       const Router = connect() (RNRF.Router)
@@ -140,4 +129,4 @@ class Viicles extends Component {
   }
 }
 
-export default connect (mapStateToProps, mapDispatchToProps) (Viicles)
+export default connect () (Raaz)

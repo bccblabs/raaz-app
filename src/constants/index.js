@@ -28,6 +28,15 @@ export default keyMirror ({
   POSTS_SUCCESS: null,
   POSTS_ERROR: null,
 
+  POSTS_REQUEST_USER: null,
+  POSTS_SUCCESS_USER: null,
+  POSTS_ERROR_USER: null,
+
+  POSTS_REQUEST_BUILD: null,
+  POSTS_SUCCESS_BUILD: null,
+  POSTS_ERROR_BUILD: null,
+
+  /* User create post */
   RESET_POSTS_FILTER_STATE: null,
   SET_POSTS_FILTER_HASH: null,
   SET_POSTS_FILTER_STATE: null,
